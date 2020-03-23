@@ -1,0 +1,41 @@
+.margen-card {
+    margin-top: 4%;
+}
+
+.fondo{
+    opacity: 0.3;
+    position: absolute;
+}
+
+.card-title {
+    color: rgb(11, 104, 99);
+    font-size: 3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 1.25rem;
+    height: 20rem;
+    width: 54rem;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 2rem;
+}   
+
+.card-text:last-child {
+    margin-bottom: 0;
+    text-align: justify;
+}
