@@ -1,3 +1,5 @@
+
+
 .margen-card {
     margin-top: 4%;
 }
@@ -38,4 +40,8 @@
 .card-text:last-child {
     margin-bottom: 0;
     text-align: justify;
+}
+
+.color-icon {
+    color: rgb(11, 104, 99);
 }

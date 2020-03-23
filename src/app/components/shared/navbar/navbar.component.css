@@ -11,3 +11,15 @@
     padding: 1.5rem 3rem;
     background: rgb(11, 167, 167);
 }
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 2rem;
+    margin-left: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    font-weight: bold;
+}
