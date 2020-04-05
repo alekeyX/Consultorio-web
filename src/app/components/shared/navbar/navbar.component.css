@@ -16,10 +16,17 @@
     display: inline-block;
     padding-top: .3125rem;
     padding-bottom: .3125rem;
-    margin-right: 2rem;
-    margin-left: 1rem;
-    font-size: 1.25rem;
-    line-height: inherit;
-    white-space: nowrap;
+    margin-right: 0%;
     font-weight: bold;
+}
+
+/* Boton de menu collapsable */
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(245, 246, 247, 0.25);
+}
+
+.navbar-toggler {
+    color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
 }
