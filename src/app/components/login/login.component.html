@@ -1,26 +1,39 @@
 
+<div class="alert alert-info">
+    <strong>Normal User</strong> - U: user P: user<br />
+    <strong>Administrator</strong> - U: admin P: admin
+</div>
+
 <div class="container p-5">
     <div class="card">
         <h4 class="card-header bg-aqua text-white text-center">Inicio de Sesión</h4>
         <div class="card-body">
-            <form>
+            <!-- Formulario de Login -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre de Usuario</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                </div>
-                <div  class="invalid-feedback">
-                    <div >El nombre es requerido</div>
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" class="form-control" name="username" id="username" formControlName="username" 
+                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" aria-describedby="usernameHelp" required>
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">El nombre es requerido</div>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control " id="exampleInputPassword1" required>
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" name="password" formControlName="password" id="exampleInputPassword1" 
+                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
                 </div>
-                <div  class="invalid-feedback">
-                    <div >La contraseña es requerida</div>
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">La contraseña es requerida</div>
                 </div>
 
-                <button type="submit" class="text-white btn bg-aqua">Iniciar</button>
+                <button [disabled]="loading" type="submit" class="text-white btn bg-aqua">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Iniciar
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
             </form>
         </div>
     </div>

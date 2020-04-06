@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthenticationService } from './components/services/authentication.service';
+import { Role } from './components/models/role';
+import { User } from './components/models/user';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'consultorio-web';
+  currentUser: User;
+
+  constructor(
+      private router: Router,
+      private authenticationService: AuthenticationService
+  ) {
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isAdmin() {
+      return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  logout() {
+      this.authenticationService.logout();
+      this.router.navigate(['/login']);
+  }
 }
