@@ -6,6 +6,18 @@ html {
 body {
     margin: 0;
     margin-bottom: 40px;
+
+    background-image: url(assets/img/doctor-vestido-con-una-bata-blanca-y-una-corbata-azul-sosteniendo-una-carpeta_0.jp);
+    background-position: center center;
+    /* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+    /* Se muestra un color de fondo mientras se está cargando la imagen
+    de fondo o si hay problemas para cargarla */
+    background-color: aquamarine;
 }
 app-footer {
     background-color: black;
@@ -14,4 +26,8 @@ app-footer {
     width: 100%;
     height: 40px;
     color: white;
+}
+
+.bg-aqua {
+    background: rgb(11, 167, 167);
 }
