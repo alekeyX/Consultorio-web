@@ -8,8 +8,16 @@
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 1rem;
     background: rgb(11, 167, 167);
+}
+
+.navbar-nav {
+    padding-left: 2%;
+}
+
+.show {
+    margin-top: 2%;
 }
 
 .navbar-brand {
