@@ -1,9 +1,4 @@
 
-
-.margen-card {
-    margin-top: 4%;
-}
-
 .card-title {
     color: rgb(11, 104, 99);
     font-size: 3rem;
@@ -25,4 +20,17 @@
 
 .color-icon {
     color: rgb(11, 104, 99);
+}
+
+.alto {
+    height: 90%;
+}
+
+.width-sidebar{
+    width: 250px;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
 }

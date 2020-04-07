@@ -1,0 +1,30 @@
+a {
+    color: #f0e4e4;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: rgb(0, 151, 131);
+    text-decoration: none;
+    background-color: #f0e4e4;
+}
+
+/* sidebar */
+#sidebar {
+    height: 100%;
+    width: inherit;
+}

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light fondo-navbar" >
+<nav class="navbar navbar-expand-lg navbar-light fondo-navbar shadow-sm" >
     <!-- icono de navbar -->
     <!-- <i class="fas fa-stethoscope fa-4x text-white pr-3"></i> -->
     <button class="btn btn-toolbar navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
     </div>
     
     <!-- Login -->
-    <div class="ml-auto d-lg-none d-lg-block">
+    <div class="d-none d-md-none d-lg-block">
         <a class="nav-link text-white" [routerLink]="['/login']" 
             routerLinkActive="router-link-active" *ngIf="!currentUser">
             Login
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Icono de usuario -->
-    <div class="d-md-none d-lg-block">
+    <div class="d-none d-md-none d-lg-block">
         <i class="fas fa-user-circle fa-3x text-white" *ngIf="currentUser"></i>
     </div>  
 </nav>

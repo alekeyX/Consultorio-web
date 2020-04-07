@@ -17,6 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { JwtInterceptor } from './components/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './components/helpers/error.interceptor';
+import { MenuComponent } from './components/shared/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ErrorInterceptor } from './components/helpers/error.interceptor';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
