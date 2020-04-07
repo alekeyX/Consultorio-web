@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
+
 import { AdminComponent } from './components/admin/admin.component';
 import { JwtInterceptor } from './components/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './components/helpers/error.interceptor';

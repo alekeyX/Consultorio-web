@@ -4,12 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../services/authentication.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -61,4 +63,5 @@ export class LoginComponent implements OnInit {
                   this.loading = false;
               });
   }
+
 }
