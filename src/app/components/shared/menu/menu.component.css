@@ -1,13 +1,17 @@
 a {
     color: #f0e4e4;
-    text-decoration: none;
-    background-color: transparent;
+    cursor: pointer;
 }
+
+a:hover {
+    background-color: rgb(238, 238, 223);
+    color: rgb(0, 151, 131);
+  }
 
 .dropdown-item {
     display: block;
     width: 100%;
-    padding: .25rem 1.5rem;
+    padding: .5rem 1.5rem;
     clear: both;
     font-weight: 400;
     color: #ffffff;
@@ -27,4 +31,9 @@ a {
 #sidebar {
     height: 100%;
     width: inherit;
+}
+
+/* Separadores */
+.dropdown-divider {
+    margin: 0;
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light fondo-navbar shadow-sm" >
+<nav class="navbar navbar-expand-lg navbar-light bg-aqua shadow-sm" >
     <!-- icono de navbar -->
     <!-- <i class="fas fa-stethoscope fa-4x text-white pr-3"></i> -->
     <button class="btn btn-toolbar navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +29,12 @@
                 <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active" >NOSOTROS</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active" >SERVICIOS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active" >CONTACTO</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active" *ngIf="isAdmin">SERVICIOS</a>
             </li>
             <li class="nav-item">
@@ -36,7 +42,10 @@
             </li>
         </ul>
         <a class="nav-link text-white ml-auto" (click)="logout()"  *ngIf="currentUser">Logout</a>
-
+        
+        <div class="mt-3">
+            <app-menu class="width-sidebar d-block d-none d-md-block d-lg-none"></app-menu>
+        </div>
     </div>
     
     <!-- Login -->
@@ -51,4 +60,6 @@
     <div class="d-none d-md-none d-lg-block">
         <i class="fas fa-user-circle fa-3x text-white" *ngIf="currentUser"></i>
     </div>  
+
+
 </nav>
