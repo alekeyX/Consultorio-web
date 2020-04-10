@@ -34,14 +34,11 @@
             <li class="nav-item" id="lista-navbar">
                 <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active" >CONTACTO</a>
             </li>
-            <li class="nav-item" id="lista-navbar">
-                <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active" *ngIf="isAdmin">SERVICIOS</a>
-            </li>
-            <li class="nav-item" id="lista-navbar">
-                <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active" *ngIf="isAdmin">CONTACTO</a>
+            <li>
+                <a class="nav-link text-white d-lg-none d-xl-none mouse" id="lista-navbar" (click)="logout()"  *ngIf="currentUser">Cerrar Sesión</a>
             </li>
         </ul>
-        <a class="nav-link text-white ml-auto mouse" (click)="logout()"  *ngIf="currentUser">Cerrar Sesión</a>
+        <a class="nav-link text-white ml-auto d-none d-md-none d-lg-block mouse" id="logout" (click)="logout()"  *ngIf="currentUser">Cerrar Sesión</a>
         
         <div class="mt-3">
             <app-menu class="width-sidebar d-block d-none d-md-block d-lg-none" *ngIf="currentUser"></app-menu>
