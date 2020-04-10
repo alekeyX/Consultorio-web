@@ -31,3 +31,24 @@
     border-color: rgba(0, 0, 0, 0);
 }
 
+
+/* Css para desktop */
+
+/* lista del navbar */
+@media screen and (min-width:1000px) {
+    
+#lista-navbar {
+    margin-left: 3rem;
+}
+
+}
+
+/* CSS para phone */
+
+@media screen and (max-width:1000px) {
+    
+#lista-navbar {
+    margin-left: 1.2rem;
+}
+
+}
