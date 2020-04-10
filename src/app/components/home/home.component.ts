@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 
+import { Role } from '../models/role';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -22,6 +23,7 @@ export class HomeComponent {
         private authenticationService: AuthenticationService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
 
     OnInit() {
@@ -31,4 +33,8 @@ export class HomeComponent {
             this.userFromApi = user;
         });
     }
+
+    get isAdmin() {
+        return this.currentUser && this.currentUser.role === Role.Admin;
+      }
 }
