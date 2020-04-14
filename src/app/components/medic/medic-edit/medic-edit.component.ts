@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MedicService } from '../../services/medic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Medic } from '../../models/medic';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-medic-edit',
@@ -13,15 +14,20 @@ export class MedicEditComponent implements OnInit {
   angForm: FormGroup;
   medic: Medic;
   medicData: Medic[];
+  currentUser: Medic;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    public medicService: MedicService) {
+    public medicService: MedicService,
+    private authenticationService: AuthenticationService
+    ) {
   }
 
   ngOnInit() {
+    this.currentUser = this.authenticationService.currentUserValue;
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.updateMedic();
     const id = this.route.snapshot.paramMap.get('id');
     this.getMedic(id);

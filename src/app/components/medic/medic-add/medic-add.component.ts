@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MedicService } from '../../services/medic.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Medic } from '../../models/medic';
 
 @Component({
   selector: 'app-medic-add',
@@ -10,13 +12,19 @@ import { Router } from '@angular/router';
 })
 export class MedicAddComponent implements OnInit {
   angForm: FormGroup;
+  currentUser: Medic;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentUser = this.authenticationService.currentUserValue;
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public medicService: MedicService) {
+    public medicService: MedicService,
+    private authenticationService: AuthenticationService
+    ) {
     this.createForm();
   }
 
