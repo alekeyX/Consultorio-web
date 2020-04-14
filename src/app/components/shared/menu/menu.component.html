@@ -17,13 +17,13 @@
 <div class="bg-aqua border-light border-top" id="sidebar">
     <div class="text-white p-2">
 
-      <a class="nav-link dropdown-item" *ngIf="isAdmin">
+      <a class="nav-link dropdown-item" [routerLink]="['/medics']" routerLinkActive="router-link-active"  *ngIf="isAdmin">
         <i class="fas fa-user-md fa-2x mr-3"></i>
         MÉDICOS
       </a>
       <div class="dropdown-divider"></div>
 
-      <a class="nav-link dropdown-item" *ngIf="isAdmin">
+      <a class="nav-link dropdown-item" [routerLink]="['/patients']" routerLinkActive="router-link-active"  *ngIf="isAdmin">
         <i class="fas fa-user-injured fa-2x mr-3" ></i>
         PACIENTES
       </a>

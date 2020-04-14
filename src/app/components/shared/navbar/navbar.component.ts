@@ -33,3 +33,10 @@ export class NavbarComponent implements OnInit {
   }
 
 }
+// TODO instalara indicador de progreso de cargar pagina
+// npm install ng2-slim-loading-bar --save
+// npm install rxjs-compat --save
+
+// https://appdividend.com/2020/02/24/angular-9-tutorial-how-to-build-angular-9-crud-app/
+ 
+// paso 6
