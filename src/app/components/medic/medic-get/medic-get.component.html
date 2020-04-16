@@ -16,13 +16,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let medic of medics; let i = index">
-          <th scope="row">{{medic.id}}</th>
-          <td>{{medic.name}}</td>
+          <th scope="row">{{medic._id}}</th>
+          <td>{{medic.username}}</td>
           <td>{{medic.email}}</td>
           <td>{{medic.especiality}}</td>
           <td>{{medic.phone}}</td>
           <td class="text-center edit-block">
-            <span class="edit" [routerLink]="['/medic/edit', medic.id]">
+            <span class="edit" [routerLink]="['/medic/update', medic._id]">
               <button type="button" class="btn btn-success btn-sm">Editar</button>
             </span>
             <span class="delete" (click)="removeMedic(medic, i)">

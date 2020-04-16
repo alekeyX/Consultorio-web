@@ -10,7 +10,7 @@ import { Medic } from '../models/medic';
 })
 export class MedicService {
 
-  apiServer = 'http://localhost:4000/medics';
+  apiServer = 'http://localhost:4000/api';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,30 +29,16 @@ export class MedicService {
   }
 
   // Encontrar por ID
-  getById(id): Observable<Medic> {
-    return this.httpClient.get<Medic>(this.apiServer + '/medic/' + id)
+  getById(id): Observable<any> {
+    return this.httpClient.get<any>(this.apiServer + '/medic/' + id)
     .pipe(
-      // map((res: Response) => {
-      //   return res || {}
-      // }),
       catchError(this.errorHandler)
-    );
+    )
   }
-
-   // Get por id
-  //  getMedic(id): Observable<any> {
-  //   const url = `${this.apiServer}/medic/${id}`;
-  //   return this.httpClient.get(url, this.httpOptions).pipe(
-  //     map((res: Response) => {
-  //       return res || {};
-  //     }),
-  //     catchError(this.errorHandler)
-  //   );
-  // }
 
   // Dar todos los medicos
   getAll(): Observable<Medic[]> {
-    return this.httpClient.get<Medic[]>(this.apiServer + '/medics')
+    return this.httpClient.get<Medic[]>(this.apiServer + '/medic')
     .pipe(
       catchError(this.errorHandler)
     );
@@ -60,7 +46,7 @@ export class MedicService {
 
   // Editar medico
   update(id, medic): Observable<Medic> {
-    return this.httpClient.put<Medic>(this.apiServer + '/medic/edit' + id, JSON.stringify(medic), this.httpOptions)
+    return this.httpClient.put<Medic>(this.apiServer + '/medic/update/' + id, JSON.stringify(medic), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     );

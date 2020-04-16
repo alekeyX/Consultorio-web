@@ -13,6 +13,8 @@ import { Medic } from '../../models/medic';
 export class MedicAddComponent implements OnInit {
   angForm: FormGroup;
   currentUser: Medic;
+  submitted = false;
+
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
@@ -26,31 +28,37 @@ export class MedicAddComponent implements OnInit {
     private authenticationService: AuthenticationService
     ) {
     this.createForm();
+    console.log(this.angForm);
+
   }
 
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       role: ['Medic'],
-      email: ['', Validators.required],
+      email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       genero: [''],
       address: [''],
-      phone: [''],
+      phone: ['', Validators.pattern('^[0-9]+$')],
       especiality: [''],
       image: [''],
     });
   }
 
   submitForm() {
-    this.medicService.create(this.angForm.value).subscribe(res => {
-      console.log('Medico añadido exitosamente!');
-      this.router.navigate(['medics']);
-    }, (error) => {
-      console.log(error);
-    });
+    this.submitted = true;
+    if (!this.angForm.valid) {
+      return false;
+    } else {
+      this.medicService.create(this.angForm.value).subscribe(res => {
+        console.log('Medico añadido exitosamente!');
+        this.router.navigate(['medics']);
+      }, (error) => {
+        console.log(error);
+      });
+    }
   }
-
 }

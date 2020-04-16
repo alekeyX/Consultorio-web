@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'medics', component: MedicGetComponent },
   { path: 'medic/create', component: MedicAddComponent },
   // { path: 'medic/:id', component: MedicAddComponent },
-  { path: 'medic/edit/:id', component: MedicEditComponent },
+  { path: 'medic/update/:id', component: MedicEditComponent },
   { path: 'patients', component: PatientGetComponent },
   { path: 'patient/create', component: PatientAddComponent },
   { path: 'patient/edit/:id', component: PatientEditComponent },

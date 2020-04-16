@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrls: ['./medic-edit.component.css']
 })
 export class MedicEditComponent implements OnInit {
+  submitted = false;
   angForm: FormGroup;
   medic: Medic;
   medicData: Medic[];
@@ -30,6 +31,7 @@ export class MedicEditComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.updateMedic();
     const id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
     this.getMedic(id);
     this.createForm();
   }
@@ -38,8 +40,8 @@ export class MedicEditComponent implements OnInit {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       role: ['Medic'],
       email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       genero: [''],
@@ -55,7 +57,7 @@ export class MedicEditComponent implements OnInit {
       this.angForm.setValue({
         username: data.username,
         password: data.password,
-        firtsName: data.firstName,
+        firstName: data.firstName,
         lastName: data.lastName,
         role: data.role,
         email: data.email,
@@ -72,8 +74,8 @@ export class MedicEditComponent implements OnInit {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       role: ['Medic'],
       email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       genero: [''],
@@ -85,6 +87,7 @@ export class MedicEditComponent implements OnInit {
   }
 
   submitForm() {
+    this.submitted = true;
     if (!this.angForm.valid) {
       return false;
     } else {
