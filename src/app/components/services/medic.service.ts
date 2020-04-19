@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEventType, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -21,11 +21,24 @@ export class MedicService {
   constructor(private httpClient: HttpClient) { }
 
   // Crear medico
-  create(medic): Observable<Medic> {
-    return this.httpClient.post<Medic>(this.apiServer + '/medic/create', JSON.stringify(medic), this.httpOptions)
-    .pipe(
-      catchError(this.errorHandler)
-    );
+  create(medic): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/medic/create', JSON.stringify(medic), this.httpOptions )
+    .pipe((map((event) => {
+
+      switch (event.type) {
+
+        case HttpEventType.UploadProgress:
+          const progress = Math.round(100 * event.loaded / event.total);
+          return { status: 'progress', message: progress };
+
+        case HttpEventType.Response:
+          return event.body;
+        default:
+          return `Unhandled event: ${event.type}`;
+      }
+    })
+    ));
+
   }
 
   // Encontrar por ID
