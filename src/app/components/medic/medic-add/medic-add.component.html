@@ -1,9 +1,9 @@
-<div class="row w-100 h-100">
+<div class="row h-75">
   <app-menu class="width-sidebar d-none d-md-none d-lg-block" *ngIf="currentUser"></app-menu>
   
-  <div class="container card mt-4 w-75">
+  <div class="container card mt-4 mb-4 w-75">
     <div class="card-body">
-      <h1 class="text-aqua-dark">Añadir Médico</h1>
+      <h1 class="text-aqua-dark mb-3">Añadir Médico</h1>
         <!-- formulario para añadir medico -->
         <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
           
@@ -121,7 +121,7 @@
             <label class="col-lg">Foto</label>
             <div class="custom-file  col-lg-4 form-group">
               <input type="file" class="custom-file-input" lang="es"
-                      formControlName="image" (change)="fileProgress($event)">
+                      formControlName="image">
               <label class="custom-file-label" for="image">Seleccionar Archivo</label>
             </div>
           </div>
