@@ -3,7 +3,9 @@
   
   <div class="container card mt-4 mb-4 w-75">
     <div class="card-body">
+
       <h1 class="text-aqua-dark mb-3">Añadir Médico</h1>
+
         <!-- formulario para añadir medico -->
         <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
           
@@ -38,7 +40,8 @@
           <div class="row">
             <div class="form-group col-lg">
               <label class="col-lg">Nombre</label>
-              <input type="text" class="form-control"  [ngClass]="{'is-invalid': angForm.controls['firstName'].errors?.required && angForm.controls['firstName'].touched}"
+              <input type="text" class="form-control"  
+              [ngClass]="{'is-invalid': angForm.controls['firstName'].errors?.required && angForm.controls['firstName'].touched}"
               formControlName="firstName" 
                 #firstName/>
                  <!-- error -->
@@ -51,7 +54,8 @@
             
             <div class="form-group col-lg">
               <label class="col-lg">Apellidos</label>
-              <input type="text" class="form-control"  [ngClass]="{'is-invalid': angForm.controls['lastName'].errors?.required && angForm.controls['lastName'].touched}"
+              <input type="text" class="form-control"  
+              [ngClass]="{'is-invalid': angForm.controls['lastName'].errors?.required && angForm.controls['lastName'].touched}"
               formControlName="lastName" 
                 #lastName/>
                  <!-- error -->
@@ -66,13 +70,14 @@
           <div class="row">
             <div class="form-group col-lg">
               <label class="col-lg">Email</label>
-              <input type="email" class="form-control"  [ngClass]="{'is-invalid': angForm.controls['email'].errors?.required && angForm.controls['email'].touched}"
+              <input type="email" class="form-control"  
+              [ngClass]="{'is-invalid': angForm.controls['email'].errors?.required && angForm.controls['email'].touched}"
               formControlName="email" 
                 #email/>
                 <!-- error -->
                 <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="text-danger font-weight-light">
                   <div *ngIf="angForm.controls['email'].errors.required">
-                    Correo incorrecto.
+                    Correo obligatorio.
                   </div>
                 </div>
             </div>
@@ -118,15 +123,25 @@
           </div>
 
           <div>
+<<<<<<< HEAD
             <label class="col-lg">Foto</label>
             <div class="custom-file  col-lg-4 form-group">
               <input type="file" class="custom-file-input" lang="es"
                       formControlName="image">
               <label class="custom-file-label" for="image">Seleccionar Archivo</label>
+=======
+            <label class="col-lg" for="file">Foto</label>
+            <div class="custom-file col-lg-4 form-group">
+              <input type="file"  id="file" #fileInput 
+                      FormControlName="image" (change)="onFileChange($event)">
+                      <!-- class="custom-file-input" -->
+              <!-- <label class="custom-file-label" for="inputFile">Seleccionar Archivo</label> -->
+>>>>>>> devUploadFile
             </div>
+            <img [src]="image" *ngIf="image" style="width: 200px; height: 200px;" alt="foto-perfil">
           </div>
 
-          <div class="form-group mt-4 text-center">
+          <div class="form-group mt-4">
             <button type="submit" class="btn text-white bg-aqua"
             [disabled]="angForm.pristine || angForm.invalid">Añadir Médico</button>
           </div>

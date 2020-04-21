@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MedicService } from '../../services/medic.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Medic } from '../../models/medic';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Medic } from '../../models/medic';
 
 @Component({
   selector: 'app-medic-edit',
@@ -16,6 +16,8 @@ export class MedicEditComponent implements OnInit {
   medic: Medic;
   medicData: Medic[];
   currentUser: Medic;
+  error: string;
+  image: string;
 
   constructor(
     private fb: FormBuilder,
@@ -43,7 +45,7 @@ export class MedicEditComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       role: ['Medic'],
-      email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
+      email: ['', Validators.required],
       genero: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
@@ -77,7 +79,7 @@ export class MedicEditComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       role: ['Medic'],
-      email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
+      email: ['', Validators.required],
       genero: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
@@ -86,14 +88,46 @@ export class MedicEditComponent implements OnInit {
     });
   }
 
+  onFileChange(event) {
+    const reader = new FileReader();
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.angForm.patchValue({
+        image: file
+      });
+      this.angForm.get('image').updateValueAndValidity();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.image = reader.result as string;
+        this.angForm.patchValue({
+          fileSource: reader.result
+        });
+      };
+    }
+  }
+
   submitForm() {
     this.submitted = true;
     if (!this.angForm.valid) {
       return false;
     } else {
       if (window.confirm('Esta seguro?')) {
+        const formData: any = new FormData();
+        formData.append('username', this.angForm.get('username').value);
+        formData.append('password', this.angForm.get('password').value);
+        formData.append('firstName', this.angForm.get('firstName').value);
+        formData.append('lastName', this.angForm.get('lastName').value);
+        formData.append('role', this.angForm.get('role').value);
+        formData.append('email', this.angForm.get('email').value);
+        formData.append('genero', this.angForm.get('genero').value);
+        formData.append('address', this.angForm.get('address').value);
+        formData.append('phone', this.angForm.get('phone').value);
+        formData.append('especiality', this.angForm.get('especiality').value);
+        formData.append('image', this.angForm.get('image').value);
+
         const id = this.route.snapshot.paramMap.get('id');
-        this.medicService.update(id, this.angForm.value)
+        this.medicService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/medics']);
             console.log('Contenido actualizado exitosamente!')

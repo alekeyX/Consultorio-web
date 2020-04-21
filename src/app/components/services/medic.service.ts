@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEventType, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -21,19 +21,26 @@ export class MedicService {
   constructor(private httpClient: HttpClient) { }
 
   // Crear medico
-  create(medic): Observable<Medic> {
-    return this.httpClient.post<Medic>(this.apiServer + '/medic/create', JSON.stringify(medic), this.httpOptions)
+  // create(medic): Observable<any> {
+  //   return this.httpClient.post<any>(this.apiServer + '/medic/create', JSON.stringify(medic), this.httpOptions )
+  //   .pipe(
+  //     catchError(this.errorHandler)
+  //   );
+
+  // }
+  create(medic): Observable<any> {
+    return this.httpClient.post( this.apiServer + '/medic/create', medic)
     .pipe(
-      catchError(this.errorHandler)
+        catchError(this.errorHandler)
     );
-  }
+}
 
   // Encontrar por ID
   getById(id): Observable<any> {
     return this.httpClient.get<any>(this.apiServer + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
-    )
+    );
   }
 
   // Dar todos los medicos
@@ -46,7 +53,7 @@ export class MedicService {
 
   // Editar medico
   update(id, medic): Observable<Medic> {
-    return this.httpClient.put<Medic>(this.apiServer + '/medic/update/' + id, JSON.stringify(medic), this.httpOptions)
+    return this.httpClient.put<Medic>(this.apiServer + '/medic/update/' + id, medic)
     .pipe(
       catchError(this.errorHandler)
     );
