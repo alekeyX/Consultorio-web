@@ -21,32 +21,26 @@ export class MedicService {
   constructor(private httpClient: HttpClient) { }
 
   // Crear medico
+  // create(medic): Observable<any> {
+  //   return this.httpClient.post<any>(this.apiServer + '/medic/create', JSON.stringify(medic), this.httpOptions )
+  //   .pipe(
+  //     catchError(this.errorHandler)
+  //   );
+
+  // }
   create(medic): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/medic/create', JSON.stringify(medic), this.httpOptions )
-    .pipe((map((event) => {
-
-      switch (event.type) {
-
-        case HttpEventType.UploadProgress:
-          const progress = Math.round(100 * event.loaded / event.total);
-          return { status: 'progress', message: progress };
-
-        case HttpEventType.Response:
-          return event.body;
-        default:
-          return `Unhandled event: ${event.type}`;
-      }
-    })
-    ));
-
-  }
+    return this.httpClient.post( this.apiServer + '/medic/create', medic)
+    .pipe(
+        catchError(this.errorHandler)
+    );
+}
 
   // Encontrar por ID
   getById(id): Observable<any> {
     return this.httpClient.get<any>(this.apiServer + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
-    )
+    );
   }
 
   // Dar todos los medicos
@@ -59,7 +53,7 @@ export class MedicService {
 
   // Editar medico
   update(id, medic): Observable<Medic> {
-    return this.httpClient.put<Medic>(this.apiServer + '/medic/update/' + id, JSON.stringify(medic), this.httpOptions)
+    return this.httpClient.put<Medic>(this.apiServer + '/medic/update/' + id, medic)
     .pipe(
       catchError(this.errorHandler)
     );

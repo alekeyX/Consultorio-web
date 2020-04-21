@@ -11,6 +11,6 @@ export interface Medic {
     address?: string;
     phone?: string;
     especiality?: string;
-    image?: File;
+    image?: any;
     token?: string;
 }

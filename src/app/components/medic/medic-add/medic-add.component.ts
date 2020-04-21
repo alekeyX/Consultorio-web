@@ -15,23 +15,20 @@ export class MedicAddComponent implements OnInit {
   currentUser: Medic;
   submitted = false;
   error: string;
-  imageSrc: string;
-  uploadResponse = { status: '', message: '', filePath: '' };
-
-  ngOnInit(): void {
-    this.currentUser = this.authenticationService.currentUserValue;
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-  }
+  image: string;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public medicService: MedicService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
     ) {
-    this.createForm();
-    console.log(this.angForm);
+      this.createForm();
+    }
 
+  ngOnInit(): void {
+    this.currentUser = this.authenticationService.currentUserValue;
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   createForm() {
@@ -55,11 +52,14 @@ export class MedicAddComponent implements OnInit {
     const reader = new FileReader();
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.angForm.get('image').setValue(file);
+      this.angForm.patchValue({
+        image: file
+      });
+      this.angForm.get('image').updateValueAndValidity();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
-        this.imageSrc = reader.result as string;
+        this.image = reader.result as string;
         this.angForm.patchValue({
           fileSource: reader.result
         });
@@ -72,17 +72,29 @@ export class MedicAddComponent implements OnInit {
     if (!this.angForm.valid) {
       return false;
     } else {
-      const formData = new FormData();
-      formData.append('file', this.angForm.get('image').value);
-      this.medicService.create(this.angForm.value).subscribe(res => {
+      const formData: any = new FormData();
+      formData.append('username', this.angForm.get('username').value);
+      formData.append('password', this.angForm.get('password').value);
+      formData.append('firstName', this.angForm.get('firstName').value);
+      formData.append('lastName', this.angForm.get('lastName').value);
+      formData.append('role', this.angForm.get('role').value);
+      formData.append('email', this.angForm.get('email').value);
+      formData.append('genero', this.angForm.get('genero').value);
+      formData.append('address', this.angForm.get('address').value);
+      formData.append('phone', this.angForm.get('phone').value);
+      formData.append('especiality', this.angForm.get('especiality').value);
+      formData.append('image', this.angForm.get('image').value);
+    //   console.log(this.angForm.value);
+    //   for (var value of formData.values()) {
+    //     console.log(value);
+    //  }
+      this.medicService.create(formData).subscribe(res => {
         console.log('Medico añadido exitosamente!');
-        console.log(this.angForm);
         this.router.navigate(['medics']);
       }, (error) => {
         this.error = error;
         console.log(error);
-        console.log(this.angForm);
-
+        // console.log(this.angForm);
       });
     }
   }
