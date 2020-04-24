@@ -27,15 +27,16 @@ app-footer {
     color: white;
 }
 
-/* .bg-aqua {
-    background: rgb(11, 167, 167);
-} */
 .bg-aqua {
     background: #15B9C6;
 }
 
 .bg-aqua-light {
     background: #D5F2F3;
+}
+
+.alto {
+    height: 75%;
 }
 
 /* TODO aumentar animated fadeIn */
