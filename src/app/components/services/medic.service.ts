@@ -36,8 +36,8 @@ export class MedicService {
 }
 
   // Encontrar por ID
-  getById(id): Observable<any> {
-    return this.httpClient.get<any>(this.apiServer + '/medic/' + id)
+  getById(id): Observable<Medic> {
+    return this.httpClient.get<Medic>(this.apiServer + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
     );

@@ -33,7 +33,7 @@ export class MedicEditComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.updateMedic();
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    // console.log(id);
     this.getMedic(id);
     this.createForm();
   }
@@ -50,7 +50,7 @@ export class MedicEditComponent implements OnInit {
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
       especiality: [''],
-      image: [''],
+      imagePath: [''],
     });
   }
 
@@ -67,7 +67,7 @@ export class MedicEditComponent implements OnInit {
         address: data.address,
         phone: data.phone,
         especiality: data.especiality,
-        image: data.image,
+        imagePath: data.imagePath,
       });
     });
   }
@@ -84,7 +84,7 @@ export class MedicEditComponent implements OnInit {
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
       especiality: [''],
-      image: [''],
+      imagePath: [''],
     });
   }
 
@@ -93,9 +93,9 @@ export class MedicEditComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.angForm.patchValue({
-        image: file
+        imagePath: file
       });
-      this.angForm.get('image').updateValueAndValidity();
+      this.angForm.get('imagePath').updateValueAndValidity();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
@@ -124,12 +124,12 @@ export class MedicEditComponent implements OnInit {
         formData.append('address', this.angForm.get('address').value);
         formData.append('phone', this.angForm.get('phone').value);
         formData.append('especiality', this.angForm.get('especiality').value);
-        formData.append('image', this.angForm.get('image').value);
+        formData.append('imagePath', this.angForm.get('imagePath').value);
 
         const id = this.route.snapshot.paramMap.get('id');
         this.medicService.update(id, formData)
           .subscribe(res => {
-            this.router.navigate(['/medics']);
+            this.router.navigate(['/medic']);
             console.log('Contenido actualizado exitosamente!')
           }, (error) => {
             console.log(error);

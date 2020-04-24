@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Medic } from '../../models/medic';
 import { MedicService } from '../../services/medic.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-medic-get',
@@ -14,9 +15,10 @@ export class MedicGetComponent implements OnInit {
 
   constructor(
       private medicService: MedicService,
+      private router: Router,
       private authenticationService: AuthenticationService
     ) {
-      this.readEmployee();
+      this.getMedics();
     }
 
     ngOnInit() {
@@ -24,7 +26,7 @@ export class MedicGetComponent implements OnInit {
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  readEmployee(){
+  getMedics() {
     this.medicService.getAll().subscribe((data) => {
      this.medics = data;
     });
@@ -36,6 +38,10 @@ export class MedicGetComponent implements OnInit {
           this.medics.splice(index, 1);
         });
     }
+  }
+
+  selectedMedic(id: string) {
+    this.router.navigate(['/medic/', id]);
   }
 
 }

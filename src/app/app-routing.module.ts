@@ -14,14 +14,16 @@ import { MedicEditComponent } from './components/medic/medic-edit/medic-edit.com
 import { PatientGetComponent } from './components/patient/patient-get/patient-get.component';
 import { PatientAddComponent } from './components/patient/patient-add/patient-add.component';
 import { PatientEditComponent } from './components/patient/patient-edit/patient-edit.component';
+import { MedicProfileComponent } from './components/medic/medic-profile/medic-profile.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
   { path: 'login', component: LoginComponent },
-  { path: 'medics', component: MedicGetComponent },
+  { path: 'medic', component: MedicGetComponent },
   { path: 'medic/create', component: MedicAddComponent },
+  { path: 'medic/:id', component: MedicProfileComponent },
   // { path: 'medic/:id', component: MedicAddComponent },
   { path: 'medic/update/:id', component: MedicEditComponent },
   { path: 'patients', component: PatientGetComponent },

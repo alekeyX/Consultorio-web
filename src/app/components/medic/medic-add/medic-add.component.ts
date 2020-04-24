@@ -44,7 +44,7 @@ export class MedicAddComponent implements OnInit {
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
       especiality: [''],
-      image: [''],
+      imagePath: [''],
     });
   }
 
@@ -53,9 +53,9 @@ export class MedicAddComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.angForm.patchValue({
-        image: file
+        imagePath: file
       });
-      this.angForm.get('image').updateValueAndValidity();
+      this.angForm.get('imagePath').updateValueAndValidity();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
@@ -83,14 +83,14 @@ export class MedicAddComponent implements OnInit {
       formData.append('address', this.angForm.get('address').value);
       formData.append('phone', this.angForm.get('phone').value);
       formData.append('especiality', this.angForm.get('especiality').value);
-      formData.append('image', this.angForm.get('image').value);
+      formData.append('imagePath', this.angForm.get('imagePath').value);
     //   console.log(this.angForm.value);
     //   for (var value of formData.values()) {
     //     console.log(value);
     //  }
       this.medicService.create(formData).subscribe(res => {
         console.log('Medico añadido exitosamente!');
-        this.router.navigate(['medics']);
+        this.router.navigate(['medic']);
       }, (error) => {
         this.error = error;
         console.log(error);

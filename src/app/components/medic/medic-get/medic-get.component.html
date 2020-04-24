@@ -1,6 +1,6 @@
-<div class="row h-75">
+<div class="row">
   <app-menu class="width-sidebar d-none d-md-none d-lg-block" *ngIf="currentUser"></app-menu>
-  
+  `
   <div class="container card mt-4 mb-4 w-75">
     <div class="card-body">
     <div class="d-md-flex justify-content-between align-items-center mb-4">
@@ -13,28 +13,28 @@
       <h2 *ngIf="medics.length <= 0" class="no-data text-center text-aqua-dark">No existen médicos añadidos!</h2>
     
       <!-- medic list -->
-      <table class="table table-sm table-hover table-responsive-lg" *ngIf="medics.length > 0">
-        <thead class="bg-aqua text-white ">
-          <tr class="">
-            <th class="w-25">Nombre</th>
-            <th class="w-25">Especialidad</th>
-            <th class="w-25">Email</th>
-            <th class="w-25">Teléfono</th>
-            <th class="w-25">Edición</th>
+      <table class="table table-sm table-hover table-responsive-md table-fixed " *ngIf="medics.length > 0">
+        <thead class="bg-aqua text-white">
+          <tr>
+            <th class="col-xs-3">Nombre</th>
+            <th class="col-xs-2">Especialidad</th>
+            <th class="col-xs-2">Email</th>
+            <th class="col-xs-3">Teléfono</th>
+            <th class="col-xs-2">Edición</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let medic of medics; let i = index">
-            <td>{{medic.username}}</td>
-            <td>{{medic.especiality}}</td>
-            <td>{{medic.email}}</td>
-            <td>{{medic.phone}}</td>
-            <td class="text-center edit-block">
-              <a [routerLink]="['/medic/update', medic._id]" class="text-dark mr-1"><i class="fas fa-edit"></i></a>
+        <tbody class="overflow-auto">
+          <tr *ngFor="let medic of medics; let i = index" (click)="selectedMedic(medic._id)">
+            <td class="col-xs-3">{{medic.username}}</td>
+            <td class="col-xs-2">{{medic.especiality}}</td>
+            <td class="col-xs-2">{{medic.email}}</td>
+            <td class="col-xs-3">{{medic.image}}</td>
+            <td class="col-xs-2" class="text-center edit-block">
+              <a [routerLink]="['/medic/update', medic._id]" class="text-dark mr-2"><i class="fas fa-edit"></i></a>
               <!-- <span class="edit" [routerLink]="['/medic/update', medic._id]">
                 <button type="button" class="btn btn-success btn-sm">Editar</button>
               </span> -->
-              <a (click)="removeMedic(medic, i)" class="ml-1"><i class="fas fa-trash"></i></a>
+              <a (click)="removeMedic(medic, i)" class="ml-2"><i class="fas fa-trash"></i></a>
               <!-- <span class="delete" (click)="removeMedic(medic, i)">
                 <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
               </span> -->

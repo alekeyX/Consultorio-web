@@ -1,6 +1,7 @@
 import { Role } from './role';
 
 export interface Medic {
+    _id: string;
     username: string;
     password: string;
     firstName: string;
@@ -11,6 +12,6 @@ export interface Medic {
     address?: string;
     phone?: string;
     especiality?: string;
-    image?: any;
+    imagePath?: string;
     token?: string;
 }

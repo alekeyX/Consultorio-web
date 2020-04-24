@@ -1,4 +1,4 @@
-<div class="row w-100 h-100">
+<div class="row">
     <app-menu class="width-sidebar d-none d-md-none d-lg-block" *ngIf="currentUser"></app-menu>
     
     <div class="container card mt-4 mb-4 w-75">
@@ -124,8 +124,8 @@
             <div>
               <label class="col-lg" for="file">Foto</label>
               <div class="custom-file col-lg-4 form-group">
-                <input type="file"  id="file" #fileInput
-                        FormControlName="image" (change)="onFileChange($event)">
+                <input type="file"  id="file" #fileInput lang="es" accept="image/gif, image/png, image/jpeg"
+                        FormControlName="imagePath" (change)="onFileChange($event)">
                         <!-- class="custom-file-input" -->
                 <!-- <label class="custom-file-label" for="inputFile">Seleccionar Archivo</label> -->
               </div>

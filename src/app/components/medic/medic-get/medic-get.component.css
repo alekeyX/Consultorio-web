@@ -6,3 +6,9 @@
 .text-aqua-dark {
     color: #0F7F87;
 }
+
+.table-fixed tbody {
+    height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    }
