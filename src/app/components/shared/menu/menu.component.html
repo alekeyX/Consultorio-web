@@ -1,0 +1,53 @@
+<!-- TODO Example single danger button -->
+<!-- <div class="btn-group">
+    <button type="button" class="btn bg-aqua dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Menú
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Medicos</a>
+      <a class="dropdown-item" href="#">Pacientes</a>
+      <a class="dropdown-item" href="#">Consultas</a>
+      <a class="dropdown-item" href="#">Mensajes</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated ank</a>
+    </div>
+  </div> -->
+
+<!-- sidebar -->
+<div class="bg-aqua border-light border-top" id="sidebar">
+    <div class="text-white p-2">
+
+      <a class="nav-link dropdown-item" [routerLink]="['/medic']" *ngIf="isAdmin">
+        <i class="fas fa-user-md fa-2x mr-3"></i>
+        MÉDICOS
+      </a>
+      <div class="dropdown-divider"></div>
+
+      <a class="nav-link dropdown-item" [routerLink]="['/patients']" *ngIf="isAdmin">
+        <i class="fas fa-user-injured fa-2x mr-3" ></i>
+        PACIENTES
+      </a>
+      <div class="dropdown-divider"></div>
+
+      <a class="nav-link dropdown-item">
+        <i class="fas fa-notes-medical fa-2x mr-3 ml-1"></i>
+        HISTORIAL
+      </a>
+      <div class="dropdown-divider"></div>
+
+      <a class="nav-link dropdown-item">
+        <i class="fas fa-clock fa-2x mr-3"></i>
+        CONSULTAS
+      </a>
+      <div class="dropdown-divider"></div>
+
+      <a class="nav-link dropdown-item">
+        <i class="fas fa-envelope fa-2x mr-3"></i>
+        MENSAJES
+      </a>
+      <div class="dropdown-divider"></div>
+      
+    </div>
+</div>
+
+  

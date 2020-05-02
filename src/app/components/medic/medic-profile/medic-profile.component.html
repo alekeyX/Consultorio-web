@@ -1,0 +1,87 @@
+<div class="row w-100 alto">
+    <app-menu class="width-sidebar d-none d-md-none d-lg-block" *ngIf="currentUser"></app-menu>
+    
+    <div *ngIf="!medic; else main_content">
+        <h1>Loading...</h1>
+    </div>
+
+    <ng-template #main_content>
+        <div class="container mt-4 mb-4 w-75">
+            <div class="card rounded-lg shadow mb-5 bg-white rounded">
+                <div class="card-body">
+                
+                    <h1 class="text-aqua-dark mb-3">Perfil Médico</h1>
+                
+                    <div class="row d-flex align-items-center justify-content-around mb-2">
+                        <div class="col-md-5 d-flex align-items-center justify-content-around">
+                            <img [src]="'http://localhost:4000/' + medic.imagePath" 
+                                class=" imgfluid imgRedonda border">
+                        </div>
+                        <div class="col-md-7 ">
+                            <div class="py-2 row d-flex align-self-center">
+                                <div class="col-md-4 col-lg-3">
+                                    <strong>Usuario:</strong>
+                                </div>
+                                <div class="col-md-8">{{ medic.username }}</div>
+                            </div>
+                            <div class="py-2 row d-flex align-self-center">
+                                <div class="col-md-4 col-lg-3">
+                                    <strong>Nombre:</strong>
+                                </div>
+                                <div class="col-md-8">{{ medic.firstName }}  {{ medic.lastName }}</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="row mt-lg-3">
+                        <div class="py-2 col-md-7 row d-flex align-self-center">
+                            <div class="col-md-6 col-lg-5">
+                                <strong>Especialidad:</strong>
+                            </div>
+                            <div class="col-md-7">{{ medic.especiality }} </div>
+                        </div>
+                        <div class="py-2 col-md-5 row d-flex align-self-center">
+                            <div class="col-md-6 col-lg-5">
+                                <strong>Género:</strong>
+                            </div>
+                            <div class="col-md-7">{{ medic.genero }} </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="py-2 col-md-7 row d-flex align-self-center">
+                            <div class="col-md-6 col-lg-5">
+                                <strong>Correo:</strong>
+                            </div>
+                            <div class="col-md-7">{{ medic.email }} </div>
+                        </div>
+                        <div class="py-2 col-md-5 row d-flex align-self-center">
+                            <div class="col-md-6 col-lg-5">
+                                <strong>Teléfono:</strong>
+                            </div>
+                            <div class="col-md-7">{{ medic.phone }} </div>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="py-2 col-md-7 row d-flex align-self-center">
+                            <div class="col-md-6 col-lg-5">
+                                <strong>Dirección:</strong>
+                            </div>
+                            <div class="col-md-7">{{ medic.address }} </div>
+                        </div>
+                    </div>
+                
+                    <div class="mt-4 d-md-flex justify-content-end">
+                        <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger m-1" (click)="deleteMedic(medic._id)">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

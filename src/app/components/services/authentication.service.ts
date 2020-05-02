@@ -9,14 +9,14 @@ import { User } from '../models/user';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+    public currentUser: Observable<any>;
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): User {
+    public get currentUserValue(): any {
         return this.currentUserSubject.value;
     }
 
@@ -25,7 +25,8 @@ export class AuthenticationService {
             .pipe(map(user => {
                 // iniciar sesión correctamente si hay un token jwt en la respuesta
                 if (user && user.token) {
-                    // almacenar detalles de usuario y token jwt en local storage para mantener al usuario conectado entre actualizaciones de página
+                    // almacenar detalles de usuario y token jwt en local storage para mantener
+                    // al usuario conectado entre actualizaciones de página
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
                 }

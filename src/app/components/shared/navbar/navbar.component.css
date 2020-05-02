@@ -1,15 +1,6 @@
 .navbar {
     position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
     padding: 1.5rem 1rem;
-    background: rgb(11, 167, 167);
 }
 
 .navbar-nav {
@@ -18,6 +9,7 @@
 
 .show {
     margin-top: 2%;
+    height: 100vh;
 }
 
 .navbar-brand {
@@ -37,4 +29,31 @@
 .navbar-toggler {
     color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
+}
+
+.mouse {
+    cursor: pointer;
+}
+
+
+/* Css para desktop */
+
+/* lista del navbar */
+@media screen and (min-width:1000px) {
+    
+#lista-navbar {
+    margin-left: 3rem;
+}
+
+}
+
+/* CSS para phone */
+
+@media screen and (max-width:1000px) {
+    
+#lista-navbar {
+    margin-left: 1.2rem;
+}
+
+
 }

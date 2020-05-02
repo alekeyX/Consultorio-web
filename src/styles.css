@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 html {
-    min-height: 100%;
+    height: 100%;
     position: relative;
 }
 body {
+    height: 100vh;
+    padding: 0;
     margin: 0;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
 
     background-image: url(assets/img/doctor-vestido-con-una-bata-blanca-y-una-corbata-azul-sosteniendo-una-carpeta_0.jpg);
     background-position: center center;
@@ -19,15 +21,22 @@ body {
     de fondo o si hay problemas para cargarla */
     background-color: aquamarine;
 }
+
 app-footer {
-    background-color: black;
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    height: 40px;
     color: white;
 }
 
 .bg-aqua {
-    background: rgb(11, 167, 167);
+    background: #15B9C6;
 }
+
+.bg-aqua-light {
+    background: #D5F2F3;
+}
+
+.alto {
+    height: 75%;
+}
+
+/* TODO aumentar animated fadeIn */

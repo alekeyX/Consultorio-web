@@ -1,0 +1,51 @@
+a {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+a:hover {
+    background-color: rgb(247, 247, 247);
+    color: #15B9C6;
+  }
+
+.dropdown-item {
+    padding: .5rem 1.5rem;
+    color: #ffffff;
+    border: 0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: rgb(0, 151, 131);
+    text-decoration: none;
+    background-color: #f0e4e4;
+}
+
+/* sidebar */
+#sidebar {
+    height: 100%;
+    width: inherit;
+}
+
+/* Separadores */
+.dropdown-divider {
+    margin: 0;
+}
+
+/* Css para telefono */
+
+/* lista del navbar */
+@media screen and (max-width:600) {
+    
+.dropdown-item {
+    padding: .5rem 0;
+    color: #ffffff;
+    border: 0;
+}
+
+}
+
+
+@media screen and (min-width:1000px){
+
+    
+}
