@@ -11,8 +11,8 @@ import { Patient } from '../models/patient';
 const users: User[] = [
     { id: 1, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
     { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User },
-    { id: 2, username: 'medic', password: 'medic', firstName: 'Medic', lastName: 'user', role: Role.Medic },
-    { id: 2, username: 'patient', password: 'patient', firstName: 'patient', lastName: 'User', role: Role.Patient }
+    { id: 3, username: 'medic', password: 'medic', firstName: 'Medic', lastName: 'user', role: Role.Medic },
+    { id: 4, username: 'patient', password: 'patient', firstName: 'patient', lastName: 'User', role: Role.Patient }
 ];
 
 @Injectable()
@@ -105,13 +105,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function currentUser() {
-            if (!isLoggedIn()) return;
+            if (!isLoggedIn()) { return; }
+            // tslint:disable-next-line:radix
             const id = parseInt(headers.get('Authorization').split('.')[1]);
             return users.find(x => x.id === id);
         }
 
         function idFromUrl() {
             const urlParts = url.split('/');
+            // tslint:disable-next-line:radix
             return parseInt(urlParts[urlParts.length - 1]);
         }
     }
