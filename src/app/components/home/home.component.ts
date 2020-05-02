@@ -15,8 +15,8 @@ import { AuthenticationService } from '../services/authentication.service';
 export class HomeComponent {
 
     loading = false;
-    currentUser: User;
-    userFromApi: User;
+    currentUser: any;
+    userFromApi: any;
 
     constructor(
         private userService: UserService,
@@ -29,10 +29,10 @@ export class HomeComponent {
 
     OnInit() {
         this.loading = true;
-        this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
+        this.userService.getById(this.currentUser._id).pipe(first()).subscribe(user => {
             this.loading = false;
             this.userFromApi = user;
-        });        
+        });
     }
 
     get isAdmin() {

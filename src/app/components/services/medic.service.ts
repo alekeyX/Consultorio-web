@@ -29,7 +29,7 @@ export class MedicService {
 
   // }
   create(medic): Observable<any> {
-    return this.httpClient.post( this.apiServer + '/medic/create', medic)
+    return this.httpClient.post( this.apiServer + '/medic/', medic)
     .pipe(
         catchError(this.errorHandler)
     );
@@ -53,7 +53,7 @@ export class MedicService {
 
   // Editar medico
   update(id, medic): Observable<Medic> {
-    return this.httpClient.put<Medic>(this.apiServer + '/medic/update/' + id, medic)
+    return this.httpClient.put<Medic>(this.apiServer + '/medic/' + id, medic)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -61,7 +61,7 @@ export class MedicService {
 
   // Eliminar medico
   delete(id): Observable<Medic> {
-    return this.httpClient.delete<Medic>(this.apiServer + '/delete/' + id, this.httpOptions)
+    return this.httpClient.delete<Medic>(this.apiServer + '/medic/' + id, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     );

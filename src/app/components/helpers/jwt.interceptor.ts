@@ -7,13 +7,18 @@ import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService) { }
+
+    private URL = 'http://localhost:4000/api';
+
+    constructor(
+        private authenticationService: AuthenticationService
+    ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // agregue el encabezado de autenticación con jwt si el usuario ha iniciado sesión y la solicitud es a la URL de la API
         const currentUser = this.authenticationService.currentUserValue;
         const isLoggedIn = currentUser && currentUser.token;
-        const isApiUrl = request.url.startsWith(environment.apiUrl);
+        const isApiUrl = request.url.startsWith(this.URL);
         if (isLoggedIn && isApiUrl) {
             request = request.clone({
                 setHeaders: {

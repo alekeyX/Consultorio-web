@@ -9,10 +9,10 @@ import { Medic } from '../models/medic';
 import { Patient } from '../models/patient';
 
 const users: User[] = [
-    { id: 1, username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', role: Role.Admin },
-    { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User },
-    { id: 3, username: 'medic', password: 'medic', firstName: 'Medic', lastName: 'user', role: Role.Medic },
-    { id: 4, username: 'patient', password: 'patient', firstName: 'patient', lastName: 'User', role: Role.Patient }
+    { _id: '1', username: 'admin', password: 'admin', email: 'Admin', role: Role.Admin },
+    { _id: '2', username: 'user', password: 'user', email: 'Normal', role: Role.User },
+    { _id: '3', username: 'medic', password: 'medic', email: 'Medic', role: Role.Medic },
+    { _id: '4', username: 'patient', password: 'patient', email: 'patient', role: Role.Patient }
 ];
 
 @Injectable()
@@ -49,12 +49,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const user = users.find(x => x.username === username && x.password === password);
             if (!user) { return error('Nombre de usuario incorrecto'); }
             return ok({
-                id: user.id,
+                id: user._id,
                 username: user.username,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                email: user.email,
                 role: user.role,
-                token: `fake-jwt-token.${user.id}`
+                token: `fake-jwt-token.${user._id}`
             });
         }
 
@@ -67,9 +66,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (!isLoggedIn()) { return unauthorized(); }
 
             // only admins can access other user records
-            if (!isAdmin() && currentUser().id !== idFromUrl()) { return unauthorized(); }
+            if (!isAdmin() && currentUser()._id !== idFromUrl()) { return unauthorized(); }
 
-            const user = users.find(x => x.id === idFromUrl());
+            const user = users.find(x => x._id === idFromUrl());
             return ok(user);
         }
 
@@ -107,14 +106,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function currentUser() {
             if (!isLoggedIn()) { return; }
             // tslint:disable-next-line:radix
-            const id = parseInt(headers.get('Authorization').split('.')[1]);
-            return users.find(x => x.id === id);
+            const id = headers.get('Authorization').split('.')[1];
+            return users.find(x => x._id === id);
         }
 
         function idFromUrl() {
             const urlParts = url.split('/');
             // tslint:disable-next-line:radix
-            return parseInt(urlParts[urlParts.length - 1]);
+            return urlParts[urlParts.length - 1];
         }
     }
 }
