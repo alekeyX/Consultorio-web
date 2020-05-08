@@ -30,38 +30,39 @@ export class LoginComponent implements OnInit {
       }
   }
 
-  ngOnInit() {
-      this.loginForm = this.formBuilder.group({
-          username: ['', Validators.required],
-          password: ['', Validators.required]
-      });
+    ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+        username: ['', Validators.required],
+        password: ['', Validators.required]
+    });
 
       // Obtener URL de retorno de los parámetros de ruta o por defecto a '/'
-      this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-  }
+        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    }
 
   // Obtención de conveniencia para un fácil acceso a los campos de formulario
-  get f() { return this.loginForm.controls; }
+    get f() { return this.loginForm.controls; }
 
-  onSubmit() {
-      this.submitted = true;
+    onSubmit() {
+        this.submitted = true;
 
       // para aquí si el formulario no es válido
-      if (this.loginForm.invalid) {
-          return;
-      }
+        if (this.loginForm.invalid) {
+        return;
+    }
 
-      this.loading = true;
-      this.authenticationService.login(this.f.username.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  this.router.navigate([this.returnUrl]);
-              },
-              error => {
-                  this.error = error;
-                  this.loading = false;
-              });
-  }
+        this.loading = true;
+        this.authenticationService.login(this.f.username.value, this.f.password.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.router.navigate([this.returnUrl]);
+                },
+                error => {
+                    console.log(error);
+                    this.error = error;
+                    this.loading = false;
+                });
+    }
 
 }

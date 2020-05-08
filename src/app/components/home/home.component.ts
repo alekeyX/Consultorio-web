@@ -17,6 +17,7 @@ export class HomeComponent {
     loading = false;
     currentUser: any;
     userFromApi: any;
+    username: string;
 
     constructor(
         private userService: UserService,
@@ -24,26 +25,27 @@ export class HomeComponent {
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-        console.log(this.currentUser);
+        // console.log(this.currentUser);
     }
 
     OnInit() {
-        this.loading = true;
-        this.userService.getById(this.currentUser._id).pipe(first()).subscribe(user => {
-            this.loading = false;
-            this.userFromApi = user;
-        });
+        // this.loading = true;
+        // this.userService.getById(this.currentUser._id).pipe(first()).subscribe(user => {
+        //     this.loading = false;
+            // console.log(this.currentUser);
+            // this.userFromApi = user;
+        // });
     }
 
     get isAdmin() {
         return this.currentUser && this.currentUser.role === Role.Admin;
-      }
+    }
 
     get isMedic() {
-    return this.currentUser && this.currentUser.role === Role.Medic;
+    return this.currentUser && this.currentUser.medic.role === Role.Medic;
     }
 
     get isPatient() {
-        return this.currentUser && this.currentUser.role === Role.Patient;
-        }
+        return this.currentUser && this.currentUser.patient.role === Role.Patient;
+    }
 }

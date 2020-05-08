@@ -43,7 +43,7 @@ export class MedicAddComponent implements OnInit {
       genero: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      especiality: [''],
+      specialty: [''],
       imagePath: [''],
     });
   }
@@ -82,19 +82,13 @@ export class MedicAddComponent implements OnInit {
       formData.append('genero', this.angForm.get('genero').value);
       formData.append('address', this.angForm.get('address').value);
       formData.append('phone', this.angForm.get('phone').value);
-      formData.append('especiality', this.angForm.get('especiality').value);
+      formData.append('specialty', this.angForm.get('specialty').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
-    //   console.log(this.angForm.value);
-    //   for (var value of formData.values()) {
-    //     console.log(value);
-    //  }
+ 
       this.medicService.create(formData).subscribe(res => {
-        console.log('Medico añadido exitosamente!');
         this.router.navigate(['medic']);
       }, (error) => {
         this.error = error;
-        console.log(error);
-        // console.log(this.angForm);
       });
     }
   }

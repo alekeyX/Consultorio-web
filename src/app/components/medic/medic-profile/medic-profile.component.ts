@@ -39,10 +39,12 @@ export class MedicProfileComponent implements OnInit {
   }
 
   deleteMedic(id: string) {
-    this.medicService.delete(id)
-      .subscribe(res => {
-        console.log(res);
-        this.router.navigate(['/medic']);
-      });
+    if (window.confirm('Esta seguro?')) {
+      this.medicService.delete(id)
+        .subscribe(res => {
+          console.log(res);
+          this.router.navigate(['/medic']);
+        });
+      }
   }
 }

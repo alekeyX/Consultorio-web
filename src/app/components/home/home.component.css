@@ -22,11 +22,11 @@
     color: rgb(11, 104, 99);
 }
 
-.width-sidebar{
-    width: 250px;
-}
-
 .row {
     margin-right: 0px;
     margin-left: 0px;
+}
+
+.width-sidebar{
+    width: 250px;
 }

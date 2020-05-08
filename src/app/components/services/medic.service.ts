@@ -36,8 +36,8 @@ export class MedicService {
 }
 
   // Encontrar por ID
-  getById(id): Observable<Medic> {
-    return this.httpClient.get<Medic>(this.apiServer + '/medic/' + id)
+  getById(id): any {
+    return this.httpClient.get(this.apiServer + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -61,7 +61,7 @@ export class MedicService {
 
   // Eliminar medico
   delete(id): Observable<Medic> {
-    return this.httpClient.delete<Medic>(this.apiServer + '/medic/' + id, this.httpOptions)
+    return this.httpClient.delete<Medic>(this.apiServer + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -76,7 +76,6 @@ export class MedicService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

@@ -10,9 +10,11 @@
 <app-navbar></app-navbar>
 <!-- <app-navbar class="fixed-top"></app-navbar> -->
 
-    <div class="w-75 alto">
-        <router-outlet></router-outlet>
-    </div>
-    
+<div class="row w-100">
+  <app-menu class="d-none d-md-none d-lg-block" *ngIf="currentUser"></app-menu>
+  <div class="container mt-4 mb-4 w-75">
+      <router-outlet></router-outlet>
+  </div>
+</div>
 
 <app-footer></app-footer>

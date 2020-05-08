@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
             // comprobar si la ruta esta restringida por rol
             if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {
                 // rol no autorizado, así que redirige a la página de inicio
-                this.router.navigate(['/home']);
+                this.router.navigate(['/']);
                 return false;
             }
 
@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
         }
 
         // no ha iniciado sesión, así que redirija a la página de inicio de sesión con la URL de retorno
-        this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
+        this.router.navigate(['/'], { queryParams: { returnUrl: state.url } });
         return false;
     }
 }

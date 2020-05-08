@@ -12,14 +12,14 @@ import { User } from '../models/user';
 export class AuthenticationService {
 
     private URL = 'http://localhost:4000/api';
-    private currentUserSubject: BehaviorSubject<User>;
+    private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
 
     constructor(
         private http: HttpClient,
         private router: Router
         ) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -27,31 +27,25 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    // signUp(user) {
-    //     return this.http.post<any>(this.URL + '/signup', user);
-    // }
-
-    // signIn(user) {
-    //     return this.http.post<any>(this.URL + '/signin', user);
-    // }
-
-    // loggedIn() {
-    //     return !!localStorage.getItem('token');
-    // }
-
-    // getToken() {
-    //     return localStorage.getItem('token');
-    // }
-
-    // eliminar usuario del local storage para cerrar sesión
-    // logout() {
-    //     localStorage.removeItem('token');
-    //     this.router.navigate(['/home']);
-    // }
-
-    //
+    // Inicio de Sesión 
     login(username: string, password: string) {
-        return this.http.post<any>(this.URL + '/signin', { username, password })
+        return this.http.post<any>(environment.apiUrl + '/signin', { username, password })
+            .pipe(map(user => {
+                // iniciar sesión correctamente si hay un token jwt en la respuesta
+                if (user && user.token) {
+                    // almacenar detalles de usuario y token jwt en local storage para mantener
+                    // al usuario conectado entre actualizaciones de página
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.currentUserSubject.next(user);
+                }
+
+                return user;
+            }));
+    }
+
+    // Inicio de Sesión de medicos
+    loginMedic(username: string, password: string) {
+        return this.http.post<any>(environment.apiUrl + '/medic/signin', { username, password })
             .pipe(map(user => {
                 // iniciar sesión correctamente si hay un token jwt en la respuesta
                 if (user && user.token) {
@@ -69,5 +63,6 @@ export class AuthenticationService {
         // eliminar usuario del local storage para cerrar sesión
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        this.router.navigate(['/home']);
     }
 }

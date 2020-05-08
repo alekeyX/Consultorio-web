@@ -49,13 +49,15 @@ export class MedicEditComponent implements OnInit {
       genero: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      especiality: [''],
+      specialty: [''],
       imagePath: [''],
     });
   }
 
   getMedic(id) {
     this.medicService.getById(id).subscribe(data => {
+      console.log(data);
+      
       this.angForm.setValue({
         username: data.username,
         password: data.password,
@@ -66,7 +68,7 @@ export class MedicEditComponent implements OnInit {
         genero: data.genero,
         address: data.address,
         phone: data.phone,
-        especiality: data.especiality,
+        specialty: data.specialty,
         imagePath: data.imagePath,
       });
     });
@@ -83,7 +85,7 @@ export class MedicEditComponent implements OnInit {
       genero: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      especiality: [''],
+      specialty: [''],
       imagePath: [''],
     });
   }
@@ -123,7 +125,7 @@ export class MedicEditComponent implements OnInit {
         formData.append('genero', this.angForm.get('genero').value);
         formData.append('address', this.angForm.get('address').value);
         formData.append('phone', this.angForm.get('phone').value);
-        formData.append('especiality', this.angForm.get('especiality').value);
+        formData.append('specialty', this.angForm.get('specialty').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
 
         const id = this.route.snapshot.paramMap.get('id');

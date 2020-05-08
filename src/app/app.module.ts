@@ -29,6 +29,7 @@ import { PatientEditComponent } from './components/patient/patient-edit/patient-
 import { MedicService } from './components/services/medic.service';
 import { PatientService } from './components/services/patient.service';
 import { MedicProfileComponent } from './components/medic/medic-profile/medic-profile.component';
+import { LoginMedicComponent } from './components/medic/login-medic/login-medic.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MedicProfileComponent } from './components/medic/medic-profile/medic-pr
     PatientAddComponent,
     PatientGetComponent,
     PatientEditComponent,
-    MedicProfileComponent
+    MedicProfileComponent,
+    LoginMedicComponent
   ],
   imports: [
     BrowserModule,

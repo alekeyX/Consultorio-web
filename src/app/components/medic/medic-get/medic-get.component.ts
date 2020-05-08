@@ -34,7 +34,7 @@ export class MedicGetComponent implements OnInit {
 
   removeMedic(medic, index) {
     if (window.confirm('Esta seguro?')) {
-        this.medicService.delete(medic.id).subscribe((data) => {
+        this.medicService.delete(medic._id).subscribe((data) => {
           this.medics.splice(index, 1);
         });
     }

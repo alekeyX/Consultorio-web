@@ -13,13 +13,15 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class MenuComponent implements OnInit {
 
-  currentUser: User;
+  currentUser: any;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
+    this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    // console.log(this.currentUser);
   }
 
   ngOnInit(): void {
@@ -27,5 +29,9 @@ export class MenuComponent implements OnInit {
 
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  get isMedic() {
+    return this.currentUser && this.currentUser.role === Role.Medic;
   }
 }
