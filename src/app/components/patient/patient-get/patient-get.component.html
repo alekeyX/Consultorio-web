@@ -1,1 +1,48 @@
-<p>patient-get works!</p>
+<div class="card rounded-lg shadow mb-5 bg-white rounded">
+    <div class="card-body">
+    <div class="d-md-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-aqua-dark">Lista de Pacientes</h1>
+        <div>
+            <a class="btn bg-aqua text-white" [routerLink]="['/patient/create']" routerLinkActive="router-link-active"  role="button">Añadir Paciente</a>
+        </div>
+    </div>
+        <div *ngIf="patients.length <= 0; else main_content">
+            <h1>Cargando...</h1>
+            <span *ngIf="loading" class="spinner-border"></span>
+        </div>
+        
+        <ng-template #main_content>
+            <!-- No data message -->
+            <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen médicos añadidos!</h2>
+            
+            <!-- patient list -->
+            <table class="table table-sm table-hover table-responsive-md table-fixed " *ngIf="patients.length > 0">
+            <thead class="bg-aqua text-white">
+                <tr>
+                <th class="col-xs-3">Código</th>
+                <th class="col-xs-2">Nombre</th>
+                <th class="col-xs-3">Teléfono</th>
+                <th class="col-xs-2">Edición</th>
+                </tr>
+            </thead>
+            <tbody class="overflow-auto">
+                <tr *ngFor="let patient of patients; let i = index">
+                <td class="col-xs-3" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
+                <td class="col-xs-2" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
+                <td class="col-xs-3" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
+                <td class="col-xs-2" class="text-center edit-block">
+                    <a [routerLink]="['/patient/update', patient._id]" class="text-dark mr-2"><i class="fas fa-edit"></i></a>
+                    <!-- <span class="edit" [routerLink]="['/patient/update', patient._id]">
+                    <button type="button" class="btn btn-success btn-sm">Editar</button>
+                    </span> -->
+                    <a (click)="removePatient(patient, i)" class="ml-2"><i class="fas fa-trash"></i></a>
+                    <!-- <span class="delete" (click)="removeMedic(patient, i)">
+                    <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                    </span> -->
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </ng-template>
+    </div>
+</div>

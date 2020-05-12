@@ -4,14 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { Patient } from '../models/patient';
-
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
-  apiServer = 'http://localhost:4000/patients';
+  apiServer = 'http://localhost:4000/api';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -22,35 +22,35 @@ export class PatientService {
   constructor(private httpClient: HttpClient) { }
 
   create(patient): Observable<Patient> {
-    return this.httpClient.post<Patient>(this.apiServer + '/patients/', JSON.stringify(patient), this.httpOptions)
+    return this.httpClient.post<Patient>(environment.apiUrl + '/patient/', patient)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   getById(id): Observable<Patient> {
-    return this.httpClient.get<Patient>(this.apiServer + '/patients/' + id)
+    return this.httpClient.get<Patient>(environment.apiUrl + '/patient/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   getAll(): Observable<Patient[]> {
-    return this.httpClient.get<Patient[]>(this.apiServer + '/patients/')
+    return this.httpClient.get<Patient[]>(environment.apiUrl + '/patient')
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   update(id, patient): Observable<Patient> {
-    return this.httpClient.put<Patient>(this.apiServer + '/patients/' + id, JSON.stringify(patient), this.httpOptions)
+    return this.httpClient.put<Patient>(environment.apiUrl + '/patient/' + id, patient)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   delete(id) {
-    return this.httpClient.delete<Patient>(this.apiServer + '/patients/' + id, this.httpOptions)
+    return this.httpClient.delete<Patient>(environment.apiUrl + '/patient/' + id)
     .pipe(
       catchError(this.errorHandler)
     );

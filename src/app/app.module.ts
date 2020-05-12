@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
+// Modulos
+import { PatientModule } from './components/patient/patient.module';
 
 // used to create fake backend
 import { fakeBackendProvider } from './components/helpers/fake-backend';
@@ -22,14 +25,11 @@ import { AdminComponent } from './components/admin/admin.component';
 import { MedicAddComponent } from './components/medic/medic-add/medic-add.component';
 import { MedicGetComponent } from './components/medic/medic-get/medic-get.component';
 import { MedicEditComponent } from './components/medic/medic-edit/medic-edit.component';
-import { PatientAddComponent } from './components/patient/patient-add/patient-add.component';
-import { PatientGetComponent } from './components/patient/patient-get/patient-get.component';
-import { PatientEditComponent } from './components/patient/patient-edit/patient-edit.component';
-// Servicios
-import { MedicService } from './components/services/medic.service';
-import { PatientService } from './components/services/patient.service';
 import { MedicProfileComponent } from './components/medic/medic-profile/medic-profile.component';
 import { LoginMedicComponent } from './components/medic/login-medic/login-medic.component';
+
+// Servicios
+import { MedicService } from './components/services/medic.service';
 
 @NgModule({
   declarations: [
@@ -43,23 +43,21 @@ import { LoginMedicComponent } from './components/medic/login-medic/login-medic.
     MedicAddComponent,
     MedicGetComponent,
     MedicEditComponent,
-    PatientAddComponent,
-    PatientGetComponent,
-    PatientEditComponent,
     MedicProfileComponent,
     LoginMedicComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    PatientModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     MedicService,
-    PatientService,
     // provider used to create fake backend
     fakeBackendProvider
   ],

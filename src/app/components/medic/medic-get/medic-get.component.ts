@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class MedicGetComponent implements OnInit {
   currentUser: Medic;
   medics: Medic[] = [];
+  loading = false;
 
   constructor(
       private medicService: MedicService,
@@ -19,16 +20,17 @@ export class MedicGetComponent implements OnInit {
       private authenticationService: AuthenticationService
     ) {
       this.getMedics();
-    }
+  }
 
-    ngOnInit() {
-      this.currentUser = this.authenticationService.currentUserValue;
-      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  ngOnInit() {
+    this.currentUser = this.authenticationService.currentUserValue;
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   getMedics() {
+    this.loading = true;
     this.medicService.getAll().subscribe((data) => {
-     this.medics = data;
+      this.medics = data;
     });
   }
 

@@ -1,17 +1,23 @@
 import { Role } from './role';
 
 export interface Patient {
-    id: number;
+    _id: string;
     username: string; // nombre
     password: string; // apellido
     firstName: string;
     lastName: string;
+    ci: number;
+    age: number;
     role: Role;
-    genero: string;
-    date: string;
     email?: string;
+    genero?: string;
+    ethnicity?: string;
+    maritalStatus?: string;
+    ocupation?: string;
+    placeBirth?: string;
     address: string;
-    phone: string;
-    image?: File;
+    phone?: string;
+    medic: string;
+    imagePath?: File;
     token?: string;
 }

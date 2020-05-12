@@ -56,8 +56,6 @@ export class MedicEditComponent implements OnInit {
 
   getMedic(id) {
     this.medicService.getById(id).subscribe(data => {
-      console.log(data);
-      
       this.angForm.setValue({
         username: data.username,
         password: data.password,
