@@ -5,12 +5,13 @@ import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../../services/authentication.service';
 
+
 @Component({
-  selector: 'app-login-medic',
-  templateUrl: './login-medic.component.html',
-  styleUrls: ['./login-medic.component.css']
+  selector: 'app-patient-login',
+  templateUrl: './patient-login.component.html',
+  styleUrls: ['./patient-login.component.css']
 })
-export class LoginMedicComponent implements OnInit {
+export class PatientLoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loading = false;
@@ -64,5 +65,4 @@ export class LoginMedicComponent implements OnInit {
                 this.loading = false;
             });
   }
-
 }

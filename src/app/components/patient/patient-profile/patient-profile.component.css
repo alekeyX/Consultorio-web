@@ -1,0 +1,20 @@
+/* Colores */
+/* .bg-aqua {
+    background: #15B9C6;
+}
+
+.text-aqua-dark {
+    color: #0F7F87;
+} */
+
+/* Imagen de perfil */
+.imgRedonda {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+button {
+    border-radius: 20px;
+    width: 100px;
+}

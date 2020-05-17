@@ -62,7 +62,7 @@ export class PatientEditComponent implements OnInit {
 
   getPatient(id) {
     this.patientService.getById(id).subscribe(data => {
-      // console.log(data);
+      console.log(data);
       this.angForm.setValue({
         username: data.username,
         ci: data.ci,
