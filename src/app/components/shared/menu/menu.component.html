@@ -10,6 +10,14 @@
         <div class="dropdown-divider"></div>
       </div>
 
+      <div *ngIf="isMedic || isPatient">
+        <a class="nav-link dropdown-item" (click)="selected(currentUser._id)">
+          <i class="fas fa-user fa-2x mr-3 ml-1" ></i>
+          PÉRFIL
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+
       <div *ngIf="isAdmin || isMedic">
         <a class="nav-link dropdown-item" [routerLink]="['/patient']">
           <i class="fas fa-user-injured fa-2x mr-3" ></i>

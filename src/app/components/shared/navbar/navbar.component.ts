@@ -12,6 +12,7 @@ import { User } from '../../models/user';
 })
 export class NavbarComponent implements OnInit {
   currentUser: User;
+  isShown = false;
 
   constructor(
     private router: Router,
@@ -29,12 +30,11 @@ export class NavbarComponent implements OnInit {
   logout() {
       this.authenticationService.logout();
   }
-
 }
 // TODO instalara indicador de progreso de cargar pagina
 // npm install ng2-slim-loading-bar --save
 // npm install rxjs-compat --save
 
 // https://appdividend.com/2020/02/24/angular-9-tutorial-how-to-build-angular-9-crud-app/
- 
+
 // paso 6

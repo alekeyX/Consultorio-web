@@ -34,4 +34,16 @@ export class MenuComponent implements OnInit {
   get isMedic() {
     return this.currentUser && this.currentUser.role === Role.Medic;
   }
+
+  get isPatient() {
+    return this.currentUser && this.currentUser.role === Role.Patient;
+  }
+
+  selected(id: string) {
+    if (this.currentUser.role === Role.Medic) {
+      this.router.navigate(['/medic/', id]);
+    } else {
+      this.router.navigate(['/patient/', id]);
+    }
+  }
 }
