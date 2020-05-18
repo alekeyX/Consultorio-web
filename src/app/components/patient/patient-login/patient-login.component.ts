@@ -53,14 +53,13 @@ export class PatientLoginComponent implements OnInit {
   }
 
     this.loading = true;
-    this.authenticationService.loginMedic(this.f.username.value, this.f.password.value)
+    this.authenticationService.loginPatient(this.f.username.value, this.f.password.value)
         .pipe(first())
         .subscribe(
             data => {
                 this.router.navigate([this.returnUrl]);
             },
             error => {
-                console.log(error);
                 this.error = error;
                 this.loading = false;
             });

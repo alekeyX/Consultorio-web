@@ -59,6 +59,22 @@ export class AuthenticationService {
             }));
     }
 
+    // Inicio de Sesión de medicos
+    loginPatient(username: string, password: string) {
+        return this.http.post<any>(environment.apiUrl + '/patient/signin', { username, password })
+            .pipe(map(user => {
+                // iniciar sesión correctamente si hay un token jwt en la respuesta
+                if (user && user.token) {
+                    // almacenar detalles de usuario y token jwt en local storage para mantener
+                    // al usuario conectado entre actualizaciones de página
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.currentUserSubject.next(user);
+                }
+
+                return user;
+            }));
+    }
+
     logout() {
         // eliminar usuario del local storage para cerrar sesión
         localStorage.removeItem('currentUser');

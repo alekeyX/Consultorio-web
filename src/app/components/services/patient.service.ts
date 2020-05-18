@@ -11,8 +11,6 @@ import { environment } from '../../../environments/environment';
 })
 export class PatientService {
 
-  apiServer = 'http://localhost:4000/api';
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

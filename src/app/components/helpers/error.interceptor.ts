@@ -14,12 +14,13 @@ export class ErrorInterceptor implements HttpInterceptor {
             catchError(err => {
             if ([401, 403].indexOf(err.status) !== -1) {
                 // cierre de sesión automático si la respuesta 401 no autorizada o 403 prohibida regresó de la API
-                // this.authenticationService.logout();
+                const currentUser = this.authenticationService.currentUserValue;
+                if(currentUser){
+                    this.authenticationService.logout();
+                }
                 // location.reload(true);
             }
-
-            const error = err.error.message || err.statusText;
-            // console.log(error);
+            const error = err.error || err.statusText;
             // this.authenticationService.logout();
             return throwError(error);
         }));
