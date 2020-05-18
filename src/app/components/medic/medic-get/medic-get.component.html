@@ -7,8 +7,8 @@
       </div>
   </div>
     <div *ngIf="medics.length <= 0; else main_content">
-      <h1>Cargando...</h1>
-      <span *ngIf="loading" class="spinner-border"></span>
+      <h1 class="text-aqua-dark">Cargando...</h1>
+      <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
     </div>
 
     <ng-template #main_content>

@@ -1,22 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-aqua shadow-sm" >
+<nav  class="navbar navbar-expand-lg navbar-light bg-aqua shadow-sm justify-content-between">
     <!-- icono de navbar -->
-    <button class="btn btn-toolbar navbar-toggler mr-auto" type="button" data-target="#navbarNav" aria-controls="navbarNav" (click)="isShown=!isShown" [attr.aria-expanded]="isShown" aria-label="Toggle navigation">
+    <button class="btn btn-toolbar navbar-toggler px-md-4" id="buttonMenu" type="button" data-target="#navbarNav" aria-controls="navbarNav" (click)="isShown=!isShown" [attr.aria-expanded]="isShown" aria-label="Toggle navigation">
         <span class="fas fa-bars fa-2x text-white"></span>
     </button>
-    <div class="mb-1">
-        <i class="fas fa-stethoscope fa-2x text-white pr-3"></i>
+
+    <div class="">
         <a class="navbar-brand text-white" [routerLink]="['/']" routerLinkActive="router-link-active" >Consultorio Médico</a>
     </div>
     
-    <div class="ml-auto d-lg-none d-xl-none">
+    <div class="ml-auto d-lg-none d-xl-none" *ngIf="!currentUser">
         <a class="nav-link text-white" [routerLink]="['/login']" 
-            routerLinkActive="router-link-active" *ngIf="!currentUser">
+            routerLinkActive="router-link-active">
             Iniciar Sesión
         </a>
     </div>
-    
-    <div class="d-lg-none d-xl-none">
-        <i class="fas fa-user-circle fa-3x text-white" *ngIf="currentUser"></i>
+    <div class="d-lg-none d-xl-none" *ngIf="currentUser">
+        <!-- <i class="fas fa-user-circle fa-3x text-white"></i> -->
+        <img [src]="'http://localhost:4000/' + currentUser.imagePath" 
+            class=" imgfluid imgRedonda border">
     </div>
 
     <!-- Menu colapsable -->
@@ -44,19 +45,10 @@
             <app-menu class="width-sidebar d-block d-none d-md-block d-lg-none" *ngIf="currentUser" (click)="isShown=false"></app-menu>
         </div>
     </div>
-    
-    <!-- Login -->
-    <div class="d-none d-md-none d-lg-block">
-        <a class="nav-link text-white" [routerLink]="['/login']" 
-            routerLinkActive="router-link-active" *ngIf="!currentUser">
-            Iniciar Sesión
-        </a>
-    </div>
-
     <!-- Icono de usuario -->
-    <div class="d-none d-md-none d-lg-block">
-        <i class="fas fa-user-circle fa-3x text-white" *ngIf="currentUser"></i>
+    <div class="d-none d-md-none d-lg-block" *ngIf="currentUser">
+        <!-- <i class="fas fa-user-circle fa-3x text-white" *ngIf="currentUser"></i> -->
+        <img [src]="'http://localhost:4000/' + currentUser.imagePath" 
+            class=" imgfluid imgRedonda border">
     </div>  
-
-
 </nav>

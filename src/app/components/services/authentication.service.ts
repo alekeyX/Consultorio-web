@@ -27,7 +27,7 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    // Inicio de Sesión 
+    // Inicio de Sesión
     login(username: string, password: string) {
         return this.http.post<any>(environment.apiUrl + '/signin', { username, password })
             .pipe(map(user => {

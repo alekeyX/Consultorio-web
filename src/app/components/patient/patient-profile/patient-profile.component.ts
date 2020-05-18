@@ -15,6 +15,7 @@ export class PatientProfileComponent implements OnInit {
   currentUser: Patient;
   patient: Patient;
   id: string;
+  loading = false;
 
   constructor(
       private patientService: PatientService,
@@ -26,6 +27,7 @@ export class PatientProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.loading = true;
     this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
       this.patientService.getById(this.id)

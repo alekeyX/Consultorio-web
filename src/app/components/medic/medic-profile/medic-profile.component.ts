@@ -14,6 +14,7 @@ import { Medic } from '../../models/medic';
 export class MedicProfileComponent implements OnInit {
   currentUser: Medic;
   medic: Medic;
+  loading = false;
   id: string;
 
   constructor(
@@ -26,6 +27,7 @@ export class MedicProfileComponent implements OnInit {
   ngOnInit(): void {
       this.currentUser = this.authenticationService.currentUserValue;
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+      this.loading = true;
       this.activatedRoute.params.subscribe(params => {
         this.id = params.id;
         this.medicService.getById(this.id)

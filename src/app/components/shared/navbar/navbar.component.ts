@@ -11,7 +11,7 @@ import { User } from '../../models/user';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  currentUser: User;
+  currentUser: any;
   isShown = false;
 
   constructor(

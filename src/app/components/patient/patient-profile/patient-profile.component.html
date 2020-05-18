@@ -1,5 +1,6 @@
 <div *ngIf="!patient; else main_content">
-    <h1>Loading...</h1>
+    <h1 class="text-aqua-dark">Cargando...</h1>
+    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
 </div>
 
 <ng-template #main_content>
