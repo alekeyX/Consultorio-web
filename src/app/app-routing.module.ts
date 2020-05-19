@@ -13,10 +13,6 @@ import { MedicAddComponent } from './components/medic/medic-add/medic-add.compon
 import { MedicEditComponent } from './components/medic/medic-edit/medic-edit.component';
 import { MedicProfileComponent } from './components/medic/medic-profile/medic-profile.component';
 import { LoginMedicComponent } from './components/medic/login-medic/login-medic.component';
-// import { PatientGetComponent } from './components/patient/patient-get/patient-get.component';
-// import { PatientAddComponent } from './components/patient/patient-add/patient-add.component';
-// import { PatientEditComponent } from './components/patient/patient-edit/patient-edit.component';
-
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -31,13 +27,13 @@ const routes: Routes = [
 
 
   {
+    path: 'medic',
+    loadChildren: () => import('./components/medic/medic.module').then(m => m.MedicModule)
+  },
+  {
     path: 'patient',
     loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule)
   },
-
-  // { path: 'patients', component: PatientGetComponent },
-  // { path: 'patient/create', component: PatientAddComponent },
-  // { path: 'patient/edit/:id', component: PatientEditComponent },
   { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];
 

@@ -3,6 +3,7 @@ import { Patient } from '../../models/patient';
 import { PatientService } from '../../services/patient.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-patient-get',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./patient-get.component.css']
 })
 export class PatientGetComponent implements OnInit {
-  currentUser: Patient;
+  currentUser: any;
   patients: Patient[] = [];
   loading = false;
 
@@ -18,20 +19,25 @@ export class PatientGetComponent implements OnInit {
     private patientService: PatientService,
     private router: Router,
     private authenticationService: AuthenticationService
-  ) {
-    this.getPatients();
-  }
+  ) { }
 
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.getPatients();
   }
 
   getPatients() {
     this.loading = true;
-    this.patientService.getAll().subscribe((data) => {
-      this.patients = data;
-    });
+    if (this.currentUser.role === Role.Admin) {
+      this.patientService.getAll().subscribe((data) => {
+        this.patients = data;
+      });
+    } else {
+      this.patientService.getPatientByMedic(this.currentUser._id).subscribe((data) => {
+        this.patients = data;
+      });
+    }
   }
 
   removePatient(medic, index) {

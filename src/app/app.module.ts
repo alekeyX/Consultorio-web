@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Modulos
 import { PatientModule } from './components/patient/patient.module';
+import { MedicModule } from './components/medic/medic.module';
 
 // used to create fake backend
 import { fakeBackendProvider } from './components/helpers/fake-backend';
@@ -40,11 +41,6 @@ import { MedicService } from './components/services/medic.service';
     LoginComponent,
     AdminComponent,
     MenuComponent,
-    MedicAddComponent,
-    MedicGetComponent,
-    MedicEditComponent,
-    MedicProfileComponent,
-    LoginMedicComponent
   ],
   imports: [
     BrowserModule,
@@ -52,12 +48,13 @@ import { MedicService } from './components/services/medic.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MedicModule,
     PatientModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    MedicService,
+    // MedicService,
     // provider used to create fake backend
     fakeBackendProvider
   ],

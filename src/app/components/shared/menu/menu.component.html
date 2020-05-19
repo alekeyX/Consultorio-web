@@ -1,17 +1,9 @@
 <!-- sidebar -->
 <div class="bg-aqua border-light border-top" id="sidebar">
     <div class="text-white p-2">
-
-      <div *ngIf="isAdmin">
-        <a class="nav-link dropdown-item" [routerLink]="['/medic']" >
-          <i class="fas fa-user-md fa-2x mr-3"></i>
-          MÉDICOS
-        </a>
-        <div class="dropdown-divider"></div>
-      </div>
-
+      
       <div *ngIf="isMedic || isPatient">
-        <a class="nav-link dropdown-item" (click)="selected(currentUser._id)">
+        <a class="nav-link dropdown-item" (click)="selected(currentUser._id)" routerLinkActive="activo">
           <i class="fas fa-user fa-2x mr-3 ml-1" ></i>
           PÉRFIL
         </a>
@@ -19,14 +11,22 @@
       </div>
 
       <div *ngIf="isAdmin || isMedic">
-        <a class="nav-link dropdown-item" [routerLink]="['/patient']">
+        <a class="nav-link dropdown-item" [routerLink]="['/medic']" routerLinkActive="activo">
+          <i class="fas fa-user-md fa-2x mr-3"></i>
+          MÉDICOS
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+
+      <div *ngIf="isAdmin || isMedic">
+        <a class="nav-link dropdown-item" [routerLink]="['/patient']" routerLinkActive="activo">
           <i class="fas fa-user-injured fa-2x mr-3" ></i>
           PACIENTES
         </a>
         <div class="dropdown-divider"></div>
       </div>
 
-      <a class="nav-link dropdown-item">
+      <a class="nav-link dropdown-item" >
         <i class="fas fa-notes-medical fa-2x mr-3 ml-1"></i>
         HISTORIAL
       </a>

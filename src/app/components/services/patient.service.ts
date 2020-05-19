@@ -33,6 +33,13 @@ export class PatientService {
     );
   }
 
+  getPatientByMedic(id): Observable<Patient[]> {
+    return this.httpClient.get<Patient[]>(environment.apiUrl + '/patients/' + id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getAll(): Observable<Patient[]> {
     return this.httpClient.get<Patient[]>(environment.apiUrl + '/patient')
     .pipe(

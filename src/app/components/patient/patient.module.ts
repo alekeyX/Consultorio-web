@@ -12,9 +12,9 @@ import { ErrorInterceptor } from '../helpers/error.interceptor';
 import { PatientGetComponent } from './patient-get/patient-get.component';
 import { PatientAddComponent } from './patient-add/patient-add.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
-import { PatientService } from '../services/patient.service';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
 import { PatientLoginComponent } from './patient-login/patient-login.component';
+import { PatientService } from '../services/patient.service';
 
 
 @NgModule({

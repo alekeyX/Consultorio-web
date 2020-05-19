@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 
 import { Role } from '../../models/role';
 import { User } from '../../models/user';
@@ -21,7 +21,6 @@ export class MenuComponent implements OnInit {
   ) {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    // console.log(this.currentUser);
   }
 
   ngOnInit(): void {

@@ -13,12 +13,19 @@ import { User } from '../../models/user';
 export class NavbarComponent implements OnInit {
   currentUser: any;
   isShown = false;
+  image = true;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    console.log(this.currentUser.imagePath);
+    if (this.currentUser.imagePath === 'none') {
+      this.image = false;
+    }
+    console.log(this.image);
+    
   }
 
   ngOnInit(): void {
@@ -29,6 +36,14 @@ export class NavbarComponent implements OnInit {
 
   logout() {
       this.authenticationService.logout();
+  }
+
+  selected(id: string) {
+    if (this.currentUser.role === Role.Medic) {
+      this.router.navigate(['/medic/', id]);
+    } else {
+      this.router.navigate(['/patient/', id]);
+    }
   }
 }
 // TODO instalara indicador de progreso de cargar pagina

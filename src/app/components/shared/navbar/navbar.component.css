@@ -3,14 +3,10 @@
     padding: 1.5rem 1rem;
 }
 
-.navbar-nav {
-    padding-left: 2%;
-}
-
-.show {
+/* .show {
     margin-top: 2%;
-    height: 100vh;
-}
+    height: 100vh; 
+} */
 
 .navbar-brand {
     display: inline-block;
@@ -18,6 +14,10 @@
     padding-bottom: .3125rem;
     margin-right: 0%;
     font-weight: bold;
+}
+
+.activo {
+    background: linear-gradient(to bottom, rgba(226,226,226,0) 0%, rgba(219, 219, 219, 0.041) 80%, rgba(254, 254, 254, 0.616) 100%);
 }
 
 /* Boton de menu collapsable */
@@ -52,14 +52,24 @@
     margin-left: 3rem;
 }
 
+
 }
 
 /* CSS para phone */
 
 @media screen and (max-width:1000px) {
-    
+
 #lista-navbar {
     margin-left: 1.2rem;
 }
+
+#empty {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
+.show {
+    margin-top: 2%;
+    height: 100vh; 
+}
+}
