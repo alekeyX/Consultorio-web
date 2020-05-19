@@ -13,25 +13,20 @@ import { User } from '../../models/user';
 export class NavbarComponent implements OnInit {
   currentUser: any;
   isShown = false;
-  image = true;
+  avatar = true;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    console.log(this.currentUser.imagePath);
-    if (this.currentUser.imagePath === 'none') {
-      this.image = false;
-    }
-    console.log(this.image);
-    
+    if (this.currentUser) {
+      if (this.currentUser.imagePath === 'none') {
+      this.avatar = false;
+    }}
   }
 
   ngOnInit(): void {
-  }
-  get isAdmin() {
-    return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
   logout() {
@@ -52,4 +47,4 @@ export class NavbarComponent implements OnInit {
 
 // https://appdividend.com/2020/02/24/angular-9-tutorial-how-to-build-angular-9-crud-app/
 
-// paso 6
+// paso6

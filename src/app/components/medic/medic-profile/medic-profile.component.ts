@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MedicService } from '../../services/medic.service';
 import { Medic } from '../../models/medic';
+import { Role } from '../../models/role';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class MedicProfileComponent implements OnInit {
   medic: Medic;
   loading = false;
   id: string;
+  avatar = true;
 
   constructor(
       private medicService: MedicService,
@@ -34,6 +36,9 @@ export class MedicProfileComponent implements OnInit {
           .subscribe(
             res => {
               this.medic = res;
+              if ( this.medic.imagePath === 'none') {
+                this.avatar = false;
+              }
             },
             err => console.log(err)
           );
@@ -48,5 +53,9 @@ export class MedicProfileComponent implements OnInit {
           this.router.navigate(['/medic']);
         });
       }
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
   }
 }

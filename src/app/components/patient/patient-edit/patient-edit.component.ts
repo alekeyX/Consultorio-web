@@ -32,7 +32,6 @@ export class PatientEditComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.updatePatient();
     const id = this.route.snapshot.paramMap.get('id');
-    // console.log(id);
     this.getPatient(id);
     this.createForm();
   }
@@ -62,7 +61,6 @@ export class PatientEditComponent implements OnInit {
 
   getPatient(id) {
     this.patientService.getById(id).subscribe(data => {
-      console.log(data);
       this.angForm.setValue({
         username: data.username,
         ci: data.ci,

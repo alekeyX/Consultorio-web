@@ -33,7 +33,6 @@ export class MedicEditComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.updateMedic();
     const id = this.route.snapshot.paramMap.get('id');
-    // console.log(id);
     this.getMedic(id);
     this.createForm();
   }
@@ -41,7 +40,7 @@ export class MedicEditComponent implements OnInit {
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      // password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       role: ['Medic'],
@@ -58,7 +57,8 @@ export class MedicEditComponent implements OnInit {
     this.medicService.getById(id).subscribe(data => {
       this.angForm.setValue({
         username: data.username,
-        password: data.password,
+        // TODO devolver password
+        // password: data.password
         firstName: data.firstName,
         lastName: data.lastName,
         role: data.role,
@@ -130,7 +130,7 @@ export class MedicEditComponent implements OnInit {
         this.medicService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/medic']);
-            console.log('Contenido actualizado exitosamente!')
+            console.log('Contenido actualizado exitosamente!');
           }, (error) => {
             console.log(error);
           });

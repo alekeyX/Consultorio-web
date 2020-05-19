@@ -60,8 +60,7 @@ export class PatientLoginComponent implements OnInit {
                 this.router.navigate([this.returnUrl]);
             },
             error => {
-                console.log(error);
-                this.error = error;
+                this.error = error.error.message;
                 this.loading = false;
             });
   }

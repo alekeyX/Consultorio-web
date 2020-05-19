@@ -1,6 +1,6 @@
 <div class="card rounded-lg shadow mb-5 bg-white rounded">
 <div class="card-body">
-<h1>Editar Médico</h1>
+<h1 class="text-aqua-dark mb-3">Editar Médico</h1>
   <!-- formulario para añadir medico -->
   <form [formGroup]="angForm" (ngSubmit)="submitForm()">
     
@@ -19,24 +19,23 @@
           </div>
       </div>
       
-      
-      <div class="form-group col-lg">
+      <!-- <div class="form-group col-lg">
         <label class="col-lg">Contraseña*</label>
         <input type="password" class="form-control" [ngClass]="{'is-invalid': angForm.controls['password'].errors?.required && angForm.controls['password'].touched}"
         formControlName="password" 
-          #password/>
+          #password/> -->
             <!-- error -->
-            <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="text-danger font-weight-light">
+            <!-- <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="text-danger font-weight-light">
             <div *ngIf="angForm.controls['password'].errors.required">
               Contraseña es requerida.
             </div>
           </div>
-      </div>
+      </div> -->
     </div>
       
     <div class="row">
       <div class="form-group col-lg">
-        <label class="col-lg">Nombre*</label>
+        <label class="col-lg">Nombre(s)*</label>
         <input type="text" class="form-control" 
         [ngClass]="{'is-invalid': angForm.controls['firstName'].errors?.required && angForm.controls['firstName'].touched}"
         formControlName="firstName" 
@@ -129,8 +128,9 @@
     </div>
 
     <div class="form-group mt-4">
-      <button type="submit" class="btn text-white bg-aqua"
-              >Actualizar Médico</button>
+      <button type="submit" class="btn text-white bg-aqua">
+        Guardar
+      </button>
     </div>
   </form>
 </div>

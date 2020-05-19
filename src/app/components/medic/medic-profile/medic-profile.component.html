@@ -11,8 +11,9 @@
             
                 <div class="row d-flex align-items-center justify-content-around mb-2">
                     <div class="col-md-5 d-flex align-items-center justify-content-around">
-                        <img [src]="'http://localhost:4000/' + medic.imagePath" 
+                        <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
                             class=" imgfluid imgRedonda border">
+                        <i class="fas fa-user-circle fa-10x text-aqua-dark" *ngIf="!avatar"></i>
                     </div>
                     <div class="col-md-7 ">
                         <div class="py-2 row d-flex align-self-center">
@@ -73,7 +74,7 @@
                     <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]">
                         Editar
                     </button>
-                    <button class="btn btn-danger m-1" (click)="deleteMedic(medic._id)">
+                    <button class="btn btn-danger m-1" (click)="deleteMedic(medic._id)" *ngIf="isAdmin">
                         Eliminar
                     </button>
                 </div>

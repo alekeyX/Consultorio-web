@@ -18,6 +18,6 @@ export interface Patient {
     address: string;
     phone?: string;
     medic: string;
-    imagePath?: File;
+    imagePath?: string;
     token?: string;
 }

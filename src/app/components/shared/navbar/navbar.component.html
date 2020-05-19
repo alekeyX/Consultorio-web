@@ -15,9 +15,9 @@
         </a>
     </div> -->
     <div class="d-lg-none d-xl-none" *ngIf="currentUser">
-        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!image"></i>
-        <img [src]="'http://localhost:4000/' + currentUser.imagePath" *ngIf="image" 
-            class=" imgfluid imgRedonda border">
+        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+        <img [src]="'http://localhost:4000/' + currentUser.imagePath" *ngIf="avatar" 
+            class=" imgfluid imgRedonda">
     </div>
 
     <!-- Menu colapsable -->
@@ -51,14 +51,14 @@
             {{currentUser.firstName}}
         </a>
     
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" (click)="selected(currentUser._id)">Pérfil</a>
             <a class="dropdown-item" (click)="logout()">Cerrar Sesión</a>
         </div>
     </div>
     <div class="d-none d-md-none d-lg-block" *ngIf="currentUser">
-        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!image"></i>
-        <img [src]="'http://localhost:4000/' + currentUser.imagePath" *ngIf="image"
-            class=" imgfluid imgRedonda border">
+        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+        <img [src]="'http://localhost:4000/' + currentUser.imagePath" *ngIf="avatar"
+            class=" imgfluid imgRedonda">
     </div>  
 </nav>
