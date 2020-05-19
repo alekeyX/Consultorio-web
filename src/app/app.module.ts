@@ -31,6 +31,9 @@ import { LoginMedicComponent } from './components/medic/login-medic/login-medic.
 
 // Servicios
 import { MedicService } from './components/services/medic.service';
+import { NosotrosComponent } from './components/shared/nosotros/nosotros.component';
+import { ServiciosComponent } from './components/shared/servicios/servicios.component';
+import { ContactoComponent } from './components/shared/contacto/contacto.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { MedicService } from './components/services/medic.service';
     LoginComponent,
     AdminComponent,
     MenuComponent,
+    NosotrosComponent,
+    ServiciosComponent,
+    ContactoComponent,
   ],
   imports: [
     BrowserModule,

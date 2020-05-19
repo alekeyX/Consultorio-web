@@ -6,33 +6,25 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AuthGuard } from './components/helpers/auth.guard';
 import { Role } from './components/models/role';
-
-// componentes CRUD
-import { MedicGetComponent } from './components/medic/medic-get/medic-get.component';
-import { MedicAddComponent } from './components/medic/medic-add/medic-add.component';
-import { MedicEditComponent } from './components/medic/medic-edit/medic-edit.component';
-import { MedicProfileComponent } from './components/medic/medic-profile/medic-profile.component';
-import { LoginMedicComponent } from './components/medic/login-medic/login-medic.component';
+import { NosotrosComponent } from './components/shared/nosotros/nosotros.component';
+import { ServiciosComponent } from './components/shared/servicios/servicios.component';
+import { ContactoComponent } from './components/shared/contacto/contacto.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
   { path: 'login', component: LoginComponent },
-  { path: 'medic/login', component: LoginMedicComponent },
-  { path: 'medic', component: MedicGetComponent, canActivate: [AuthGuard]},
-  { path: 'medic/create', component: MedicAddComponent, canActivate: [AuthGuard]},
-  { path: 'medic/:id', component: MedicProfileComponent, canActivate: [AuthGuard]},
-  // { path: 'medic/:id', component: MedicAddComponent },
-  { path: 'medic/update/:id', component: MedicEditComponent, canActivate: [AuthGuard]},
-
+  { path: 'nosotros', component: NosotrosComponent },
+  { path: 'servicios', component: ServiciosComponent },
+  { path: 'contacto', component: ContactoComponent },
 
   {
     path: 'medic',
-    loadChildren: () => import('./components/medic/medic.module').then(m => m.MedicModule)
+    loadChildren: () => import('./components/medic/medic.module').then(m => m.MedicModule), canActivate: [AuthGuard]
   },
   {
     path: 'patient',
-    loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule)
+    loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule), canActivate: [AuthGuard]
   },
   { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];

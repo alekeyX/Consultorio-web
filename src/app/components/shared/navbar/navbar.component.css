@@ -54,10 +54,8 @@
 @media screen and (min-width:1000px) {
     
 #lista-navbar {
-    margin-left: 3rem;
+    margin-left: 2rem;
 }
-
-
 }
 
 /* CSS para phone */
@@ -75,6 +73,5 @@
 
 .show {
     margin-top: 2%;
-    height: 100vh; 
 }
 }
