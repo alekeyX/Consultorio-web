@@ -20,11 +20,11 @@ const routes: Routes = [
 
   {
     path: 'medic',
-    loadChildren: () => import('./components/medic/medic.module').then(m => m.MedicModule), canActivate: [AuthGuard]
+    loadChildren: () => import('./components/medic/medic.module').then(m => m.MedicModule)
   },
   {
     path: 'patient',
-    loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule), canActivate: [AuthGuard]
+    loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule)
   },
   { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];
