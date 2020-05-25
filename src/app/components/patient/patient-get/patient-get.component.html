@@ -13,7 +13,7 @@
         
         <ng-template #main_content>
             <!-- No data message -->
-            <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen médicos añadidos!</h2>
+            <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen pacientes añadidos!</h2>
             
             <!-- patient list -->
             <table class="table table-sm table-hover table-responsive-md table-fixed " *ngIf="patients.length > 0">
@@ -30,15 +30,10 @@
                 <td class="col-xs-3" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
                 <td class="col-xs-2" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
                 <td class="col-xs-3" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
-                <td class="col-xs-2" class="text-center edit-block">
-                    <a [routerLink]="['/patient/update', patient._id]" class="text-dark mr-2"><i class="fas fa-edit"></i></a>
-                    <!-- <span class="edit" [routerLink]="['/patient/update', patient._id]">
-                    <button type="button" class="btn btn-success btn-sm">Editar</button>
-                    </span> -->
-                    <a (click)="removePatient(patient, i)" class="ml-2"><i class="fas fa-trash"></i></a>
-                    <!-- <span class="delete" (click)="removeMedic(patient, i)">
-                    <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                    </span> -->
+                <td class="col-xs-2" class="text-center">
+                    <a [routerLink]="['/history', patient._id]" class="mr-2"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
+                    <a [routerLink]="['/patient/update', patient._id]" class="mx-1"><i class="fas fa-edit text-info"></i></a>
+                    <a (click)="removePatient(patient, i)" class="ml-1"><i class="fas fa-trash text-danger"></i></a>
                 </td>
                 </tr>
             </tbody>

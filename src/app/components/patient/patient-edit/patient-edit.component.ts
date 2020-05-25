@@ -53,8 +53,8 @@ export class PatientEditComponent implements OnInit {
       placeBirth: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      // medic: [this.currentUser._id],
-      medic: ['5eb58bd89b6f502ca023dc6b'],
+      medic_id: [this.currentUser._id],
+      // medic: ['5eb58bd89b6f502ca023dc6b'],
       imagePath: [''],
     });
   }
@@ -76,7 +76,7 @@ export class PatientEditComponent implements OnInit {
         placeBirth: data.placeBirth,
         address: data.address,
         phone: data.phone,
-        medic: data.medic,
+        medic_id: data.medic_id,
         imagePath: data.imagePath,
       });
     });
@@ -100,7 +100,7 @@ export class PatientEditComponent implements OnInit {
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
       // medic: [this.currentUser._id],
-      medic: ['5jldafj4l4lkr3j4l5h'],
+      medic_id: ['5jldafj4l4lkr3j4l5h'],
       imagePath: [''],
     });
   }

@@ -53,7 +53,7 @@ export class MedicEditComponent implements OnInit {
     });
   }
 
-  getMedic(id) {
+  getMedic(id: string) {
     this.medicService.getById(id).subscribe(data => {
       this.angForm.setValue({
         username: data.username,
@@ -137,5 +137,4 @@ export class MedicEditComponent implements OnInit {
       }
     }
   }
-
 }

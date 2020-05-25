@@ -84,7 +84,7 @@ export class MedicAddComponent implements OnInit {
       formData.append('phone', this.angForm.get('phone').value);
       formData.append('specialty', this.angForm.get('specialty').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
- 
+
       this.medicService.create(formData).subscribe(res => {
         this.router.navigate(['medic']);
       }, (error) => {

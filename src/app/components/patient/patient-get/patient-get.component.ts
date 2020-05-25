@@ -40,9 +40,9 @@ export class PatientGetComponent implements OnInit {
     }
   }
 
-  removePatient(medic, index) {
+  removePatient(patient, index) {
     if (window.confirm('Esta seguro?')) {
-        this.patientService.delete(medic._id).subscribe((data) => {
+        this.patientService.delete(patient._id).subscribe((data) => {
           this.patients.splice(index, 1);
         });
     }

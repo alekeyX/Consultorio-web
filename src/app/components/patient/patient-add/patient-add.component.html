@@ -3,7 +3,7 @@
   
     <h1 class="text-aqua-dark mb-3">Añadir Paciente</h1>
   
-      <!-- formulario para añadir medico -->
+      <!-- formulario para añadir paciente -->
       <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
         
         <div class="row">
@@ -161,7 +161,7 @@
   
         <div class="form-group mt-4">
           <button type="submit" class="btn text-white bg-aqua"
-          [disabled]="angForm.pristine || angForm.invalid">Añadir Médico</button>
+          [disabled]="angForm.pristine || angForm.invalid">Añadir Paciente</button>
         </div>
       </form>
     </div>

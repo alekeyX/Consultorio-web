@@ -83,13 +83,18 @@
                     </div>
                 </div>
             
-                <div class="mt-4 d-md-flex justify-content-end align-content-center" id="buttons">
-                    <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]">
-                        Editar
+                <div class="container row mt-4 d-md-flex justify-content-between align-content-center" id="buttons">
+                    <button class="btn bg-aqua text-white ml-3" [routerLink]="['/history', patient._id]">
+                        Historial Clínico
                     </button>
-                    <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" *ngIf="isAdmin || isMedic">
-                        Eliminar
-                    </button>
+                    <div class="">
+                        <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" *ngIf="isAdmin || isMedic">
+                            Eliminar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

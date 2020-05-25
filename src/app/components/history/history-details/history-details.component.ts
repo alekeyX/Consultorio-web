@@ -2,25 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { PatientService } from '../../services/patient.service';
-import { Patient } from '../../models/patient';
+import { HistoryService } from '../../services/history.service';
+import { History } from '../../models/history';
 import { Role } from '../../models/role';
 
 @Component({
-  selector: 'app-patient-profile',
-  templateUrl: './patient-profile.component.html',
-  styleUrls: ['./patient-profile.component.css']
+  selector: 'app-history-details',
+  templateUrl: './history-details.component.html',
+  styleUrls: ['./history-details.component.css']
 })
-export class PatientProfileComponent implements OnInit {
+export class HistoryDetailsComponent implements OnInit {
 
   currentUser: any;
-  patient: Patient;
+  history: History;
   id: string;
   loading = false;
-  avatar = true;
 
   constructor(
-      private patientService: PatientService,
+      private historyService: HistoryService,
       private authenticationService: AuthenticationService,
       private activatedRoute: ActivatedRoute,
       private router: Router
@@ -32,24 +31,22 @@ export class PatientProfileComponent implements OnInit {
     this.loading = true;
     this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
-      this.patientService.getById(this.id)
+      this.historyService.getById(this.id)
         .subscribe(
           res => {
-            this.patient = res;
-            if ( this.patient.imagePath === 'none') {
-              this.avatar = false;
-            }
+            this.history = res;
           },
           err => console.log(err)
         );
     });
   }
 
-  deletePatient(id: string) {
+  deleteHistory(id: string) {
     if (window.confirm('Esta seguro?')) {
-      this.patientService.delete(id)
+      this.historyService.delete(id)
         .subscribe(res => {
-          this.router.navigate(['/patient']);
+          console.log(res);
+          this.router.navigate(['/history']);
         });
       }
   }
@@ -61,5 +58,4 @@ export class PatientProfileComponent implements OnInit {
   get isMedic() {
     return this.currentUser && this.currentUser.role === Role.Medic;
   }
-
 }
