@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'patient',
     loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule)
   },
+  {
+    path: 'history',
+    loadChildren: () => import('./components/history/history.module').then(m => m.HistoryModule)
+  },
   { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];
 

@@ -12,7 +12,7 @@ import { Patient } from '../../models/patient';
 })
 export class PatientAddComponent implements OnInit {
   angForm: FormGroup;
-  currentUser: Patient;
+  currentUser: any;
   submitted = false;
   error: string;
   image: string;
@@ -48,8 +48,6 @@ export class PatientAddComponent implements OnInit {
       placeBirth: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      // medic: [this.currentUser._id],
-      medic: ['5eb58bd89b6f502ca023dc6b'],
       imagePath: [''],
     });
   }
@@ -95,8 +93,8 @@ export class PatientAddComponent implements OnInit {
       formData.append('placeBirth', this.angForm.get('placeBirth').value);
       formData.append('address', this.angForm.get('address').value);
       formData.append('phone', this.angForm.get('phone').value);
-      formData.append('medic', this.angForm.get('medic').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
+      formData.append('medic_id', this.currentUser._id);
       this.patientService.create(formData).subscribe(res => {
         this.router.navigate(['patient']);
       }, (error) => {

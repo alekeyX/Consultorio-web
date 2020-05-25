@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 // Modulos
 import { PatientModule } from './components/patient/patient.module';
 import { MedicModule } from './components/medic/medic.module';
+import { HistoryModule } from './components/history/history.module';
 
 // used to create fake backend
 import { fakeBackendProvider } from './components/helpers/fake-backend';
@@ -18,22 +19,13 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/shared/menu/menu.component';
-//  Interceptores
-import { JwtInterceptor } from './components/helpers/jwt.interceptor';
-import { ErrorInterceptor } from './components/helpers/error.interceptor';
-// Componentes de usuarios
-import { AdminComponent } from './components/admin/admin.component';
-import { MedicAddComponent } from './components/medic/medic-add/medic-add.component';
-import { MedicGetComponent } from './components/medic/medic-get/medic-get.component';
-import { MedicEditComponent } from './components/medic/medic-edit/medic-edit.component';
-import { MedicProfileComponent } from './components/medic/medic-profile/medic-profile.component';
-import { LoginMedicComponent } from './components/medic/login-medic/login-medic.component';
-
-// Servicios
-import { MedicService } from './components/services/medic.service';
 import { NosotrosComponent } from './components/shared/nosotros/nosotros.component';
 import { ServiciosComponent } from './components/shared/servicios/servicios.component';
 import { ContactoComponent } from './components/shared/contacto/contacto.component';
+import { AdminComponent } from './components/admin/admin.component';
+//  Interceptores
+import { JwtInterceptor } from './components/helpers/jwt.interceptor';
+import { ErrorInterceptor } from './components/helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,7 +47,8 @@ import { ContactoComponent } from './components/shared/contacto/contacto.compone
     ReactiveFormsModule,
     HttpClientModule,
     MedicModule,
-    PatientModule
+    PatientModule,
+    HistoryModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

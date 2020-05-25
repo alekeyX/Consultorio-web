@@ -36,8 +36,8 @@ export class MedicEditComponent implements OnInit {
     this.getMedic(id);
     this.createForm();
   }
-
-  getMedic(id) {
+  
+  getMedic(id: string) {
     this.medicService.getById(id).subscribe(data => {
       this.angForm = this.fb.group({
         username: [data.username, Validators.required],
@@ -137,5 +137,4 @@ export class MedicEditComponent implements OnInit {
       }
     }
   }
-
 }

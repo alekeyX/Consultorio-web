@@ -17,7 +17,7 @@ export interface Patient {
     placeBirth?: string;
     address: string;
     phone?: string;
-    medic: string;
+    medic_id: string;
     imagePath?: string;
     token?: string;
 }

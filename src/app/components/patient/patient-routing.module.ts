@@ -9,8 +9,8 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 
 
 const routes: Routes = [
-  { path: 'signin', component: PatientLoginComponent },
   { path: 'create', component: PatientAddComponent, canActivate: [AuthGuard] },
+  { path: 'signin', component: PatientLoginComponent },
   { path: 'update/:id', component: PatientEditComponent, canActivate: [AuthGuard] },
   { path: '', component: PatientGetComponent, canActivate: [AuthGuard] },
   { path: ':id', component: PatientProfileComponent, canActivate: [AuthGuard] },

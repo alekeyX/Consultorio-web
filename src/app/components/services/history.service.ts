@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Patient } from '../models/patient';
+import { History } from '../models/history';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PatientService {
+export class HistoryService {
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -19,43 +19,43 @@ export class PatientService {
 
   constructor(private httpClient: HttpClient) { }
 
-  create(patient: any): Observable<Patient> {
-    return this.httpClient.post<Patient>(environment.apiUrl + '/patient/', patient)
+  create(history): Observable<History> {
+    return this.httpClient.post<History>(environment.apiUrl + '/history', history)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getById(id: string): Observable<Patient> {
-    return this.httpClient.get<Patient>(environment.apiUrl + '/patient/' + id)
+  getById(id): Observable<History> {
+    return this.httpClient.get<History>(environment.apiUrl + '/history/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getPatientByMedic(id: string): Observable<Patient[]> {
-    return this.httpClient.get<Patient[]>(environment.apiUrl + '/patients/' + id)
+  getHistoryByPatient(id): Observable<History[]> {
+    return this.httpClient.get<History[]>(environment.apiUrl + '/histories/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getAll(): Observable<Patient[]> {
-    return this.httpClient.get<Patient[]>(environment.apiUrl + '/patient')
+  getAll(): Observable<History[]> {
+    return this.httpClient.get<History[]>(environment.apiUrl + '/history')
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  update(id: string, patient: any): Observable<Patient> {
-    return this.httpClient.put<Patient>(environment.apiUrl + '/patient/' + id, patient)
+  update(id, history): Observable<History> {
+    return this.httpClient.put<History>(environment.apiUrl + '/history/' + id, history)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  delete(id: string) {
-    return this.httpClient.delete<Patient>(environment.apiUrl + '/patient/' + id)
+  delete(id) {
+    return this.httpClient.delete<History>(environment.apiUrl + '/History/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
