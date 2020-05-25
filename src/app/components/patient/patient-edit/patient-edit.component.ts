@@ -30,11 +30,35 @@ export class PatientEditComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.updatePatient();
     const id = this.route.snapshot.paramMap.get('id');
-    // console.log(id);
     this.getPatient(id);
     this.createForm();
+  }
+
+  getPatient(id) {
+    this.patientService.getById(id).subscribe(data => {
+      console.log(data);
+      this.angForm = this.fb.group({
+          username: [data.username, Validators.required],
+          ci: [data.ci, Validators.required],
+          firstName: [data.firstName, Validators.required],
+          lastName: [data.lastName, Validators.required],
+          age: [data.age],
+          role: ['Patient'],
+          // // email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
+          email: [data.email, Validators.required ],
+          genero: [data.genero],
+          ethnicity: [data.ethnicity],
+          maritalStatus: [data.maritalStatus],
+          ocupation: [data.ocupation],
+          placeBirth: [data.placeBirth],
+          address: [data.address],
+          phone: [data.phone, Validators.pattern('^[0-9]+$')],
+          // medic: [this.currentUser._id],
+          medic_id: ['5eb58bd89b6f502ca023dc6b'],
+          imagePath: [data.imagePath],
+        });
+    });
   }
 
   createForm() {
@@ -55,58 +79,59 @@ export class PatientEditComponent implements OnInit {
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
       // medic: [this.currentUser._id],
-      medic: ['5eb58bd89b6f502ca023dc6b'],
+      medic_id: ['5eb58bd89b6f502ca023dc6b'],
       imagePath: [''],
     });
   }
 
-  getPatient(id) {
-    this.patientService.getById(id).subscribe(data => {
-      console.log(data);
-      this.angForm.setValue({
-        username: data.username,
-        ci: data.ci,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        age: data.age,
-        role: data.role,
-        email: data.email,
-        genero: data.genero,
-        ethnicity: data.ethnicity,
-        maritalStatus: data.maritalStatus,
-        ocupation: data.ocupation,
-        placeBirth: data.placeBirth,
-        address: data.address,
-        phone: data.phone,
-        medic: data.medic,
-        imagePath: data.imagePath,
-      });
-    });
-  }
+  // getPatient(id) {
+  //   this.patientService.getById(id).subscribe(data => {
+  //     console.log(data);
+  //     this.angForm.setValue({
+  //       username: data.username,
+  //       ci: data.ci,
+  //       firstName: data.firstName,
+  //       lastName: data.lastName,
+  //       age: data.age,
+  //       role: data.role,
+  //       email: data.email,
+  //       genero: data.genero,
+  //       ethnicity: data.ethnicity,
+  //       maritalStatus: data.maritalStatus,
+  //       ocupation: data.ocupation,
+  //       placeBirth: data.placeBirth,
+  //       address: data.address,
+  //       phone: data.phone,
+  //       medic: data.medic,
+  //       imagePath: data.imagePath,
+  //     });
+  //   });
+  // }
 
-  updatePatient() {
-    this.angForm = this.fb.group({
-      username: ['', Validators.required],
-      ci: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      age: [''],
-      role: ['Patient'],
-      // // email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
-      email: ['', Validators.required ],
-      genero: [''],
-      ethnicity: [''],
-      maritalStatus: [''],
-      ocupation: [''],
-      placeBirth: [''],
-      address: [''],
-      phone: ['', Validators.pattern('^[0-9]+$')],
-      // medic: [this.currentUser._id],
-      medic: ['5jldafj4l4lkr3j4l5h'],
-      imagePath: [''],
-    });
-  }
+  // updatePatient() {
+  //   this.angForm = this.fb.group({
+  //     username: ['', Validators.required],
+  //     ci: ['', Validators.required],
+  //     firstName: ['', Validators.required],
+  //     lastName: ['', Validators.required],
+  //     age: [''],
+  //     role: ['Patient'],
+  //     // // email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
+  //     email: ['', Validators.required ],
+  //     genero: [''],
+  //     ethnicity: [''],
+  //     maritalStatus: [''],
+  //     ocupation: [''],
+  //     placeBirth: [''],
+  //     address: [''],
+  //     phone: ['', Validators.pattern('^[0-9]+$')],
+  //     // medic: [this.currentUser._id],
+  //     medic_id: ['5jldafj4l4lkr3j4l5h'],
+  //     imagePath: [''],
+  //   });
+  // }
 
+  // mostrar imagen elegida
   onFileChange(event) {
     const reader = new FileReader();
     if (event.target.files.length > 0) {
@@ -155,7 +180,7 @@ export class PatientEditComponent implements OnInit {
         this.patientService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/patient']);
-            console.log('Contenido actualizado exitosamente!')
+            console.log('Contenido actualizado exitosamente!');
           }, (error) => {
             console.log(error);
           });
