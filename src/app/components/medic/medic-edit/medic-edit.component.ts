@@ -31,12 +31,30 @@ export class MedicEditComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.updateMedic();
+    // this.updateMedic();
     const id = this.route.snapshot.paramMap.get('id');
     this.getMedic(id);
     this.createForm();
   }
 
+  getMedic(id) {
+    this.medicService.getById(id).subscribe(data => {
+      this.angForm = this.fb.group({
+        username: [data.username, Validators.required],
+        // TODO devolver password
+        // password: data.password
+        firstName: [ data.firstName, Validators.required ],
+        lastName: [ data.lastName, Validators.required ],
+        role: [ data.role ],
+        email: [ data.email, Validators.required ],
+        genero: [ data.genero ],
+        address: [ data.address ],
+        phone: [ data.phone, Validators.pattern('^[0-9]+$') ],
+        specialty: [ data.specialty ],
+        imagePath: [ data.imagePath ],
+      });
+    });
+  }
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
@@ -53,40 +71,22 @@ export class MedicEditComponent implements OnInit {
     });
   }
 
-  getMedic(id) {
-    this.medicService.getById(id).subscribe(data => {
-      this.angForm.setValue({
-        username: data.username,
-        // TODO devolver password
-        // password: data.password
-        firstName: data.firstName,
-        lastName: data.lastName,
-        role: data.role,
-        email: data.email,
-        genero: data.genero,
-        address: data.address,
-        phone: data.phone,
-        specialty: data.specialty,
-        imagePath: data.imagePath,
-      });
-    });
-  }
 
-  updateMedic() {
-    this.angForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      role: ['Medic'],
-      email: ['', Validators.required],
-      genero: [''],
-      address: [''],
-      phone: ['', Validators.pattern('^[0-9]+$')],
-      specialty: [''],
-      imagePath: [''],
-    });
-  }
+  // updateMedic() {
+  //   this.angForm = this.fb.group({
+  //     username: ['', Validators.required],
+  //     password: ['', Validators.required],
+  //     firstName: ['', Validators.required],
+  //     lastName: ['', Validators.required],
+  //     role: ['Medic'],
+  //     email: ['', Validators.required],
+  //     genero: [''],
+  //     address: [''],
+  //     phone: ['', Validators.pattern('^[0-9]+$')],
+  //     specialty: [''],
+  //     imagePath: [''],
+  //   });
+  // }
 
   onFileChange(event) {
     const reader = new FileReader();

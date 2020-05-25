@@ -125,7 +125,7 @@ export class PatientEditComponent implements OnInit {
         formData.append('placeBirth', this.angForm.get('placeBirth').value);
         formData.append('address', this.angForm.get('address').value);
         formData.append('phone', this.angForm.get('phone').value);
-        formData.append('medic', this.angForm.get('medic').value);
+        formData.append('medic_id', this.angForm.get('medic_id').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
 
         const id = this.route.snapshot.paramMap.get('id');
