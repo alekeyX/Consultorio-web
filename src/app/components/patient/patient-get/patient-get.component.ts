@@ -52,4 +52,8 @@ export class PatientGetComponent implements OnInit {
     this.router.navigate(['/patient/', id]);
   }
 
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
 }

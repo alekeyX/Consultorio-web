@@ -3,6 +3,7 @@ import { Medic } from '../../models/medic';
 import { MedicService } from '../../services/medic.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-medic-get',
@@ -44,6 +45,10 @@ export class MedicGetComponent implements OnInit {
 
   selectedMedic(id: string) {
     this.router.navigate(['/medic/', id]);
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
 }

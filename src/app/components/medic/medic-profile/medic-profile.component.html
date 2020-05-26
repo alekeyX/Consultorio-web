@@ -70,11 +70,11 @@
                     </div>
                 </div>
             
-                <div class="mt-4 d-md-flex justify-content-end">
+                <div class="mt-4 d-md-flex justify-content-end" *ngIf="isAdmin">
                     <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]">
                         Editar
                     </button>
-                    <button class="btn btn-danger m-1" (click)="deleteMedic(medic._id)" *ngIf="isAdmin">
+                    <button class="btn btn-danger m-1" (click)="deleteMedic(medic._id)">
                         Eliminar
                     </button>
                 </div>

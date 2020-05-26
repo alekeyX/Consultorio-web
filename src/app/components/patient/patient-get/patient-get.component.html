@@ -19,21 +19,21 @@
             <table class="table table-sm table-hover table-responsive-md table-fixed " *ngIf="patients.length > 0">
             <thead class="bg-aqua text-white">
                 <tr>
-                <th class="col-xs-3">Código</th>
-                <th class="col-xs-2">Nombre</th>
-                <th class="col-xs-3">Teléfono</th>
-                <th class="col-xs-2">Edición</th>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col" class="text-center">Edición</th>
                 </tr>
             </thead>
             <tbody class="overflow-auto">
                 <tr *ngFor="let patient of patients; let i = index">
-                <td class="col-xs-3" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
-                <td class="col-xs-2" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
-                <td class="col-xs-3" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
-                <td class="col-xs-2" class="text-center">
+                <td scope="col" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
+                <td scope="col" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
+                <td scope="col" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
+                <td scope="col" class="text-center">
                     <a [routerLink]="['/history', patient._id]" class="mr-2"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
                     <a [routerLink]="['/patient/update', patient._id]" class="mx-1"><i class="fas fa-edit text-info"></i></a>
-                    <a (click)="removePatient(patient, i)" class="ml-1"><i class="fas fa-trash text-danger"></i></a>
+                    <a (click)="removePatient(patient, i)" class="ml-1" *ngIf="isAdmin"><i class="fas fa-trash text-danger"></i></a>
                 </td>
                 </tr>
             </tbody>

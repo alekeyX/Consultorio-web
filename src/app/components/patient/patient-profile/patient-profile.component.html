@@ -87,11 +87,11 @@
                     <button class="btn bg-aqua text-white ml-3" [routerLink]="['/history', patient._id]">
                         Historial Clínico
                     </button>
-                    <div class="">
+                    <div *ngIf="isAdmin || isMedic">
                         <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]">
                             Editar
                         </button>
-                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" *ngIf="isAdmin || isMedic">
+                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)">
                             Eliminar
                         </button>
                     </div>

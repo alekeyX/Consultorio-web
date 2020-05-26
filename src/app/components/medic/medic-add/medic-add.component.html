@@ -109,13 +109,21 @@
         <div class="form-group col-lg">
           <!-- <label class="col-lg">Género</label> -->
           <select class="custom-select" formControlName="genero" #genero>
-            <option selected>Seleccione género</option>
-            <option value="masculino">Masculino</option>
-            <option value="femenino">Femenino</option>
-            <option value="otro">Otro</option>
+            <option value="" disabled>Seleccione género</option>
+            <option *ngFor="let gen of generos" [ngValue]="gen">{{gen}}</option>
           </select>
         </div>
       </div>
+
+      <div class="row">
+        <div class="form-group col-lg-6">
+          <select class="custom-select" formControlName="role" #role>
+            <option value="" disabled>Seleccione el rol</option>
+            <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+          </select>
+        </div>
+      </div>
+
 
       <div>
         <!-- <label class="col-lg" for="file">Foto</label> -->

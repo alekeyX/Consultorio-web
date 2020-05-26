@@ -18,6 +18,8 @@ export class MedicEditComponent implements OnInit {
   currentUser: Medic;
   error: string;
   image: string;
+  generos = ['Masculino', 'Femenino', 'Otro'];
+  roles = ['Médico', 'Administrador'];
 
   constructor(
     private fb: FormBuilder,
@@ -61,7 +63,7 @@ export class MedicEditComponent implements OnInit {
       // password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      role: ['Medic'],
+      role: [''],
       email: ['', Validators.required],
       genero: [''],
       address: [''],
@@ -115,17 +117,20 @@ export class MedicEditComponent implements OnInit {
       if (window.confirm('Esta seguro?')) {
         const formData: any = new FormData();
         formData.append('username', this.angForm.get('username').value);
-        formData.append('password', this.angForm.get('password').value);
+        // formData.append('password', this.angForm.get('password').value);
         formData.append('firstName', this.angForm.get('firstName').value);
         formData.append('lastName', this.angForm.get('lastName').value);
-        formData.append('role', this.angForm.get('role').value);
         formData.append('email', this.angForm.get('email').value);
         formData.append('genero', this.angForm.get('genero').value);
         formData.append('address', this.angForm.get('address').value);
         formData.append('phone', this.angForm.get('phone').value);
         formData.append('specialty', this.angForm.get('specialty').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
-
+        if (this.angForm.get('role').value === 'Administrador') {
+          formData.append('role', 'Admin');
+        } else {
+          formData.append('role', 'Medic');
+        }
         const id = this.route.snapshot.paramMap.get('id');
         this.medicService.update(id, formData)
           .subscribe(res => {
