@@ -1,6 +1,8 @@
 <div class="card rounded-lg shadow mb-5 bg-white rounded">
 <div class="card-body">
 
+    <!-- formulario para añadir historial -->
+    <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
     <div class="container row justify-content-between">
         <h1 class="text-aqua-dark mb-3">Registrar Historial Clínico</h1>
         <div class="form-group d-flex align-items-center">
@@ -10,8 +12,6 @@
         </div>
     </div>
 
-    <!-- formulario para añadir historial -->
-    <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
         <div class="form-group row">
             <label for="motivoConsulta" class="col-sm-3 col-form-label">Motivo de Consulta:</label>
             <div class="col-sm-9">

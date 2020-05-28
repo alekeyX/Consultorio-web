@@ -15,6 +15,7 @@ export class HistoryGetComponent implements OnInit {
   currentUser: any;
   histories: History[] = [];
   loading = false;
+  patientId: string;
 
   constructor(
     private historyService: HistoryService,
@@ -27,26 +28,20 @@ export class HistoryGetComponent implements OnInit {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.getHistories();
+    this.patientId = this.route.snapshot.paramMap.get('id');
   }
 
   getHistories() {
     this.loading = true;
-    if (this.currentUser.role === Role.Admin) {
-      this.historyService.getAll().subscribe((data) => {
+    if (this.currentUser.role === Role.Patient) {
+      this.historyService.getHistoryByPatient(this.currentUser._id).subscribe((data) => {
         this.histories = data;
       });
     } else {
-      if (this.currentUser.role === Role.Patient) {
-        this.historyService.getHistoryByPatient(this.currentUser.id).subscribe((data) => {
-          this.histories = data;
-        });
-      } else {
-        // const idPatient = this.historyService.getId();
-        const id = this.route.snapshot.paramMap.get('id');
-        this.historyService.getHistoryByPatient(id).subscribe((data) => {
-          this.histories = data;
-        });
-      }
+      const id = this.route.snapshot.paramMap.get('id');
+      this.historyService.getHistoryByPatient(id).subscribe((data) => {
+        this.histories = data;
+      });
     }
   }
 

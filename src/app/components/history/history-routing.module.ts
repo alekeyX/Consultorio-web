@@ -4,14 +4,16 @@ import { HistoryAddComponent } from './history-add/history-add.component';
 import { HistoryEditComponent } from './history-edit/history-edit.component';
 import { HistoryGetComponent } from './history-get/history-get.component';
 import { HistoryDetailsComponent } from './history-details/history-details.component';
+import { AuthGuard } from '../helpers/auth.guard';
+import { Role } from '../models/role';
 
 
 const routes: Routes = [
-  { path: 'create', component: HistoryAddComponent },
-  { path: 'update/:id', component: HistoryEditComponent },
-  { path: ':id', component: HistoryGetComponent },
-  { path: '', component: HistoryGetComponent },
-  { path: 'detail/:id', component: HistoryDetailsComponent },
+  { path: 'create/:id', component: HistoryAddComponent,  canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
+  { path: 'update/:id', component: HistoryEditComponent, canActivate: [AuthGuard] },
+  { path: ':id', component: HistoryGetComponent, canActivate: [AuthGuard] },
+  { path: '', component: HistoryGetComponent, canActivate: [AuthGuard] },
+  { path: 'detail/:id', component: HistoryDetailsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

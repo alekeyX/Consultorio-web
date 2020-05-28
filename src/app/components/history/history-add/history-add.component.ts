@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HistoryService } from '../../services/history.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { History } from '../../models/history';
 
@@ -17,13 +17,16 @@ export class HistoryAddComponent implements OnInit {
   submitted = false;
   error: string;
   image: string;
+  patientId: string;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     public historyService: HistoryService,
     private authenticationService: AuthenticationService,
     ) {
+      this.patientId = this.route.snapshot.paramMap.get('id');
       this.createForm();
     }
 
@@ -87,7 +90,7 @@ export class HistoryAddComponent implements OnInit {
       sensibilidadSuperficial: [''],
       diagnostico: [''],
       tratamiento: [''],
-      patient_id: ['']
+      patient_id: [this.patientId]
     });
   }
 
