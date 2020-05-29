@@ -28,7 +28,7 @@ export class PatientGetComponent implements OnInit {
   }
 
   getPatients() {
-    this.loading = true;
+    setInterval(() => {this.loading = true; }, 800);
     if (this.currentUser.role === Role.Admin) {
       this.patientService.getAll().subscribe((data) => {
         this.patients = data;

@@ -17,6 +17,7 @@ export class HistoryDetailsComponent implements OnInit {
   history: History;
   id: string;
   loading = false;
+  date: string;
 
   constructor(
       private historyService: HistoryService,
@@ -34,6 +35,7 @@ export class HistoryDetailsComponent implements OnInit {
       this.historyService.getById(this.id)
         .subscribe(
           res => {
+            this.getDate(res);
             this.history = res;
           },
           err => console.log(err)
@@ -49,6 +51,10 @@ export class HistoryDetailsComponent implements OnInit {
           this.router.navigate(['/history']);
         });
       }
+  }
+
+  getDate(history: any) {
+    this.date = history.createdAt.substring(0, 10);
   }
 
   get isAdmin() {

@@ -6,9 +6,9 @@
             <a class="btn bg-aqua text-white" [routerLink]="['/history/create', patientId]" routerLinkActive="router-link-active"  role="button">Nuevo Historial</a>
         </div>
     </div>
-        <div *ngIf="histories.length <= 0; else main_content">
+        <div *ngIf="!loading; else main_content">
             <h1 class="text-aqua-dark">Cargando...</h1>
-            <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+            <span class="spinner-border text-aqua-dark"></span>
         </div>
         
         <ng-template #main_content>
@@ -26,7 +26,7 @@
             </thead>
             <tbody class="overflow-auto">
                 <tr *ngFor="let history of histories; let i = index">
-                <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt}}</td>
+                <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt.substring(0, 10)}}</td>
                 <td scope="col" (click)="selectedHistory(history._id)">{{history.motivoConsulta}}</td>
                 <td scope="col" class="text-center" *ngIf="isAdmin || isMedic">
                     <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>

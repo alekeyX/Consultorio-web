@@ -6,9 +6,9 @@
         <a class="btn bg-aqua text-white" [routerLink]="['/medic/create']" routerLinkActive="router-link-active"  role="button">Nuevo Médico</a>
       </div>
   </div>
-    <div *ngIf="medics.length < 0; else main_content">
+    <div *ngIf="!loading; else main_content">
       <h1 class="text-aqua-dark">Cargando...</h1>
-      <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+      <span class="spinner-border text-aqua-dark"></span>
     </div>
 
     <ng-template #main_content>

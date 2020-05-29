@@ -4,6 +4,7 @@ import { HistoryService } from '../../services/history.service';
 import { History } from '../../models/history';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../models/role';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-history-get',
@@ -32,7 +33,7 @@ export class HistoryGetComponent implements OnInit {
   }
 
   getHistories() {
-    this.loading = true;
+    setInterval(() => {this.loading = true; }, 800);
     if (this.currentUser.role === Role.Patient) {
       this.historyService.getHistoryByPatient(this.currentUser._id).subscribe((data) => {
         this.histories = data;

@@ -29,7 +29,7 @@ export class MedicGetComponent implements OnInit {
   }
 
   getMedics() {
-    this.loading = true;
+    setInterval(() => {this.loading = true; }, 800);
     this.medicService.getAll().subscribe((data) => {
       this.medics = data;
     });
