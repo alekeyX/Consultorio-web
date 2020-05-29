@@ -28,8 +28,8 @@ export class HistoryGetComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.getHistories();
     this.patientId = this.route.snapshot.paramMap.get('id');
+    this.getHistories();
   }
 
   getHistories() {

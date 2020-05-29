@@ -1,4 +1,4 @@
-<div class="card rounded-lg shadow mb-5 bg-white rounded">
+<div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
     <div class="card-body">
     <div class="d-md-flex justify-content-between align-items-center mb-4">
         <h1 class="text-aqua-dark">Lista de Historiales Clínicos</h1>
@@ -16,24 +16,24 @@
             <h2 *ngIf="histories.length == 0" class="no-data text-center text-aqua-dark">No existen historias añadidas!</h2>
             
             <!-- history list -->
-            <table class="table table-sm table-hover table-responsive-md table-fixed " *ngIf="histories.length > 0">
-            <thead class="bg-aqua text-white">
-                <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Motivo</th>
-                <th scope="col"  class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
-                </tr>
-            </thead>
-            <tbody class="overflow-auto">
-                <tr *ngFor="let history of histories; let i = index">
-                <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt.substring(0, 10)}}</td>
-                <td scope="col" (click)="selectedHistory(history._id)">{{history.motivoConsulta}}</td>
-                <td scope="col" class="text-center" *ngIf="isAdmin || isMedic">
-                    <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>
-                    <a (click)="removeHistory(history, i)" class="ml-2" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
-                </td>
-                </tr>
-            </tbody>
+            <table class="table table-sm table-hover table-fixed " *ngIf="histories.length > 0">
+                <thead class="bg-aqua text-white">
+                    <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Motivo</th>
+                    <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody class="overflow-auto">
+                    <tr *ngFor="let history of histories; let i = index">
+                    <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt.substring(0, 10)}}</td>
+                    <td scope="col" (click)="selectedHistory(history._id)">{{history.motivoConsulta}}</td>
+                    <td scope="col" class="text-center" *ngIf="isAdmin || isMedic">
+                        <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>
+                        <a (click)="removeHistory(history, i)" class="ml-2" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
+                    </td>
+                    </tr>
+                </tbody>
             </table>
         </ng-template>
     </div>

@@ -17,7 +17,8 @@
 }
 
 .activo {
-    background: linear-gradient(to bottom, rgba(226,226,226,0) 0%, rgba(219, 219, 219, 0.041) 80%, rgba(254, 254, 254, 0.616) 100%);
+    /* background: linear-gradient(to bottom, rgba(226,226,226,0) 0%, rgba(219, 219, 219, 0.041) 80%, rgba(254, 254, 254, 0.911) 100%); */
+    border-bottom: 2px solid #ffffff;
 }
 
 .dropdown-item:hover {
