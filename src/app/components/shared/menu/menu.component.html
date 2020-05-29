@@ -2,7 +2,7 @@
 <div class="bg-aqua border-light border-top" id="sidebar">
     <div class="text-white p-2">
       
-      <div *ngIf="isMedic || isPatient">
+      <div>
         <a class="nav-link dropdown-item" (click)="selected(currentUser._id)" routerLinkActive="activo">
           <i class="fas fa-user fa-2x mr-3 ml-1" ></i>
           PÉRFIL
@@ -26,13 +26,13 @@
         <div class="dropdown-divider"></div>
       </div>
 
-      <div *ngIf="!isMedic">
+      <!-- <div *ngIf="!isMedic">
         <a class="nav-link dropdown-item" [routerLink]="['/history']" routerLinkActive="activo">
           <i class="fas fa-notes-medical fa-2x mr-3 ml-1"></i>
           HISTORIAL
         </a>
         <div class="dropdown-divider"></div>
-      </div>
+      </div> -->
 
       <a class="nav-link dropdown-item">
         <i class="fas fa-clock fa-2x mr-3"></i>

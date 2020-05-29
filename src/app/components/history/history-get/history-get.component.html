@@ -29,8 +29,8 @@
                 <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt}}</td>
                 <td scope="col" (click)="selectedHistory(history._id)">{{history.motivoConsulta}}</td>
                 <td scope="col" class="text-center" *ngIf="isAdmin || isMedic">
-                    <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2"><i class="fas fa-edit text-info"></i></a>
-                    <a (click)="removeHistory(history, i)" class="ml-2" *ngIf="isAdmin"><i class="fas fa-trash text-danger"></i></a>
+                    <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>
+                    <a (click)="removeHistory(history, i)" class="ml-2" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
                 </td>
                 </tr>
             </tbody>

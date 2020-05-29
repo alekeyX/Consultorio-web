@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
   }
 
   selected(id: string) {
-    if (this.currentUser.role === Role.Medic) {
+    if (this.currentUser.role !== Role.Patient) {
       this.router.navigate(['/medic/', id]);
     } else {
       this.router.navigate(['/patient/', id]);

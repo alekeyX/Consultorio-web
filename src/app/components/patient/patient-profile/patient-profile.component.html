@@ -4,98 +4,82 @@
 </div>
 
 <ng-template #main_content>
-        <div class="card rounded-lg shadow mb-5 bg-white rounded">
-            <div class="card-body">
-            
-                <h1 class="text-aqua-dark mb-3">Perfil de paciente</h1>
-            
-                <div class="row d-flex align-items-center justify-content-around mb-2">
-                    <div class="col-md-5 d-flex align-items-center justify-content-around">
-                        <img [src]="'http://localhost:4000/' + patient.imagePath" 
-                            class=" imgfluid imgRedonda border" *ngIf="avatar" >
-                        <i class="fas fa-user-circle fa-10x text-aqua-dark" *ngIf="!avatar"></i>
-                    </div>
-                    <div class="col-md-7 ">
-                        <div class="py-2 row">
-                            <div class="col-md-8">
-                                <strong class="ml-3">Código Paciente:</strong>
-                            </div>
-                            <div class="col-md-8 ml-4">{{ patient.username }}</div>
-                        </div>
-                        <div class="py-2 row">
-                            <div class="col-md-8">
-                                <strong class="ml-3">Nombre:</strong>
-                            </div>
-                            <div class="col-md-8 ml-4">{{ patient.firstName }}  {{ patient.lastName }}</div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="row mt-lg-3 d-flex justify-content-center">
-                    <div class="py-2 col-md-4">
-                        <strong class="ml-3">Carnet:</strong>
-                        <div class="ml-4">{{ patient.ci }} </div>
-                    </div>
-                    <div class="py-2 col-md-4">
-                        <strong class="ml-3">Género:</strong>
-                        <div class="ml-4">{{ patient.genero }} </div>
-                    </div>
-                    <div class="py-2 col-md-4">
-                        <strong class="ml-3">Edad:</strong>
-                        <div class="ml-4">{{ patient.age }} </div>
-                    </div>
-                </div>
-                
-                <div class="row d-flex justify-content-around">
-                    <div class="py-2 col-md-4">
-                        <strong class="ml-3">Correo:</strong>
-                        <div class="ml-4">{{ patient.email }} </div>
-                    </div>
-                    <div class="py-2 col-md-4">
-                        <strong class="ml-3">Teléfono:</strong>
-                        <div class="ml-4">{{ patient.phone }} </div>
-                    </div>
-                    <div class="py-2 col-md-4">
-                        <strong class="ml-3">Étnia:</strong>
-                        <div class="ml-4">{{ patient.ethnicity }} </div>
-                    </div>
+    <div class="card rounded-lg shadow mb-5 bg-white rounded">
+        <div class="card-body">
+            <h1 class="text-aqua-dark mb-3">Perfil Paciente</h1>
+            <div class="row">
+                <div class="col-md-4 d-flex justify-content-center">
+                    <img [src]="'http://localhost:4000/' + patient.imagePath" 
+                        class=" imgfluid imgRedonda border" *ngIf="avatar" >
+                    <i class="fas fa-user-circle fa-10x text-aqua-dark" *ngIf="!avatar"></i>
                 </div>
 
-                <div class="row d-flex justify-content-around">
-                    <div class="py-2 col-md-6">
-                        <strong class="ml-3">Estado Civil:</strong>
-                        <div class="ml-4">{{ patient.maritalStatus }} </div>
+                <div class="col-md-8 mt-3 mt-md-0">
+                    <div class="row" *ngIf="isAdmin || isMedic">
+                        <strong class="col-6 col-md-5 col-lg-5">Código Paciente:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.username }}</div>
                     </div>
-                    <div class="py-2 col-md-6">
-                        <strong class="ml-3">Ocupación:</strong>
-                        <div class="ml-4">{{ patient.ocupation }} </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Nombre:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.firstName }}  {{ patient.lastName }}</div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Carnet:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.ci }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Género:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.genero }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Edad:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.age }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Correo:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.email }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Teléfono:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.phone }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Étnia:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.ethnicity }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Estado Civil:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.maritalStatus }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Ocupación:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.ocupation }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Lugar de Nacimiento:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.placeBirth }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-6 col-md-5 col-lg-5">Dirección:</strong>
+                        <div class="col-6 col-md-7 col-lg-7">{{ patient.address }} </div>
                     </div>
                 </div>
-            
-                <div class="row d-flex justify-content-around">
-                    <div class="py-2 col-md-6">
-                        <strong class="ml-3">Lugar de Nacimiento:</strong>
-                        <div class="ml-4">{{ patient.placeBirth }} </div>
-                    </div>
-                    <div class="py-2 col-md-6">
-                        <strong class="ml-3">Dirección:</strong>
-                        <div class="ml-4">{{ patient.address }} </div>
-                    </div>
-                </div>
-            
-                <div class="container row mt-4 d-md-flex justify-content-between align-content-center" id="buttons">
-                    <button class="btn bg-aqua text-white ml-3" [routerLink]="['/history', patient._id]">
+            </div>
+            <div class="container">
+                <div class="mt-4 row d-flex justify-content-center justify-content-sm-between" id="buttons">
+                    <button class="btn bg-aqua text-white mb-2 mb-sm-0" [routerLink]="['/history', patient._id]">
                         Historial Clínico
                     </button>
                     <div *ngIf="isAdmin || isMedic">
-                        <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]">
+                        <button class="btn bg-aqua text-white mx-1" [routerLink]="['/patient/update', patient._id]" id="btnOption">
                             Editar
                         </button>
-                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)">
+                        <button class="btn btn-danger ml-1" (click)="deletePatient(patient._id)" id="btnOption" *ngIf="isAdmin">
                             Eliminar
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </ng-template>

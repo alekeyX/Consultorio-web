@@ -8,3 +8,7 @@
 button {
     border-radius: 20px;
 }
+
+#btnOption {
+    width: 100px;
+}
