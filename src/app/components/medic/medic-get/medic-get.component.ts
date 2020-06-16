@@ -14,6 +14,7 @@ export class MedicGetComponent implements OnInit {
   currentUser: Medic;
   medics: Medic[] = [];
   loading = false;
+  filterMedic = '';
 
   constructor(
       private medicService: MedicService,

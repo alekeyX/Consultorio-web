@@ -15,6 +15,7 @@ import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
 import { PatientLoginComponent } from './patient-login/patient-login.component';
 import { PatientService } from '../services/patient.service';
+import { FilterPatientPipe } from 'src/app/pipes/filter-patient.pipe';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PatientService } from '../services/patient.service';
     PatientEditComponent,
     PatientProfileComponent,
     PatientLoginComponent,
+    FilterPatientPipe
   ],
   imports: [
     CommonModule,

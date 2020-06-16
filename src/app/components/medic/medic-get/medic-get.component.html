@@ -2,8 +2,11 @@
   <div class="card-body">
   <div class="d-md-flex justify-content-between align-items-center mb-4">
       <h1 class="text-aqua-dark">Lista de Médicos</h1>
-      <div *ngIf="isAdmin">
-        <a class="btn bg-aqua text-white" [routerLink]="['/medic/create']" routerLinkActive="router-link-active"  role="button">Nuevo Médico</a>
+      <div class="d-flex">
+        <div class="form-group mb-0 mx-2">
+          <input type="text" class="form-control" name="filterMedic" placeholder="Buscar..." [(ngModel)]="filterMedic">
+        </div>
+        <a class="btn bg-aqua text-white" [routerLink]="['/medic/create']" routerLinkActive="router-link-active" role="button" *ngIf="isAdmin">Nuevo Médico</a>
       </div>
   </div>
     <div *ngIf="!loading; else main_content">
@@ -16,7 +19,7 @@
       <h2 *ngIf="medics.length == 0" class="no-data text-center text-aqua-dark">No existen médicos añadidos!</h2>
       
       <!-- medic list -->
-      <table class="table table-sm table-hover table-responsive-sm table-fixed " *ngIf="medics.length > 0">
+      <table class="table table-sm table-hover" *ngIf="medics.length > 0">
         <thead class="bg-aqua text-white">
           <tr>
             <th scope="col">Nombre</th>
@@ -26,7 +29,7 @@
           </tr>
         </thead>
         <tbody class="overflow-auto">
-          <tr *ngFor="let medic of medics; let i = index">
+          <tr *ngFor="let medic of medics | filter:filterMedic; let i = index ">
             <td scope="col" (click)="selectedMedic(medic._id)">{{medic.username}}</td>
             <td scope="col" (click)="selectedMedic(medic._id)">{{medic.specialty}}</td>
             <td scope="col" (click)="selectedMedic(medic._id)">{{medic.phone}}</td>

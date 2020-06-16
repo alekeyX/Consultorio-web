@@ -2,7 +2,10 @@
     <div class="card-body">
     <div class="d-md-flex justify-content-between align-items-center mb-4">
         <h1 class="text-aqua-dark">Lista de Pacientes</h1>
-        <div>
+        <div class="d-flex">
+            <div class="form-group mb-0 mx-2">
+                <input type="text" class="form-control" name="filterPatient" placeholder="Buscar..." [(ngModel)]="filterPatient">
+            </div>
             <a class="btn bg-aqua text-white" [routerLink]="['/patient/create']" routerLinkActive="router-link-active"  role="button">Nuevo Paciente</a>
         </div>
     </div>
@@ -16,7 +19,7 @@
             <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen pacientes añadidos!</h2>
             
             <!-- patient list -->
-            <table class="table table-sm table-hover table-responsive-md table-fixed " *ngIf="patients.length > 0">
+            <table class="table table-sm table-hover table-fixed " *ngIf="patients.length > 0">
             <thead class="bg-aqua text-white">
                 <tr>
                 <th scope="col">Código</th>
@@ -26,7 +29,7 @@
                 </tr>
             </thead>
             <tbody class="overflow-auto">
-                <tr *ngFor="let patient of patients; let i = index">
+                <tr *ngFor="let patient of patients | filterPatient:filterPatient; let i = index">
                 <td scope="col" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
                 <td scope="col" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
                 <td scope="col" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>

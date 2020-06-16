@@ -14,6 +14,7 @@ export class PatientGetComponent implements OnInit {
   currentUser: any;
   patients: Patient[] = [];
   loading = false;
+  filterPatient = '';
 
   constructor(
     private patientService: PatientService,
