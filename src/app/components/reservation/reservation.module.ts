@@ -7,13 +7,17 @@ import { ReservationRoutingModule } from './reservation-routing.module';
 import { ReservationAddComponent } from './reservation-add/reservation-add.component';
 import { ReservationGetComponent } from './reservation-get/reservation-get.component';
 import { ReservationChooseComponent } from './reservation-choose/reservation-choose.component';
+import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
+import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
 
 
 @NgModule({
   declarations: [
     ReservationAddComponent,
     ReservationGetComponent,
-    ReservationChooseComponent
+    ReservationChooseComponent,
+    ReservationDetailComponent,
+    ReservationEditComponent
   ],
   imports: [
     CommonModule,

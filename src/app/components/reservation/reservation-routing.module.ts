@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReservationAddComponent } from './reservation-add/reservation-add.component';
 import { ReservationChooseComponent } from './reservation-choose/reservation-choose.component';
 import { ReservationGetComponent } from './reservation-get/reservation-get.component';
+import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
 
 
 const routes: Routes = [
   { path: 'create', component: ReservationAddComponent },
   { path: 'choose', component: ReservationChooseComponent },
+  { path: ':id', component: ReservationDetailComponent },
   { path: '', component: ReservationGetComponent },
 ];
 
