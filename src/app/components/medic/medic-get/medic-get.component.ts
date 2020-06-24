@@ -51,5 +51,4 @@ export class MedicGetComponent implements OnInit {
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
-
 }

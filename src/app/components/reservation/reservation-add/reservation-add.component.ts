@@ -1,0 +1,84 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Reservation } from '../../models/reservation';
+import { ReservationService } from '../../services/reservation.service';
+
+@Component({
+  selector: 'app-reservation-add',
+  templateUrl: './reservation-add.component.html',
+  styleUrls: ['./reservation-add.component.css']
+})
+export class ReservationAddComponent implements OnInit {
+  angForm: FormGroup;
+  currentUser: any;
+  medicId: string;
+  submitted = false;
+  intervalo = 20;
+  reservation: Reservation;
+  reserva: Reservation[];
+  error: string;
+
+  days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+  hours = [
+    '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+    '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30',
+    '16:00', '16:30', '17:00', '17:30', '18:00'];
+
+  hours2 = [ '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+
+  hours3 = [
+    '08:00', '08:20', '08:40', '09:00', '09:20', '09:40', '10:00', '10:20', '10:40',
+    '11:00', '11:20', '11:40', '12:00', '12:20', '12:40', '13:00', '13:20', '13:40',
+    '13:00', '13:20', '13:40', '14:00', '14:20', '14:40', '15:00', '15:20', '15:40',
+    '16:00', '16:20', '16:40', '17:00', '17:20', '17:40', '18:00'];
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private reservationService: ReservationService,
+    private authenticationService: AuthenticationService,
+  ) {
+    this.createForm();
+  }
+
+  ngOnInit(): void {
+    this.currentUser = this.authenticationService.currentUserValue;
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.medicId = this.currentUser._id;
+  }
+
+  createForm() {
+    this.angForm = this.fb.group({
+      days: [''],
+      dateStart: ['', Validators.required],
+      dateEnd: ['', Validators.required],
+      hours: ['', Validators.required],
+      medic_id: [''],
+      patient_id: [''],
+      enable: [true],
+      available: [true]
+    });
+  }
+
+  // TODO terminar formulario
+  submitForm() {
+    this.submitted = true;
+    this.reservation = this.angForm.value;
+    this.reservation.medic_id = this.medicId;
+    // this.reservation.horas = this.angForm.value.hours;
+    console.log(this.reservation);
+    this.reservationService.create(this.reservation).subscribe(res => {
+      this.router.navigate(['reservation']);
+    }, (error) => {
+      this.error = error;
+    });
+  }
+
+  interval(interv: number) {
+    this.intervalo = interv;
+  }
+
+}

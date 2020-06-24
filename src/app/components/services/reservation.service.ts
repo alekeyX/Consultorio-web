@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { History } from '../models/history';
 import { environment } from '../../../environments/environment';
+import { Reservation } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HistoryService {
+export class ReservationService {
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -19,43 +19,43 @@ export class HistoryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  create(history): Observable<History> {
-    return this.httpClient.post<History>(environment.apiUrl + '/history', history)
+  create(reserva): Observable<Reservation> {
+    return this.httpClient.post<Reservation>(environment.apiUrl + '/reservation', reserva)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getById(id): Observable<History> {
-    return this.httpClient.get<History>(environment.apiUrl + '/history/' + id)
+  getById(id): Observable<Reservation> {
+    return this.httpClient.get<Reservation>(environment.apiUrl + '/reservation/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getHistoryByPatient(id): Observable<History[]> {
-    return this.httpClient.get<History[]>(environment.apiUrl + '/histories/' + id)
+  getReservByMedic(id): Observable<Reservation[]> {
+    return this.httpClient.get<Reservation[]>(environment.apiUrl + '/reservations/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getAll(): Observable<History[]> {
-    return this.httpClient.get<History[]>(environment.apiUrl + '/history')
+  getAll(): Observable<Reservation[]> {
+    return this.httpClient.get<Reservation[]>(environment.apiUrl + '/reservation')
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  update(id, history): Observable<History> {
-    return this.httpClient.put<History>(environment.apiUrl + '/history/' + id, history)
+  update(id, reservation): Observable<Reservation> {
+    return this.httpClient.put<Reservation>(environment.apiUrl + '/reservation/' + id, reservation)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   delete(id) {
-    return this.httpClient.delete<History>(environment.apiUrl + '/history/' + id)
+    return this.httpClient.delete<Reservation>(environment.apiUrl + '/reservation/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
