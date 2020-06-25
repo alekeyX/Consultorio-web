@@ -56,6 +56,7 @@ export class ReservationAddComponent implements OnInit {
       dateStart: ['', Validators.required],
       dateEnd: ['', Validators.required],
       hours: ['', Validators.required],
+      date: [''],
       medic_id: [''],
       patient_id: [''],
       enable: [true],
@@ -68,8 +69,6 @@ export class ReservationAddComponent implements OnInit {
     this.submitted = true;
     this.reservation = this.angForm.value;
     this.reservation.medic_id = this.medicId;
-    // this.reservation.horas = this.angForm.value.hours;
-    console.log(this.reservation);
     this.reservationService.create(this.reservation).subscribe(res => {
       this.router.navigate(['reservation']);
     }, (error) => {

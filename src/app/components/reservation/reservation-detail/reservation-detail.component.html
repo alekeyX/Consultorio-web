@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="mt-4 d-flex justify-content-center justify-content-md-end" *ngIf="isAdmin || isMedic">
-                <button class="btn bg-aqua text-white mx-1" [routerLink]="['/', reserva._id]">
+                <button class="btn bg-aqua text-white mx-1" [routerLink]="['/reservation/edit', reserva._id]">
                     Editar
                 </button>
                 <button class="btn btn-danger ml-1" (click)="deleteReserva(reserva._id)">

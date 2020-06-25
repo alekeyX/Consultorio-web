@@ -43,6 +43,10 @@ export class ReservationGetComponent implements OnInit {
     }
   }
 
+  selectReserva(id: string) {
+    this.router.navigate(['/reservation/', id]);
+  }
+
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
