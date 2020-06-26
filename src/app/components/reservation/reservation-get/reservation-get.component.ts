@@ -13,7 +13,9 @@ import { Reservation } from '../../models/reservation';
 export class ReservationGetComponent implements OnInit {
   currentUser: any;
   reservations: Reservation[] = [];
+  filterDates: string[] = [];
   loading = false;
+  filterReservation = '';
 
   constructor(
     private reservationService: ReservationService,
@@ -32,6 +34,7 @@ export class ReservationGetComponent implements OnInit {
     setInterval(() => {this.loading = true; }, 800);
     this.reservationService.getAll().subscribe((data) => {
       this.reservations = data;
+      this.filterDate();
     });
   }
 
@@ -45,6 +48,14 @@ export class ReservationGetComponent implements OnInit {
 
   selectReserva(id: string) {
     this.router.navigate(['/reservation/', id]);
+  }
+
+  filterDate() {
+    const resultado = Array.from(new Set(this.reservations.map(element => element.date)))
+    .map(date => {
+      return date = this.reservations.find(element => element.date === date).date.substring(0, 10);
+    });
+    return this.filterDates = resultado;
   }
 
   get isAdmin() {
