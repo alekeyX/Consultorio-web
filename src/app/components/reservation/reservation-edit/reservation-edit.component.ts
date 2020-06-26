@@ -78,7 +78,6 @@ export class ReservationEditComponent implements OnInit {
     } else {
       this.reserva.enable = false;
     }
-    console.log(this.reserva);
     const id = this.route.snapshot.paramMap.get('id');
     this.reservationService.update(id, this.reserva).subscribe(res => {
       this.router.navigate(['reservation']);
