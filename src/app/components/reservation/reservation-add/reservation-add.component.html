@@ -9,21 +9,25 @@
             <li><b>Paso 3:</b> Elija la hora limite de reservas.</li>
             <li><b>Paso 4:</b> Elija la cantidad de minutos que tendra cada reserva para la cita</li>
         </p>
-        <div class="container col-md-10 col-lg-8 col-xl-5 py-3">
+        <div class="container col-md-10 col-lg-10 col-xl-7 py-3">
             <form [formGroup]="angForm" (ngSubmit)="submitForm()">
-                <div class="form-group d-md-flex">
-                    <label for="days" class="col-sm-5 col-form-label">Día:</label>
-                    <select class="custom-select" formControlName="days" #Days multiple>
-                        <option [value]="day" *ngFor="let day of days">{{day}}</option>
-                    </select>
-                </div>
-                <div class="form-group d-md-flex">
-                    <label for="dateStart" class="col-sm-5 col-form-label">Fecha Inicial:</label>
-                    <input type="date" formControlName="dateStart" #dateStart>
-                </div>
-                <div class="form-group d-md-flex">
-                    <label for="dateEnd" class="col-sm-5 col-form-label">Fecha Final:</label>
-                    <input type="date" formControlName="dateEnd" #dateEnd>
+                <div class="d-md-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="days" class="col-sm-5 col-form-label">Día:</label>
+                        <select class="custom-select" formControlName="days" #Days multiple>
+                            <option [value]="day" *ngFor="let day of days">{{day}}</option>
+                        </select>
+                    </div>
+                    <div class="my-auto">
+                        <div class="form-group d-md-flex">
+                            <label for="dateStart" class="col-sm-5 col-form-label">Fecha Inicial:</label>
+                            <input type="date" formControlName="dateStart" #dateStart>
+                        </div>
+                        <div class="form-group d-md-flex">
+                            <label for="dateEnd" class="col-sm-5 col-form-label">Fecha Final:</label>
+                            <input type="date" formControlName="dateEnd" #dateEnd>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <label for="interval">Intervalo entre consultas:</label>
@@ -49,18 +53,18 @@
                     </div>
                 </div>
 
-                <div class="mt-3 ">
-                    <div class="form-group d-flex" *ngIf="intervalo==20">
+                <div class="mt-3 col-md-6 mx-auto">
+                    <div class="form-group" *ngIf="intervalo==20">
                         <select class="custom-select" formControlName="hours" #Hours multiple>
                             <option [ngValue]="hour" *ngFor="let hour of hours3">{{hour}}</option>
                         </select>
                     </div>
-                    <div class="form-group d-flex" *ngIf="intervalo==30">
+                    <div class="form-group" *ngIf="intervalo==30">
                         <select class="custom-select" formControlName="hours" #Hours multiple>
                             <option [ngValue]="hour" *ngFor="let hour of hours">{{hour}}</option>
                         </select>
                     </div>
-                    <div class="form-group d-flex" *ngIf="intervalo==60">
+                    <div class="form-group" *ngIf="intervalo==60">
                         <select class="custom-select" formControlName="hours" #Hours multiple>
                             <option [ngValue]="hour" *ngFor="let hour of hours2">{{hour}}</option>
                         </select>
