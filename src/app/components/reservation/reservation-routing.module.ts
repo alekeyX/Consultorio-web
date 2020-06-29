@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../helpers/auth.guard';
 import { ReservationAddComponent } from './reservation-add/reservation-add.component';
 import { ReservationChooseComponent } from './reservation-choose/reservation-choose.component';
 import { ReservationGetComponent } from './reservation-get/reservation-get.component';
@@ -8,11 +9,11 @@ import { ReservationEditComponent } from './reservation-edit/reservation-edit.co
 
 
 const routes: Routes = [
-  { path: 'create', component: ReservationAddComponent },
-  { path: 'choose', component: ReservationChooseComponent },
-  { path: 'edit/:id', component: ReservationEditComponent},
-  { path: ':id', component: ReservationDetailComponent },
-  { path: '', component: ReservationGetComponent },
+  { path: 'create', component: ReservationAddComponent, canActivate: [AuthGuard]  },
+  { path: 'choose', component: ReservationChooseComponent, canActivate: [AuthGuard]  },
+  { path: 'edit/:id', component: ReservationEditComponent, canActivate: [AuthGuard] },
+  { path: ':id', component: ReservationDetailComponent, canActivate: [AuthGuard]  },
+  { path: '', component: ReservationGetComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({
