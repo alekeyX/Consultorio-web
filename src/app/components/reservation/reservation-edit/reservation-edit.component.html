@@ -17,7 +17,7 @@
                 <div class="form-group d-md-flex justify-content-between">
                     <label class="col-lg-4">Paciente:</label>
                     <select class="custom-select" formControlName="patient_id" #patient_id>
-                        <option value="" disabled>Opcional</option>
+                        <option value="">Ninguno</option>
                         <option *ngFor="let patient of patients" [ngValue]="patient.firstName + ' ' + patient.lastName">{{patient.firstName}} {{patient.lastName}}</option>
                     </select>
                 </div>
@@ -34,10 +34,6 @@
                                 formControlName="enable" #enable>
                         <label class="form-check-label" for="inlineRadio2">Desactivado</label>
                     </div>
-                    <!-- <select class="custom-select" formControlName="enable" #enable>
-                        <option [value]="true">Habilitado</option>
-                        <option [value]="false">Deshabilitado</option>
-                    </select> -->
                 </div>
                 
                 <div class="form-group mt-4 text-center">

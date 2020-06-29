@@ -7,14 +7,12 @@
             <div class="col-md-4 col-lg-3 my-3">
                 <label for="specialty"><strong>1.</strong> Elegir especialidad</label>
                 <select class="custom-select" id="specialty" [(ngModel)]="specialty" (change)="selectSpecialty(specialty)">
-                    <!-- <option value="" disabled>Elegir especialidad</option> -->
                     <option [ngValue]="specialty" *ngFor="let specialty of specialtys">{{specialty}}</option>
                 </select>
             </div>
             <div class="col-md-4 col-lg-3 my-3">
                 <label for="medic"><strong>2.</strong> Elegir Médico</label>
                 <select class="custom-select" id="medic" [(ngModel)]="medic" (change)="selectMedic(medic)">
-                    <!-- <option value="" disabled>Elegir medico</option> -->
                     <option [ngValue]="medic" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
                 </select>
             </div>
@@ -26,8 +24,8 @@
                 </select>
             </div>
         </div>
-        <div class="container col-4 py-5" *ngIf="!loading; else main_content">
-            <h1 class="text-aqua-dark">Seleccione...  <span class="spinner-border text-aqua-dark"></span></h1>
+        <div class="container col-md-6 py-5 text-center" *ngIf="!loading; else main_content">
+            <h1 class="text-aqua-dark">Seleccione primero especialidad y médico...</h1>
         </div>
 
         <ng-template #main_content>
@@ -35,7 +33,7 @@
             <h2 *ngIf="reservaByMedic.length == 0" class="no-data text-center text-aqua-dark py-5">No hay reservaciones disponibles</h2>
             
             <!--Lista de reservas -->
-            <div class="container col-8">
+            <div class="container col-md-8">
                 <table class="table table-sm table-hover" *ngIf="reservaByMedic.length > 0">
                     <thead class="bg-aqua text-white">
                     <tr>
@@ -46,14 +44,70 @@
                     </thead>
                     <tbody class="overflow-auto">
                     <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation; let i = index">
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center">{{reserva.date.substring(0, 10)}}</td>
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center">{{reserva.hours}}</td>
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" class="text-center text-white" [ngClass]="{'bg-success': reserva.patient_id===''}">Disponible</td>
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id!='' && reserva.enable" class="text-center text-white" [ngClass]="{'bg-danger': reserva.patient_id!==''}">Ocupado</td>
+                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.date.substring(0, 10)}}</td>
+                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.hours}}</td>
+                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" 
+                            class="text-center text-white font-weight-bold" [ngClass]="{'text-success': reserva.patient_id===''}"
+                            data-toggle="modal" data-target="#exampleModalCenter">Disponible</td>
+                        <td *ngIf="reserva.patient_id!='' && reserva.enable" class="text-center text-white font-weight-bold" 
+                            [ngClass]="{'text-danger': reserva.patient_id!==''}">Ocupado</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </ng-template>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-aqua-dark" id="exampleModalLongTitle">Confirmar Reserva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <strong class="col-4">Médico:</strong>
+                    <div class="ml-4">
+                        {{medicName}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Especialidad:</strong>
+                    <div class="ml-4">
+                        {{specialtySelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Fecha:</strong> 
+                    <div class="ml-4">
+                        {{dateSelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Hora:</strong>
+                    <div class="ml-4">
+                        {{reserv.hours}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Paciente:</strong>
+                    <div class="ml-4">
+                        {{currentUser.firstName}} {{currentUser.lastName}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button (click)="submit()" type="button" class="btn bg-aqua text-white" data-dismiss="modal">Confirmar</button>
+            </div>
+            </div>
+        </div>
     </div>
 </div>

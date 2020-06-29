@@ -6,7 +6,8 @@ import { ReservationService } from '../../services/reservation.service';
 import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 import { Medic } from '../../models/medic';
-import { element } from 'protractor';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-choose',
@@ -20,9 +21,14 @@ export class ReservationChooseComponent implements OnInit {
   medics: Medic[] = [];
   medic: Medic;
   reservaByMedic: Reservation[] = [];
+  reservaByMedic2: Observable<Reservation[]>;
   reservas: string[] = [];
+  reserv: any = {};
   filterReservation = '';
   loading = false;
+  specialtySelected;
+  medicName;
+  dateSelected;
 
   constructor(
     private reservationService: ReservationService,
@@ -37,6 +43,7 @@ export class ReservationChooseComponent implements OnInit {
     this.currentUser = this.authenticationService.currentUserValue;
   }
 
+  // Mostrar lista de especialidades de medicos
   getSpecialty() {
     this.medicService.getAll().subscribe((data) => {
       const resultado = Array.from(new Set(data.map(element => element.specialty)))
@@ -47,11 +54,13 @@ export class ReservationChooseComponent implements OnInit {
     });
   }
   
+  // Seleccion de una especialidad
   selectSpecialty(specialty: string) {
     this.specialty = specialty;
     this.getMedics();
   }
 
+  // Listar medicos segun especialidad elegida
   getMedics() {
     this.medics.splice(0, this.medics.length);
     this.medicService.getAll().subscribe((data) => {
@@ -63,10 +72,13 @@ export class ReservationChooseComponent implements OnInit {
     })
   }
 
+  // Seleccion de un medico
   selectMedic(medic: Medic) {
+    this.medic = medic;
     this.getReservasByMedic(medic);
   }
 
+  // Mostrar reservas habilitadas de un medico
   getReservasByMedic(medic: Medic) {
     this.reservationService.getReservByMedic(medic._id)
     .subscribe(data => {
@@ -76,6 +88,15 @@ export class ReservationChooseComponent implements OnInit {
     })
   }
 
+  getReservasByMedic2(medic: Medic) {
+    this.reservaByMedic2.pipe(
+      switchMap(() => {
+        return this.reservationService.getReservByMedic(medic._id);
+      })
+    );
+  }
+
+  // Filtrar resultados por fecha
   selectDate() {
     const resultado = Array.from(new Set(this.reservaByMedic.map(element => element.date)))
     .map(date => {
@@ -84,8 +105,22 @@ export class ReservationChooseComponent implements OnInit {
     return this.reservas = resultado;
   }
 
+  // Seleccion de una reserva disponible
   selectReserva(id: string) {
-    this.router.navigate(['/reservation/', id]);
+    this.medicName = this.medic.firstName + ' ' + this.medic.lastName;
+    this.specialtySelected = this.specialty;
+    this.reservationService.getById(id)
+    .subscribe(data => {
+      this.reserv = data;
+      this.dateSelected = data.date.substring(0, 10);
+    })
+  }
+
+  submit() {
+    this.reserv.patient_id = this.currentUser.firstName + ' ' + this.currentUser.lastName;
+    this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
+      this.getReservasByMedic(this.medic);
+    });
   }
 
   get isAdmin() {
