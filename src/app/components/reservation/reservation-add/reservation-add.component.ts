@@ -64,7 +64,6 @@ export class ReservationAddComponent implements OnInit {
     });
   }
 
-  // TODO terminar formulario
   submitForm() {
     this.submitted = true;
     this.reservation = this.angForm.value;
