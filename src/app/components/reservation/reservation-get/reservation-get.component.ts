@@ -16,26 +16,45 @@ export class ReservationGetComponent implements OnInit {
   filterDates: string[] = [];
   loading = false;
   filterReservation = '';
+  order: string = '';
+  asc: boolean = false;
 
   constructor(
     private reservationService: ReservationService,
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.getReservas();
   }
-
+  
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.getReservas();
   }
 
   getReservas() {
     setInterval(() => {this.loading = true; }, 800);
-    this.reservationService.getAll().subscribe((data) => {
+    if (this.currentUser.role === Role.Admin) {
+      this.reservationService.getAll().subscribe((data) => {
       this.reservations = data;
       this.filterDate();
-    });
+      });
+    } else {
+      if (this.currentUser.role === Role.Medic) {
+        this.reservationService.getReservByMedic(this.currentUser._id).subscribe((data) => {
+          this.reservations = data;
+          this.filterDate();
+        })
+      } else {
+        if (this.currentUser.role == Role.Patient) {
+          this.reservationService.getReservByPatient(this.currentUser.firstName + ' ' + this.currentUser.lastName)
+          .subscribe((data) => {
+            this.reservations = data;
+            this.filterDate();
+          })
+        }
+      }
+    }
   }
 
   removeReservation(reservation, index) {
@@ -56,6 +75,11 @@ export class ReservationGetComponent implements OnInit {
       return date = this.reservations.find(element => element.date === date).date.substring(0, 10);
     });
     return this.filterDates = resultado;
+  }
+
+  orderBy(order: string) {
+    this.asc = !this.asc;
+    this.order = order;
   }
 
   get isAdmin() {

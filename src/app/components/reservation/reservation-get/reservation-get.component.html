@@ -26,16 +26,16 @@
             <table class="table table-sm table-hover" *ngIf="reservations.length > 0">
                 <thead class="bg-aqua text-white">
                 <tr>
-                    <th scope="col" class="text-center">Fecha</th>
-                    <th scope="col" class="text-center">Hora</th>
-                    <th scope="col" class="text-center">Paciente</th>
+                    <th scope="col" class="text-center" (click)="orderBy('date')">Fecha</th>
+                    <th scope="col" class="text-center" (click)="orderBy('hours')">Hora</th>
+                    <th scope="col" class="text-center" (click)="orderBy('patient_id')">Paciente</th>
                     <th scope="col" class="text-center">Estado</th>
                     <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
                 </tr>
                 </thead>
                 <tbody class="overflow-auto">
-                <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation; let i = index">
-                    <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date.substring(0, 10)}}</td>
+                <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | orderBy:order:asc ; let i = index">
+                    <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
                     <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
                     <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.patient_id}}</td>
                     <td *ngIf="reserva.enable" class="text-center">Activo</td>
@@ -50,3 +50,4 @@
         </ng-template>
     </div>
 </div>
+

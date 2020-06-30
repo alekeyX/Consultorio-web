@@ -10,6 +10,7 @@ import { ReservationChooseComponent } from './reservation-choose/reservation-cho
 import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
 import { FilterReservationPipe } from 'src/app/pipes/filter-reservation.pipe';
+import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FilterReservationPipe } from 'src/app/pipes/filter-reservation.pipe';
     ReservationDetailComponent,
     ReservationEditComponent,
     FilterReservationPipe,
+    OrderByPipe,
   ],
   imports: [
     CommonModule,

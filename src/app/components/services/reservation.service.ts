@@ -40,6 +40,13 @@ export class ReservationService {
     );
   }
 
+  getReservByPatient(id): Observable<Reservation[]> {
+    return this.httpClient.get<Reservation[]>(environment.apiUrl + '/reservations/patient/' + id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   getAll(): Observable<Reservation[]> {
     return this.httpClient.get<Reservation[]>(environment.apiUrl + '/reservation')
     .pipe(
