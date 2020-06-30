@@ -12,3 +12,13 @@ button {
 #btnOption {
     width: 100px;
 }
+
+@media screen and (max-width: 768px) {
+    #options, button {
+        width: 100%;
+    }
+
+    #btnOption {
+        width: 99%;
+    }
+}

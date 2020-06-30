@@ -66,15 +66,15 @@
                 </div>
             </div>
             <div class="container">
-                <div class="mt-4 row d-flex justify-content-center justify-content-sm-between" id="buttons">
-                    <button class="btn bg-aqua text-white mb-2 mb-sm-0" [routerLink]="['/history', patient._id]">
+                <div class="mt-4 row d-md-flex justify-content-sm-between">
+                    <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]">
                         Historial Clínico
                     </button>
-                    <div *ngIf="isAdmin || isMedic">
-                        <button class="btn bg-aqua text-white mx-1" [routerLink]="['/patient/update', patient._id]" id="btnOption">
+                    <div class="d-md-flex" *ngIf="isAdmin || isMedic" id="options">
+                        <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]" id="btnOption">
                             Editar
                         </button>
-                        <button class="btn btn-danger ml-1" (click)="deletePatient(patient._id)" id="btnOption" *ngIf="isAdmin">
+                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" id="btnOption" *ngIf="isAdmin">
                             Eliminar
                         </button>
                     </div>
