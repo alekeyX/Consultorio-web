@@ -1,0 +1,113 @@
+<div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
+    <div class="card-body">
+    <div class="d-md-flex justify-content-between align-items-center">
+        <h1 class="text-aqua-dark">Selección de Reservas</h1>
+    </div>
+        <div class="d-md-flex mx-auto">
+            <div class="col-md-4 col-lg-3 my-3">
+                <label for="specialty"><strong>1.</strong> Elegir especialidad</label>
+                <select class="custom-select" id="specialty" [(ngModel)]="specialty" (change)="selectSpecialty(specialty)">
+                    <option [ngValue]="specialty" *ngFor="let specialty of specialtys">{{specialty}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 col-lg-3 my-3">
+                <label for="medic"><strong>2.</strong> Elegir Médico</label>
+                <select class="custom-select" id="medic" [(ngModel)]="medic" (change)="selectMedic(medic)">
+                    <option [ngValue]="medic" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 col-lg-3 my-3">
+                <label for="fecha"><strong>3.</strong> Filtrar por fecha</label>
+                <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
+                    <option [ngValue]="" ></option>
+                    <option [ngValue]="date" *ngFor="let date of reservas">{{date}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="container col-md-6 py-5 text-center" *ngIf="!loading; else main_content">
+            <h1 class="text-aqua-dark">Seleccione primero especialidad y médico...</h1>
+        </div>
+
+        <ng-template #main_content>
+            <!-- Mensaje si no hay datos -->
+            <h2 *ngIf="reservaByMedic.length == 0" class="no-data text-center text-aqua-dark py-5">No hay reservaciones disponibles</h2>
+            
+            <!--Lista de reservas -->
+            <div class="container col-md-8">
+                <table class="table table-sm table-hover" *ngIf="reservaByMedic.length > 0">
+                    <thead class="bg-aqua text-white">
+                    <tr>
+                        <th scope="col" class="text-center">Fecha</th>
+                        <th scope="col" class="text-center">Hora</th>
+                        <th scope="col" class="text-center">Disponibilidad</th>
+                    </tr>
+                    </thead>
+                    <tbody class="overflow-auto">
+                    <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation; let i = index">
+                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.date.substring(0, 10)}}</td>
+                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.hours}}</td>
+                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" 
+                            class="text-center text-white font-weight-bold" [ngClass]="{'text-success': reserva.patient_id===''}"
+                            data-toggle="modal" data-target="#exampleModalCenter">Disponible</td>
+                        <td *ngIf="reserva.patient_id!='' && reserva.enable" class="text-center text-white font-weight-bold" 
+                            [ngClass]="{'text-danger': reserva.patient_id!==''}">Ocupado</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-aqua-dark" id="exampleModalLongTitle">Confirmar Reserva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <strong class="col-4">Médico:</strong>
+                    <div class="ml-4">
+                        {{medicName}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Especialidad:</strong>
+                    <div class="ml-4">
+                        {{specialtySelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Fecha:</strong> 
+                    <div class="ml-4">
+                        {{dateSelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Hora:</strong>
+                    <div class="ml-4">
+                        {{reserv.hours}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Paciente:</strong>
+                    <div class="ml-4">
+                        {{currentUser.firstName}} {{currentUser.lastName}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button (click)="submit()" type="button" class="btn bg-aqua text-white" data-dismiss="modal">Confirmar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

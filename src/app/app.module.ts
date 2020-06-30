@@ -9,9 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PatientModule } from './components/patient/patient.module';
 import { MedicModule } from './components/medic/medic.module';
 import { HistoryModule } from './components/history/history.module';
-
-// used to create fake backend
-import { fakeBackendProvider } from './components/helpers/fake-backend';
+import { ReservationModule } from './components/reservation/reservation.module';
 
 // Componentes de pagina
 import { HomeComponent } from './components/home/home.component';
@@ -49,6 +47,7 @@ import { ErrorInterceptor } from './components/helpers/error.interceptor';
     MedicModule,
     PatientModule,
     HistoryModule,
+    ReservationModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

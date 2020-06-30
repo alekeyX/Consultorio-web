@@ -1,0 +1,56 @@
+<div *ngIf="!reserva; else main_content">
+    <h1 class="text-aqua-dark">Cargando...</h1>
+    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+</div>
+
+<ng-template #main_content>
+    <div class="card rounded bg-white rounded-lg shadow mb-5 animated fadeIn">
+        <div class="card-body">
+            <h1 class="text-aqua-dark mb-3">Detalles de Reserva</h1>
+            <div class="d-flex justify-content-center mb-4">                
+                <div class="col-md-6">
+                    <div class="row">
+                        <strong class="col-5 col-md-6">Fecha:</strong>
+                        <div class="col-7 col-md-6">{{ reserva.date.substring(0, 10) }}</div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-5 col-md-6">Día:</strong>
+                        <div class="col-7 col-md-6">{{ reserva.days }}</div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-5 col-md-6">Hora:</strong>
+                        <div class="col-7 col-md-6">{{ reserva.hours }} hrs.</div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-5 col-md-6">Paciente:</strong>
+                        <div class="col-7 col-md-6">{{ reserva.patient_id }} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-5 col-md-6">Médico:</strong>
+                        <div class="col-7 col-md-6">{{ medic.firstName }} {{medic.lastName}} </div>
+                    </div>
+                    <div class="row">
+                        <strong class="col-5 col-md-6">Especialidad:</strong>
+                        <div class="col-7 col-md-6">{{ medic.specialty }} </div>
+                    </div>
+                    <div class="row" *ngIf="reserva.enable">
+                        <strong class="col-5 col-md-6">Estado:</strong>
+                        <div class="col-7 col-md-6">Activo</div>
+                    </div>
+                    <div class="row" *ngIf="!reserva.enable">
+                        <strong class="col-5 col-md-6">Estado:</strong>
+                        <div class="col-7 col-md-6">Inactivo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center justify-content-md-end" *ngIf="isAdmin || isMedic">
+                <button class="btn bg-aqua text-white mx-1" [routerLink]="['/reservation/edit', reserva._id]">
+                    Editar
+                </button>
+                <button class="btn btn-danger ml-1" (click)="deleteReserva(reserva._id)">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
