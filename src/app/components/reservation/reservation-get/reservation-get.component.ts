@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Role } from '../../models/role';
 import { ReservationService } from '../../services/reservation.service';
+import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 
 @Component({
@@ -14,13 +15,16 @@ export class ReservationGetComponent implements OnInit {
   currentUser: any;
   reservations: Reservation[] = [];
   filterDates: string[] = [];
+  medics: any[] = [];
   loading = false;
   filterReservation = '';
+  filterReservationByMedic = '';
   order: string = '';
   asc: boolean = false;
 
   constructor(
     private reservationService: ReservationService,
+    private medicService: MedicService,
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
@@ -29,7 +33,7 @@ export class ReservationGetComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.getReservas();
+    this.getReservas();    
   }
 
   getReservas() {
@@ -38,6 +42,7 @@ export class ReservationGetComponent implements OnInit {
       this.reservationService.getAll().subscribe((data) => {
       this.reservations = data;
       this.filterDate();
+      this.getMedics();
       });
     } else {
       if (this.currentUser.role === Role.Medic) {
@@ -55,6 +60,12 @@ export class ReservationGetComponent implements OnInit {
         }
       }
     }
+  }
+
+  getMedics() {
+    this.medicService.getAll().subscribe((data) => {
+      this.medics = data;
+    })
   }
 
   removeReservation(reservation, index) {

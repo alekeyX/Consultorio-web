@@ -10,6 +10,7 @@ import { ReservationChooseComponent } from './reservation-choose/reservation-cho
 import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
 import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
 import { FilterReservationPipe } from 'src/app/pipes/filter-reservation.pipe';
+import { FilterReservationByMedicPipe } from 'src/app/pipes/filter-reservation-by-medic.pipe';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
 
@@ -21,6 +22,7 @@ import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
     ReservationDetailComponent,
     ReservationEditComponent,
     FilterReservationPipe,
+    FilterReservationByMedicPipe,
     OrderByPipe,
   ],
   imports: [

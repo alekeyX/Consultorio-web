@@ -1,23 +1,32 @@
 <div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
     <div class="card-body">
-    <div class="d-md-flex justify-content-between align-items-center">
-        <h1 class="text-aqua-dark">Lista de Reservas</h1>
-        <div class="d-flex">
-            <a class="btn bg-aqua text-white" [routerLink]="['/reservation/create']" routerLinkActive="router-link-active" role="button" *ngIf="isAdmin || isMedic">Añadir Reservas</a>
+        <div class="d-md-flex justify-content-between align-items-center">
+            <h1 class="text-aqua-dark">Lista de Reservas</h1>
+            <div class="d-flex">
+                <a class="btn bg-aqua text-white" [routerLink]="['/reservation/create']" routerLinkActive="router-link-active" role="button" *ngIf="isAdmin || isMedic">Añadir Reservas</a>
+            </div>
         </div>
-    </div>
         <div *ngIf="!loading; else main_content">
             <h1 class="text-aqua-dark">Cargando...</h1>
             <span class="spinner-border text-aqua-dark"></span>
         </div>
 
         <ng-template #main_content>
-            <div class="col-md-4 col-lg-3 my-3">
-                <label for="fecha">Filtrar por fecha</label>
-                <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
-                    <option value=""></option>
-                    <option *ngFor="let date of filterDates">{{date}}</option>
-                </select>
+            <div class="d-md-flex">
+                <div class="col-md-4 col-lg-3 my-3">
+                    <label for="fecha">Filtrar por fecha</label>
+                    <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
+                        <option value=""></option>
+                        <option *ngFor="let date of filterDates">{{date}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-lg-3 my-3" *ngIf="isAdmin">
+                    <label for="medico">Filtrar por médico</label>
+                    <select class="custom-select" [(ngModel)]="filterReservationByMedic" id="medico">
+                        <option value=""></option>
+                        <option value="{{medic._id}}" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
+                    </select>
+                </div>
             </div>
             <!-- Mensaje si no hay datos -->
             <h2 *ngIf="reservations.length == 0" class="no-data text-center text-aqua-dark">No existen reservas añadidas!</h2>
@@ -34,7 +43,7 @@
                 </tr>
                 </thead>
                 <tbody class="overflow-auto">
-                <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | orderBy:order:asc ; let i = index">
+                <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | filterReservationByMedic:filterReservationByMedic | orderBy:order:asc ; let i = index">
                     <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
                     <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
                     <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.patient_id}}</td>
