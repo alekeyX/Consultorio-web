@@ -11,7 +11,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <strong class="col-5 col-md-6">Fecha:</strong>
-                        <div class="col-7 col-md-6">{{ reserva.date.substring(0, 10) }}</div>
+                        <div class="col-7 col-md-6">{{ reserva.date | slice:0:10 }}</div>
                     </div>
                     <div class="row">
                         <strong class="col-5 col-md-6">Día:</strong>

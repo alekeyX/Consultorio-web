@@ -11,7 +11,7 @@ import { ReservationDetailComponent } from './reservation-detail/reservation-det
 import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
 import { FilterReservationPipe } from 'src/app/pipes/filter-reservation.pipe';
 import { FilterReservationByMedicPipe } from 'src/app/pipes/filter-reservation-by-medic.pipe';
-import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -23,14 +23,14 @@ import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
     ReservationEditComponent,
     FilterReservationPipe,
     FilterReservationByMedicPipe,
-    OrderByPipe,
   ],
   imports: [
     CommonModule,
     ReservationRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
   ]
 })
 export class ReservationModule { }

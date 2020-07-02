@@ -32,6 +32,10 @@ app-footer {
     color: #0F7F87;
 }
 
+.orderBy {
+    cursor: pointer;
+}
+
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;

@@ -15,6 +15,8 @@ export class PatientGetComponent implements OnInit {
   patients: Patient[] = [];
   loading = false;
   filterPatient = '';
+  order: string = '';
+  asc: boolean = false;
 
   constructor(
     private patientService: PatientService,
@@ -51,6 +53,11 @@ export class PatientGetComponent implements OnInit {
 
   selectedPatient(id: string) {
     this.router.navigate(['/patient/', id]);
+  }
+
+  orderBy(order: string) {
+    this.asc = !this.asc;
+    this.order = order;
   }
 
   get isAdmin() {

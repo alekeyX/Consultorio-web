@@ -4,7 +4,6 @@ import { HistoryService } from '../../services/history.service';
 import { History } from '../../models/history';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../models/role';
-import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-history-get',
@@ -17,6 +16,8 @@ export class HistoryGetComponent implements OnInit {
   histories: History[] = [];
   loading = false;
   patientId: string;
+  order: string = '';
+  asc: boolean = false;
 
   constructor(
     private historyService: HistoryService,
@@ -56,6 +57,11 @@ export class HistoryGetComponent implements OnInit {
 
   selectedHistory(id: string) {
     this.router.navigate(['/history/detail/', id]);
+  }
+
+  orderBy(order: string) {
+    this.asc = !this.asc;
+    this.order = order;
   }
 
   get isAdmin() {

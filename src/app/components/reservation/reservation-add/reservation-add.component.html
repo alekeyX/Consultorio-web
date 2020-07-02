@@ -2,30 +2,31 @@
     <div class="card-body">
         <h1 class="text-aqua-dark mb-3">Registrar Historial Clínico</h1>
         <p>
-            Bienvenido al sistema de reservas de citas.<br>
+            Bienvenido al sistema de reservas de citas médicas.<br>
             Pasos para habilitar el sistema:
             <li><b>Paso 1:</b> Elija los dias hábiles para reservar citas.</li>
-            <li><b>Paso 2:</b> Elija la hora para iniciar las reservas.</li>
-            <li><b>Paso 3:</b> Elija la hora limite de reservas.</li>
-            <li><b>Paso 4:</b> Elija la cantidad de minutos que tendra cada reserva para la cita</li>
+            <li><b>Paso 2:</b> Elija la fecha inicial para habilitar las reservas.</li>
+            <li><b>Paso 3:</b> Elija la fecha limite de habilitación de reservas.</li>
+            <li><b>Paso 4:</b> Elija el intervalo y horarios para las reservas.</li>
+            <li class=" list-unstyled font-weight-lighter"><i>Para escoger más de una opción, utilice (ctrl+click) ó (shift+click).</i></li>
         </p>
         <div class="container col-md-10 col-lg-10 col-xl-7 py-3">
             <form [formGroup]="angForm" (ngSubmit)="submitForm()">
                 <div class="d-md-flex justify-content-between">
                     <div class="form-group">
                         <label for="days" class="col-sm-5 col-form-label">Día:</label>
-                        <select class="custom-select" formControlName="days" #Days multiple>
+                        <select class="custom-select" formControlName="days" #Days multiple required>
                             <option [value]="day" *ngFor="let day of days">{{day}}</option>
                         </select>
                     </div>
                     <div class="my-auto">
                         <div class="form-group d-md-flex">
                             <label for="dateStart" class="col-sm-5 col-form-label">Fecha Inicial:</label>
-                            <input type="date" formControlName="dateStart" #dateStart>
+                            <input type="date" formControlName="dateStart" #dateStart required>
                         </div>
                         <div class="form-group d-md-flex">
                             <label for="dateEnd" class="col-sm-5 col-form-label">Fecha Final:</label>
-                            <input type="date" formControlName="dateEnd" #dateEnd>
+                            <input type="date" formControlName="dateEnd" #dateEnd required>
                         </div>
                     </div>
                 </div>
@@ -71,8 +72,9 @@
                     </div>
                 </div>
                 <div class="form-group mt-4 text-center">
-                    <button type="submit" class="btn text-white bg-aqua"
-                    >Habilitar</button>
+                    <button type="submit" class="btn btn-block text-white bg-aqua">
+                        Habilitar
+                    </button>
                 </div>
             </form>
         </div>

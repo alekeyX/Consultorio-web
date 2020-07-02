@@ -44,7 +44,7 @@
                     </thead>
                     <tbody class="overflow-auto">
                     <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation; let i = index">
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.date.substring(0, 10)}}</td>
+                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.date | slice:0:10}}</td>
                         <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.hours}}</td>
                         <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" 
                             class="text-center text-white font-weight-bold" [ngClass]="{'text-success': reserva.patient_id===''}"

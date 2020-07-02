@@ -8,6 +8,7 @@ import { HistoryAddComponent } from './history-add/history-add.component';
 import { HistoryGetComponent } from './history-get/history-get.component';
 import { HistoryEditComponent } from './history-edit/history-edit.component';
 import { HistoryDetailsComponent } from './history-details/history-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -15,13 +16,15 @@ import { HistoryDetailsComponent } from './history-details/history-details.compo
     HistoryAddComponent,
     HistoryGetComponent,
     HistoryEditComponent,
-    HistoryDetailsComponent],
+    HistoryDetailsComponent,
+  ],
   imports: [
     CommonModule,
     HistoryRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule
   ]
 })
 export class HistoryModule { }

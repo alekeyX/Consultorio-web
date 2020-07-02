@@ -16,6 +16,7 @@ import { MedicGetComponent } from './medic-get/medic-get.component';
 import { MedicProfileComponent } from './medic-profile/medic-profile.component';
 import { LoginMedicComponent } from './login-medic/login-medic.component';
 import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { FilterPipe } from 'src/app/pipes/filter.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

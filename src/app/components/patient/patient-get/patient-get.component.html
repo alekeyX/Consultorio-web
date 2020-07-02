@@ -24,14 +24,14 @@
             <table class="table table-sm table-hover table-fixed " *ngIf="patients.length > 0">
             <thead class="bg-aqua text-white">
                 <tr>
-                <th scope="col">Código</th>
-                <th scope="col">Nombre</th>
+                <th scope="col" class="orderBy" (click)="orderBy('username')">Código</th>
+                <th scope="col" class="orderBy" (click)="orderBy('firstName')">Nombre</th>
                 <th scope="col">Teléfono</th>
                 <th scope="col" class="text-center">Opciones</th>
                 </tr>
             </thead>
             <tbody class="overflow-auto">
-                <tr *ngFor="let patient of patients | filterPatient:filterPatient; let i = index">
+                <tr *ngFor="let patient of patients | filterPatient:filterPatient | orderBy:order:asc; let i = index">
                 <td scope="col" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
                 <td scope="col" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
                 <td scope="col" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>

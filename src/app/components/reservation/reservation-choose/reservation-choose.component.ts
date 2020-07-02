@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
 import { Role } from '../../models/role';
 import { ReservationService } from '../../services/reservation.service';
 import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 import { Medic } from '../../models/medic';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-choose',
@@ -21,19 +18,17 @@ export class ReservationChooseComponent implements OnInit {
   medics: Medic[] = [];
   medic: Medic;
   reservaByMedic: Reservation[] = [];
-  reservaByMedic2: Observable<Reservation[]>;
   reservas: string[] = [];
   reserv: any = {};
   filterReservation = '';
   loading = false;
-  specialtySelected;
-  medicName;
-  dateSelected;
+  specialtySelected: string;
+  medicName: string;
+  dateSelected: string;
 
   constructor(
     private reservationService: ReservationService,
     private medicService: MedicService,
-    private router: Router,
     private authenticationService: AuthenticationService
   ) {
     this.getSpecialty();
@@ -86,14 +81,6 @@ export class ReservationChooseComponent implements OnInit {
       this.reservaByMedic = data;
       this.selectDate();
     })
-  }
-
-  getReservasByMedic2(medic: Medic) {
-    this.reservaByMedic2.pipe(
-      switchMap(() => {
-        return this.reservationService.getReservByMedic(medic._id);
-      })
-    );
   }
 
   // Filtrar resultados por fecha

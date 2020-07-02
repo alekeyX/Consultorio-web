@@ -24,14 +24,14 @@
       <table class="table table-sm table-hover" *ngIf="medics.length > 0">
         <thead class="bg-aqua text-white">
           <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Especialidad</th>
-            <th scope="col">Teléfono</th>
+            <th scope="col" class="orderBy" (click)="orderBy('username')">Nombre</th>
+            <th scope="col" class="orderBy" (click)="orderBy('specialty')">Especialidad</th>
+            <th scope="col" >Teléfono</th>
             <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
           </tr>
         </thead>
         <tbody class="overflow-auto">
-          <tr *ngFor="let medic of medics | filter:filterMedic; let i = index ">
+          <tr *ngFor="let medic of medics | filter:filterMedic | orderBy:order:asc; let i = index ">
             <td scope="col" (click)="selectedMedic(medic._id)">{{medic.username}}</td>
             <td scope="col" (click)="selectedMedic(medic._id)">{{medic.specialty}}</td>
             <td scope="col" (click)="selectedMedic(medic._id)">{{medic.phone}}</td>

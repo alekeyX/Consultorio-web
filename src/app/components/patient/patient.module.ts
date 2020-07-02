@@ -16,6 +16,7 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 import { PatientLoginComponent } from './patient-login/patient-login.component';
 import { PatientService } from '../services/patient.service';
 import { FilterPatientPipe } from 'src/app/pipes/filter-patient.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { FilterPatientPipe } from 'src/app/pipes/filter-patient.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

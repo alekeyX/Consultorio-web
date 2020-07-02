@@ -15,6 +15,8 @@ export class MedicGetComponent implements OnInit {
   medics: Medic[] = [];
   loading = false;
   filterMedic = '';
+  order: string = '';
+  asc: boolean = false;
 
   constructor(
       private medicService: MedicService,
@@ -46,6 +48,11 @@ export class MedicGetComponent implements OnInit {
 
   selectedMedic(id: string) {
     this.router.navigate(['/medic/', id]);
+  }
+
+  orderBy(order: string) {
+    this.asc = !this.asc;
+    this.order = order;
   }
 
   get isAdmin() {

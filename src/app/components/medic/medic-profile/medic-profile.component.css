@@ -6,13 +6,11 @@
 }
 
 button {
-    border-radius: 20px;
     width: 100px;
 }
 
 @media screen and (max-width: 768px) {
     button {
-        border-radius: 20px;
         width: 100%;
     }
 }

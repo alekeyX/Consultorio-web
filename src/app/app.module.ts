@@ -10,6 +10,7 @@ import { PatientModule } from './components/patient/patient.module';
 import { MedicModule } from './components/medic/medic.module';
 import { HistoryModule } from './components/history/history.module';
 import { ReservationModule } from './components/reservation/reservation.module';
+import { SharedModule } from './components/shared/shared.module';
 
 // Componentes de pagina
 import { HomeComponent } from './components/home/home.component';
@@ -48,6 +49,9 @@ import { ErrorInterceptor } from './components/helpers/error.interceptor';
     PatientModule,
     HistoryModule,
     ReservationModule,
+    SharedModule
+  ],
+  exports: [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
