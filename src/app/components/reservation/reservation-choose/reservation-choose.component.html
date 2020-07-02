@@ -37,13 +37,13 @@
                 <table class="table table-sm table-hover" *ngIf="reservaByMedic.length > 0">
                     <thead class="bg-aqua text-white">
                     <tr>
-                        <th scope="col" class="text-center">Fecha</th>
-                        <th scope="col" class="text-center">Hora</th>
+                        <th scope="col" class="text-center orderBy" (click)="orderBy('date')">Fecha</th>
+                        <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora</th>
                         <th scope="col" class="text-center">Disponibilidad</th>
                     </tr>
                     </thead>
                     <tbody class="overflow-auto">
-                    <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation; let i = index">
+                    <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation | orderBy:order:asc ; let i = index">
                         <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.date | slice:0:10}}</td>
                         <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.hours}}</td>
                         <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" 

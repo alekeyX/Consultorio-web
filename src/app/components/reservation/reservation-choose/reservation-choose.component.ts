@@ -25,6 +25,8 @@ export class ReservationChooseComponent implements OnInit {
   specialtySelected: string;
   medicName: string;
   dateSelected: string;
+  order: string = '';
+  asc: boolean = false;
 
   constructor(
     private reservationService: ReservationService,
@@ -108,6 +110,11 @@ export class ReservationChooseComponent implements OnInit {
     this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
       this.getReservasByMedic(this.medic);
     });
+  }
+
+  orderBy(order: string) {
+    this.asc = !this.asc;
+    this.order = order;
   }
 
   get isAdmin() {
