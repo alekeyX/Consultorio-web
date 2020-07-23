@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'reservation',
     loadChildren: () => import('./components/reservation/reservation.module').then(m => m.ReservationModule)
   },
+  {
+    path: 'chat',
+    loadChildren: () => import('./components/chat/chat.module').then(m => m.ChatModule)
+  },
   { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];
 

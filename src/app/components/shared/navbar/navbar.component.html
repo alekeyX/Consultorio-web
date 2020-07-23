@@ -39,7 +39,7 @@
                 <a class="nav-link text-white" (click)="isShown=false" [routerLink]="['/patient/signin']" routerLinkActive="activo" >PACIENTES</a>
             </li>
             <li>
-                <a class="nav-link text-white d-lg-none d-xl-none mouse" id="lista-navbar" (click)="logout();isShown=false;"  *ngIf="currentUser">Cerrar Sesión</a>
+                <a class="nav-link text-white d-lg-none d-xl-none mouse" id="lista-navbar" (click)="logout();isShown=false;" *ngIf="currentUser">Cerrar Sesión</a>
             </li>
         </ul>
         <!-- <a class="nav-link text-white ml-auto d-none d-md-none d-lg-block mouse" id="logout" (click)="logout()"  *ngIf="currentUser">Cerrar Sesión</a> -->

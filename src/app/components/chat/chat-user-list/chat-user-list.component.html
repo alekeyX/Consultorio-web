@@ -1,0 +1,35 @@
+<div class="">
+    <div class="btn-group btn-group-toggle w-100" data-toggle="buttons" *ngIf="isAdmin || isMedic">
+        <label class="btn btn-secondary active">
+            <input type="radio" (click)="modelChangeUser(true)" checked> Médicos
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" (click)="modelChangeUser(false)"> Pacientes
+        </label>
+    </div>
+    <div *ngIf="typeUser">
+        <div *ngFor="let medic of medics" class="border-bottom p-2">
+            <div class="d-flex justify-content-start align-content-center" id="selected" (click)="openChat(medic._id, false)">
+                <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="medic.imagePath != 'none'"
+                class=" imgfluid imgRedonda">
+                <i class="fas fa-user-circle fa-3x text-info" *ngIf="medic.imagePath == 'none'"></i>
+                <div class="ml-2">
+                    <div>{{medic.firstName}} {{medic.lastName}}</div>
+                    <div id="specialty">{{medic.specialty}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!typeUser">
+        <div *ngFor="let patient of patients" class="border-bottom p-2">
+            <div class="d-flex justify-content-start align-content-center" id="selected" (click)="openChat(patient._id, true)">
+                <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="patient.imagePath != 'none'"
+                class=" imgfluid imgRedonda">
+                <i class="fas fa-user-circle fa-3x text-info" *ngIf="patient.imagePath == 'none'"></i>
+                <div class="ml-2">
+                    <div>{{patient.firstName}} {{patient.lastName}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

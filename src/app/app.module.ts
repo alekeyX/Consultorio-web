@@ -25,6 +25,7 @@ import { AdminComponent } from './components/admin/admin.component';
 //  Interceptores
 import { JwtInterceptor } from './components/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './components/helpers/error.interceptor';
+import { ChatModule } from './components/chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ErrorInterceptor } from './components/helpers/error.interceptor';
     PatientModule,
     HistoryModule,
     ReservationModule,
+    ChatModule,
     SharedModule
   ],
   exports: [

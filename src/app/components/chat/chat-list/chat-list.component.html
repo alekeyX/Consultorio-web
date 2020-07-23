@@ -1,0 +1,33 @@
+<div class="w-100 px-4 py-2 border-bottom bg-aqua" id="userTo" *ngIf="userSelected">
+    <div class="d-flex justify-content-start align-content-center" *ngIf="!isPatient">
+        <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
+        class=" imgfluid imgRedonda">
+        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+        <div class="ml-2 text-white">
+            <div>{{medic.firstName}} {{medic.lastName}}</div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-start align-content-center" *ngIf="isPatient">
+        <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="avatar"
+        class=" imgfluid imgRedonda">
+        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+        <div class="ml-2 text-white">
+            <div>{{patient.firstName}} {{patient.lastName}}</div>
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="p-3">
+        <div *ngFor="let message of messages" class="text-wrap bg-info rounded w-75 p-2 mb-1">
+            <span class="text-white">
+                {{message}}
+            </span>
+        </div>
+    </div>
+</div>
+<div class="w-100" id="formulario">
+    <div class="d-flex">
+        <input class="form-control w-100" [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
+        <button class="btn bg-aqua text-white" (click)="sendMessage()">Enviar</button>
+    </div>
+</div>
