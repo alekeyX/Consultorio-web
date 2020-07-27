@@ -13,17 +13,34 @@ export class ChatService {
   private url = 'http://localhost:5000';
   private socket;
   isPatient: boolean;
+  to_user_id: string = '';
 
   constructor(private httpClient: HttpClient) {
     this.socket = io.connect(this.url);
   }
 
-  public sendMessage(message) {
-    this.socket.emit('new-message', message);
+  // Recibir id's de usuario para abrir chat
+  setUsers(to_user_id, patient_medic_id, medic_id, patientSelected) {
+    this.isPatient = patientSelected;
+    this.to_user_id = to_user_id;
+    this.socket.emit('open-chat', patient_medic_id, medic_id);
   }
 
-  // TODO enviar id de usuario para chatear y mandar su id
-  // y con los id de userTo y userFrom devolver la lista de mensajes que tienen
+  // Devolver arrays de mensajes de la bd de los usuarios de un chat
+  getUser = () => {
+    return Observable.create((observer) => {
+      this.socket.on('open-chat', (messages) => {
+          observer.next(messages);
+      });
+    });
+  }
+
+  // Enviar mensaje
+  public sendMessage(message, isPatient) {
+    this.socket.emit('new-message', message, isPatient);
+  }
+
+  // Recibir los mensajes
   public getMessages = () => {
       return Observable.create((observer) => {
           this.socket.on('new-message', (message) => {
@@ -32,36 +49,13 @@ export class ChatService {
       });
   }
 
-  // Recibir id de usuario para abrir chat y mandarlo al servidor
-  setUsers(userTo, isPatient) {
-    this.isPatient = isPatient;
-    this.socket.emit('open-chat', userTo);
-  }
-
-  // Dar el id de usuario elegido para un chat
-  getUser = () => {
-    return Observable.create((observer) => {
-      this.socket.on('open-chat', (user_id) => {
-          observer.next(user_id);
-      });
-    });
-  }
-
-  // mandar mensaje
-  create(message: any): Observable<Message> {
-    return this.httpClient.post<Message>(this.url + '/message/', message)
-    .pipe(
-      catchError(this.errorHandler)
-    );
-  }
-
   // Devolver los mensajes segun los usuarios
-  getChat(): Observable<Message[]> {
-    return this.httpClient.get<Message[]>(this.url + '/')
-    .pipe(
-      catchError(this.errorHandler)
-    );
-  }
+  // getMsg(id): Observable<Message[]> {
+  //   return this.httpClient.get<Message[]>('http://localhost:4000/api' +'/chat/' + id)
+  //   .pipe(
+  //     catchError(this.errorHandler)
+  //   );
+  // }
 
   errorHandler(error) {
     let errorMessage = '';

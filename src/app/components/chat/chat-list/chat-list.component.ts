@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ChatService } from '../../services/chat.service';
 import { MedicService } from '../../services/medic.service';
 import { PatientService } from '../../services/patient.service';
 import { Medic } from '../../models/medic';
 import { Patient } from '../../models/patient';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-chat-list',
@@ -14,7 +15,7 @@ import { Patient } from '../../models/patient';
 export class ChatListComponent implements OnInit {
 
   message: string;
-  messages: string[] = [];
+  messages = [];
   currentUser: any;
   userTo: string;
   medic: Medic;
@@ -22,46 +23,40 @@ export class ChatListComponent implements OnInit {
   isPatient: boolean;
   avatar = true;
   userSelected: boolean = false;
-
+  angForm: FormGroup;
 
   constructor(
     private chatService: ChatService,
     private medicService: MedicService,
     private patientService: PatientService,
-    private authenticationService: AuthenticationService
-    ) {
-  }
+    private authenticationService: AuthenticationService,
+    private fb: FormBuilder
+    ) {  }
   
-  
-  // arreglar recibir la info del userTo para mostrar en pantalla
-  // mostrar los mensajes del userfrom y userto 
-  // enviar los mensajes y guardarlos en la bd
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.getUser();
     this.getMessages();
-  }
-  
-  sendMessage() {
-    this.chatService.sendMessage(this.message);
-    this.message = '';
+    this.scrollToBottom();
   }
 
+  // Actualizar lista de mensajes
   getMessages() {
-    this.chatService
-      .getMessages()
-      .subscribe((message: string) => {
-        this.messages.push(message);
+    this.chatService.getMessages()
+      .subscribe((message) => {
+        this.messages = message;
       });
   }
 
   // Recibe el id del usuario elegido para abrir un chat
   getUser() {
     this.chatService.getUser()
-    .subscribe((user_id) => {
+    .subscribe((messages) => {
       this.isPatient = this.chatService.isPatient;
+      let user_id = this.chatService.to_user_id;
       this.avatar = true;
+      this.messages = messages
       if (!this.isPatient) {
         this.openChatMedic(user_id);
       } else {
@@ -102,5 +97,44 @@ export class ChatListComponent implements OnInit {
     );
   }
 
+  // Enviar un mensaje
+  submitForm() {
+    // si es medico a quien escribimos
+    if (!this.isPatient) {
+      var id = this.medic._id;
+      this.angForm = this.fb.group({
+        medic_id: [id],
+        patient_id: [this.currentUser._id],
+        to: [id],
+        from: [this.currentUser._id],
+        msg: [this.message]
+      })
+    } else {
+      // si es un paciente a quien escribimos
+      var id = this.patient._id;
+      this.angForm = this.fb.group({
+        medic_id: [this.currentUser._id],
+        patient_id: [id],
+        to: [id],
+        from: [this.currentUser._id],
+        msg: [this.message]
+      })
+    }
+    this.chatService.sendMessage(this.angForm.value, this.isPatient);
+    // this.getMessages();
+    this.message = '';
+  }
 
+  // Mantener el scroll siempre abajo 
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  } 
+
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+  }
 }

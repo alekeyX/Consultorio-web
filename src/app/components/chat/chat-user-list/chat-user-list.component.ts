@@ -17,7 +17,7 @@ export class ChatUserListComponent implements OnInit {
   currentUser: any;
   medics: Medic[] = [];
   patients: Patient[] = [];
-  isPatient: boolean = false;
+  // isPatient: boolean = false;
   typeUser: boolean = true;
 
   constructor(
@@ -25,8 +25,7 @@ export class ChatUserListComponent implements OnInit {
     private patientService: PatientService,
     private chatService: ChatService,
     private authenticationService: AuthenticationService
-    ) {
-    }
+    ) { }
     
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
@@ -48,10 +47,19 @@ export class ChatUserListComponent implements OnInit {
     })
   }
   // mandar id del usuario con quien se quiere abrir un chat
-  openChat(userTo: string, isPatient) {
-    this.isPatient = isPatient;
-    this.chatService.setUsers(userTo, this.isPatient);
-    // this.chatService.create(this.angForm.value);
+  openChat(to_user_id: string, patientSelected) {
+    var patient_medic_id, medic_id;
+    if(patientSelected) {
+      // si se elige a un paciente para abrir un chat
+      patient_medic_id = to_user_id;
+      medic_id = this.currentUser._id;
+    } else {
+      // si se elige a un medico para abrir un chat
+      medic_id = to_user_id;
+      patient_medic_id = this.currentUser._id;
+    }
+    // this.isPatient = isPatient;
+    this.chatService.setUsers(to_user_id, patient_medic_id, medic_id, patientSelected);
   }
 
   modelChangeUser(changeUser) {

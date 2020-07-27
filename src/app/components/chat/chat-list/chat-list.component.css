@@ -16,3 +16,24 @@
 #specialty {
     font-size: 12px;
 }
+
+#notify {
+    top: 20%;
+    position: absolute;
+}
+
+#from {
+    font-size: 10px;
+}
+
+#messages {
+    margin-bottom: 25px;
+}
+
+.chat {
+    list-style: none;
+}
+
+#time {
+    font-size: 10px;
+}
