@@ -5,7 +5,7 @@ import { MedicService } from '../../services/medic.service';
 import { PatientService } from '../../services/patient.service';
 import { Medic } from '../../models/medic';
 import { Patient } from '../../models/patient';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-chat-list',
@@ -52,11 +52,10 @@ export class ChatListComponent implements OnInit {
   // Recibe el id del usuario elegido para abrir un chat
   getUser() {
     this.chatService.getUser()
-    .subscribe((messages) => {
+    .subscribe((to_user_id) => {
       this.isPatient = this.chatService.isPatient;
-      let user_id = this.chatService.to_user_id;
+      let user_id = to_user_id;
       this.avatar = true;
-      this.messages = messages
       if (!this.isPatient) {
         this.openChatMedic(user_id);
       } else {

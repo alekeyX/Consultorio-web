@@ -18,7 +18,7 @@ export class ChatUserListComponent implements OnInit {
   medics: Medic[] = [];
   patients: Patient[] = [];
   // isPatient: boolean = false;
-  typeUser: boolean = true;
+  // typeUser: boolean = true;
 
   constructor(
     private medicService: MedicService,
@@ -62,9 +62,9 @@ export class ChatUserListComponent implements OnInit {
     this.chatService.setUsers(to_user_id, patient_medic_id, medic_id, patientSelected);
   }
 
-  modelChangeUser(changeUser) {
-    this.typeUser = changeUser;
-  }
+  // modelChangeUser(changeUser) {
+  //   this.typeUser = changeUser;
+  // }
 
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;

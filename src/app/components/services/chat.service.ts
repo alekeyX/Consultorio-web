@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import * as io from 'socket.io-client';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Message } from "../models/Message";
 
 @Injectable({
   providedIn: 'root'
@@ -13,24 +10,27 @@ export class ChatService {
   private url = 'http://localhost:5000';
   private socket;
   isPatient: boolean;
-  to_user_id: string = '';
 
-  constructor(private httpClient: HttpClient) {
+  constructor() {
     this.socket = io.connect(this.url);
   }
 
   // Recibir id's de usuario para abrir chat
-  setUsers(to_user_id, patient_medic_id, medic_id, patientSelected) {
+  setUsers(to_user_id, patient_id, medic_id, patientSelected) {
     this.isPatient = patientSelected;
-    this.to_user_id = to_user_id;
-    this.socket.emit('open-chat', patient_medic_id, medic_id);
+    this.socket.emit('open-chat', to_user_id);
+    let data = {
+      'patient_id': patient_id,
+      'medic_id': medic_id
+    }
+    this.socket.emit('get-message', data)
   }
 
   // Devolver arrays de mensajes de la bd de los usuarios de un chat
   getUser = () => {
     return Observable.create((observer) => {
-      this.socket.on('open-chat', (messages) => {
-          observer.next(messages);
+      this.socket.on('open-chat', (to_user_id) => {
+          observer.next(to_user_id);
       });
     });
   }
@@ -44,18 +44,10 @@ export class ChatService {
   public getMessages = () => {
       return Observable.create((observer) => {
           this.socket.on('new-message', (message) => {
-              observer.next(message);
+              observer.next(message);              
           });
       });
   }
-
-  // Devolver los mensajes segun los usuarios
-  // getMsg(id): Observable<Message[]> {
-  //   return this.httpClient.get<Message[]>('http://localhost:4000/api' +'/chat/' + id)
-  //   .pipe(
-  //     catchError(this.errorHandler)
-  //   );
-  // }
 
   errorHandler(error) {
     let errorMessage = '';

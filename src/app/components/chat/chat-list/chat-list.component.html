@@ -26,13 +26,8 @@
         </div>
     </div>
     <!-- Mostrar los mensajes del chat -->
-    <div class="overflow-auto" id="messages" #scrollMe>
+    <div class="overflow-auto animated fadeIn" id="messages" #scrollMe>
         <div class="p-3">
-            <!-- <div *ngFor="let message of messages" class="text-wrap bg-info rounded w-75 p-2 mb-1">
-                <span class="text-white">
-                    {{message.msg}}
-                </span>
-            </div> -->
             <li [ngClass]="{'d-flex align-items-end flex-column': message.from == currentUser._id}" class="chat"
                 *ngFor="let message of messages">
                 <div class="text-wrap bg-info rounded w-75 p-2 mb-1">
