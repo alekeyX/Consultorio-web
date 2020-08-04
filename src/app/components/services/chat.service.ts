@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Message } from '../models/Message';
 
 @Injectable({
   providedIn: 'root'
@@ -9,46 +13,51 @@ export class ChatService {
 
   private url = 'http://localhost:5000';
   private socket;
-  isPatient: boolean;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.socket = io.connect(this.url);
   }
 
-  // Recibir id's de usuario para abrir chat
-  setUsers(to_user_id, patient_id, medic_id, patientSelected) {
-    this.isPatient = patientSelected;
-    this.socket.emit('open-chat', to_user_id);
-    let data = {
-      'patient_id': patient_id,
-      'medic_id': medic_id
-    }
-    this.socket.emit('get-message', data)
+  public joinRoom(room) {
+    this.socket.emit('joinRoom', room);
   }
 
-  // Devolver arrays de mensajes de la bd de los usuarios de un chat
-  getUser = () => {
-    return Observable.create((observer) => {
-      this.socket.on('open-chat', (to_user_id) => {
-          observer.next(to_user_id);
-      });
-    });
+  public leaveRoom(room) {
+    this.socket.emit('leaveRoom', room);
   }
 
   // Enviar mensaje
-  public sendMessage(message, isPatient) {
-    this.socket.emit('new-message', message, isPatient);
+  public sendMessage(message, room) {
+    this.socket.emit('new-message', message, room);
   }
 
   // Recibir los mensajes
   public getMessages = () => {
       return Observable.create((observer) => {
-          this.socket.on('new-message', (message) => {
-              observer.next(message);              
+          this.socket.on('new-message', (messages) => {
+            observer.next(messages);              
           });
       });
   }
 
+  public disconnect() {
+    this.socket.disconnect();
+  }
+
+  getAll(to_id, from_id): Observable<Message[]> {
+    return this.httpClient.get<Message[]>(environment.apiUrl + '/chat/' + to_id + '/' + from_id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  getAll2(to_id, from_id): Observable<Message[]> {
+    return this.httpClient.get<Message[]>(environment.apiUrl + '/chat/' + from_id + '/' + to_id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+  
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

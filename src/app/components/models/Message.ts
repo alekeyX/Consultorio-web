@@ -1,6 +1,7 @@
 export class Message {
     _id: string;
-    to: string;
     from: string;
+    medic_id: string;
+    patient_id: string;
     msg: string;
 }
