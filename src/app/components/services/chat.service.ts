@@ -18,6 +18,10 @@ export class ChatService {
     this.socket = io.connect(this.url);
   }
 
+  public connect() {
+    this.socket = io.connect(this.url);
+  }
+
   public joinRoom(room) {
     this.socket.emit('joinRoom', room);
   }

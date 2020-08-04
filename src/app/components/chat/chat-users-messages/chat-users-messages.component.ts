@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { Medic } from '../../models/medic';
 import { Patient } from '../../models/patient';
 import { MedicService } from '../../services/medic.service';
@@ -13,7 +13,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: './chat-users-messages.component.html',
   styleUrls: ['./chat-users-messages.component.css']
 })
-export class ChatUsersMessagesComponent implements OnInit {
+export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
 
   currentUser: any;
   medics: Medic[] = [];
@@ -40,6 +40,7 @@ export class ChatUsersMessagesComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.chatService.connect();
     this.getMedics();
     this.getPatients();
     this.scrollToBottom();
@@ -158,16 +159,20 @@ export class ChatUsersMessagesComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Medic;
   }
 
-    // Mantener el scroll siempre abajo 
-    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  // Mantener el scroll siempre abajo 
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-    ngAfterViewChecked() {        
-      this.scrollToBottom();        
-    } 
-  
-    scrollToBottom(): void {
-      try {
-          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-      } catch(err) { }                 
-    }
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  } 
+
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+  }
+
+  ngOnDestroy() {
+    this.chatService.disconnect();
+  }
 }
