@@ -26,6 +26,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { JwtInterceptor } from './components/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './components/helpers/error.interceptor';
 import { ChatModule } from './components/chat/chat.module';
+import { ChatbotComponent } from './components/chat/chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ChatModule } from './components/chat/chat.module';
     NosotrosComponent,
     ServiciosComponent,
     ContactoComponent,
+    ChatbotComponent
   ],
   imports: [
     BrowserModule,
