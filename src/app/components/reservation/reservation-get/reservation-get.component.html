@@ -12,50 +12,83 @@
         </div>
 
         <ng-template #main_content>
-            <div class="d-md-flex">
-                <div class="col-md-4 col-lg-3 my-3">
-                    <label for="fecha">Filtrar por fecha</label>
-                    <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
-                        <option value=""></option>
-                        <option *ngFor="let date of filterDates">{{date}}</option>
-                    </select>
+            <div class="d-md-flex justify-content-between align-items-center">
+                <div class="d-md-flex w-75">
+                    <div class="col-md-4 col-lg-3 my-3">
+                        <label for="fecha">Filtrar por fecha</label>
+                        <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
+                            <option value=""> Todos</option>
+                            <option *ngFor="let date of filterDates">{{date}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-lg-3 my-3" *ngIf="isAdmin">
+                        <label for="medico">Filtrar por médico</label>
+                        <select class="custom-select" [(ngModel)]="filterReservationByMedic" id="medico">
+                            <option value="">Todos</option>
+                            <option value="{{medic._id}}" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-4 col-lg-3 my-3" *ngIf="isAdmin">
-                    <label for="medico">Filtrar por médico</label>
-                    <select class="custom-select" [(ngModel)]="filterReservationByMedic" id="medico">
-                        <option value=""></option>
-                        <option value="{{medic._id}}" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
-                    </select>
+                <div>
+                    <button class="btn bg-aqua text-white" (click)="allReservations = !allReservations">
+                        <div *ngIf="allReservations">
+                            Mostrar reservas activas
+                        </div>
+                        <div *ngIf="!allReservations">
+                            Mostrar todas las reservas
+                        </div>
+                    </button>
                 </div>
             </div>
             <!-- Mensaje si no hay datos -->
             <h2 *ngIf="reservations.length == 0" class="no-data text-center text-aqua-dark">No existen reservas añadidas!</h2>
             
             <!--Lista de reservas -->
-            <table class="table table-sm table-hover" *ngIf="reservations.length > 0">
-                <thead class="bg-aqua text-white">
-                <tr>
-                    <th scope="col" class="text-center orderBy" (click)="orderBy('date')">Fecha</th>
-                    <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora</th>
-                    <th scope="col" class="text-center orderBy" (click)="orderBy('patient_id')">Paciente</th>
-                    <th scope="col" class="text-center">Estado</th>
-                    <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
-                </tr>
-                </thead>
-                <tbody class="overflow-auto">
-                <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | filterReservationByMedic:filterReservationByMedic | orderBy:order:asc ; let i = index">
-                    <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
-                    <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
-                    <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.patient_id}}</td>
-                    <td *ngIf="reserva.enable" class="text-center">Activo</td>
-                    <td *ngIf="!reserva.enable" class="text-center">Inactivo</td>
-                    <td class="text-center" *ngIf="isAdmin || isMedic">
-                    <a [routerLink]="['/reservation/edit', reserva._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
-                    <a (click)="removeReservation(reserva, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="overflow-auto" id="lista">
+                <table class="table table-sm table-hover" *ngIf="reservations.length > 0">
+                    <thead class="bg-aqua text-white fixed">
+                    <tr>
+                        <th scope="col" class="text-center orderBy" (click)="orderBy('date')">Fecha</th>
+                        <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora</th>
+                        <th scope="col" class="text-center orderBy" (click)="orderBy('medic_id')" *ngIf="isAdmin">Médico</th>
+                        <th scope="col" class="text-center orderBy" (click)="orderBy('patient_id')">Paciente</th>
+                        <th scope="col" class="text-center">Estado</th>
+                        <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="!allReservations; else all_reservation">
+                    <tr scope="row" *ngFor="let reserva of reservationsActive | filterReservation:filterReservation | filterReservationByMedic:filterReservationByMedic | orderBy:order:asc ; let i = index">
+                        <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
+                        <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
+                        <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="isAdmin">{{reserva.medic_id.firstName}}</td>
+                        <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.patient_id}}</td>
+                        <td *ngIf="reserva.enable" class="text-center">Activo</td>
+                        <td *ngIf="!reserva.enable" class="text-center">Inactivo</td>
+                        <td class="text-center" *ngIf="isAdmin || isMedic">
+                        <a [routerLink]="['/reservation/edit', reserva._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
+                        <a (click)="removeReservation(reserva, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                    <ng-template #all_reservation>
+                        <tbody *ngIf="allReservations; else all_reservation">
+                            <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | filterReservationByMedic:filterReservationByMedic | orderBy:order:asc ; let i = index">
+                                <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
+                                <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
+                                <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="isAdmin">{{reserva.medic_id.firstName}}</td>
+                                <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.patient_id}}</td>
+                                <td *ngIf="reserva.enable" class="text-center">Activo</td>
+                                <td *ngIf="!reserva.enable" class="text-center">Inactivo</td>
+                                <td class="text-center" *ngIf="isAdmin || isMedic">
+                                <a [routerLink]="['/reservation/edit', reserva._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
+                                <a (click)="removeReservation(reserva, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                </table>
+            </div>
         </ng-template>
     </div>
 </div>
