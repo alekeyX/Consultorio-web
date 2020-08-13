@@ -30,6 +30,9 @@ export class PatientGetComponent implements OnInit {
     this.getPatients();
   }
 
+  // Obtener los registros de los pacientes
+  // Si el usuario es admin obtendra todos los registros
+  // Si el usuario es medico obtentra solo los registros de sus pacientes
   getPatients() {
     setInterval(() => {this.loading = true; }, 800);
     if (this.currentUser.role === Role.Admin) {
@@ -43,18 +46,21 @@ export class PatientGetComponent implements OnInit {
     }
   }
 
+  // Eliminar el registro de un paciente
   removePatient(patient, index) {
-    if (window.confirm('Esta seguro?')) {
+    if (window.confirm('¿Esta seguro que quiere eliminar el registro del médico?')) {
         this.patientService.delete(patient._id).subscribe((data) => {
           this.patients.splice(index, 1);
         });
     }
   }
 
+  // Navegar al perfil de un paciente por su id
   selectedPatient(id: string) {
     this.router.navigate(['/patient/', id]);
   }
 
+  // cambiar orden de la lista de forma ascendente o descendente
   orderBy(order: string) {
     this.asc = !this.asc;
     this.order = order;

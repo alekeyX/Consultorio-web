@@ -15,7 +15,6 @@ export class PatientProfileComponent implements OnInit {
 
   currentUser: any;
   patient: Patient;
-  id: string;
   loading = false;
   avatar = true;
 
@@ -31,22 +30,27 @@ export class PatientProfileComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.loading = true;
     this.activatedRoute.params.subscribe(params => {
-      this.id = params.id;
-      this.patientService.getById(this.id)
-        .subscribe(
-          res => {
-            this.patient = res;
-            if ( this.patient.imagePath === 'none') {
-              this.avatar = false;
-            }
-          },
-          err => console.log(err)
-        );
+      this.getPatient(params.id)
     });
   }
 
+  // Obtener los datos de un paciente
+  getPatient(id: string) {
+    this.patientService.getById(id)
+    .subscribe(
+      res => {
+        this.patient = res;
+        if ( this.patient.imagePath === 'none') {
+          this.avatar = false;
+        }
+      },
+      err => console.log(err)
+    );
+  }
+
+  // Eliminar registro del paciente 
   deletePatient(id: string) {
-    if (window.confirm('Esta seguro?')) {
+    if (window.confirm('¿Esta seguro que quiere eliminar el registro del paciente?')) {
       this.patientService.delete(id)
         .subscribe(res => {
           this.router.navigate(['/patient']);

@@ -1,4 +1,4 @@
-<div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
+<div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
   <div class="card-body">
 
     <div class="d-md-flex justify-content-between align-items-center mb-1">
@@ -27,27 +27,29 @@
       <h2 *ngIf="medics.length == 0" class="no-data text-center text-aqua-dark">No existen médicos añadidos</h2>
       
       <!-- Lista de medicos -->
-      <table class="table table-sm table-hover" *ngIf="medics.length > 0">
-        <thead class="bg-aqua text-white">
-          <tr>
-            <th scope="col" class="orderBy" (click)="orderBy('username')">Nombre</th>
-            <th scope="col" class="orderBy" (click)="orderBy('specialty')">Especialidad</th>
-            <th scope="col" >Teléfono</th>
-            <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
-          </tr>
-        </thead>
-        <tbody class="overflow-auto">
-          <tr *ngFor="let medic of medics | filter:filterMedic | orderBy:order:asc; let i = index ">
-            <td scope="col" (click)="selectedMedic(medic._id)">{{medic.username}}</td>
-            <td scope="col" (click)="selectedMedic(medic._id)">{{medic.specialty}}</td>
-            <td scope="col" (click)="selectedMedic(medic._id)">{{medic.phone}}</td>
-            <td scope="col" class="text-center" *ngIf="isAdmin">
-              <a [routerLink]="['/medic/update', medic._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
-              <a (click)="removeMedic(medic, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive overflow-auto">
+        <table class="table table-sm table-hover" *ngIf="medics.length > 0">
+          <thead class="bg-aqua text-white">
+            <tr>
+              <th scope="col" class="orderBy" (click)="orderBy('username')">Nombre</th>
+              <th scope="col" class="orderBy" (click)="orderBy('specialty')">Especialidad</th>
+              <th scope="col" >Teléfono</th>
+              <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let medic of medics | filter:filterMedic | orderBy:order:asc; let i = index ">
+              <td scope="col" (click)="selectedMedic(medic._id)">{{medic.firstName}} {{medic.lastName}}</td>
+              <td scope="col" (click)="selectedMedic(medic._id)">{{medic.specialty}}</td>
+              <td scope="col" (click)="selectedMedic(medic._id)">{{medic.phone}}</td>
+              <td scope="col" class="text-center" *ngIf="isAdmin">
+                <a [routerLink]="['/medic/update', medic._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
+                <a (click)="removeMedic(medic, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </ng-template>
   </div>
 </div>

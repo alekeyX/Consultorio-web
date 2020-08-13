@@ -7,7 +7,7 @@ export interface Patient {
     firstName: string;
     lastName: string;
     ci: number;
-    age: number;
+    age?: string;
     role: Role;
     email?: string;
     genero?: string;
@@ -15,7 +15,7 @@ export interface Patient {
     maritalStatus?: string;
     ocupation?: string;
     placeBirth?: string;
-    address: string;
+    address?: string;
     phone?: string;
     medic_id: string;
     imagePath?: string;

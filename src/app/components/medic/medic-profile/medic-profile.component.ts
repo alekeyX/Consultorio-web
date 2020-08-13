@@ -52,7 +52,7 @@ export class MedicProfileComponent implements OnInit {
 
   // Eliminar el registro del medico
   deleteMedic(id: string) {
-    if (window.confirm('Esta seguro?')) {
+    if (window.confirm('¿Esta seguro que quiere eliminar el registro del médico?')) {
       this.medicService.delete(id)
         .subscribe(res => {
           console.log(res);

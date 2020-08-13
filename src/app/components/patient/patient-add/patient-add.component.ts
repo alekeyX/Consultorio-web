@@ -11,11 +11,13 @@ import { Patient } from '../../models/patient';
   styleUrls: ['./patient-add.component.css']
 })
 export class PatientAddComponent implements OnInit {
+
   angForm: FormGroup;
   currentUser: any;
   submitted = false;
   error: string;
   image: string;
+  generos = ['Masculino', 'Femenino', 'Otro'];
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +33,7 @@ export class PatientAddComponent implements OnInit {
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
+  // Creacion de formulario angForm
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
@@ -39,8 +42,7 @@ export class PatientAddComponent implements OnInit {
       lastName: ['', Validators.required],
       age: [''],
       role: ['Patient'],
-      // // email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
-      email: ['', Validators.required ],
+      email: [''],
       genero: [''],
       ethnicity: [''],
       maritalStatus: [''],
@@ -72,11 +74,13 @@ export class PatientAddComponent implements OnInit {
     }
   }
 
+  // Envio de formulario
   submitForm() {
     this.submitted = true;
     if (!this.angForm.valid) {
       return false;
     } else {
+      // Creacion de formData con los valores de angForm
       const formData: any = new FormData();
       formData.append('username', this.angForm.get('username').value);
       formData.append('password', this.angForm.get('ci').value);
@@ -95,6 +99,9 @@ export class PatientAddComponent implements OnInit {
       formData.append('phone', this.angForm.get('phone').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
       formData.append('medic_id', this.currentUser._id);
+      console.log(this.angForm.value);
+      
+      // Envio del formData al servicio 
       this.patientService.create(formData).subscribe(res => {
         this.router.navigate(['patient']);
       }, (error) => {

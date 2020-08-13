@@ -41,7 +41,7 @@ export class MedicAddComponent implements OnInit {
       password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      role: [''],
+      role: ['', Validators.required],
       email: ['', Validators.required ],
       genero: [''],
       address: [''],

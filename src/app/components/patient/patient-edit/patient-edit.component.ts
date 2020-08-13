@@ -11,6 +11,7 @@ import { Patient } from '../../models/patient';
   styleUrls: ['./patient-edit.component.css']
 })
 export class PatientEditComponent implements OnInit {
+
   submitted = false;
   angForm: FormGroup;
   patient: Patient;
@@ -18,6 +19,7 @@ export class PatientEditComponent implements OnInit {
   currentUser: Patient;
   error: string;
   image: string;
+  generos = ['Masculino', 'Femenino', 'Otro'];
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +37,8 @@ export class PatientEditComponent implements OnInit {
     this.createForm();
   }
 
-  getPatient(id) {
+  // Obtener los datos de un paciente por el id
+  getPatient(id: string) {
     this.patientService.getById(id).subscribe(data => {
       this.angForm = this.fb.group({
           username: [data.username, Validators.required],
@@ -44,8 +47,7 @@ export class PatientEditComponent implements OnInit {
           lastName: [data.lastName, Validators.required],
           age: [data.age],
           role: ['Patient'],
-          // // email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
-          email: [data.email, Validators.required ],
+          email: [data.email ],
           genero: [data.genero],
           ethnicity: [data.ethnicity],
           maritalStatus: [data.maritalStatus],
@@ -53,13 +55,13 @@ export class PatientEditComponent implements OnInit {
           placeBirth: [data.placeBirth],
           address: [data.address],
           phone: [data.phone, Validators.pattern('^[0-9]+$')],
-          // medic: [this.currentUser._id],
-          medic_id: ['5eb58bd89b6f502ca023dc6b'],
+          medic_id: [data.medic_id],
           imagePath: [data.imagePath],
         });
     });
   }
 
+  // Crear formulario
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
@@ -68,8 +70,7 @@ export class PatientEditComponent implements OnInit {
       lastName: ['', Validators.required],
       age: [''],
       role: ['Patient'],
-      // // email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
-      email: ['', Validators.required ],
+      email: [''],
       genero: [''],
       ethnicity: [''],
       maritalStatus: [''],
@@ -77,13 +78,12 @@ export class PatientEditComponent implements OnInit {
       placeBirth: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      // medic: [this.currentUser._id],
-      medic_id: ['5eb58bd89b6f502ca023dc6b'],
+      medic_id: [''],
       imagePath: [''],
     });
   }
 
-  // mostrar imagen elegida
+  // mostrar imagen
   onFileChange(event) {
     const reader = new FileReader();
     if (event.target.files.length > 0) {
@@ -103,6 +103,7 @@ export class PatientEditComponent implements OnInit {
     }
   }
 
+  // mandar formulario
   submitForm() {
     this.submitted = true;
     if (!this.angForm.valid) {
@@ -127,12 +128,12 @@ export class PatientEditComponent implements OnInit {
         formData.append('phone', this.angForm.get('phone').value);
         formData.append('medic_id', this.angForm.get('medic_id').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
-
+        
+        // Mandar el id y el formData al servicio para actualizar los datos
         const id = this.route.snapshot.paramMap.get('id');
         this.patientService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/patient']);
-            console.log('Contenido actualizado exitosamente!');
           }, (error) => {
             console.log(error);
           });

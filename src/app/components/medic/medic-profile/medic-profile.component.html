@@ -1,17 +1,19 @@
-<div *ngIf="!medic; else main_content" class="container">
-    <div class="row">
-        <div class="mx-auto d-flex align-items-center">
-            <h1 class="text-aqua-dark mr-2">Cargando...</h1>
-            <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
-        </div>
-    </div>
-</div>
+<div class="card bg-white rounded-lg shadow mb-2 animated fadeIn">
+    <div class="card-body">
+        <h1 class="text-aqua-dark mb-3">Perfil Médico</h1>
 
-<ng-template #main_content>
-    <div class="card rounded bg-white rounded-lg shadow mb-5 animated fadeIn">
-        <div class="card-body">
-            <h1 class="text-aqua-dark mb-3">Perfil Médico</h1>
-            <!-- Informacion del medico -->
+        <!-- Mesaje de cargando -->
+        <div *ngIf="!medic; else main_content" class="container">
+            <div class="row">
+                <div class="mx-auto d-flex align-items-center">
+                    <h1 class="text-aqua-dark mr-2">Cargando...</h1>
+                    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informacion del medico -->
+        <ng-template #main_content>
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-center">
                     <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
@@ -76,6 +78,7 @@
                     Eliminar
                 </button>
             </div>
-        </div>
+        </ng-template>
     </div>
-</ng-template>
+</div>
+        

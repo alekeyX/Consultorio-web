@@ -1,12 +1,19 @@
-<div *ngIf="!patient; else main_content">
-    <h1 class="text-aqua-dark">Cargando...</h1>
-    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
-</div>
+<div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
+    <div class="card-body">
+        <h1 class="text-aqua-dark mb-3">Perfil Paciente</h1>
+        
+        <!-- Mensaje de cargando.. -->
+        <div *ngIf="!patient; else main_content" class="container">
+            <div class="d-md-flex p-2">
+                <div class="mx-auto d-flex align-items-center">
+                    <h1 class="text-aqua-dark mr-2">Cargando...</h1>
+                    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+                </div>
+            </div>
+        </div>
 
-<ng-template #main_content>
-    <div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
-        <div class="card-body">
-            <h1 class="text-aqua-dark mb-3">Perfil Paciente</h1>
+        <!-- Informacion del paciente -->
+        <ng-template #main_content>
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-center">
                     <img [src]="'http://localhost:4000/' + patient.imagePath" 
@@ -14,59 +21,85 @@
                     <i class="fas fa-user-circle fa-10x text-aqua-dark" *ngIf="!avatar"></i>
                 </div>
 
-                <div class="col-md-8 mt-3 mt-md-0">
-                    <div class="row" *ngIf="isAdmin || isMedic">
-                        <strong class="col-6 col-md-5 col-lg-5">Código Paciente:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.username }}</div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Nombre:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.firstName }}  {{ patient.lastName }}</div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Carnet:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.ci }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Género:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.genero }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Edad:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.age }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Correo:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.email }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Teléfono:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.phone }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Étnia:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.ethnicity }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Estado Civil:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.maritalStatus }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Ocupación:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.ocupation }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Lugar de Nacimiento:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.placeBirth }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-6 col-md-5 col-lg-5">Dirección:</strong>
-                        <div class="col-6 col-md-7 col-lg-7">{{ patient.address }} </div>
+                <div class="col-12 col-md-8 d-flex justify-content-center">
+                    <div class="col-12 col-md-12 col-lg-11 mt-3 mt-md-0">
+                        <div class="card" *ngIf="isAdmin || isMedic">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Código Paciente:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.username }}</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Nombre:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.firstName }}  {{ patient.lastName }}</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Carnet:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.ci }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Género:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.genero }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Edad:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.age }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Correo:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.email }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Teléfono:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.phone }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Étnia:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.ethnicity }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Estado Civil:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.maritalStatus }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Ocupación:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.ocupation }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Lugar de Nacimiento:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.placeBirth }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5 col-lg-5">Dirección:</strong>
+                                <div class="col-12 col-md-7 col-lg-7">{{ patient.address }} </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="container">
-                <div class="mt-4 row d-md-flex justify-content-sm-between">
+                <div class="mt-4 d-md-flex p-2 d-md-flex justify-content-sm-between">
                     <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]">
                         Historial Clínico
                     </button>
@@ -80,6 +113,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </ng-template>
     </div>
-</ng-template>
+</div>
