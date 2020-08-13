@@ -46,10 +46,10 @@ export class LoginMedicComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-  // para aquí si el formulario no es válido
+    // para aquí si el formulario no es válido
     if (this.loginForm.invalid) {
-    return;
-  }
+      return;
+    }
 
     this.loading = true;
     this.authenticationService.loginMedic(this.f.username.value, this.f.password.value)

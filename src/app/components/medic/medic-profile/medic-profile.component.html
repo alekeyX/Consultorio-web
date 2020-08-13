@@ -1,12 +1,17 @@
-<div *ngIf="!medic; else main_content">
-    <h1 class="text-aqua-dark">Cargando...</h1>
-    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+<div *ngIf="!medic; else main_content" class="container">
+    <div class="row">
+        <div class="mx-auto d-flex align-items-center">
+            <h1 class="text-aqua-dark mr-2">Cargando...</h1>
+            <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+        </div>
+    </div>
 </div>
 
 <ng-template #main_content>
     <div class="card rounded bg-white rounded-lg shadow mb-5 animated fadeIn">
         <div class="card-body">
             <h1 class="text-aqua-dark mb-3">Perfil Médico</h1>
+            <!-- Informacion del medico -->
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-center">
                     <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
@@ -14,37 +19,55 @@
                     <i class="fas fa-user-circle fa-10x text-aqua-dark" *ngIf="!avatar"></i>
                 </div>
                 
-                <div class="col-md-8 mt-3 mt-md-0 ">
-                    <div class="row" *ngIf="isAdmin">
-                        <strong class="col-5 col-md-4">Usuario:</strong>
-                        <div class="col-7 col-md-6">{{ medic.username }}</div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-5 col-md-4">Nombre:</strong>
-                        <div class="col-7 col-md-6">{{ medic.firstName }}  {{ medic.lastName }}</div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-5 col-md-4">Especialidad:</strong>
-                        <div class="col-7 col-md-6">{{ medic.specialty }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-5 col-md-4">Género:</strong>
-                        <div class="col-7 col-md-6">{{ medic.genero }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-5 col-md-4">Correo:</strong>
-                        <div class="col-7 col-md-6">{{ medic.email }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-5 col-md-4">Teléfono:</strong>
-                        <div class="col-7 col-md-6">{{ medic.phone }} </div>
-                    </div>
-                    <div class="row">
-                        <strong class="col-5 col-md-4">Dirección:</strong>
-                        <div class="col-7 col-md-6">{{ medic.address }} </div>
+                <div class="col-12 col-md-8 d-flex justify-content-center">
+                    <div class="col-12 col-md-12 col-lg-11 mt-3 mt-md-0">
+                        <div class="card" *ngIf="isAdmin">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5">Usuario:</strong>
+                                <div class="col-12 col-md-7">{{ medic.username }}</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5">Nombre:</strong>
+                                <div class="col-12 col-md-7">{{ medic.firstName }}  {{ medic.lastName }}</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5">Especialidad:</strong>
+                                <div class="col-12 col-md-7">{{ medic.specialty }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5">Género:</strong>
+                                <div class="col-12 col-md-7">{{ medic.genero }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5">Correo:</strong>
+                                <div class="col-12 col-md-7">{{ medic.email }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5">Teléfono:</strong>
+                                <div class="col-12 col-md-7">{{ medic.phone }} </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="d-md-flex p-2">
+                                <strong class="col-12 col-md-5">Dirección:</strong>
+                                <div class="col-12 col-md-7">{{ medic.address }} </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Botones para editar y eliminar -->
             <div class="mt-4 d-md-flex justify-content-md-end" *ngIf="isAdmin">
                 <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]">
                     Editar

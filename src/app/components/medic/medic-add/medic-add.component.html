@@ -6,7 +6,6 @@
       
       <div class="row">
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Nombre de Usuario</label> -->
           <input type="text" class="form-control" [ngClass]="{'is-invalid': angForm.controls['username'].errors?.required && angForm.controls['username'].touched}"
           formControlName="username"  placeholder="Nombre de Usuario*"
             #username/>
@@ -19,7 +18,6 @@
         </div>
         
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Contraseña</label> -->
           <input type="password" class="form-control" [ngClass]="{'is-invalid': angForm.controls['password'].errors?.required && angForm.controls['password'].touched}"
           formControlName="password" placeholder="Contraseña*"
             #password/>
@@ -34,7 +32,6 @@
 
       <div class="row">
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Nombre</label> -->
           <input type="text" class="form-control"  
           [ngClass]="{'is-invalid': angForm.controls['firstName'].errors?.required && angForm.controls['firstName'].touched}"
           formControlName="firstName" placeholder="Nombres*"
@@ -48,7 +45,6 @@
         </div>
         
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Apellidos</label> -->
           <input type="text" class="form-control"  
           [ngClass]="{'is-invalid': angForm.controls['lastName'].errors?.required && angForm.controls['lastName'].touched}"
           formControlName="lastName" placeholder="Apellidos*"
@@ -64,7 +60,6 @@
 
       <div class="row">
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Email</label> -->
           <input type="email" class="form-control"  
           [ngClass]="{'is-invalid': angForm.controls['email'].errors?.required && angForm.controls['email'].touched}"
           formControlName="email" placeholder="Correo Electrónico*"
@@ -78,21 +73,17 @@
         </div>
 
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Especialidad</label> -->
           <input type="text" class="form-control" 
           formControlName="specialty" placeholder="Especialidad"
             #specialty/>
         </div>
         
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Teléfono</label> -->
-          <input type="text" class="form-control" 
+          <input type="number" class="form-control" 
           formControlName="phone" placeholder="Teléfono"
           #phone/>
             <div *ngIf="angForm.controls['phone'].invalid && (angForm.controls['phone'].dirty || angForm.controls['phone'].touched)" class="text-danger font-weight-light">
-              <!-- <div *ngIf="angForm.controls['phone'].errors.required"> -->
                 Deben ser solo digitos
-              <!-- </div> -->
             </div>
         </div>
       </div>
@@ -100,14 +91,12 @@
 
       <div class="row">
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Dirección</label> -->
           <input type="text" class="form-control" 
           formControlName="address" placeholder="Dirección"
             #address/>
         </div>
 
         <div class="form-group col-lg">
-          <!-- <label class="col-lg">Género</label> -->
           <select class="custom-select" formControlName="genero" #genero>
             <option value="" disabled>Seleccione género</option>
             <option *ngFor="let gen of generos" [ngValue]="gen">{{gen}}</option>
@@ -126,14 +115,14 @@
 
 
       <div>
-        <!-- <label class="col-lg" for="file">Foto</label> -->
         <div class="custom-file col-lg-4 form-group">
-          <input type="file"  id="file" #fileInput  lang="es" 
+          <label class="custom-file-label" for="file">Foto de perfil</label>
+          <input type="file" id="file" #fileInput lang="es" class="custom-file-input"
                   FormControlName="imagePath" (change)="onFileChange($event)">
-                  <!-- class="custom-file-input" -->
-          <!-- <label class="custom-file-label" for="inputFile">Seleccionar Archivo</label> -->
         </div>
-        <img [src]="image" *ngIf="image" style="width: 200px; height: 200px;" alt="foto-perfil">
+        <div class="w-100 d-flex justify-content-center">
+          <img [src]="image" *ngIf="image" alt="foto-perfil" id="foto-perfil" class="p-2 mx-auto">
+        </div>
       </div>
 
       <div class="form-group mt-4">
@@ -141,5 +130,6 @@
         [disabled]="angForm.pristine || angForm.invalid">Añadir Médico</button>
       </div>
     </form>
+    <!-- fin formulario para añadir medico -->
   </div>
 </div>

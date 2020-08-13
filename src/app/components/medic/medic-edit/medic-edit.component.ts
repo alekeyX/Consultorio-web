@@ -11,6 +11,7 @@ import { Medic } from '../../models/medic';
   styleUrls: ['./medic-edit.component.css']
 })
 export class MedicEditComponent implements OnInit {
+
   submitted = false;
   angForm: FormGroup;
   medic: Medic;
@@ -33,21 +34,25 @@ export class MedicEditComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    // this.updateMedic();
     const id = this.route.snapshot.paramMap.get('id');
     this.getMedic(id);
     this.createForm();
   }
   
+  // Obtener los datos del médico y ponerlos en el angForm
   getMedic(id: string) {
     this.medicService.getById(id).subscribe(data => {
+      let rol: string;
+      if (data.role === 'Admin') {
+        rol = 'Administrador';
+      } else {
+        rol = 'Médico';
+      }
       this.angForm = this.fb.group({
         username: [data.username, Validators.required],
-        // TODO devolver password
-        // password: data.password
         firstName: [ data.firstName, Validators.required ],
         lastName: [ data.lastName, Validators.required ],
-        role: [ data.role ],
+        role: [ rol ],
         email: [ data.email, Validators.required ],
         genero: [ data.genero ],
         address: [ data.address ],
@@ -57,10 +62,11 @@ export class MedicEditComponent implements OnInit {
       });
     });
   }
+
+  // Creacion del formulario angForm
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
-      // password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       role: [''],
@@ -73,23 +79,7 @@ export class MedicEditComponent implements OnInit {
     });
   }
 
-
-  // updateMedic() {
-  //   this.angForm = this.fb.group({
-  //     username: ['', Validators.required],
-  //     password: ['', Validators.required],
-  //     firstName: ['', Validators.required],
-  //     lastName: ['', Validators.required],
-  //     role: ['Medic'],
-  //     email: ['', Validators.required],
-  //     genero: [''],
-  //     address: [''],
-  //     phone: ['', Validators.pattern('^[0-9]+$')],
-  //     specialty: [''],
-  //     imagePath: [''],
-  //   });
-  // }
-
+  // Cargar archivo de imagen
   onFileChange(event) {
     const reader = new FileReader();
     if (event.target.files.length > 0) {
@@ -109,15 +99,16 @@ export class MedicEditComponent implements OnInit {
     }
   }
 
+  // Enviar formulario
   submitForm() {
     this.submitted = true;
     if (!this.angForm.valid) {
       return false;
     } else {
       if (window.confirm('Esta seguro?')) {
+        // Creacion de formData con los valores de angForm
         const formData: any = new FormData();
         formData.append('username', this.angForm.get('username').value);
-        // formData.append('password', this.angForm.get('password').value);
         formData.append('firstName', this.angForm.get('firstName').value);
         formData.append('lastName', this.angForm.get('lastName').value);
         formData.append('email', this.angForm.get('email').value);
@@ -131,11 +122,11 @@ export class MedicEditComponent implements OnInit {
         } else {
           formData.append('role', 'Medic');
         }
+        // envio de id y formData al servicio para actualizar el registro
         const id = this.route.snapshot.paramMap.get('id');
         this.medicService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/medic']);
-            console.log('Contenido actualizado exitosamente!');
           }, (error) => {
             console.log(error);
           });

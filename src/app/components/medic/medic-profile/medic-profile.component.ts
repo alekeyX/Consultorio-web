@@ -13,10 +13,10 @@ import { Role } from '../../models/role';
   styleUrls: ['./medic-profile.component.css']
 })
 export class MedicProfileComponent implements OnInit {
+
   currentUser: Medic;
   medic: Medic;
   loading = false;
-  id: string;
   avatar = true;
 
   constructor(
@@ -30,21 +30,27 @@ export class MedicProfileComponent implements OnInit {
       this.currentUser = this.authenticationService.currentUserValue;
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
       this.loading = true;
+      // Obtener el id por la direccion url
       this.activatedRoute.params.subscribe(params => {
-        this.id = params.id;
-        this.medicService.getById(this.id)
-          .subscribe(
-            res => {
-              this.medic = res;
-              if ( this.medic.imagePath === 'none') {
-                this.avatar = false;
-              }
-            },
-            err => console.log(err)
-          );
+        this.getMedic(params.id);
       });
   }
 
+  // Obtener un medico por id
+  getMedic(id: string) {
+    this.medicService.getById(id)
+    .subscribe(
+      res => {
+        this.medic = res;
+        if ( this.medic.imagePath === 'none') {
+          this.avatar = false;
+        }
+      },
+      err => console.log(err)
+    );
+  }
+
+  // Eliminar el registro del medico
   deleteMedic(id: string) {
     if (window.confirm('Esta seguro?')) {
       this.medicService.delete(id)

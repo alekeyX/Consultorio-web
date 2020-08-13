@@ -11,6 +11,7 @@ import { Medic } from '../../models/medic';
   styleUrls: ['./medic-add.component.css']
 })
 export class MedicAddComponent implements OnInit {
+  
   angForm: FormGroup;
   currentUser: Medic;
   submitted = false;
@@ -33,6 +34,7 @@ export class MedicAddComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
+  // Creacion del formulario
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
@@ -40,7 +42,6 @@ export class MedicAddComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       role: [''],
-      // email: ['', Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],
       email: ['', Validators.required ],
       genero: [''],
       address: [''],
@@ -50,6 +51,7 @@ export class MedicAddComponent implements OnInit {
     });
   }
 
+  // Cargar archivo de foto
   onFileChange(event) {
     const reader = new FileReader();
     if (event.target.files.length > 0) {
@@ -69,6 +71,7 @@ export class MedicAddComponent implements OnInit {
     }
   }
 
+  // Enviar formulario
   submitForm() {
     this.submitted = true;
     if (!this.angForm.valid) {
@@ -90,6 +93,7 @@ export class MedicAddComponent implements OnInit {
       } else {
         formData.append('role', 'Medic');
       }
+      // Envio del formData al servicio
       this.medicService.create(formData).subscribe(res => {
         this.router.navigate(['medic']);
       }, (error) => {
