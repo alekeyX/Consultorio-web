@@ -3,16 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { AuthGuard } from './components/helpers/auth.guard';
-import { Role } from './components/models/role';
 import { NosotrosComponent } from './components/shared/nosotros/nosotros.component';
 import { ServiciosComponent } from './components/shared/servicios/servicios.component';
 import { ContactoComponent } from './components/shared/contacto/contacto.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
   { path: 'login', component: LoginComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'servicios', component: ServiciosComponent },

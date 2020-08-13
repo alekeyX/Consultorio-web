@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Role } from '../../models/role';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({

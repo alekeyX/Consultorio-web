@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import { first } from 'rxjs/operators';
-
 import { Role } from '../models/role';
-import { User } from '../models/user';
-import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
 
 
@@ -20,21 +16,14 @@ export class HomeComponent {
     username: string;
 
     constructor(
-        private userService: UserService,
         private authenticationService: AuthenticationService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-        // console.log(this.currentUser);
     }
 
     OnInit() {
-        // this.loading = true;
-        // this.userService.getById(this.currentUser._id).pipe(first()).subscribe(user => {
-        //     this.loading = false;
-            // console.log(this.currentUser);
-            // this.userFromApi = user;
-        // });
+
     }
 
     get isAdmin() {

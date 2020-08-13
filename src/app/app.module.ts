@@ -21,7 +21,7 @@ import { MenuComponent } from './components/shared/menu/menu.component';
 import { NosotrosComponent } from './components/shared/nosotros/nosotros.component';
 import { ServiciosComponent } from './components/shared/servicios/servicios.component';
 import { ContactoComponent } from './components/shared/contacto/contacto.component';
-import { AdminComponent } from './components/admin/admin.component';
+
 //  Interceptores
 import { JwtInterceptor } from './components/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './components/helpers/error.interceptor';
@@ -35,7 +35,6 @@ import { ChatbotComponent } from './components/chat/chatbot/chatbot.component';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    AdminComponent,
     MenuComponent,
     NosotrosComponent,
     ServiciosComponent,

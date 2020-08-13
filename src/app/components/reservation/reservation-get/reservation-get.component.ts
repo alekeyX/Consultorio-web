@@ -110,7 +110,7 @@ export class ReservationGetComponent implements OnInit {
       let date = new Date(year,month,day);
       let today = new Date();
 
-      if (date > today) {
+      if (date >= today) {
         this.reservationsActive.push(element);
       }
     });
