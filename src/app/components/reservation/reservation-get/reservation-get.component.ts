@@ -13,6 +13,7 @@ import { element } from 'protractor';
   styleUrls: ['./reservation-get.component.css']
 })
 export class ReservationGetComponent implements OnInit {
+  
   currentUser: any;
   reservations: Reservation[] = [];
   reservationsActive: Reservation[] = [];
@@ -92,9 +93,10 @@ export class ReservationGetComponent implements OnInit {
     .map(date => {
       return date = this.reservations.find(element => element.date === date).date.substring(0, 10);
     });
-    return this.filterDates = resultado;
+    return this.filterDates = resultado.reverse();
   }
 
+  // Cambiar el orden ascendente/descendente
   orderBy(order: string) {
     this.asc = !this.asc;
     this.order = order;
@@ -107,7 +109,7 @@ export class ReservationGetComponent implements OnInit {
       month = parseInt(element.date.substring(5,7), 10),
       day = parseInt(element.date.substring(8,10), 10);
       
-      let date = new Date(year,month,day);
+      let date = new Date(year,month-1,day);
       let today = new Date();
 
       if (date >= today) {

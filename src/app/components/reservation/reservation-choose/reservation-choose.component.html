@@ -1,8 +1,9 @@
-<div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
+<div class="card rounded-lg shadow mb-2 bg-white animated fadeIn">
     <div class="card-body">
     <div class="d-md-flex justify-content-between align-items-center">
         <h1 class="text-aqua-dark">Selección de Reservas</h1>
     </div>
+        <!-- Inputs para mostrar lista de reservas -->
         <div class="d-md-flex mx-auto">
             <div class="col-md-4 col-lg-3 my-3">
                 <label for="specialty"><strong>1.</strong> Elegir especialidad</label>
@@ -24,8 +25,10 @@
                 </select>
             </div>
         </div>
-        <div class="container col-md-6 py-5 text-center" *ngIf="!loading; else main_content">
-            <h1 class="text-aqua-dark">Seleccione primero especialidad y médico...</h1>
+
+        <!-- Mensaje -->
+        <div class="container col-md-10 py-5 text-center" *ngIf="!loading; else main_content">
+            <h1 class="text-aqua-dark">Seleccione especialidad y médico...</h1>
         </div>
 
         <ng-template #main_content>
@@ -36,22 +39,32 @@
             <div class="container col-md-8">
                 <table class="table table-sm table-hover" *ngIf="reservaByMedic.length > 0">
                     <thead class="bg-aqua text-white">
-                    <tr>
-                        <th scope="col" class="text-center orderBy" (click)="orderBy('date')">Fecha</th>
-                        <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora</th>
-                        <th scope="col" class="text-center">Disponibilidad</th>
-                    </tr>
+                        <tr>
+                            <th scope="col" class="text-center orderBy" (click)="orderBy('date')">Fecha</th>
+                            <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora</th>
+                            <th scope="col" class="text-center">Disponibilidad</th>
+                        </tr>
                     </thead>
                     <tbody class="overflow-auto">
-                    <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation | orderBy:order:asc ; let i = index">
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.date | slice:0:10}}</td>
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" data-target="#exampleModalCenter">{{reserva.hours}}</td>
-                        <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" 
-                            class="text-center text-white font-weight-bold" [ngClass]="{'text-success': reserva.patient_id===''}"
-                            data-toggle="modal" data-target="#exampleModalCenter">Disponible</td>
-                        <td *ngIf="reserva.patient_id!='' && reserva.enable" class="text-center text-white font-weight-bold" 
-                            [ngClass]="{'text-danger': reserva.patient_id!==''}">Ocupado</td>
-                    </tr>
+                        <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation | orderBy:order:asc ; let i = index">
+                            <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" 
+                                data-toggle="modal" data-target="#modalReserva">
+                                {{reserva.date | slice:0:10}}
+                            </td>
+                            <td (click)="selectReserva(reserva._id)" *ngIf="reserva.enable" class="text-center" 
+                                data-toggle="modal" data-target="#modalReserva">
+                                {{reserva.hours}}
+                            </td>
+                            <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" 
+                                class="text-center text-white font-weight-bold" [ngClass]="{'text-success': reserva.patient_id===''}"
+                                data-toggle="modal" data-target="#modalReserva">
+                                Disponible
+                            </td>
+                            <td *ngIf="reserva.patient_id!='' && reserva.enable" class="text-center text-white font-weight-bold" 
+                                [ngClass]="{'text-danger': reserva.patient_id!==''}">
+                                Ocupado
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -60,9 +73,9 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal para confirmar una reserva -->
 <div>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modalReserva" tabindex="-1" role="dialog" aria-labelledby="modalReservaTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -71,6 +84,8 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+            <!-- Datos de confirmacion para la reserva -->
             <div class="modal-body">
                 <div class="d-flex">
                     <strong class="col-4">Médico:</strong>

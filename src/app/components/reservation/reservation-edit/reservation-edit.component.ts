@@ -7,6 +7,7 @@ import { PatientService } from '../../services/patient.service';
 import { Reservation } from '../../models/reservation';
 import { Medic } from '../../models/medic';
 import { Patient } from '../../models/patient';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-reservation-edit',
@@ -14,14 +15,15 @@ import { Patient } from '../../models/patient';
   styleUrls: ['./reservation-edit.component.css']
 })
 export class ReservationEditComponent implements OnInit {
+
   submitted = false;
   angForm: FormGroup;
   reserva: Reservation;
   currentUser: Medic;
   patients: Patient[];
-  days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
   enable = true;
   error: string;
+  reservaId: string;
 
   constructor(
     private fb: FormBuilder,
@@ -34,12 +36,12 @@ export class ReservationEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
-    const id = this.route.snapshot.paramMap.get('id');
-    this.getReservation(id);
+    this.reservaId = this.route.snapshot.paramMap.get('id');
+    this.getReservation(this.reservaId);
     this.createForm();
-    this.getPatient();
   }
-
+  
+  // Obtener los datos de la reservar y guardarlos en el formulario angForm
   getReservation(id: string) {
     this.reservationService.getById(id).subscribe(data => {
       this.angForm = this.fb.group({
@@ -52,9 +54,11 @@ export class ReservationEditComponent implements OnInit {
         enable: [data.enable],
         medic_id: [data.medic_id]
       });
+      this.getPatient(data);
     });
   }
 
+  // Crear el formulario angForm
   createForm() {
     this.angForm = this.fb.group({
       days: ['', Validators.required],
@@ -69,6 +73,7 @@ export class ReservationEditComponent implements OnInit {
     });
   }
 
+  // Enviar formulario
   submitForm() {
     this.submitted = true;
     this.reserva = this.angForm.value;
@@ -78,16 +83,16 @@ export class ReservationEditComponent implements OnInit {
     } else {
       this.reserva.enable = false;
     }
-    const id = this.route.snapshot.paramMap.get('id');
-    this.reservationService.update(id, this.reserva).subscribe(res => {
+    this.reservationService.update(this.reservaId, this.reserva).subscribe(res => {
       this.router.navigate(['reservation']);
     }, (error) => {
       this.error = error;
     });
   }
 
-  getPatient() {
-    this.patientService.getPatientByMedic(this.currentUser._id)
+  // Obtener lista de pacientes del medico
+  getPatient(reserva: Reservation) {
+    this.patientService.getPatientByMedic(reserva.medic_id)
     .subscribe((data) => {
       this.patients = data;
     });

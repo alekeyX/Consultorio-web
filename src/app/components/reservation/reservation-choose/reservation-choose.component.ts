@@ -12,6 +12,7 @@ import { Medic } from '../../models/medic';
   styleUrls: ['./reservation-choose.component.css']
 })
 export class ReservationChooseComponent implements OnInit {
+
   currentUser: any;
   specialtys: string[] = [];
   specialty: string = '';
@@ -27,6 +28,7 @@ export class ReservationChooseComponent implements OnInit {
   dateSelected: string;
   order: string = '';
   asc: boolean = false;
+  reservationsActive: Reservation[] = [];
 
   constructor(
     private reservationService: ReservationService,
@@ -80,9 +82,25 @@ export class ReservationChooseComponent implements OnInit {
     this.reservationService.getReservByMedic(medic._id)
     .subscribe(data => {
       this.loading = true;
-      this.reservaByMedic = data;
+      this.ReservationsActually(data);
       this.selectDate();
     })
+  }
+
+  // Arreglo de solo reservaciones a partir de la fecha actual
+  ReservationsActually(reservas: Reservation[]) {
+    reservas.forEach(element => {
+      let year = parseInt(element.date.substring(0,4), 10),
+      month = parseInt(element.date.substring(5,7), 10),
+      day = parseInt(element.date.substring(8,10), 10);
+      
+      let date = new Date(year,month-1,day);
+      let today = new Date();
+
+      if (date >= today) {
+        this.reservaByMedic.push(element);
+      }
+    });
   }
 
   // Filtrar resultados por fecha
@@ -94,7 +112,7 @@ export class ReservationChooseComponent implements OnInit {
     return this.reservas = resultado;
   }
 
-  // Seleccion de una reserva disponible
+  // Seleccion de una reserva disponible obteniendo los datos de la reserva y nombre del medico 
   selectReserva(id: string) {
     this.medicName = this.medic.firstName + ' ' + this.medic.lastName;
     this.specialtySelected = this.specialty;
@@ -105,6 +123,7 @@ export class ReservationChooseComponent implements OnInit {
     })
   }
 
+  // Actualizar registro de reserva con el nombre del usuario que elige la reserva
   submit() {
     this.reserv.patient_id = this.currentUser.firstName + ' ' + this.currentUser.lastName;
     this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
@@ -112,6 +131,7 @@ export class ReservationChooseComponent implements OnInit {
     });
   }
 
+  // Cambiar el orden ascendente/descendente
   orderBy(order: string) {
     this.asc = !this.asc;
     this.order = order;

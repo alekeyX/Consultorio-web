@@ -6,7 +6,6 @@ import { ReservationService } from '../../services/reservation.service';
 import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 import { Role } from '../../models/role';
-import { Medic } from '../../models/medic';
 
 @Component({
   selector: 'app-reservation-detail',
@@ -14,6 +13,7 @@ import { Medic } from '../../models/medic';
   styleUrls: ['./reservation-detail.component.css']
 })
 export class ReservationDetailComponent implements OnInit {
+
   currentUser: any;
   reserva: Reservation;
   medic: any = {};
@@ -33,6 +33,7 @@ export class ReservationDetailComponent implements OnInit {
     this.getDetail();
   }
 
+  // Obtener los datos de una reserva por su id
   getDetail() {
     this.loading = true;
     this.activatedRoute.params.subscribe(params => {
@@ -48,6 +49,7 @@ export class ReservationDetailComponent implements OnInit {
     });
   }
 
+  // Obtener los datos del medico por su id
   getMedic() {
     this.medicService.getById(this.reserva.medic_id)
     .subscribe(res => {
@@ -55,11 +57,11 @@ export class ReservationDetailComponent implements OnInit {
     })
   }
 
+  // Eliminar el registro de la reserva
   deleteReserva(id: string) {
-    if (window.confirm('Esta seguro?')) {
+    if (window.confirm('Esta seguro que quiere eliminar la reserva?')) {
       this.reservaService.delete(id)
         .subscribe(res => {
-          console.log(res);
           this.router.navigate(['/reservations']);
         });
       }
