@@ -18,14 +18,17 @@ export class ChatService {
     this.socket = io.connect(this.url);
   }
 
+  // Conectarse al socket
   public connect() {
     this.socket = io.connect(this.url);
   }
 
+  // Unirser a un room
   public joinRoom(room) {
     this.socket.emit('joinRoom', room);
   }
 
+  // Salir de un room
   public leaveRoom(room) {
     this.socket.emit('leaveRoom', room);
   }
@@ -44,10 +47,12 @@ export class ChatService {
       });
   }
 
+  // Desconectarse del socket
   public disconnect() {
     this.socket.disconnect();
   }
 
+  // Obtener los mensajes por id de medico, id de paciente
   getAll(to_id, from_id): Observable<Message[]> {
     return this.httpClient.get<Message[]>(environment.apiUrl + '/chat/' + to_id + '/' + from_id)
     .pipe(
@@ -55,6 +60,7 @@ export class ChatService {
     );
   }
 
+  // Obtener los mensajes por id de paciente, id de medico
   getAll2(to_id, from_id): Observable<Message[]> {
     return this.httpClient.get<Message[]>(environment.apiUrl + '/chat/' + from_id + '/' + to_id)
     .pipe(

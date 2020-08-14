@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { History } from '../models/history';
 import { environment } from '../../../environments/environment';
 
@@ -19,27 +18,31 @@ export class HistoryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  create(history): Observable<History> {
+  // Crear un registro
+  create(history: any): Observable<History> {
     return this.httpClient.post<History>(environment.apiUrl + '/history', history)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getById(id): Observable<History> {
+  // Obtener por id
+  getById(id: string): Observable<History> {
     return this.httpClient.get<History>(environment.apiUrl + '/history/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getHistoryByPatient(id): Observable<History[]> {
+  // Obtener historia por id del paciente
+  getHistoryByPatient(id: string): Observable<History[]> {
     return this.httpClient.get<History[]>(environment.apiUrl + '/histories/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
+  // Obtener todas las historias
   getAll(): Observable<History[]> {
     return this.httpClient.get<History[]>(environment.apiUrl + '/history')
     .pipe(
@@ -47,14 +50,16 @@ export class HistoryService {
     );
   }
 
-  update(id, history): Observable<History> {
+  // Actualizar una historia por su id y un formulario
+  update(id: string, history: any): Observable<History> {
     return this.httpClient.put<History>(environment.apiUrl + '/history/' + id, history)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  delete(id) {
+  // Eliminar una historia por su id
+  delete(id: string) {
     return this.httpClient.delete<History>(environment.apiUrl + '/history/' + id)
     .pipe(
       catchError(this.errorHandler)

@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpEventType, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-
+import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 import { Medic } from '../models/medic';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedicService {
-
-  apiServer = 'http://localhost:4000/api';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -20,48 +18,41 @@ export class MedicService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // Crear medico
-  // create(medic): Observable<any> {
-  //   return this.httpClient.post<any>(this.apiServer + '/medic/create', JSON.stringify(medic), this.httpOptions )
-  //   .pipe(
-  //     catchError(this.errorHandler)
-  //   );
-
-  // }
-  create(medic): Observable<any> {
-    return this.httpClient.post( this.apiServer + '/medic/', medic)
+  // Crear un medico
+  create(medic: any): Observable<Medic> {
+    return this.httpClient.post<Medic>( environment.apiUrl + '/medic/', medic)
     .pipe(
         catchError(this.errorHandler)
     );
-}
+  }
 
   // Encontrar por ID
-  getById(id): any {
-    return this.httpClient.get(this.apiServer + '/medic/' + id)
+  getById(id: string):  Observable<Medic> {
+    return this.httpClient.get<Medic>(environment.apiUrl + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  // Dar todos los medicos
+  // Obtener todos los medicos
   getAll(): Observable<Medic[]> {
-    return this.httpClient.get<Medic[]>(this.apiServer + '/medic')
+    return this.httpClient.get<Medic[]>(environment.apiUrl + '/medic')
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  // Editar medico
-  update(id, medic): Observable<Medic> {
-    return this.httpClient.put<Medic>(this.apiServer + '/medic/' + id, medic)
+  // Editar medico por su id
+  update(id: string, medic: any): Observable<Medic> {
+    return this.httpClient.put<Medic>(environment.apiUrl + '/medic/' + id, medic)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  // Eliminar medico
-  delete(id): Observable<Medic> {
-    return this.httpClient.delete<Medic>(this.apiServer + '/medic/' + id)
+  // Eliminar medico por su id
+  delete(id: string): Observable<Medic> {
+    return this.httpClient.delete<Medic>(environment.apiUrl + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
     );

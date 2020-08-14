@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
-import { Patient } from '../models/patient';
 import { environment } from '../../../environments/environment';
+import { Patient } from '../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +18,7 @@ export class PatientService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // Crear un paciente
   create(patient: any): Observable<Patient> {
     return this.httpClient.post<Patient>(environment.apiUrl + '/patient/', patient)
     .pipe(
@@ -26,6 +26,7 @@ export class PatientService {
     );
   }
 
+  // Obtener por di
   getById(id: string): Observable<Patient> {
     return this.httpClient.get<Patient>(environment.apiUrl + '/patient/' + id)
     .pipe(
@@ -33,6 +34,7 @@ export class PatientService {
     );
   }
 
+  // Obtener pacientes por id de medico
   getPatientByMedic(id: string): Observable<Patient[]> {
     return this.httpClient.get<Patient[]>(environment.apiUrl + '/patients/' + id)
     .pipe(
@@ -40,6 +42,7 @@ export class PatientService {
     );
   }
 
+  // Obtener todos los pacientes
   getAll(): Observable<Patient[]> {
     return this.httpClient.get<Patient[]>(environment.apiUrl + '/patient')
     .pipe(
@@ -47,6 +50,7 @@ export class PatientService {
     );
   }
 
+  // Actualizar un paciente por id
   update(id: string, patient: any): Observable<Patient> {
     return this.httpClient.put<Patient>(environment.apiUrl + '/patient/' + id, patient)
     .pipe(
@@ -54,6 +58,7 @@ export class PatientService {
     );
   }
 
+  // Eliminar un paciente por id
   delete(id: string) {
     return this.httpClient.delete<Patient>(environment.apiUrl + '/patient/' + id)
     .pipe(

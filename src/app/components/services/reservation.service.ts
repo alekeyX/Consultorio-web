@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { environment } from '../../../environments/environment';
 import { Reservation } from '../models/reservation';
 
@@ -19,34 +18,39 @@ export class ReservationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  create(reserva): Observable<Reservation> {
+  // Crear reservas
+  create(reserva: any): Observable<Reservation> {
     return this.httpClient.post<Reservation>(environment.apiUrl + '/reservation', reserva)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getById(id): Observable<Reservation> {
+  // Obtener reserva por id
+  getById(id: string): Observable<Reservation> {
     return this.httpClient.get<Reservation>(environment.apiUrl + '/reservation/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getReservByMedic(id): Observable<Reservation[]> {
+  // Obtener reservas por id del medico
+  getReservByMedic(id: string): Observable<Reservation[]> {
     return this.httpClient.get<Reservation[]>(environment.apiUrl + '/reservations/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  getReservByPatient(id): Observable<Reservation[]> {
+  // Obtener reservas por id del paciente
+  getReservByPatient(id: string): Observable<Reservation[]> {
     return this.httpClient.get<Reservation[]>(environment.apiUrl + '/reservations/patient/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
+  // Obtener todas las reservas
   getAll(): Observable<Reservation[]> {
     return this.httpClient.get<Reservation[]>(environment.apiUrl + '/reservation')
     .pipe(
@@ -54,14 +58,16 @@ export class ReservationService {
     );
   }
 
-  update(id, reservation): Observable<Reservation> {
+  // Actualizar una reserva por id
+  update(id: string, reservation: any): Observable<Reservation> {
     return this.httpClient.put<Reservation>(environment.apiUrl + '/reservation/' + id, reservation)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
-  delete(id) {
+  // Eliminar una reserva por id
+  delete(id: string) {
     return this.httpClient.delete<Reservation>(environment.apiUrl + '/reservation/' + id)
     .pipe(
       catchError(this.errorHandler)
