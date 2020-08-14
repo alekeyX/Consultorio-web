@@ -1,19 +1,21 @@
-<nav  class="navbar navbar-expand-lg navbar-light bg-aqua shadow justify-content-between">
+<nav  class="navbar navbar-expand-lg navbar-light bg-aqua shadow justify-content-between" [ngClass]="{'padtop': isShown}">
     <!-- icono de navbar -->
-    <button class="btn btn-toolbar navbar-toggler px-md-4" id="buttonMenu" type="button" data-target="#navbarNav" 
+    <button class="btn btn-toolbar navbar-toggler px-md-4" id="buttonMenu" type="button" data-target="#navbarNav"
         aria-controls="navbarNav" (click)="isShown=!isShown" [attr.aria-expanded]="isShown" aria-label="Toggle navigation">
         <span class="fas fa-bars fa-2x text-white"></span>
     </button>
 
     <!-- Titulo -->
-    <div class="">
-        <a class="navbar-brand text-white" [routerLink]="['/']">Consultorio Médico</a>
+    <div class="pl-3">
+        <a class="navbar-brand text-white" [routerLink]="['/']">
+            Consultorio Médico
+        </a>
     </div>
     <!-- Espacio vacio para centrar el titulo cuando el user no esta logueado -->
     <div id="empty" *ngIf="!currentUser"></div>
 
     <!-- Imagen de perfil y Dropdown para pantalla phone/tablet -->
-    <div class="dropdown d-lg-none d-xl-none" *ngIf="currentUser">
+    <div class="dropdown d-lg-none d-xl-none pr-3" *ngIf="currentUser">
         <div role="button" id="dropdownMenuLinkPhone" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
             <img [src]="'http://localhost:4000/' + currentUser.imagePath" *ngIf="avatar" 
@@ -28,9 +30,9 @@
     </div>
 
     <!-- Menu colapsable -->
-    <div class="collapse navbar-collapse" id="navbarNav" [ngClass]="{'show': isShown}">
-        <ul class="navbar-nav mt-2 mt-lg-0 py-0">
-            <li class="nav-item" id="lista-navbar">
+    <div class="collapse navbar-collapse bg-aqua" id="navbarNav" [ngClass]="{'show': isShown}">
+        <ul class="navbar-nav py-0">
+            <li class="nav-item mt-3 mt-lg-0" id="lista-navbar">
                 <a class="nav-link text-white" (click)="isShown=false" 
                     [routerLink]="['/nosotros']" routerLinkActive="activo">
                     NOSOTROS
@@ -78,7 +80,7 @@
     </div>
 
     <!-- dropdown de usuario logueado para desktop -->
-    <div class="dropdown d-none d-md-none d-lg-block" *ngIf="currentUser">
+    <div class="dropdown d-none d-md-none d-lg-block pr-3" *ngIf="currentUser">
         <div class="d-flex align-items-center" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <!-- Nombre de usuario -->
             <a class="dropdown-toggle text-white mr-2" >
