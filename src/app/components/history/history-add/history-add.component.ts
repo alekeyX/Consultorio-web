@@ -18,6 +18,14 @@ export class HistoryAddComponent implements OnInit {
   error: string;
   image: string;
   patientId: string;
+  eFisico: boolean = false;
+  ePiel: boolean = false;
+  eCabeza: boolean = false;
+  eCuello: boolean = false;
+  eRespiratorio: boolean = false;
+  eCardio: boolean = false;
+  eAbdomen: boolean = false;
+  eNeurologo: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +43,7 @@ export class HistoryAddComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
+  // Creacion de formulario angForm
   createForm() {
     this.angForm = this.fb.group({
       motivoConsulta: [''],
@@ -94,17 +103,17 @@ export class HistoryAddComponent implements OnInit {
     });
   }
 
+  // Envio de formulario
   submitForm() {
     this.submitted = true;
     if (!this.angForm.valid) {
       return false;
     } else {
       this.historyService.create(this.angForm.value).subscribe(res => {
-        this.router.navigate(['patient']);
+        this.router.navigate(['history/' + this.patientId]);
       }, (error) => {
         this.error = error;
       });
     }
   }
-
 }

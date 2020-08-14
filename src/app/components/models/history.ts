@@ -62,4 +62,5 @@ export interface History {
     // Diagnostico
     diagnostico: string;
     tratamiento: string;
+    patient_id: string;
 }

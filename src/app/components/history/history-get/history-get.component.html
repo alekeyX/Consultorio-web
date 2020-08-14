@@ -1,40 +1,50 @@
-<div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
+<div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
     <div class="card-body">
-    <div class="d-md-flex justify-content-between align-items-center mb-1">
-        <h1 class="text-aqua-dark">Lista de Historiales Clínicos</h1>
-        <div *ngIf="isAdmin || isMedic">
-            <a class="btn btn-block bg-aqua text-white" [routerLink]="['/history/create', patientId]" routerLinkActive="router-link-active"  role="button">Nuevo Historial</a>
+        <!-- Titulo y boton para registrar una nueva historia clinica -->
+        <div class="d-md-flex justify-content-between align-items-center mb-1">
+            <h1 class="text-aqua-dark">Lista de Historiales Clínicos</h1>
+            <div *ngIf="isAdmin || isMedic">
+                <a class="btn btn-block bg-aqua text-white" [routerLink]="['/history/create', patientId]"
+                    routerLinkActive="router-link-active"  role="button">Nuevo Historial</a>
+            </div>
         </div>
-    </div>
-        <div *ngIf="!loading; else main_content">
-            <h1 class="text-aqua-dark">Cargando...</h1>
-            <span class="spinner-border text-aqua-dark"></span>
+
+        <!-- Mensaje cargando -->
+        <div *ngIf="!loading; else main_content" class="container">
+            <div class="row">
+                <div class="mx-auto d-flex align-items-center">
+                    <h1 class="text-aqua-dark">Cargando...</h1>
+                    <span class="spinner-border text-aqua-dark"></span>
+                </div>
+            </div>
         </div>
         
         <ng-template #main_content>
-            <!-- No data message -->
+            <!-- Mensaje si no hay datos -->
             <h2 *ngIf="histories.length == 0" class="no-data text-center text-aqua-dark">No existen historias añadidas!</h2>
             
-            <!-- history list -->
-            <table class="table table-sm table-hover table-fixed " *ngIf="histories.length > 0">
-                <thead class="bg-aqua text-white">
-                    <tr>
-                    <th scope="col" class="orderBy" (click)="orderBy('createdAt')">Fecha</th>
-                    <th scope="col" class="orderBy" (click)="orderBy('motivoConsulta')">Motivo</th>
-                    <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody class="overflow-auto">
-                    <tr *ngFor="let history of histories | orderBy:order:asc; let i = index">
-                    <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt | slice:0:10}}</td>
-                    <td scope="col" (click)="selectedHistory(history._id)">{{history.motivoConsulta}}</td>
-                    <td scope="col" class="text-center" *ngIf="isAdmin || isMedic">
-                        <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>
-                        <a (click)="removeHistory(history, i)" class="ml-2" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
-                    </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- Lista de historiales -->
+            <div class="table-responsive">
+                <table class="table table-sm table-hover table-fixed " *ngIf="histories.length > 0">
+                    <thead class="bg-aqua text-white">
+                        <tr>
+                        <th scope="col" class="orderBy" (click)="orderBy('createdAt')">Fecha</th>
+                        <th scope="col" class="orderBy" (click)="orderBy('motivoConsulta')">Motivo</th>
+                        <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let history of histories | orderBy:order:asc; let i = index">
+                        <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt | slice:0:10}}</td>
+                        <td scope="col" (click)="selectedHistory(history._id)">{{history.motivoConsulta}}</td>
+                        <td scope="col" class="text-center" *ngIf="isAdmin">
+                            <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>
+                            <a (click)="removeHistory(history, i)" class="ml-2" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </ng-template>
     </div>
 </div>

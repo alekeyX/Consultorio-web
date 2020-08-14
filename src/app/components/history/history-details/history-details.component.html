@@ -1,360 +1,475 @@
-<div *ngIf="!history; else main_content">
-    <h1 class="text-aqua-dark">Cargando...</h1>
-    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
-</div>
+<div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
+    <div class="card-body">
+    
+        <!-- Mensaje de cargando -->
+        <div *ngIf="!history; else main_content" class="container">
+            <div class="row">
+                <div class="mx-auto d-flex">
+                    <h1 class="text-aqua-dark">Cargando...</h1>
+                    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+                </div>
+            </div>
+        </div>
 
-<ng-template #main_content>
-        <div class="card rounded-lg shadow mb-5 bg-white rounded animated fadeIn">
-            <div class="card-body">
-                <h1 class="text-aqua-dark mb-3">Historia Clínica {{date}} </h1>
+        <ng-template #main_content>
+            <h1 class="text-aqua-dark mb-3">Historia Clínica {{date}} </h1>
 
+            <div class="card">
                 <div class="container row">
                     <div class="col-md-3">
                         <strong>Motivo de Consulta:</strong>
                     </div>
                     <div class="col-md-9">{{ history.motivoConsulta }} </div>
                 </div>
+            </div>
+            <div class="card">
                 <div class="container row">
                     <div class="col-md-3">
                         <strong>Enfermedad Actual:</strong>
                     </div>
                     <div class="col-md-9">{{ history.enfermedadActual }} </div>
                 </div>
-                <div *ngIf="isAdmin || isMedic">
+            </div>
+            <div *ngIf="isAdmin || isMedic">
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Antecedentes Personales:</strong>
                         </div>
                         <div class="col-md-9">{{ history.antecedentesPersonales }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Antecedentes Familiares:</strong>
                         </div>
                         <div class="col-md-9">{{ history.antecedentesFamiliares }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Edad:</strong>
                         </div>
                         <div class="col-md-9">{{ history.age }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Hábitos Tóxicos:</strong>
                         </div>
                         <div class="col-md-9">{{ history.habitosToxicos }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Examen Físico</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Examen Físico</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Peso:</strong>
                         </div>
                         <div class="col-md-9">{{ history.peso }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Altura:</strong>
                         </div>
                         <div class="col-md-9">{{ history.altura }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Talla:</strong>
                         </div>
                         <div class="col-md-9">{{ history.talla }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>FC:</strong>
                         </div>
                         <div class="col-md-9">{{ history.FC }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>FR:</strong>
                         </div>
                         <div class="col-md-9">{{ history.FR }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Temperatura:</strong>
                         </div>
                         <div class="col-md-9">{{ history.temperatura }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Impresión General:</strong>
                         </div>
                         <div class="col-md-9">{{ history.impresionGeneral }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Constitución:</strong>
                         </div>
                         <div class="col-md-9">{{ history.constitucion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Facies:</strong>
                         </div>
                         <div class="col-md-9">{{ history.facies }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Actitud:</strong>
                         </div>
                         <div class="col-md-9">{{ history.actitud }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Decúbito:</strong>
                         </div>
                         <div class="col-md-9">{{ history.decubito }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Marcha:</strong>
                         </div>
                         <div class="col-md-9">{{ history.marcha }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Piel, Faneras y Tejido Celular Subcutáneo</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Piel, Faneras y Tejido Celular Subcutáneo</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Aspecto:</strong>
                         </div>
                         <div class="col-md-9">{{ history.aspecto }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Distribución Pilosa:</strong>
                         </div>
                         <div class="col-md-9">{{ history.distribucionPilosa }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Lesiones:</strong>
                         </div>
                         <div class="col-md-9">{{ history.lesiones }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Faneras:</strong>
                         </div>
                         <div class="col-md-9">{{ history.faneras }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Tejido Celular Subcutáneo:</strong>
                         </div>
                         <div class="col-md-9">{{ history.tejidoCelularSub }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Cabeza</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Cabeza</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Cráneo y Cara:</strong>
                         </div>
                         <div class="col-md-9">{{ history.craneoCara }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Cuero Cabelludo:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cueroCabelludo }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Región Frontal:</strong>
                         </div>
                         <div class="col-md-9">{{ history.regionFrontal }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Región Orbitonasal:</strong>
                         </div>
                         <div class="col-md-9">{{ history.regionOrbitonasal }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Región Orofaringea:</strong>
                         </div>
                         <div class="col-md-9">{{ history.regionOrofaringea }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Cuello</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Cuello</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Inspección:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cInspeccion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Palpación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cPalpacion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Percusión:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cPercusion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Auscultación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cAuscultacion }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Respiratorio</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Respiratorio</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Inspección:</strong>
                         </div>
                         <div class="col-md-9">{{ history.rInspeccion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Palpación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.rPalpacion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Percusión:</strong>
                         </div>
                         <div class="col-md-9">{{ history.rPercusion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Auscultación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.rAuscultacion }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Cardiovascular</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Cardiovascular</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Inspección:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cdInspeccion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Palpación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cdPalpacion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Auscultación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cdAuscultacion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Pulsos:</strong>
                         </div>
                         <div class="col-md-9">{{ history.cdPulsos }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Abdomen</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Abdomen</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Inspección:</strong>
                         </div>
                         <div class="col-md-9">{{ history.aInspeccion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Palpación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.aPalpacion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Percusión:</strong>
                         </div>
                         <div class="col-md-9">{{ history.aPercusion }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Auscultación:</strong>
                         </div>
                         <div class="col-md-9">{{ history.aAuscultacion }} </div>
                     </div>
-                    <hr>
-                    <h6 class="text-aqua-dark">Neurólogo</h6>
+                </div>
+                <hr>
+                <h6 class="text-aqua-dark">Neurólogo</h6>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Glasglow:</strong>
                         </div>
                         <div class="col-md-9">{{ history.glasglow }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Motilidad Activa:</strong>
                         </div>
                         <div class="col-md-9">{{ history.motilidadActiva }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Motilidad Pasiva:</strong>
                         </div>
                         <div class="col-md-9">{{ history.motilidadPasiva }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Motilidad Refleja:</strong>
                         </div>
                         <div class="col-md-9">{{ history.motilidadRefleja }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Pares Craneales:</strong>
                         </div>
                         <div class="col-md-9">{{ history.paresCraneales }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Sensibilidad Profunda:</strong>
                         </div>
                         <div class="col-md-9">{{ history.sensibilidadProfunda }} </div>
                     </div>
+                </div>
+                <div class="card">
                     <div class="container row">
                         <div class="col-md-3">
                             <strong>Sensibilidad Superficial:</strong>
                         </div>
                         <div class="col-md-9">{{ history.sensibilidadSuperficial }} </div>
                     </div>
-                    <hr>
                 </div>
-                <h6 class="text-aqua-dark">Tratamiento y Diagnóstico</h6>
+                <hr>
+            </div>
+
+            <!-- Tratamiento y diagnostico -->
+            <h6 class="text-aqua-dark">Tratamiento y Diagnóstico</h6>
+            <div class="card">
                 <div class="container row">
                     <div class="col-md-3">
                         <strong>Diagnóstico:</strong>
                     </div>
                     <div class="col-md-9">{{ history.diagnostico }} </div>
                 </div>
+            </div>
+            <div class="card">
                 <div class="container row">
                     <div class="col-md-3">
                         <strong>Tratamiento:</strong>
                     </div>
                     <div class="col-md-9">{{ history.tratamiento }} </div>
                 </div>
-
-                <div class="mt-4 d-md-flex justify-content-end align-content-center" id="buttons" *ngIf="isAdmin">
-                    <button class="btn bg-aqua text-white m-1" [routerLink]="['/history/update', history._id]">
-                        Editar
-                    </button>
-                    <button class="btn btn-danger m-1" (click)="deleteHistory(history._id)">
-                        Eliminar
-                    </button>
-                </div>
             </div>
-        </div>
-</ng-template>
+
+            <!-- Botones de edicion -->
+            <div class="mt-4 d-md-flex justify-content-end align-content-center" id="buttons" *ngIf="isAdmin">
+                <button class="btn bg-aqua text-white m-1" [routerLink]="['/history/update', history._id]">
+                    Editar
+                </button>
+                <button class="btn btn-danger m-1" (click)="deleteHistory(history._id)">
+                    Eliminar
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</div>

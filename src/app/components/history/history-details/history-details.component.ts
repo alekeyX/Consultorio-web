@@ -15,7 +15,6 @@ export class HistoryDetailsComponent implements OnInit {
 
   currentUser: any;
   history: History;
-  id: string;
   loading = false;
   date: string;
 
@@ -31,20 +30,25 @@ export class HistoryDetailsComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.loading = true;
     this.activatedRoute.params.subscribe(params => {
-      this.id = params.id;
-      this.historyService.getById(this.id)
-        .subscribe(
-          res => {
-            this.getDate(res);
-            this.history = res;
-          },
-          err => console.log(err)
-        );
+      this.getHistory(params.id);
     });
   }
 
+  // Obtener la informacion de una historia por id
+  getHistory(id: string) {
+    this.historyService.getById(id)
+    .subscribe(
+      res => {
+        this.getDate(res);
+        this.history = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  // Eliminar registro de la historia clinica
   deleteHistory(id: string) {
-    if (window.confirm('Esta seguro?')) {
+    if (window.confirm('Esta seguro de eliminar la historia clinica?')) {
       this.historyService.delete(id)
         .subscribe(res => {
           console.log(res);
@@ -53,6 +57,7 @@ export class HistoryDetailsComponent implements OnInit {
       }
   }
 
+  // Cortar la fecha para mostrarla
   getDate(history: any) {
     this.date = history.createdAt.substring(0, 10);
   }

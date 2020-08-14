@@ -33,32 +33,37 @@ export class HistoryGetComponent implements OnInit {
     this.getHistories();
   }
 
+  // Obtener historias clinicas por id de paciente
   getHistories() {
     setInterval(() => {this.loading = true; }, 800);
+    // si el rol del usuario es paciente 
     if (this.currentUser.role === Role.Patient) {
       this.historyService.getHistoryByPatient(this.currentUser._id).subscribe((data) => {
         this.histories = data;
       });
     } else {
-      const id = this.route.snapshot.paramMap.get('id');
+      let id = this.route.snapshot.paramMap.get('id');
       this.historyService.getHistoryByPatient(id).subscribe((data) => {
         this.histories = data;
       });
     }
   }
 
+  // Eliminar registro de historia clinica
   removeHistory(history: { _id: any; }, index: number) {
-    if (window.confirm('Esta seguro?')) {
+    if (window.confirm('Esta seguro de eliminar la historia clínica?')) {
         this.historyService.delete(history._id).subscribe(() => {
           this.histories.splice(index, 1);
         });
     }
   }
 
+  // Navegar a los detalles de una historia clinica
   selectedHistory(id: string) {
     this.router.navigate(['/history/detail/', id]);
   }
 
+  // Ordenar en orden ascendente/descendente
   orderBy(order: string) {
     this.asc = !this.asc;
     this.order = order;

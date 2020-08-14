@@ -13,11 +13,21 @@ import { History } from '../../models/history';
 export class HistoryEditComponent implements OnInit {
 
   submitted = false;
+  patientId: string;
   angForm: FormGroup;
   history: History;
   historyData: History[];
   currentUser: History;
   error: string;
+  id: string;
+  eFisico: boolean = false;
+  ePiel: boolean = false;
+  eCabeza: boolean = false;
+  eCuello: boolean = false;
+  eRespiratorio: boolean = false;
+  eCardio: boolean = false;
+  eAbdomen: boolean = false;
+  eNeurologo: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -31,13 +41,15 @@ export class HistoryEditComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    const id = this.route.snapshot.paramMap.get('id');
-    this.getHistory(id);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.getHistory(this.id);
     this.createForm();
   }
 
+  // Obetner datos de la historia clinica por id
   getHistory(id: string) {
     this.historyService.getById(id).subscribe (data => {
+    this.patientId = data.patient_id;
     this.angForm = this.fb.group({
         motivoConsulta: [data.motivoConsulta],
         enfermedadActual: [data.enfermedadActual],
@@ -45,7 +57,7 @@ export class HistoryEditComponent implements OnInit {
         antecedentesFamiliares: [data.antecedentesFamiliares],
         age: [data.age],
         habitosToxicos: [data.habitosToxicos],
-        /// Examen FisicExamen Fisico
+        /// Examen Fisic
         peso: [data.peso],
         altura: [data.altura],
         talla: [data.talla],
@@ -57,46 +69,55 @@ export class HistoryEditComponent implements OnInit {
         facies: [data.facies],
         actitud: [data.actitud],
         decubito: [data.decubito],
-        marcha: [data.marcha],        // Pie     // Piel
+        marcha: [data.marcha],             
+        // Piel
         aspecto: [data.aspecto],
         distribucionPilosa: [data.distribucionPilosa],
         lesiones: [''],
         faneras: [data.faneras],
-        tejidoCelularSub: [data.tejidoCelularSub],        // Cabez     // Cabeza
+        tejidoCelularSub: [data.tejidoCelularSub],             
+        // Cabeza
         craneoCara: [data.craneoCara],
         cueroCabelludo: [data.cueroCabelludo],
         regionFrontal: [data.regionFrontal],
         regionOrbitonasal: [data.regionOrbitonasal],
-        regionOrofaringea: [data.regionOrofaringea],        //  Cuell     //  Cuello
+        regionOrofaringea: [data.regionOrofaringea],            
+        //  Cuello
         cInspeccion: [data.cInspeccion],
         cPalpacion: [data.cPalpacion],
         cPercusion: [data.cPercusion],
-        cAuscultacion: [data.cAuscultacion],        // Respiratori     // Respiratorio
+        cAuscultacion: [data.cAuscultacion],            
+        // Respiratorio
         rInspeccion: [data.rInspeccion],
         rPalpacion: [data.rPalpacion],
         rPercusion: [data.rPercusion],
-        rAuscultacion: [data.rAuscultacion],        // Cardiovascula     // Cardiovascular
+        rAuscultacion: [data.rAuscultacion],        
+        // Cardiovascular
         cdInspeccion: [data.cdInspeccion],
         cdPalpacion: [data.cdPalpacion],
         cdAuscultacion: [data.cdAuscultacion],
-        cdPulsos: [data.cdPulsos],        // Abdome     // Abdomen
+        cdPulsos: [data.cdPulsos],         
+        // Abdomen
         aInspeccion: [data.aInspeccion],
         aPalpacion: [data.aPalpacion],
         aPercusion: [data.aPercusion],
-        aAuscultacion: [data.aAuscultacion],        // Neurolog     // Neurologo
+        aAuscultacion: [data.aAuscultacion],        
+        // Neurologo
         glasglow: [data.glasglow],
         motilidadActiva: [data.motilidadActiva],
         motilidadPasiva: [data.motilidadPasiva],
         motilidadRefleja: [data.motilidadRefleja],
         paresCraneales: [data.paresCraneales],
         sensibilidadProfunda: [data.sensibilidadProfunda],
-        sensibilidadSuperficial: [data.sensibilidadSuperficial],        // Diagnostic     // Diagnostico
+        sensibilidadSuperficial: [data.sensibilidadSuperficial],       
+        // Diagnostico
         diagnostico: [data.diagnostico],
         tratamiento: [data.tratamiento],
       });
     });
   }
 
+  // Crear formulario angForm
   createForm() {
     this.angForm = this.fb.group({
       motivoConsulta: [''],
@@ -164,17 +185,16 @@ export class HistoryEditComponent implements OnInit {
     });
   }
 
+  // Enviar formulario
   submitForm() {
     this.submitted = true;
     if (!this.angForm.valid) {
       return false;
     } else {
       if (window.confirm('Esta seguro?')) {
-        const id = this.route.snapshot.paramMap.get('id');
-        this.historyService.update(id, this.angForm.value)
+        this.historyService.update(this.id, this.angForm.value)
           .subscribe(() => {
-            this.router.navigate(['/history', id]);
-            console.log('Contenido actualizado exitosamente!');
+            this.router.navigate(['/history', this.patientId]);
           }, (error) => {
             console.log(error);
           });

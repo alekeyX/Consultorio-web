@@ -1,11 +1,9 @@
-/* Imagen de perfil */
-.imgRedonda {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
+button {
+    width: 100px;
 }
 
-button {
-    border-radius: 20px;
-    width: 100px;
+@media screen and (max-width: 768px) {
+    button {
+        width: 100%;
+    }
 }
