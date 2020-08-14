@@ -20,7 +20,7 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
   patients: Patient[] = [];
   medic: Medic;
   patient: Patient;
-  message: string;
+  message: string = '';
   messages = [];
   isPatient: boolean;
   avatar = true;
@@ -47,12 +47,14 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
     this.getMessages();
   }
 
+  // Obtener lista de medicos
   getMedics() {
     this.medicService.getAll().subscribe((data) => {
       this.medics = data;
     });
   }
 
+  // Obtner pacientes por id de medico
   getPatients() {
     this.patientService.getPatientByMedic(this.currentUser._id)
     .subscribe((data) => {
@@ -120,27 +122,29 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
 
   // Enviar un mensaje
   submitForm() {
-    // si es medico a quien escribimos
-    if (!this.isPatient) {
-      var id = this.medic._id;
-      this.angForm = this.fb.group({
-        medic_id: [id],
-        patient_id: [this.currentUser._id],
-        from: [this.currentUser._id],
-        msg: [this.message]
-      })
-    } else {
-      // si es un paciente a quien escribimos
-      var id = this.patient._id;
-      this.angForm = this.fb.group({
-        medic_id: [this.currentUser._id],
-        patient_id: [id],
-        from: [this.currentUser._id],
-        msg: [this.message]
-      })
+    if (this.message !== '') {
+      // si es medico a quien escribimos
+      if (!this.isPatient) {
+        var id = this.medic._id;
+        this.angForm = this.fb.group({
+          medic_id: [id],
+          patient_id: [this.currentUser._id],
+          from: [this.currentUser._id],
+          msg: [this.message]
+        })
+      } else {
+        // si es un paciente a quien escribimos
+        var id = this.patient._id;
+        this.angForm = this.fb.group({
+          medic_id: [this.currentUser._id],
+          patient_id: [id],
+          from: [this.currentUser._id],
+          msg: [this.message]
+        })
+      }
+      this.chatService.sendMessage(this.angForm.value, this.room);
+      this.message = '';
     }
-    this.chatService.sendMessage(this.angForm.value, this.room);
-    this.message = '';
   }
 
   // Devolver mensajes

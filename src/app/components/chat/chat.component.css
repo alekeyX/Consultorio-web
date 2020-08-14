@@ -1,17 +1,3 @@
 #chat {
     height: 700px;
 }
-
-#user-list {
-    width: 350px;
-}
-
-#chat-list {
-    width: 400px;
-}
-
-#msg {
-    bottom: 0px;
-    right: 0px;
-    position: absolute;
-}

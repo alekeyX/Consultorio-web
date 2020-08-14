@@ -1,62 +1,82 @@
-<div class="d-flex justify-content-center h-100">
+<div class="d-md-flex justify-content-b h-100">
     <!-- lista de usuarios -->
-    <div id="chat-users" class="border-right">
-        <div *ngIf="!isAdmin && !isMedic" class="overflow-auto">
-            <div *ngFor="let medic of medics" class="border-bottom p-2" (click)="openChat(medic._id, false)">
-                <div class="d-flex justify-content-start align-items-center" id="selected">
-                    <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="medic.imagePath != 'none'"
-                    class=" imgfluid imgRedonda">
-                    <i class="fas fa-user-circle fa-3x text-info" *ngIf="medic.imagePath == 'none'"></i>
-                    <div class="ml-2">
-                        <div>{{medic.firstName}} {{medic.lastName}}</div>
-                        <div id="specialty">{{medic.specialty}}</div>
+    <div id="chat-users" class="border-right" [ngClass]="{'d-none d-md-block': userSelected}">
+        <!-- Si el usuario es paciente se mostrara a sus medicos -->
+        <div *ngIf="!isAdmin && !isMedic" >
+            <div class="bg-aqua text-white w-100 text-center p-2">
+                Pacientes
+            </div>
+            <div class="overflow-auto">
+                <div *ngFor="let medic of medics" class="border-bottom p-2" (click)="openChat(medic._id, false)">
+                    <div class="d-flex justify-content-start align-items-center" id="selected">
+                        <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="medic.imagePath != 'none'"
+                        class=" imgfluid imgRedonda">
+                        <i class="fas fa-user-circle fa-3x text-info" *ngIf="medic.imagePath == 'none'"></i>
+                        <div class="ml-2">
+                            <div>{{medic.firstName}} {{medic.lastName}}</div>
+                            <div id="specialty">{{medic.specialty}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Si se elige pacientes -->
-        <div *ngIf="isMedic || isAdmin" class="overflow-auto">
-            <div *ngFor="let patient of patients" class="border-bottom p-2" (click)="openChat(patient._id, true)">
-                <div class="d-flex justify-content-start align-items-center" id="selected">
-                    <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="patient.imagePath != 'none'"
-                    class=" imgfluid imgRedonda">
-                    <i class="fas fa-user-circle fa-3x text-info" *ngIf="patient.imagePath == 'none'"></i>
-                    <div class="ml-2">
-                        <div>{{patient.firstName}} {{patient.lastName}}</div>
+        <!-- Si es medico vera a sus pacientes -->
+        <div *ngIf="isMedic || isAdmin">
+            <div class="bg-aqua text-white w-100 text-center p-2">
+                Pacientes
+            </div>
+            <div class="overflow-auto">
+                <div *ngFor="let patient of patients" class="border-bottom p-2" (click)="openChat(patient._id, true)">
+                    <div class="d-flex justify-content-start align-items-center" id="selected">
+                        <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="patient.imagePath != 'none'"
+                        class=" imgfluid imgRedonda">
+                        <i class="fas fa-user-circle fa-3x text-info" *ngIf="patient.imagePath == 'none'"></i>
+                        <div class="ml-2">
+                            <div>{{patient.firstName}} {{patient.lastName}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- lista de mensajes -->
     <div id="chat-list">
-        <div *ngIf="!userSelected; else msg_content" id="notify">
+        <div *ngIf="!userSelected; else msg_content" id="notify" class="d-none d-md-block">
             <div class="p-5 text-center">
                 <i class="fas fa-user-circle fa-5x text-info"></i>
                 <h2 class="text-center text-info">Seleccione un usuario</h2>
             </div>
         </div>
         <ng-template #msg_content>
-            <div class="w-100 px-4 py-2 border-bottom bg-aqua card" id="userTo" *ngIf="userSelected">
-                <!-- Se muestra si se elige a un medico -->
-                <div class="d-flex justify-content-start align-items-center" *ngIf="!isPatient">
-                    <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
-                    class=" imgfluid imgRedonda">
-                    <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
-                    <div class="ml-3 text-white">
-                        <h5 class="mb-0">{{medic.firstName}} {{medic.lastName}}</h5>
+            <!-- Nombre de usuario -->
+            <div class=" px-3 py-2 border-bottom bg-aqua card" id="userTo" *ngIf="userSelected">
+                <div class="d-flex align-items-center">
+                    <!-- Boton de atras -->
+                    <div class="text-white mr-3 d-md-none" role="button" (click)="userSelected = !userSelected">
+                        <i class="fas fa-chevron-left fa-2x"></i>
                     </div>
-                </div>
-                <!-- Se muestra si se elige a un paciente -->
-                <div class="d-flex justify-content-start align-items-center" *ngIf="isPatient">
-                    <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="avatar"
-                    class=" imgfluid imgRedonda">
-                    <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
-                    <div class="ml-3 text-white">
-                        <h5 class="mb-0">{{patient.firstName}} {{patient.lastName}}</h5>
+                    <!-- Se muestra si se elige a un medico -->
+                    <div class="d-flex justify-content-start align-items-center" *ngIf="!isPatient">
+                        <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
+                        class=" imgfluid imgRedonda">
+                        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+                        <div class="ml-3 text-white">
+                            <h5 class="mb-0">{{medic.firstName}} {{medic.lastName}}</h5>
+                        </div>
+                    </div>
+                    <!-- Se muestra si se elige a un paciente -->
+                    <div class="d-flex justify-content-start align-items-center" *ngIf="isPatient">
+                        <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="avatar"
+                        class=" imgfluid imgRedonda">
+                        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+                        <div class="ml-3 text-white">
+                            <h5 class="mb-0">{{patient.firstName}} {{patient.lastName}}</h5>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <!-- Mostrar los mensajes del chat -->
             <div class="overflow-auto animated fadeIn" id="messages" #scrollMe>
                 <div class="p-3">
@@ -67,17 +87,17 @@
                                 {{message.msg}}
                             </span>
                             <span class="text-white d-flex align-items-end flex-column" id="time">
-                                {{message.createdAt | slice:11:16 }}
+                                {{message.createdAt | slice:15:21 }}
                             </span>
                         </div>
                     </li>
                 </div>
             </div>
-            <div class="w-50" id="formulario">
-                <div class="d-flex">
-                    <input class="form-control" [(ngModel)]="message" (keyup)="$event.keyCode == 13 && submitForm()" />
-                    <button class="btn bg-aqua text-white" (click)="submitForm()">Enviar</button>
-                </div>
+
+            <!-- input para mandar mensaje -->
+            <div class="d-flex"  id="formulario">
+                <input class="form-control" [(ngModel)]="message" (keyup)="$event.keyCode == 13 && submitForm()" />
+                <button class="btn bg-aqua text-white" (click)="submitForm()">Enviar</button>
             </div>
         </ng-template>
     </div>

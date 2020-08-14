@@ -12,11 +12,6 @@
     cursor: pointer;
 }
 
-#formulario {
-    bottom: 0px;
-    position: absolute;
-}
-
 #userTo {
     top: 0px;
 }
@@ -39,14 +34,6 @@
     list-style: none;
 }
 
-#chat-list {
-    width: 350px;
-}
-
-#chat-users {
-    width: 350px;
-}
-
 #time {
     font-size: 10px;
 }
@@ -59,4 +46,38 @@
 #texto{
     width: 100%;
     background: #ffffff;
+}
+
+#chat-users, #chat-list {
+    width: 350px;
+}
+
+#formulario {
+    bottom: 0px;
+    position: absolute;
+    width: 350px;
+}
+
+@media screen and (max-width: 400px) {
+    #formulario {
+        bottom: 0px;
+        position: absolute;
+        width: 344px;
+    }
+
+    #chat-users, #chat-list {
+        width: 344px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    #formulario {
+        bottom: 0px;
+        position: absolute;
+        width: 288px;
+    }
+
+    #chat-users, #chat-list {
+        width: 288px;
+    }
 }

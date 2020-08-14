@@ -24,6 +24,15 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Navegar al perfil del usuario
+  selected(id: string) {
+    if (this.currentUser.role !== Role.Patient) {
+      this.router.navigate(['/medic/', id]);
+    } else {
+      this.router.navigate(['/patient/', id]);
+    }
+  }
+
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
@@ -34,13 +43,5 @@ export class MenuComponent implements OnInit {
 
   get isPatient() {
     return this.currentUser && this.currentUser.role === Role.Patient;
-  }
-
-  selected(id: string) {
-    if (this.currentUser.role !== Role.Patient) {
-      this.router.navigate(['/medic/', id]);
-    } else {
-      this.router.navigate(['/patient/', id]);
-    }
   }
 }

@@ -1,27 +1,3 @@
-
-.card-title {
-    font-size: 2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-}
-
-.card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 2rem;
-}   
-
-.card-text:last-child {
-    margin-bottom: 0;
-    text-align: justify;
-}
-
-.row {
-    margin-right: 0px;
-    margin-left: 0px;
-}
-
-.width-sidebar{
-    width: 250px;
+.alto {
+    height: 40rem;
 }

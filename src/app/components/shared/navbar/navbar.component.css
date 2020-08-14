@@ -1,12 +1,7 @@
 .navbar {
     position: relative;
-    padding: 1.5rem 1rem;
+    padding: 0.5rem 1rem;
 }
-
-/* .show {
-    margin-top: 2%;
-    height: 100vh; 
-} */
 
 .navbar-brand {
     display: inline-block;
@@ -72,7 +67,4 @@
     padding-right: 1rem;
 }
 
-.show {
-    margin-top: 2%;
-}
 }

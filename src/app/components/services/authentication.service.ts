@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
 import { environment } from '../../../environments/environment';
-
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -57,7 +55,7 @@ export class AuthenticationService {
             }));
     }
 
-    // Inicio de Sesión de medicos
+    // Inicio de Sesión de pacientes
     loginPatient(username: string, password: string) {
         return this.http.post<any>(environment.apiUrl + '/patient/signin', { username, password })
             .pipe(map(user => {
