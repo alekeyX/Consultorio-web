@@ -89,6 +89,7 @@ export class ReservationChooseComponent implements OnInit {
 
   // Arreglo de solo reservaciones a partir de la fecha actual
   ReservationsActually(reservas: Reservation[]) {
+    const reservations: Reservation[] = [];
     reservas.forEach(element => {
       let year = parseInt(element.date.substring(0,4), 10),
       month = parseInt(element.date.substring(5,7), 10),
@@ -98,9 +99,10 @@ export class ReservationChooseComponent implements OnInit {
       let today = new Date();
 
       if (date >= today) {
-        this.reservaByMedic.push(element);
+        reservations.push(element);
       }
     });
+    this.reservaByMedic = reservations;
   }
 
   // Filtrar resultados por fecha
