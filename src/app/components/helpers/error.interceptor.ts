@@ -17,6 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 const currentUser = this.authenticationService.currentUserValue;
                 if(currentUser){
                     this.authenticationService.logout();
+                    localStorage.removeItem('currentUser');
                 }
             }
             return throwError(err);

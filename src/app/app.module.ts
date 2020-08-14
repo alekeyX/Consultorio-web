@@ -16,7 +16,6 @@ import { SharedModule } from './components/shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/shared/menu/menu.component';
 import { NosotrosComponent } from './components/shared/nosotros/nosotros.component';
 import { ServiciosComponent } from './components/shared/servicios/servicios.component';
@@ -34,7 +33,6 @@ import { ChatbotComponent } from './components/chat/chatbot/chatbot.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent,
     MenuComponent,
     NosotrosComponent,
     ServiciosComponent,

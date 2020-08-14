@@ -28,15 +28,5 @@ export class JwtInterceptor implements HttpInterceptor {
             });
         }
         return next.handle(request);
-        // .pipe(
-        //     catchError((err: HttpErrorResponse) => {
-        //         // if (err.status === 401) {
-        //             // TODO  o se podria refrescar el token
-        //         // }
-        //         console.log(err);
-                
-        //         return throwError( err );
-        //     })
-        // );
     }
 }

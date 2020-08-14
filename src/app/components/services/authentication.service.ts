@@ -23,22 +23,6 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    // Inicio de Sesión
-    login(username: string, password: string) {
-        return this.http.post<any>(environment.apiUrl + '/signin', { username, password })
-            .pipe(map(user => {
-                // iniciar sesión correctamente si hay un token jwt en la respuesta
-                if (user && user.token) {
-                    // almacenar detalles de usuario y token jwt en local storage para mantener
-                    // al usuario conectado entre actualizaciones de página
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
-
-                return user;
-            }));
-    }
-
     // Inicio de Sesión de medicos
     loginMedic(username: string, password: string) {
         return this.http.post<any>(environment.apiUrl + '/medic/signin', { username, password })
