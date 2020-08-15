@@ -45,6 +45,8 @@ export class HistoryGetComponent implements OnInit {
       let id = this.route.snapshot.paramMap.get('id');
       this.historyService.getHistoryByPatient(id).subscribe((data) => {
         this.histories = data;
+        console.log(this.histories);
+        
       });
     }
   }

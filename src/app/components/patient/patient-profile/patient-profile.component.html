@@ -103,7 +103,7 @@
                     <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]">
                         Historial Clínico
                     </button>
-                    <div class="d-md-flex" *ngIf="isAdmin || isMedic" id="options">
+                    <div class="d-md-flex" *ngIf="isAdmin" id="options">
                         <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]" id="btnOption">
                             Editar
                         </button>

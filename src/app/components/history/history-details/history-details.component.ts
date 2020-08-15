@@ -59,7 +59,7 @@ export class HistoryDetailsComponent implements OnInit {
 
   // Cortar la fecha para mostrarla
   getDate(history: any) {
-    this.date = history.createdAt.substring(0, 10);
+    this.date = history.createdAt.substring(0, 10) + ' ' + history.hour;
   }
 
   get isAdmin() {

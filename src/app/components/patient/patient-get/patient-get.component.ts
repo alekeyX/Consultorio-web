@@ -35,15 +35,18 @@ export class PatientGetComponent implements OnInit {
   // Si el usuario es medico obtentra solo los registros de sus pacientes
   getPatients() {
     setInterval(() => {this.loading = true; }, 800);
-    if (this.currentUser.role === Role.Admin) {
-      this.patientService.getAll().subscribe((data) => {
-        this.patients = data;
-      });
-    } else {
-      this.patientService.getPatientByMedic(this.currentUser._id).subscribe((data) => {
-        this.patients = data;
-      });
-    }
+    // if (this.currentUser.role === Role.Admin) {
+    //   this.patientService.getAll().subscribe((data) => {
+    //     this.patients = data;
+    //   });
+    // } else {
+    //   this.patientService.getPatientByMedic(this.currentUser._id).subscribe((data) => {
+    //     this.patients = data;
+    //   });
+    // }
+    this.patientService.getAll().subscribe((data) => {
+          this.patients = data;
+        });
   }
 
   // Eliminar el registro de un paciente

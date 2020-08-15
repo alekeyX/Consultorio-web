@@ -9,7 +9,7 @@ import { Role } from '../models/role';
 
 
 const routes: Routes = [
-  { path: 'create/:id', component: HistoryAddComponent,  canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
+  { path: 'create/:id', component: HistoryAddComponent,  canActivate: [AuthGuard] },
   { path: 'update/:id', component: HistoryEditComponent, canActivate: [AuthGuard] },
   { path: ':id', component: HistoryGetComponent, canActivate: [AuthGuard] },
   { path: '', component: HistoryGetComponent, canActivate: [AuthGuard] },

@@ -62,5 +62,8 @@ export interface History {
     // Diagnostico
     diagnostico: string;
     tratamiento: string;
+    // Informacion
     patient_id: string;
+    medic: string;
+    specialty: string;
 }

@@ -17,7 +17,7 @@ export class HistoryEditComponent implements OnInit {
   angForm: FormGroup;
   history: History;
   historyData: History[];
-  currentUser: History;
+  currentUser: any;
   error: string;
   id: string;
   eFisico: boolean = false;
@@ -51,6 +51,8 @@ export class HistoryEditComponent implements OnInit {
     this.historyService.getById(id).subscribe (data => {
     this.patientId = data.patient_id;
     this.angForm = this.fb.group({
+        medic: [data.medic],
+        specialty: [data.specialty],
         motivoConsulta: [data.motivoConsulta],
         enfermedadActual: [data.enfermedadActual],
         antecedentesPersonales: [data.antecedentesPersonales],
@@ -120,6 +122,8 @@ export class HistoryEditComponent implements OnInit {
   // Crear formulario angForm
   createForm() {
     this.angForm = this.fb.group({
+      medic: [this.currentUser.firstName + ' ' + this.currentUser.lastName],
+      specialty: [this.currentUser.specialty],
       motivoConsulta: [''],
       enfermedadActual: [''],
       antecedentesPersonales: [''],
@@ -182,6 +186,7 @@ export class HistoryEditComponent implements OnInit {
       // Diagnostico
       diagnostico: [''],
       tratamiento: [''],
+      hour: [''],
     });
   }
 

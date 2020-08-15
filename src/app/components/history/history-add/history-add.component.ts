@@ -35,17 +35,19 @@ export class HistoryAddComponent implements OnInit {
     private authenticationService: AuthenticationService,
     ) {
       this.patientId = this.route.snapshot.paramMap.get('id');
-      this.createForm();
     }
-
-  ngOnInit(): void {
-    this.currentUser = this.authenticationService.currentUserValue;
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    
+    ngOnInit(): void {
+      this.currentUser = this.authenticationService.currentUserValue;
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+      this.createForm();
   }
 
   // Creacion de formulario angForm
   createForm() {
     this.angForm = this.fb.group({
+      medic: [this.currentUser.firstName + ' ' + this.currentUser.lastName],
+      specialty: [this.currentUser.specialty],
       motivoConsulta: [''],
       enfermedadActual: [''],
       antecedentesPersonales: [''],
@@ -99,7 +101,8 @@ export class HistoryAddComponent implements OnInit {
       sensibilidadSuperficial: [''],
       diagnostico: [''],
       tratamiento: [''],
-      patient_id: [this.patientId]
+      patient_id: [this.patientId],
+      hour: [Date().substring(16,21)],
     });
   }
 
