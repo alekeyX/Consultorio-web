@@ -117,10 +117,15 @@ export class MedicEditComponent implements OnInit {
         formData.append('phone', this.angForm.get('phone').value);
         formData.append('specialty', this.angForm.get('specialty').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
+        
         if (this.angForm.get('role').value === 'Administrador') {
           formData.append('role', 'Admin');
         } else {
-          formData.append('role', 'Medic');
+          if (this.angForm.get('role').value === 'Médico') {
+            formData.append('role', 'Medic');
+          } else {
+            formData.append('role', 'Reception');
+          }
         }
         // envio de id y formData al servicio para actualizar el registro
         const id = this.route.snapshot.paramMap.get('id');

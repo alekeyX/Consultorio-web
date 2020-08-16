@@ -10,7 +10,7 @@
         <div class="dropdown-divider"></div>
       </div>
 
-      <div *ngIf="isAdmin || isMedic">
+      <div *ngIf="!isPatient">
         <a class="nav-link dropdown-item" [routerLink]="['/medic']" routerLinkActive="activo">
           <i class="fas fa-user-md fa-2x mr-3"></i>
           MÉDICOS
@@ -18,7 +18,7 @@
         <div class="dropdown-divider"></div>
       </div>
 
-      <div *ngIf="isAdmin || isMedic">
+      <div *ngIf="!isPatient">
         <a class="nav-link dropdown-item" [routerLink]="['/patient']" routerLinkActive="activo">
           <i class="fas fa-user-injured fa-2x mr-3" ></i>
           PACIENTES
@@ -26,7 +26,7 @@
         <div class="dropdown-divider"></div>
       </div>
 
-      <div>
+      <div *ngIf="isAdmin || isMedic">
         <a class="nav-link dropdown-item" [routerLink]="['/reservation']" routerLinkActive="activo">
           <i class="fas fa-calendar-plus fa-2x mr-3"></i>
             MIS RESERVAS
@@ -42,7 +42,7 @@
         <div class="dropdown-divider"></div>
       </div>
 
-      <div>
+      <div *ngIf="!isReception">
         <a class="nav-link dropdown-item" [routerLink]="['/chat']" routerLinkActive="activo" >
           <i class="fas fa-envelope fa-2x mr-3"></i>
             MENSAJERIA

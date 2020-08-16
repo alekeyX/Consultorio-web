@@ -100,14 +100,14 @@
             </div>
             <div class="container">
                 <div class="mt-4 d-md-flex p-2 d-md-flex justify-content-sm-between">
-                    <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]">
+                    <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]" *ngIf="isAdmin || isMedic">
                         Historial Clínico
                     </button>
                     <div class="d-md-flex" *ngIf="isAdmin" id="options">
                         <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]" id="btnOption">
                             Editar
                         </button>
-                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" id="btnOption" *ngIf="isAdmin">
+                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" id="btnOption">
                             Eliminar
                         </button>
                     </div>

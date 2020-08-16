@@ -18,7 +18,7 @@ export class MedicAddComponent implements OnInit {
   error: string;
   image: string;
   generos = ['Masculino', 'Femenino', 'Otro'];
-  roles = ['Médico', 'Administrador'];
+  roles = ['Médico', 'Administrador', 'Recepción'];
 
   constructor(
     private fb: FormBuilder,
@@ -88,10 +88,15 @@ export class MedicAddComponent implements OnInit {
       formData.append('phone', this.angForm.get('phone').value);
       formData.append('specialty', this.angForm.get('specialty').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
+      
       if (this.angForm.get('role').value === 'Administrador') {
         formData.append('role', 'Admin');
       } else {
-        formData.append('role', 'Medic');
+        if (this.angForm.get('role').value === 'Médico') {
+          formData.append('role', 'Medic');
+        } else {
+          formData.append('role', 'Reception');
+        }
       }
       // Envio del formData al servicio
       this.medicService.create(formData).subscribe(res => {

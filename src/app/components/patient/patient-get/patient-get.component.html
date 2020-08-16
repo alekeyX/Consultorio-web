@@ -7,7 +7,10 @@
                     <input type="text" class="form-control" name="filterPatient" placeholder="Buscar..." [(ngModel)]="filterPatient">
                 </div>
                 <div class="p-1">
-                    <a class="btn btn-block bg-aqua text-white" [routerLink]="['/patient/create']" routerLinkActive="router-link-active"  role="button">Nuevo Paciente</a>
+                    <a class="btn btn-block bg-aqua text-white" [routerLink]="['/patient/create']" 
+                        routerLinkActive="router-link-active"  role="button">
+                        Nuevo Paciente
+                    </a>
                 </div>
             </div>
         </div>
@@ -33,8 +36,7 @@
                             <th scope="col" class="orderBy" (click)="orderBy('username')">Código</th>
                             <th scope="col" class="orderBy" (click)="orderBy('firstName')">Nombre</th>
                             <th scope="col">Teléfono</th>
-                            <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
-                            <th scope="col" class="text-center" *ngIf="!isAdmin">Historial</th>
+                            <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +45,7 @@
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
                             <td scope="col" class="text-center">
-                                <a [routerLink]="['/history', patient._id]" class="mr-2" title="Historial Clínico"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
+                                <a [routerLink]="['/history', patient._id]" class="mr-2" *ngIf="isMedic || isAdmin" title="Historial Clínico"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
                                 <a [routerLink]="['/patient/update', patient._id]" class="mx-1" *ngIf="isAdmin" title="Editar"><i class="fas fa-edit text-info"></i></a>
                                 <a (click)="removePatient(patient, i)" class="ml-1" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
                             </td>

@@ -44,4 +44,8 @@ export class MenuComponent implements OnInit {
   get isPatient() {
     return this.currentUser && this.currentUser.role === Role.Patient;
   }
+
+  get isReception() {
+    return this.currentUser && this.currentUser.role === Role.Reception;
+  }
 }
