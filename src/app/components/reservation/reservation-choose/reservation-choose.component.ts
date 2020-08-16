@@ -3,8 +3,11 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Role } from '../../models/role';
 import { ReservationService } from '../../services/reservation.service';
 import { MedicService } from '../../services/medic.service';
+import { PatientService } from '../../services/patient.service';
 import { Reservation } from '../../models/reservation';
 import { Medic } from '../../models/medic';
+import { Patient } from '../../models/patient';
+
 
 @Component({
   selector: 'app-reservation-choose',
@@ -18,6 +21,7 @@ export class ReservationChooseComponent implements OnInit {
   specialty: string = '';
   medics: Medic[] = [];
   medic: Medic;
+  patients: Patient[] = [];
   reservaByMedic: Reservation[] = [];
   reservas: string[] = [];
   reserv: any = {};
@@ -29,10 +33,12 @@ export class ReservationChooseComponent implements OnInit {
   order: string = '';
   asc: boolean = false;
   reservationsActive: Reservation[] = [];
+  namePatient: string = '';
 
   constructor(
     private reservationService: ReservationService,
     private medicService: MedicService,
+    private patientService: PatientService,
     private authenticationService: AuthenticationService
   ) {
     this.getSpecialty();
@@ -40,6 +46,8 @@ export class ReservationChooseComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.patientList();
   }
 
   // Mostrar lista de especialidades de medicos
@@ -49,7 +57,7 @@ export class ReservationChooseComponent implements OnInit {
       .map(specialty => {
         return specialty = data.find(element => element.specialty === specialty).specialty;
       });
-      this.specialtys = resultado;
+      this.specialtys = resultado.filter(e => e !== "");
     });
   }
   
@@ -114,6 +122,13 @@ export class ReservationChooseComponent implements OnInit {
     return this.reservas = resultado;
   }
 
+  // Lista de pacientes
+  patientList() {
+    this.patientService.getAll().subscribe((data) => {
+      this.patients = data;
+    });
+  }
+
   // Seleccion de una reserva disponible obteniendo los datos de la reserva y nombre del medico 
   selectReserva(id: string) {
     this.medicName = this.medic.firstName + ' ' + this.medic.lastName;
@@ -125,9 +140,17 @@ export class ReservationChooseComponent implements OnInit {
     })
   }
 
-  // Actualizar registro de reserva con el nombre del usuario que elige la reserva
+  // Actualizar registro de reserva con el nombre del paciente
   submit() {
-    this.reserv.patient_id = this.currentUser.firstName + ' ' + this.currentUser.lastName;
+    this.reserv.patient_id = this.namePatient;
+    this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
+      this.getReservasByMedic(this.medic);
+    });
+  }
+
+  // Cancelar una reserva quitando el nombre del paciente 
+  cancelReserv() {
+    this.reserv.patient_id = '';
     this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
       this.getReservasByMedic(this.medic);
     });

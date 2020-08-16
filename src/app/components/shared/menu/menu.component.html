@@ -34,7 +34,7 @@
         <div class="dropdown-divider"></div>
       </div>
       
-      <div *ngIf="isAdmin || isPatient">
+      <div *ngIf="!isMedic">
         <a class="nav-link dropdown-item" [routerLink]="['/reservation/choose']" routerLinkActive="activo">
           <i class="fas fa-calendar-alt fa-2x mr-3"></i>
             RESERVAR
