@@ -17,6 +17,7 @@ export class HistoryDetailsComponent implements OnInit {
   history: History;
   loading = false;
   date: string;
+  patient: any;
 
   constructor(
       private historyService: HistoryService,
@@ -40,7 +41,8 @@ export class HistoryDetailsComponent implements OnInit {
     .subscribe(
       res => {
         this.getDate(res);
-        this.history = res;
+        this.history = res; 
+        this.patient = res.patient_id;       
       },
       err => console.log(err)
     );

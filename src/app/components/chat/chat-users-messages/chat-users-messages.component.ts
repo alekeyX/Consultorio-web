@@ -56,7 +56,7 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
 
   // Obtner pacientes por id de medico
   getPatients() {
-    this.patientService.getPatientByMedic(this.currentUser._id)
+    this.patientService.getAll()
     .subscribe((data) => {
       this.patients = data;
     })

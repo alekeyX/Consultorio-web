@@ -30,20 +30,9 @@ export class PatientGetComponent implements OnInit {
     this.getPatients();
   }
 
-  // Obtener los registros de los pacientes
-  // Si el usuario es admin obtendra todos los registros
-  // Si el usuario es medico obtentra solo los registros de sus pacientes
+  // Obtener todos los pacientes
   getPatients() {
     setInterval(() => {this.loading = true; }, 800);
-    // if (this.currentUser.role === Role.Admin) {
-    //   this.patientService.getAll().subscribe((data) => {
-    //     this.patients = data;
-    //   });
-    // } else {
-    //   this.patientService.getPatientByMedic(this.currentUser._id).subscribe((data) => {
-    //     this.patients = data;
-    //   });
-    // }
     this.patientService.getAll().subscribe((data) => {
           this.patients = data;
         });

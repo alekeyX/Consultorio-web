@@ -55,7 +55,6 @@ export class PatientEditComponent implements OnInit {
           placeBirth: [data.placeBirth],
           address: [data.address],
           phone: [data.phone, Validators.pattern('^[0-9]+$')],
-          medic_id: [data.medic_id],
           imagePath: [data.imagePath],
         });
     });
@@ -78,7 +77,6 @@ export class PatientEditComponent implements OnInit {
       placeBirth: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      medic_id: [''],
       imagePath: [''],
     });
   }
@@ -126,7 +124,6 @@ export class PatientEditComponent implements OnInit {
         formData.append('placeBirth', this.angForm.get('placeBirth').value);
         formData.append('address', this.angForm.get('address').value);
         formData.append('phone', this.angForm.get('phone').value);
-        formData.append('medic_id', this.angForm.get('medic_id').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
         
         // Mandar el id y el formData al servicio para actualizar los datos

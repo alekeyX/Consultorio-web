@@ -98,7 +98,6 @@ export class PatientAddComponent implements OnInit {
       formData.append('address', this.angForm.get('address').value);
       formData.append('phone', this.angForm.get('phone').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
-      formData.append('medic_id', this.currentUser._id);
       console.log(this.angForm.value);
       
       // Envio del formData al servicio 
