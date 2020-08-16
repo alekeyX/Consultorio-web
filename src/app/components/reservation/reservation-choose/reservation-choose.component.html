@@ -4,30 +4,34 @@
             <h1 class="text-aqua-dark">Selección de Reservas</h1>
         </div>
         <!-- Inputs para mostrar lista de reservas -->
-        <div class="d-md-flex mx-auto">
-            <div class="col-md-4 col-lg-3 my-3">
-                <label for="specialty"><strong>1.</strong> Elegir especialidad</label>
-                <select class="custom-select" id="specialty" [(ngModel)]="specialty" (change)="selectSpecialty(specialty)">
-                    <option [ngValue]="specialty" *ngFor="let specialty of specialtys">{{specialty}}</option>
-                </select>
+        <div class="d-lg-flex">
+            <div class="d-md-flex w-100 mx-auto">
+                <div class="col-md-6 col-lg-6 my-3">
+                    <label for="specialty"><strong>1.</strong> Elegir especialidad</label>
+                    <select class="custom-select" id="specialty" [(ngModel)]="specialty" (change)="selectSpecialty(specialty)">
+                        <option [ngValue]="specialty" *ngFor="let specialty of specialtys">{{specialty}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-6 my-3">
+                    <label for="medic"><strong>2.</strong> Elegir Médico</label>
+                    <select class="custom-select" id="medic" [(ngModel)]="medic" (change)="selectMedic(medic)">
+                        <option [ngValue]="medic" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-md-4 col-lg-3 my-3">
-                <label for="medic"><strong>2.</strong> Elegir Médico</label>
-                <select class="custom-select" id="medic" [(ngModel)]="medic" (change)="selectMedic(medic)">
-                    <option [ngValue]="medic" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
-                </select>
-            </div>
-            <div class="col-md-4 col-lg-3 my-3" *ngIf="!isPatient">
-                <label for="patient"><strong>3.</strong>Elegir Paciente</label>
-                <select class="custom-select" [(ngModel)]="namePatient" id="patient">
-                    <option [ngValue]="patient.firstName + ' ' + patient.lastName" *ngFor="let patient of patients">{{patient.username}}</option>
-                </select>
-            </div>
-            <div class="col-md-4 col-lg-3 my-3">
-                <label for="fecha"> Filtrar por fecha</label>
-                <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
-                    <option [ngValue]="date" *ngFor="let date of reservas">{{date}}</option>
-                </select>
+            <div class="d-md-flex w-100 mx-auto">
+                <div class="col-md-6 col-lg-6 my-3" *ngIf="!isPatient">
+                    <label for="patient"><strong>3.</strong>Elegir Paciente</label>
+                    <select class="custom-select" [(ngModel)]="namePatient" id="patient">
+                        <option [ngValue]="patient.firstName + ' ' + patient.lastName" *ngFor="let patient of patients">{{patient.username}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-6 my-3">
+                    <label for="fecha"> Filtrar por fecha</label>
+                    <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
+                        <option [ngValue]="date" *ngFor="let date of reservas">{{date}}</option>
+                    </select>
+                </div>
             </div>
         </div>
 
