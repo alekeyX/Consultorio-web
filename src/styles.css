@@ -9,8 +9,8 @@ body {
     margin: 0;
     margin-bottom: 0px;
     background-color: rgba(137, 247, 255, 0.123);
-    background-image: url('./assets/img/doctor-vestido-con-una-bata-blanca-y-una-corbata-azul-sosteniendo-una-carpeta.jpg');
-    background-repeat: no-repeat;
+    /* background-image: url('./assets/img/doctor-vestido-con-una-bata-blanca-y-una-corbata-azul-sosteniendo-una-carpeta.jpg');
+    background-repeat: no-repeat; */
 }
 
 a, td {

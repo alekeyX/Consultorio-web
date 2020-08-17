@@ -14,7 +14,7 @@
 
         <!-- Informacion del medico -->
         <ng-template #main_content>
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-md-4 d-flex justify-content-center">
                     <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
                         class=" imgfluid imgRedonda border">
@@ -35,7 +35,7 @@
                                 <div class="col-12 col-md-7">{{ medic.firstName }}  {{ medic.lastName }}</div>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card" *ngIf="!isReception">
                             <div class="d-md-flex p-2">
                                 <strong class="col-12 col-md-5">Especialidad:</strong>
                                 <div class="col-12 col-md-7">{{ medic.specialty }} </div>
@@ -70,7 +70,7 @@
             </div>
             
             <!-- Botones para editar y eliminar -->
-            <div class="mt-4 d-md-flex justify-content-md-end" *ngIf="isAdmin">
+            <div class="d-md-flex justify-content-md-end" *ngIf="isAdmin">
                 <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]">
                     Editar
                 </button>

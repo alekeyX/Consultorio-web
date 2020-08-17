@@ -13,7 +13,7 @@ import { History } from '../../models/history';
 export class HistoryEditComponent implements OnInit {
 
   submitted = false;
-  patientId: string;
+  patientId: any;
   angForm: FormGroup;
   history: History;
   historyData: History[];
@@ -115,6 +115,7 @@ export class HistoryEditComponent implements OnInit {
         // Diagnostico
         diagnostico: [data.diagnostico],
         tratamiento: [data.tratamiento],
+        hour: [data.hour]
       });
     });
   }
@@ -199,7 +200,7 @@ export class HistoryEditComponent implements OnInit {
       if (window.confirm('Esta seguro?')) {
         this.historyService.update(this.id, this.angForm.value)
           .subscribe(() => {
-            this.router.navigate(['/history', this.patientId]);
+            this.router.navigate(['/history', this.patientId._id]);
           }, (error) => {
             console.log(error);
           });

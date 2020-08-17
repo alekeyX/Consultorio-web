@@ -44,8 +44,8 @@
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
-                            <td scope="col" class="text-center">
-                                <a [routerLink]="['/history', patient._id]" class="mr-2" *ngIf="isMedic || isAdmin" title="Historial Clínico"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
+                            <td scope="col" class="text-center" *ngIf="isMedic || isAdmin">
+                                <a [routerLink]="['/history', patient._id]" class="mr-2" title="Historial Clínico"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
                                 <a [routerLink]="['/patient/update', patient._id]" class="mx-1" *ngIf="isAdmin" title="Editar"><i class="fas fa-edit text-info"></i></a>
                                 <a (click)="removePatient(patient, i)" class="ml-1" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
                             </td>

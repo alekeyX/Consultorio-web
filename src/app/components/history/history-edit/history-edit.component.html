@@ -3,9 +3,9 @@
     
         <!-- formulario para añadir historial -->
         <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
-            <div class="container row justify-content-between align-items-center">
-                <h1 class="text-aqua-dark mb-3">Editar Historial Clínico</h1>
-                <div class="form-group d-flex align-items-center">
+            <div class="d-md-flex justify-content-between align-items-center">
+                <h1 class="text-aqua-dark mb-3">Editar Historia Clínica</h1>
+                <div class="form-group">
                     <button type="submit" class="btn btn-block text-white bg-aqua">
                         Guardar
                     </button>
@@ -75,8 +75,8 @@
             <!-- Botones de secciones -->
             <div class="d-md-flex justify-content-around mb-1" id="btn-exam">
                 <a class="btn bg-aqua text-white m-1" (click)="eFisico = !eFisico" id="btn-exam-sub">
-                    <span *ngIf="!eFisico">Exámen Físico  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eFisico">Exámen Físico  <i class="fas fa-minus"></i></span>
+                    <span *ngIf="!eFisico">Examen Físico  <i class="fas fa-plus"></i></span>
+                    <span *ngIf="eFisico">Examen Físico  <i class="fas fa-minus"></i></span>
                 </a>
 
                 <a class="btn bg-aqua text-white m-1" (click)="ePiel = !ePiel">

@@ -14,7 +14,7 @@
 
         <!-- Informacion del paciente -->
         <ng-template #main_content>
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-md-4 d-flex justify-content-center">
                     <img [src]="'http://localhost:4000/' + patient.imagePath" 
                         class=" imgfluid imgRedonda border" *ngIf="avatar" >
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="container">
-                <div class="mt-4 d-md-flex p-2 d-md-flex justify-content-sm-between">
+                <div class="d-md-flex p-2 d-md-flex justify-content-sm-between">
                     <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]" *ngIf="isAdmin || isMedic">
                         Historial Clínico
                     </button>

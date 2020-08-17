@@ -66,4 +66,5 @@ export interface History {
     patient_id: string;
     medic: string;
     specialty: string;
+    hour: string;
 }
