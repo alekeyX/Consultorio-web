@@ -1,0 +1,20 @@
+/* Imagen de perfil */
+.imgRedonda {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+#btnOption {
+    width: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    #options, button {
+        width: 100%;
+    }
+
+    #btnOption {
+        width: 99%;
+    }
+}

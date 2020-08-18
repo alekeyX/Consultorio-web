@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "consultorio-web"
+    }
+  },
+  "defaultProject": "consultorio-web",
+  "cli": {
+    "analytics": false
+  }
 }

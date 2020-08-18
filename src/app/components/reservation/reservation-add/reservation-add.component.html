@@ -1,0 +1,96 @@
+<div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
+    <div class="card-body">
+        <!-- Titulo y boton de ayuda -->
+        <div class="d-md-flex justify-content-between mb-5 mb-md-0">
+            <h1 class="text-aqua-dark mb-md-3">Habilitar reservas para consultas</h1>
+            <div class=" col-md-4 mt-md-3">
+                <button class="btn bg-aqua text-white float-right" (click)="help()">
+                    <span *ngIf="!ayuda">Mostrar Ayuda <i class="far fa-question-circle"></i></span>
+                    <span *ngIf="ayuda">Ocultar Ayuda <i class="far fa-question-circle"></i></span>
+                </button>
+            </div>
+        </div>
+        <!-- Instrucciones de ayuda -->
+        <div class="card" *ngIf="ayuda">
+            <p class="p-2">
+                Bienvenido al sistema de reservas para consultas médicas.<br>
+                Pasos para habilitar reserva(s):
+                <li><b>Paso 1:</b> Elija los dias que serán hábiles para reservar consultas.</li>
+                <li><b>Paso 2:</b> Elija la fecha inicial para habilitar las reservas.</li>
+                <li><b>Paso 3:</b> Elija la fecha limite de habilitación de reservas.</li>
+                <li><b>Paso 4:</b> Elija el intervalo y horarios para las reservas.</li>
+                <li class=" list-unstyled font-weight-lighter"><i>Para escoger más de una opción, utilice (ctrl+click) ó (shift+click).</i></li>
+            </p>
+        </div>
+        <!-- formulario para crear reservaciones -->
+        <div class="container col-md-10 col-lg-10 col-xl-7 py-3">
+            <form [formGroup]="angForm" (ngSubmit)="submitForm()">
+                <div class="d-md-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="days" class="col-form-label"><b>1: </b>Día:</label>
+                        <select class="custom-select" formControlName="days" #Days multiple required>
+                            <option [value]="day" *ngFor="let day of days">{{day}}</option>
+                        </select>
+                    </div>
+                    <div class="my-auto">
+                        <div class="form-group d-md-flex">
+                            <label for="dateStart" class="col-sm-5 col-form-label"><b>2: </b>Fecha Inicial:</label>
+                            <input type="date" formControlName="dateStart" #dateStart required>
+                        </div>
+                        <div class="form-group d-md-flex">
+                            <label for="dateEnd" class="col-sm-5 col-form-label"><b>3: </b>Fecha Final:</label>
+                            <input type="date" formControlName="dateEnd" #dateEnd required>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="interval"><b>4: </b>Intervalo entre consultas:</label>
+                    <div class="d-flex justify-content-around">
+                        <div class="form-check" (click)="interval(20)">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                20 min
+                            </label>
+                        </div>
+                        <div class="form-check" (click)="interval(30)">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                30 min
+                            </label>
+                        </div>
+                        <div class="form-check" (click)="interval(60)">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                            <label class="form-check-label" for="exampleRadios3">
+                                1 hora
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 col-md-6 mx-auto">
+                    <div class="form-group" *ngIf="intervalo==20">
+                        <select class="custom-select" formControlName="hours" #Hours multiple>
+                            <option [ngValue]="hour" *ngFor="let hour of hours3">{{hour}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group" *ngIf="intervalo==30">
+                        <select class="custom-select" formControlName="hours" #Hours multiple>
+                            <option [ngValue]="hour" *ngFor="let hour of hours">{{hour}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group" *ngIf="intervalo==60">
+                        <select class="custom-select" formControlName="hours" #Hours multiple>
+                            <option [ngValue]="hour" *ngFor="let hour of hours2">{{hour}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mt-4 text-center">
+                    <button type="submit" class="btn btn-block text-white bg-aqua">
+                        Habilitar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<!-- sidebar -->
+<div class="bg-aqua border-light border-top" id="sidebar">
+    <div class="text-white p-2">
+      
+      <div>
+        <a class="nav-link dropdown-item" (click)="selected(currentUser._id)" routerLinkActive="activo">
+          <i class="fas fa-user fa-2x mr-3 ml-1" ></i>
+          PERFIL
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+
+      <div *ngIf="!isPatient">
+        <a class="nav-link dropdown-item" [routerLink]="['/medic']" routerLinkActive="activo">
+          <i class="fas fa-user-md fa-2x mr-3"></i>
+          MÉDICOS
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+
+      <div *ngIf="!isPatient">
+        <a class="nav-link dropdown-item" [routerLink]="['/patient']" routerLinkActive="activo">
+          <i class="fas fa-user-injured fa-2x mr-3" ></i>
+          PACIENTES
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+
+      <div *ngIf="isAdmin || isMedic">
+        <a class="nav-link dropdown-item" [routerLink]="['/reservation']" routerLinkActive="activo">
+          <i class="fas fa-calendar-plus fa-2x mr-3"></i>
+            MIS RESERVAS
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+      
+      <div *ngIf="!isMedic">
+        <a class="nav-link dropdown-item" [routerLink]="['/reservation/choose']" routerLinkActive="activo">
+          <i class="fas fa-calendar-alt fa-2x mr-3"></i>
+            RESERVAR
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+
+      <div *ngIf="!isReception">
+        <a class="nav-link dropdown-item" [routerLink]="['/chat']" routerLinkActive="activo" >
+          <i class="fas fa-envelope fa-2x mr-3"></i>
+            MENSAJERIA
+        </a>
+        <div class="dropdown-divider"></div>
+      </div>
+      
+    </div>
+</div>

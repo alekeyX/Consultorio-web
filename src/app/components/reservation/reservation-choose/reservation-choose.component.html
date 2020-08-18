@@ -1,0 +1,209 @@
+<div class="card rounded-lg shadow mb-2 bg-white animated fadeIn">
+    <div class="card-body">
+        <div class="d-md-flex justify-content-between align-items-center">
+            <h1 class="text-aqua-dark">Selección de Reservas</h1>
+        </div>
+        <!-- Inputs para mostrar lista de reservas -->
+        <div class="d-lg-flex">
+            <div class="d-md-flex w-100 mx-auto">
+                <div class="col-md-6 col-lg-6 my-3">
+                    <label for="specialty"><strong>1.</strong> Elegir especialidad</label>
+                    <select class="custom-select" id="specialty" [(ngModel)]="specialty" (change)="selectSpecialty(specialty)">
+                        <option [ngValue]="specialty" *ngFor="let specialty of specialtys">{{specialty}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-6 my-3">
+                    <label for="medic"><strong>2.</strong> Elegir Médico</label>
+                    <select class="custom-select" id="medic" [(ngModel)]="medic" (change)="selectMedic(medic)">
+                        <option [ngValue]="medic" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-md-flex w-100 mx-auto">
+                <div class="col-md-6 col-lg-6 my-3" *ngIf="!isPatient">
+                    <label for="patient"><strong>3.</strong>Elegir Paciente</label>
+                    <select class="custom-select" [(ngModel)]="namePatient" id="patient">
+                        <option [ngValue]="patient.firstName + ' ' + patient.lastName" *ngFor="let patient of patients">{{patient.username}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-6 my-3">
+                    <label for="fecha"> Filtrar por fecha</label>
+                    <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
+                        <option [ngValue]="date" *ngFor="let date of reservas">{{date}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje -->
+        <div class="container col-md-10 py-5 text-center alto" *ngIf="!loading; else main_content">
+            <h1 class="text-aqua-dark">Seleccione especialidad y médico...</h1>
+        </div>
+
+        <ng-template #main_content>
+            <!-- Mensaje si no hay datos -->
+            <h2 *ngIf="reservaByMedic.length == 0" class="no-data text-center text-aqua-dark py-5">No hay reservaciones disponibles</h2>
+            
+            <!--Lista de reservas -->
+            <div class="container col-md-8">
+                <div class="table-responsive overflow-auto alto">
+                    <table class="table table-sm table-hover" *ngIf="reservaByMedic.length > 0">
+                        <thead class="bg-aqua text-white">
+                            <tr>
+                                <th scope="col" class="text-center orderBy" (click)="orderBy('date')">Fecha</th>
+                                <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora</th>
+                                <th scope="col" class="text-center">Disponibilidad</th>
+                            </tr>
+                        </thead>
+                        <!-- Tabla para pacientes -->
+                        <tbody class="overflow-auto">
+                            <tr scope="row" *ngFor="let reserva of reservaByMedic | filterReservation:filterReservation | orderBy:order:asc ; let i = index">
+                                <td *ngIf="reserva.enable" class="text-center">
+                                    {{reserva.date | slice:0:10}}
+                                </td>
+                                <td *ngIf="reserva.enable" class="text-center">
+                                    {{reserva.hours}}
+                                </td>
+                                <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id=='' && reserva.enable" 
+                                    class="text-center text-white font-weight-bold" [ngClass]="{'text-success': reserva.patient_id===''}"
+                                    data-toggle="modal" data-target="#modalReserva">
+                                    Disponible
+                                </td>
+                                <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id!='' && reserva.enable && isPatient" class="text-center text-white font-weight-bold" 
+                                    [ngClass]="{'text-danger': reserva.patient_id!==''}">
+                                    Ocupado
+                                </td>
+                                <td (click)="selectReserva(reserva._id)" *ngIf="reserva.patient_id!='' && reserva.enable && !isPatient" class="text-center text-white font-weight-bold" 
+                                    [ngClass]="{'text-danger': reserva.patient_id!==''}"
+                                    data-toggle="modal" data-target="#cancelReserva">
+                                    Ocupado
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+
+<!-- Modal para confirmar una reserva -->
+<div>
+    <div class="modal fade" id="modalReserva" tabindex="-1" role="dialog" aria-labelledby="modalReservaTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-aqua-dark" id="exampleModalLongTitle">Confirmar Reserva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Datos de confirmacion para la reserva -->
+            <div class="modal-body">
+                <div class="d-flex">
+                    <strong class="col-4">Médico:</strong>
+                    <div class="ml-4">
+                        {{medicName}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Especialidad:</strong>
+                    <div class="ml-4">
+                        {{specialtySelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Fecha:</strong> 
+                    <div class="ml-4">
+                        {{dateSelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Hora:</strong>
+                    <div class="ml-4">
+                        {{reserv.hours}}
+                    </div>
+                </div>
+                <div class="d-flex" *ngIf="isPatient">
+                    <strong class="col-4">Paciente:</strong>
+                    <div class="ml-4">
+                        {{currentUser.firstName}} {{currentUser.lastName}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Paciente:</strong>
+                    <div class="ml-4">
+                        {{namePatient}}
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button (click)="submit()" type="button" class="btn bg-aqua text-white" data-dismiss="modal">Confirmar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para cancelar una reserva, solo lo pueden hacer medicos y recepcionistas-->
+<div>
+    <div class="modal fade" id="cancelReserva" tabindex="-1" role="dialog" aria-labelledby="cancelReservaTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-aqua-dark" id="exampleModalLongTitle">Cancelar Reserva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Datos de confirmacion para la reserva -->
+            <div class="modal-body">
+                <div class="d-flex">
+                    <strong class="col-4">Médico:</strong>
+                    <div class="ml-4">
+                        {{medicName}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Especialidad:</strong>
+                    <div class="ml-4">
+                        {{specialtySelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Fecha:</strong> 
+                    <div class="ml-4">
+                        {{dateSelected}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Hora:</strong>
+                    <div class="ml-4">
+                        {{reserv.hours}}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <strong class="col-4">Paciente:</strong>
+                    <div class="ml-4">
+                        {{reserv.patient_id}}
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cancelar
+                </button>
+                <button (click)="cancelReserv()" type="button" class="btn bg-aqua text-white" data-dismiss="modal">
+                    Quitar Reserva
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

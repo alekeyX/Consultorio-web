@@ -1,0 +1,82 @@
+<div class="card rounded bg-white rounded-lg shadow mb-2 animated fadeIn">
+    <div class="card-body">
+        <h1 class="text-aqua-dark mb-3">Detalles de Reserva</h1>
+
+        <!-- Mensaje de cargando -->
+        <div *ngIf="!reserva; else main_content" class="container">
+            <div class="row">
+                <div class="mx-auto d-flex align-items-center">
+                    <h1 class="text-aqua-dark mr-2">Cargando...</h1>
+                    <span *ngIf="loading" class="spinner-border text-aqua-dark"></span>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #main_content>
+            <!-- informacion de la reserva -->
+            <div class="d-flex justify-content-center mb-4">                
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="d-flex p-2">
+                            <strong class="col-5 col-md-6">Fecha:</strong>
+                            <div class="col-7 col-md-6">{{ reserva.date | slice:0:10 }}</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="d-flex p-2">
+                            <strong class="col-5 col-md-6">Día:</strong>
+                            <div class="col-7 col-md-6">{{ reserva.days }}</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="d-flex p-2">
+                            <strong class="col-5 col-md-6">Hora:</strong>
+                            <div class="col-7 col-md-6">{{ reserva.hours }} hrs.</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="d-flex p-2">
+                            <strong class="col-5 col-md-6">Paciente:</strong>
+                            <div class="col-7 col-md-6" *ngIf="reserva.patient_id !== ''">{{ reserva.patient_id }} </div>
+                            <div class="col-7 col-md-6" *ngIf="reserva.patient_id === ''">Vacio </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="d-flex p-2">
+                            <strong class="col-5 col-md-6">Médico:</strong>
+                            <div class="col-7 col-md-6">{{ medic.firstName }} {{medic.lastName}} </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="d-flex p-2">
+                            <strong class="col-5 col-md-6">Especialidad:</strong>
+                            <div class="col-7 col-md-6">{{ medic.specialty }} </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="d-flex p-2" *ngIf="reserva.enable">
+                            <strong class="col-5 col-md-6">Estado:</strong>
+                            <div class="col-7 col-md-6">Activo</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="d-flex p-2" *ngIf="!reserva.enable">
+                            <strong class="col-5 col-md-6">Estado:</strong>
+                            <div class="col-7 col-md-6">Inactivo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones para eliminar o editar el registro -->
+            <div class="d-flex justify-content-center justify-content-md-end" *ngIf="isAdmin || isMedic">
+                <button class="btn bg-aqua text-white mx-1" [routerLink]="['/reservation/edit', reserva._id]">
+                    Editar
+                </button>
+                <button class="btn btn-danger ml-1" (click)="deleteReserva(reserva._id)">
+                    Eliminar
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</div>

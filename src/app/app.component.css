@@ -1,0 +1,19 @@
+/* Navbar */
+app-navbar {
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+/* Contenido */
+#content {
+    margin-top: 3.9rem;
+}
+/* Chatboy */
+#chat {
+    position: fixed;
+    bottom: 5px;
+    right: 2px;
+    z-index: 1;
+}

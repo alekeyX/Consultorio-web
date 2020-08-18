@@ -1,0 +1,44 @@
+a {
+    color: #ffffff;
+}
+
+a:hover {
+    background-color: rgb(247, 247, 247);
+    color: #15B9C6;
+}
+
+.dropdown-item {
+    padding: .5rem 1.5rem;
+    color: #ffffff;
+    border: 0;
+}
+
+.activo {
+    background: #ffffff;
+    color: #15B9C6;
+}
+
+/* sidebar */
+#sidebar {
+    height: 100%;
+    width: inherit;
+}
+
+/* Separadores */
+.dropdown-divider {
+    margin: 0;
+}
+
+/* Css para telefono */
+
+/* lista del navbar */
+@media screen and (max-width:600) {
+    
+.dropdown-item {
+    padding: .5rem 0;
+    color: #ffffff;
+    border: 0;
+}
+
+}
+

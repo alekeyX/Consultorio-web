@@ -1,0 +1,24 @@
+<!-- Boton para abrir chatbot -->
+<div *ngIf="!chatShow; else chatbot">
+    <button class="btn btn-info" type="button" (click)="chatShow = !chatShow" title="Abrir">
+        <div class="d-flex align-items-center">
+            <i class="fas fa-robot fa-2x mr-2"></i>
+            <div>
+                MediBot
+            </div>
+        </div>
+    </button>
+</div>
+
+<ng-template #chatbot>
+    <!-- Boton para ocultar chatbot -->
+    <div>
+        <button class="btn btn-info btn-block p-0" type="button" (click)="chatShow = !chatShow" title="Ocultar">
+            <span><i class="fas fa-angle-down"></i></span>
+        </button>
+    </div>
+    <!-- Chatbot -->
+    <div>
+        <iframe width="300" height="400" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/6d87be63-b366-40cd-84a1-2e6c27c8e7a2"></iframe>
+    </div>
+</ng-template>

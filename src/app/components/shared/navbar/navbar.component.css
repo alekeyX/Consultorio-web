@@ -1,0 +1,80 @@
+/* Navbar */
+.navbar {
+    position: relative;
+    padding: 0rem 0rem;
+    height: 4rem;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 0%;
+    font-weight: bold;
+}
+
+.activo {
+    border-bottom: 2px solid #ffffff;
+}
+
+.padtop {
+    padding-top: 0.45rem;
+}
+
+.dropdown-item:hover {
+    background: #15B9C6;
+    color: white;
+    cursor: pointer;
+}
+/* Boton de menu collapsable */
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(245, 246, 247, 0.25);
+}
+
+.navbar-toggler {
+    color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.mouse {
+    cursor: pointer;
+}
+
+/* Imagen de perfil */
+.imgRedonda {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+/* Css para desktop */
+
+
+/* lista del navbar */
+@media screen and (min-width:1000px) {
+    
+#lista-navbar {
+    margin-left: 2rem;
+}
+
+li a {
+    height: 4rem;
+    padding-top: 1.4rem;
+}
+}
+
+/* CSS para phone */
+
+@media screen and (max-width:1000px) {
+
+#lista-navbar {
+    margin-left: 1.2rem;
+}
+
+#empty {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+}

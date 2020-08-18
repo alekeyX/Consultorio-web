@@ -1,0 +1,9 @@
+/* input de seleccion */
+.custom-select-sm {
+    height: calc(1.5em + 0.75rem + 5px);
+}
+
+#foto-perfil {
+    width: 200px;
+    height: 200px;
+}

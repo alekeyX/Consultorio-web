@@ -1,0 +1,83 @@
+.imgRedonda {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+#specialty {
+    font-size: 12px;
+}
+
+#selected {
+    cursor: pointer;
+}
+
+#userTo {
+    top: 0px;
+}
+
+#notify {
+    top: 20%;
+    position: absolute;
+}
+
+#from {
+    font-size: 10px;
+}
+
+#messages {
+    margin-bottom: 25px;
+    height: 586px;
+}
+
+.chat {
+    list-style: none;
+}
+
+#time {
+    font-size: 10px;
+}
+
+#contenedor{
+    display: inline-block;
+    min-width: 100%;
+}
+
+#texto{
+    width: 100%;
+    background: #ffffff;
+}
+
+#chat-users, #chat-list {
+    width: 350px;
+}
+
+#formulario {
+    bottom: 0px;
+    position: absolute;
+    width: 350px;
+}
+
+@media screen and (max-width: 400px) {
+    #formulario {
+        bottom: 0px;
+        position: absolute;
+        width: 344px;
+    }
+
+    #chat-users, #chat-list {
+        width: 344px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    #formulario {
+        bottom: 0px;
+        position: absolute;
+        width: 288px;
+    }
+
+    #chat-users, #chat-list {
+        width: 288px;
+    }
+}

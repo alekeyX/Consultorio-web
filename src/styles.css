@@ -1,1 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+    height: 100%;
+    position: relative;
+}
+body {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0px;
+    background-color: rgba(137, 247, 255, 0.123);
+    /* background-image: url('./assets/img/doctor-vestido-con-una-bata-blanca-y-una-corbata-azul-sosteniendo-una-carpeta.jpg');
+    background-repeat: no-repeat; */
+}
+
+a, td {
+    cursor: pointer;
+}
+
+app-footer {
+    width: 100%;
+    color: white;
+}
+
+/* Colores base */
+.bg-aqua {
+    background: #15B9C6;
+}
+
+.bg-aqua-light {
+    background: #D5F2F3;
+}
+
+.text-aqua-dark {
+    color: #0F7F87;
+}
+
+.orderBy {
+    cursor: pointer;
+}
+
+/* Animacion */
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
