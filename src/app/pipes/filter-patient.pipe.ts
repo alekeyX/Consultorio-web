@@ -9,7 +9,9 @@ export class FilterPatientPipe implements PipeTransform {
     if (arg === '' || arg.length < 3) { return value; }
     const resultado = [];
     for (const name of value) {
-      if (name.firstName.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
+      if (name.firstName.toLowerCase().indexOf(arg.toLowerCase()) > -1
+          || name.lastName.toLowerCase().indexOf(arg.toLowerCase()) > -1
+          || name.username.toLowerCase().indexOf(arg.toLowerCase()) > -1) {
         resultado.push(name);
       }
     }

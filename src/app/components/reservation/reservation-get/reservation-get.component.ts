@@ -40,16 +40,19 @@ export class ReservationGetComponent implements OnInit {
     this.getReservas();  
   }
   
+  // Obtener las reservas
   getReservas() {
     setInterval(() => {this.loading = true; }, 800);
+    // si el usuario es admin obtiene todas las reservas
     if (this.currentUser.role === Role.Admin) {
       this.reservationService.getAll().subscribe((data) => {
         this.reservations = data;
-      this.filterDate();
-      this.getMedics();
-      this.ReservationsActually();
+        this.filterDate();
+        this.getMedics();
+        this.ReservationsActually();
       });
     } else {
+    // si el usuario es medico obtiene sus reservas por su id
       if (this.currentUser.role === Role.Medic) {
         this.reservationService.getReservByMedic(this.currentUser._id).subscribe((data) => {
           this.reservations = data;
@@ -57,6 +60,7 @@ export class ReservationGetComponent implements OnInit {
           this.ReservationsActually();
         })
       } else {
+    // si el usuario es paciente obtiene las reservas por su nombre y apellido
         if (this.currentUser.role == Role.Patient) {
           this.reservationService.getReservByPatient(this.currentUser.firstName + ' ' + this.currentUser.lastName)
           .subscribe((data) => {
@@ -69,12 +73,14 @@ export class ReservationGetComponent implements OnInit {
     }
   }
 
+  // Obtener registros de los medicos
   getMedics() {
     this.medicService.getAll().subscribe((data) => {
       this.medics = data;
     })
   }
 
+  // Eliminar una reserva por su id
   removeReservation(reservation, index) {
     if (window.confirm('Esta seguro?')) {
         this.reservationService.delete(reservation._id).subscribe((data) => {

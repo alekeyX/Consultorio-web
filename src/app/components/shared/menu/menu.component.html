@@ -26,10 +26,10 @@
         <div class="dropdown-divider"></div>
       </div>
 
-      <div *ngIf="isAdmin || isMedic">
+      <div *ngIf="isAdmin || isMedic || isPatient">
         <a class="nav-link dropdown-item" [routerLink]="['/reservation']" routerLinkActive="activo">
           <i class="fas fa-calendar-plus fa-2x mr-3"></i>
-            MIS RESERVAS
+            MIS CONSULTAS
         </a>
         <div class="dropdown-divider"></div>
       </div>

@@ -12,25 +12,25 @@
         <div *ngIf="!loading; else main_content" class="container">
             <div class="row">
                 <div class="mx-auto d-flex align-items-center">
-                    <h1 class="text-aqua-dark">Cargando...</h1>
+                    <h1 class="text-aqua-dark">Cargando... </h1>
                     <span class="spinner-border text-aqua-dark"></span>
                 </div>
             </div>
         </div>
 
         <ng-template #main_content>
-            <div class="d-md-flex justify-content-between align-items-center">
+            <div class="d-md-flex justify-content-between align-items-end">
 
                 <!-- inputs para filtrar informacion -->
-                <div class="d-md-flex">
-                    <div class="col-md-4 col-lg-4 my-3">
+                <div class="d-md-flex p-0 col-12 col-md-8 col-lg-9">
+                    <div class="p-0 pr-md-2 col-md-6 col-lg-4 my-3">
                         <label for="fecha">Filtrar por fecha</label>
                         <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
-                            <option value=""> Todos</option>
+                            <option value="">Todos</option>
                             <option *ngFor="let date of filterDates">{{date}}</option>
                         </select>
                     </div>
-                    <div class="col-md-4 col-lg-4 my-3" *ngIf="isAdmin">
+                    <div class="p-0 pr-md-2 col-md-6 col-lg-4 my-3" *ngIf="isAdmin">
                         <label for="medico">Filtrar por médico</label>
                         <select class="custom-select" [(ngModel)]="filterReservationByMedic" id="medico">
                             <option value="">Todos</option>
@@ -40,8 +40,9 @@
                 </div>
 
                 <!-- Boton para mostrar los registros vigentes o todos los registros -->
-                <div class="mb-2 mb-md-0">
-                    <button class="btn btn-block bg-aqua text-white" (click)="allReservations = !allReservations" title="Mostrar/Ocular todas las reservas">
+                <div class="p-0 col-12 col-md-4 col-lg-3">
+                    <button class="btn btn-block bg-aqua text-white mb-3 col-lg-11 col-xl-10 float-right" 
+                            (click)="allReservations = !allReservations" title="Mostrar/Ocular todas las reservas">
                         <div *ngIf="allReservations">
                             Reservas activas
                         </div>
@@ -84,7 +85,7 @@
                     </tbody>
 
                     <ng-template #all_reservation>
-                        <tbody *ngIf="allReservations; else all_reservation">
+                        <tbody>
                             <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | filterReservationByMedic:filterReservationByMedic | orderBy:order:asc ; let i = index">
                                 <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
                                 <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
