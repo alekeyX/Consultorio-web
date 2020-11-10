@@ -3,12 +3,12 @@
     <div class="card-body alto">
       <div class="container h-100 col-md-8 mb-3">
         <!-- Titulos -->
-        <h1 class="card-title text-center text-aqua-dark my-3">
+        <h1 class="card-title text-center text-aqua-dark mt-3 mb-2">
           <i class="d-none fas fa-stethoscope pr-3 pl-2 color-icon text-aqua-dark"></i>
           Consultorio Médico
         </h1>
         <div class="mb-5">
-          <div class="d-lg-flex justify-content-center align-items-center p-1 mb-3" *ngIf="currentUser">
+          <div class=" justify-content-center align-items-center p-1 mb-3" *ngIf="currentUser">
               <h2 class="card-title text-center mr-2 text-aqua-dark">Bienvenido</h2>
               <h2 class="card-title text-center text-aqua-dark">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
           </div>

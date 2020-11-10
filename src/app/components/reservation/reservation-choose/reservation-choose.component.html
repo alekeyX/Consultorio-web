@@ -29,6 +29,7 @@
                 <div class="col-md-6 col-lg-6 my-3">
                     <label for="fecha"> Filtrar por fecha</label>
                     <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
+                        <option value="">Todos</option>
                         <option [ngValue]="date" *ngFor="let date of reservas">{{date}}</option>
                     </select>
                 </div>
