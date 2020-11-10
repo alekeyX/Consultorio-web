@@ -25,12 +25,12 @@ export class PatientAddComponent implements OnInit {
     private patientService: PatientService,
     private authService: AuthenticationService
     ) {
-    this.createForm();
-  }
-
-  ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+    }
+    
+    ngOnInit(): void {
+      this.currentUser = this.authService.currentUserValue;
+      this.authService.currentUser.subscribe(x => this.currentUser = x);
+      this.createForm();
   }
 
   // Creacion de formulario angForm
@@ -51,6 +51,7 @@ export class PatientAddComponent implements OnInit {
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
       imagePath: [''],
+      medic_id: [this.currentUser._id]
     });
   }
 
@@ -98,7 +99,7 @@ export class PatientAddComponent implements OnInit {
       formData.append('address', this.angForm.get('address').value);
       formData.append('phone', this.angForm.get('phone').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
-      console.log(this.angForm.value);
+      formData.append('medic_id',  this.angForm.get('medic_id').value);
       
       // Envio del formData al servicio 
       this.patientService.create(formData).subscribe(res => {

@@ -11,10 +11,11 @@ import { Role } from '../../models/role';
   styleUrls: ['./patient-get.component.css']
 })
 export class PatientGetComponent implements OnInit {
+
   currentUser: any;
   patients: Patient[] = [];
-  loading = false;
-  filterPatient = '';
+  loading: boolean = false;
+  filterPatient: string = '';
   order: string = '';
   asc: boolean = false;
 
@@ -33,9 +34,23 @@ export class PatientGetComponent implements OnInit {
   // Obtener todos los pacientes
   getPatients() {
     setInterval(() => {this.loading = true; }, 800);
-    this.patientService.getAll().subscribe((data) => {
-          this.patients = data;
-        });
+    switch (this.currentUser.role) {
+      case 'Admin':
+        this.patientService.getAll().subscribe((data) => {
+              this.patients = data;
+            });
+        break;
+      case 'Reception':
+        this.patientService.getAll().subscribe((data) => {
+              this.patients = data;
+            });
+        break;
+      default:
+        this.patientService.getPatientByMedic(this.currentUser._id).subscribe((data) => {
+              this.patients = data;
+            });
+        break;
+    }
   }
 
   // Eliminar el registro de un paciente

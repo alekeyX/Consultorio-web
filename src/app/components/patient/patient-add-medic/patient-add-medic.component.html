@@ -1,22 +1,10 @@
 <div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
     <div class="card-body">
         <div class="d-md-flex justify-content-between align-items-center mb-1">
-            <h1 class="text-aqua-dark">Lista de Pacientes</h1>
+            <h1 class="text-aqua-dark">Pacientes Registrados</h1>
             <div class="d-md-flex">
                 <div class="form-group mb-0 p-1">
                     <input type="text" class="form-control" name="filterPatient" placeholder="Buscar..." [(ngModel)]="filterPatient">
-                </div>
-                <div class="p-1" *ngIf="isAdmin || isMedic">
-                    <a class="btn btn-block bg-aqua text-white" [routerLink]="['/patient/find']" 
-                        routerLinkActive="router-link-active"  role="button">
-                        Pacientes Registrados
-                    </a>
-                </div>
-                <div class="p-1">
-                    <a class="btn btn-block bg-aqua text-white" [routerLink]="['/patient/create']" 
-                        routerLinkActive="router-link-active"  role="button">
-                        Nuevo Paciente
-                    </a>
                 </div>
             </div>
         </div>
@@ -32,18 +20,16 @@
         
         <ng-template #main_content>
             <!-- Mensaje si no hay datos-->
-            <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen pacientes añadidos!</h2>
+            <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen pacientes registrados</h2>
             
             <!-- lista de pacientes -->
-            <div class="table-responsive overflow-auto">
+            <div class="table-responsive overflow-auto" *ngIf="isAdmin || isMedic">
                 <table class="table table-sm table-hover" *ngIf="patients.length > 0">
                     <thead class="bg-aqua text-white">
                         <tr>
                             <th scope="col" class="orderBy" (click)="orderBy('username')">Código</th>
                             <th scope="col" class="orderBy" (click)="orderBy('firstName')">Nombre</th>
                             <th scope="col">Teléfono</th>
-                            <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
-                            <th scope="col" class="text-center" *ngIf="isMedic">Historial</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,11 +37,6 @@
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
-                            <td scope="col" class="text-center" *ngIf="isMedic || isAdmin">
-                                <a [routerLink]="['/history', patient._id]" class="mr-2" title="Historial Clínico"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
-                                <a [routerLink]="['/patient/update', patient._id]" class="mx-1"  title="Editar"><i class="fas fa-edit text-info"></i></a>
-                                <a (click)="removePatient(patient, i)" class="ml-1" *ngIf="isAdmin" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>

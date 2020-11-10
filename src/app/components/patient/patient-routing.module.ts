@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../../components/helpers/auth.guard';
+import { PatientAddMedicComponent } from './patient-add-medic/patient-add-medic.component';
 import { PatientAddComponent } from './patient-add/patient-add.component';
 import { PatientEditComponent } from './patient-edit/patient-edit.component';
 import { PatientGetComponent } from './patient-get/patient-get.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'signin', component: PatientLoginComponent },
   { path: 'update/:id', component: PatientEditComponent, canActivate: [AuthGuard] },
   { path: '', component: PatientGetComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: PatientProfileComponent, canActivate: [AuthGuard] },
+  { path: 'find', component: PatientAddMedicComponent, canActivate: [AuthGuard] },
+  { path: ':id', component: PatientProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

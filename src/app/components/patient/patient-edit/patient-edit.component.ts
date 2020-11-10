@@ -55,7 +55,7 @@ export class PatientEditComponent implements OnInit {
           placeBirth: [data.placeBirth],
           address: [data.address],
           phone: [data.phone, Validators.pattern('^[0-9]+$')],
-          imagePath: [data.imagePath],
+          imagePath: [data.imagePath]
         });
     });
   }
@@ -77,7 +77,7 @@ export class PatientEditComponent implements OnInit {
       placeBirth: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      imagePath: [''],
+      imagePath: ['']
     });
   }
 

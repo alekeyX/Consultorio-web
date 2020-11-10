@@ -1,0 +1,10 @@
+.table-responsive{
+    height: 34rem;  
+}
+
+thead tr:nth-child(1) th{
+    background: #15B9C6;
+    position: sticky;
+    top: -1;
+    z-index: 20;
+}

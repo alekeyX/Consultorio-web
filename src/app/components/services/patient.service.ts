@@ -57,6 +57,14 @@ export class PatientService {
       catchError(this.errorHandler)
     );
   }
+  
+  // Medico adiciona su id a un paciente
+  medicAddPatient(id: string, medic_id: string) {
+    return this.httpClient.put(environment.apiUrl + '/patient/' + id + '/' + medic_id , medic_id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
 
   // Eliminar un paciente por id
   delete(id: string) {
