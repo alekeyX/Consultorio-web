@@ -19,8 +19,8 @@ export class MedicEditComponent implements OnInit {
   currentUser: Medic;
   error: string;
   image: string;
-  generos = ['Masculino', 'Femenino', 'Otro'];
-  roles = ['Médico', 'Administrador'];
+  generos: string[] = ['Masculino', 'Femenino', 'Otro'];
+  roles: string[] = ['Médico', 'Administrador', 'Recepción'];
 
   constructor(
     private fb: FormBuilder,
@@ -118,14 +118,16 @@ export class MedicEditComponent implements OnInit {
         formData.append('specialty', this.angForm.get('specialty').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
         
-        if (this.angForm.get('role').value === 'Administrador') {
-          formData.append('role', 'Admin');
-        } else {
-          if (this.angForm.get('role').value === 'Médico') {
+        switch (this.angForm.get('role').value) {
+          case 'Administrador':
+            formData.append('role', 'Admin');
+            break;
+          case 'Médico':
             formData.append('role', 'Medic');
-          } else {
+            break;
+          case 'Recepción':
             formData.append('role', 'Reception');
-          }
+            break;
         }
         // envio de id y formData al servicio para actualizar el registro
         const id = this.route.snapshot.paramMap.get('id');
