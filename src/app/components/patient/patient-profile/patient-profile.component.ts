@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../models/patient';
 import { Role } from '../../models/role';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-patient-profile',
@@ -22,7 +23,8 @@ export class PatientProfileComponent implements OnInit {
       private patientService: PatientService,
       private authenticationService: AuthenticationService,
       private activatedRoute: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService
   ) {  }
 
   ngOnInit(): void {
@@ -54,6 +56,7 @@ export class PatientProfileComponent implements OnInit {
       this.patientService.delete(id)
         .subscribe(res => {
           this.router.navigate(['/patient']);
+          this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName);
         });
       }
   }

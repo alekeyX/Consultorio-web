@@ -6,6 +6,7 @@ import { ReservationService } from '../../services/reservation.service';
 import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 import { element } from 'protractor';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reservation-get',
@@ -30,7 +31,8 @@ export class ReservationGetComponent implements OnInit {
     private reservationService: ReservationService,
     private medicService: MedicService,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) {
   }
   
@@ -83,8 +85,9 @@ export class ReservationGetComponent implements OnInit {
   // Eliminar una reserva por su id
   removeReservation(reservation, index) {
     if (window.confirm('Esta seguro?')) {
-        this.reservationService.delete(reservation._id).subscribe((data) => {
+        this.reservationService.delete(reservation._id).subscribe((res) => {
           this.reservations.splice(index, 1);
+          this.toastr.success(res.message, '');
         });
     }
   }

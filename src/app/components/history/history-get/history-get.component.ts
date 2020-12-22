@@ -4,6 +4,7 @@ import { HistoryService } from '../../services/history.service';
 import { History } from '../../models/history';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../models/role';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-history-get',
@@ -24,6 +25,7 @@ export class HistoryGetComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -54,8 +56,9 @@ export class HistoryGetComponent implements OnInit {
   // Eliminar registro de historia clinica
   removeHistory(history: { _id: any; }, index: number) {
     if (window.confirm('Esta seguro de eliminar la historia clínica?')) {
-        this.historyService.delete(history._id).subscribe(() => {
+        this.historyService.delete(history._id).subscribe((res) => {
           this.histories.splice(index, 1);
+          this.toastr.success(res.message, '')
         });
     }
   }

@@ -7,6 +7,7 @@ import { PatientService } from '../../services/patient.service';
 import { Reservation } from '../../models/reservation';
 import { Medic } from '../../models/medic';
 import { Patient } from '../../models/patient';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class ReservationChooseComponent implements OnInit {
     private reservationService: ReservationService,
     private medicService: MedicService,
     private patientService: PatientService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) {
     this.getSpecialty();
   }
@@ -145,6 +147,9 @@ export class ReservationChooseComponent implements OnInit {
     this.reserv.patient_id = this.namePatient;
     this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
       this.getReservasByMedic(this.medic);
+      this.toastr.success(res.message, '');
+    }, (error) => {
+      this.toastr.error('Intente nuevamente', error);
     });
   }
 

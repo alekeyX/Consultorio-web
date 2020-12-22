@@ -11,6 +11,8 @@ import { MedicModule } from './components/medic/medic.module';
 import { HistoryModule } from './components/history/history.module';
 import { ReservationModule } from './components/reservation/reservation.module';
 import { SharedModule } from './components/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 // Componentes de pagina
 import { HomeComponent } from './components/home/home.component';
@@ -50,7 +52,9 @@ import { ChatbotComponent } from './components/chat/chatbot/chatbot.component';
     HistoryModule,
     ReservationModule,
     ChatModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   exports: [
   ],

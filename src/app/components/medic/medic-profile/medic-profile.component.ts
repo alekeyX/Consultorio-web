@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MedicService } from '../../services/medic.service';
 import { Medic } from '../../models/medic';
 import { Role } from '../../models/role';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class MedicProfileComponent implements OnInit {
       private medicService: MedicService,
       private authenticationService: AuthenticationService,
       private activatedRoute: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService
   ) {  }
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class MedicProfileComponent implements OnInit {
     if (window.confirm('¿Esta seguro que quiere eliminar el registro del médico?')) {
       this.medicService.delete(id)
         .subscribe(res => {
-          console.log(res);
+          this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName)
           this.router.navigate(['/medic']);
         });
       }

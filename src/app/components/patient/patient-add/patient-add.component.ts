@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PatientService } from '../../services/patient.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Patient } from '../../models/patient';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-patient-add',
@@ -15,7 +15,6 @@ export class PatientAddComponent implements OnInit {
   angForm: FormGroup;
   currentUser: any;
   submitted = false;
-  error: string;
   image: string;
   generos = ['Masculino', 'Femenino', 'Otro'];
 
@@ -23,7 +22,8 @@ export class PatientAddComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private patientService: PatientService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private toastr: ToastrService
     ) {
     }
     
@@ -104,8 +104,9 @@ export class PatientAddComponent implements OnInit {
       // Envio del formData al servicio 
       this.patientService.create(formData).subscribe(res => {
         this.router.navigate(['patient']);
+        this.toastr.success(res.message, '');
       }, (error) => {
-        this.error = error;
+        this.toastr.error('Intente nuevamente', error);
       });
     }
   }

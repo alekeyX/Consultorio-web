@@ -4,6 +4,7 @@ import { PatientService } from '../../services/patient.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Patient } from '../../models/patient';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-patient-edit',
@@ -26,7 +27,8 @@ export class PatientEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private patientService: PatientService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -131,8 +133,9 @@ export class PatientEditComponent implements OnInit {
         this.patientService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/patient']);
+            this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName);
           }, (error) => {
-            console.log(error);
+            this.toastr.error('Intente nuevamente', error);
           });
       }
     }

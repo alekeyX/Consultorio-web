@@ -19,8 +19,8 @@ export class PatientService {
   constructor(private httpClient: HttpClient) { }
 
   // Crear un paciente
-  create(patient: any): Observable<Patient> {
-    return this.httpClient.post<Patient>(environment.apiUrl + '/patient/', patient)
+  create(patient: any): Observable<any> {
+    return this.httpClient.post<any>(environment.apiUrl + '/patient/', patient)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -51,8 +51,8 @@ export class PatientService {
   }
 
   // Actualizar un paciente por id
-  update(id: string, patient: any): Observable<Patient> {
-    return this.httpClient.put<Patient>(environment.apiUrl + '/patient/' + id, patient)
+  update(id: string, patient: any): Observable<any> {
+    return this.httpClient.put<any>(environment.apiUrl + '/patient/' + id, patient)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -67,8 +67,8 @@ export class PatientService {
   }
 
   // Eliminar un paciente por id
-  delete(id: string) {
-    return this.httpClient.delete<Patient>(environment.apiUrl + '/patient/' + id)
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete<any>(environment.apiUrl + '/patient/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -81,9 +81,8 @@ export class PatientService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = error.error.message;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

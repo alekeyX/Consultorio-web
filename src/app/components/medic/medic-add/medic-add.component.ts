@@ -4,6 +4,7 @@ import { MedicService } from '../../services/medic.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Medic } from '../../models/medic';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-medic-add',
@@ -15,7 +16,6 @@ export class MedicAddComponent implements OnInit {
   angForm: FormGroup;
   currentUser: Medic;
   submitted = false;
-  error: string;
   image: string;
   generos = ['Masculino', 'Femenino', 'Otro'];
   roles = ['Médico', 'Administrador', 'Recepción'];
@@ -25,6 +25,7 @@ export class MedicAddComponent implements OnInit {
     private router: Router,
     public medicService: MedicService,
     private authenticationService: AuthenticationService,
+    private toastr: ToastrService
     ) {
       this.createForm();
     }
@@ -103,8 +104,9 @@ export class MedicAddComponent implements OnInit {
       // Envio del formData al servicio
       this.medicService.create(formData).subscribe(res => {
         this.router.navigate(['medic']);
+        this.toastr.success(res.message, '');
       }, (error) => {
-        this.error = error;
+        this.toastr.error('Intente nuevamente', error);
       });
     }
   }

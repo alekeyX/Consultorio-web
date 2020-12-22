@@ -8,6 +8,7 @@ import { Reservation } from '../../models/reservation';
 import { Medic } from '../../models/medic';
 import { Patient } from '../../models/patient';
 import { Role } from '../../models/role';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reservation-edit',
@@ -31,7 +32,8 @@ export class ReservationEditComponent implements OnInit {
     private router: Router,
     private reservationService: ReservationService,
     private patientService: PatientService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -85,8 +87,9 @@ export class ReservationEditComponent implements OnInit {
     }
     this.reservationService.update(this.reservaId, this.reserva).subscribe(res => {
       this.router.navigate(['reservation']);
+      this.toastr.success(res.message, '');
     }, (error) => {
-      this.error = error;
+      this.toastr.error('Intente nuevamente', error);
     });
   }
 

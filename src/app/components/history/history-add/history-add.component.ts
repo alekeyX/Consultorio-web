@@ -4,6 +4,7 @@ import { HistoryService } from '../../services/history.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { History } from '../../models/history';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-history-add',
@@ -15,7 +16,6 @@ export class HistoryAddComponent implements OnInit {
   angForm: FormGroup;
   currentUser: any;
   submitted = false;
-  error: string;
   image: string;
   patientId: string;
   eFisico: boolean = false;
@@ -33,6 +33,7 @@ export class HistoryAddComponent implements OnInit {
     private route: ActivatedRoute,
     public historyService: HistoryService,
     private authenticationService: AuthenticationService,
+    private toastr: ToastrService
     ) {
       this.patientId = this.route.snapshot.paramMap.get('id');
     }
@@ -114,8 +115,9 @@ export class HistoryAddComponent implements OnInit {
     } else {
       this.historyService.create(this.angForm.value).subscribe(res => {
         this.router.navigate(['history/' + this.patientId]);
+        this.toastr.success(res.message, '');
       }, (error) => {
-        this.error = error;
+        this.toastr.error('Intente nuevamente', error);
       });
     }
   }

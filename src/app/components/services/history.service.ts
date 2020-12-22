@@ -19,8 +19,8 @@ export class HistoryService {
   constructor(private httpClient: HttpClient) { }
 
   // Crear un registro
-  create(history: any): Observable<History> {
-    return this.httpClient.post<History>(environment.apiUrl + '/history', history)
+  create(history: any): Observable<any> {
+    return this.httpClient.post<any>(environment.apiUrl + '/history', history)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -51,16 +51,16 @@ export class HistoryService {
   }
 
   // Actualizar una historia por su id y un formulario
-  update(id: string, history: any): Observable<History> {
-    return this.httpClient.put<History>(environment.apiUrl + '/history/' + id, history)
+  update(id: string, history: any): Observable<any> {
+    return this.httpClient.put<any>(environment.apiUrl + '/history/' + id, history)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   // Eliminar una historia por su id
-  delete(id: string) {
-    return this.httpClient.delete<History>(environment.apiUrl + '/history/' + id)
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete<any>(environment.apiUrl + '/history/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -73,7 +73,7 @@ export class HistoryService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = error.error.message;
     }
     console.log(errorMessage);
     return throwError(errorMessage);

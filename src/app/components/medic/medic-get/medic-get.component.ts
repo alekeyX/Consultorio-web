@@ -4,6 +4,7 @@ import { MedicService } from '../../services/medic.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Role } from '../../models/role';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-medic-get',
@@ -22,7 +23,8 @@ export class MedicGetComponent implements OnInit {
   constructor(
       private medicService: MedicService,
       private router: Router,
-      private authenticationService: AuthenticationService
+      private authenticationService: AuthenticationService,
+      private toastr: ToastrService
     ) {
       this.getMedics();
   }
@@ -43,7 +45,8 @@ export class MedicGetComponent implements OnInit {
   // Eliminar el registro de un medico
   removeMedic(medic, index) {
     if (window.confirm('¿Esta seguro que quiere eliminar el registro del médico?')) {
-        this.medicService.delete(medic._id).subscribe((data) => {
+        this.medicService.delete(medic._id).subscribe((res) => {
+          this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName)
           this.medics.splice(index, 1);
         });
     }

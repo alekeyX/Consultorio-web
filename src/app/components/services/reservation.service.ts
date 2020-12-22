@@ -19,8 +19,8 @@ export class ReservationService {
   constructor(private httpClient: HttpClient) { }
 
   // Crear reservas
-  create(reserva: any): Observable<Reservation> {
-    return this.httpClient.post<Reservation>(environment.apiUrl + '/reservation', reserva)
+  create(reserva: any): Observable<any> {
+    return this.httpClient.post<any>(environment.apiUrl + '/reservation', reserva)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -59,16 +59,16 @@ export class ReservationService {
   }
 
   // Actualizar una reserva por id
-  update(id: string, reservation: any): Observable<Reservation> {
-    return this.httpClient.put<Reservation>(environment.apiUrl + '/reservation/' + id, reservation)
+  update(id: string, reservation: any): Observable<any> {
+    return this.httpClient.put<any>(environment.apiUrl + '/reservation/' + id, reservation)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   // Eliminar una reserva por id
-  delete(id: string) {
-    return this.httpClient.delete<Reservation>(environment.apiUrl + '/reservation/' + id)
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete<any>(environment.apiUrl + '/reservation/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -81,7 +81,7 @@ export class ReservationService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = error.error.message;
     }
     console.log(errorMessage);
     return throwError(errorMessage);

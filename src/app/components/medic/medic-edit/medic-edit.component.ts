@@ -4,6 +4,7 @@ import { MedicService } from '../../services/medic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Medic } from '../../models/medic';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-medic-edit',
@@ -27,7 +28,8 @@ export class MedicEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public medicService: MedicService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
     ) {
   }
 
@@ -134,8 +136,9 @@ export class MedicEditComponent implements OnInit {
         this.medicService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/medic']);
+            this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName)
           }, (error) => {
-            console.log(error);
+            this.toastr.error('Intente nuevamente', error);
           });
       }
     }

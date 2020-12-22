@@ -19,8 +19,8 @@ export class MedicService {
   constructor(private httpClient: HttpClient) { }
 
   // Crear un medico
-  create(medic: any): Observable<Medic> {
-    return this.httpClient.post<Medic>( environment.apiUrl + '/medic/', medic)
+  create(medic: any): Observable<any> {
+    return this.httpClient.post<any>( environment.apiUrl + '/medic/', medic)
     .pipe(
         catchError(this.errorHandler)
     );
@@ -43,29 +43,31 @@ export class MedicService {
   }
 
   // Editar medico por su id
-  update(id: string, medic: any): Observable<Medic> {
-    return this.httpClient.put<Medic>(environment.apiUrl + '/medic/' + id, medic)
+  update(id: string, medic: any): Observable<any> {
+    return this.httpClient.put<any>(environment.apiUrl + '/medic/' + id, medic)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   // Eliminar medico por su id
-  delete(id: string): Observable<Medic> {
-    return this.httpClient.delete<Medic>(environment.apiUrl + '/medic/' + id)
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete<any>(environment.apiUrl + '/medic/' + id)
     .pipe(
       catchError(this.errorHandler)
     );
   }
 
   errorHandler(error) {
+    console.log(error);
+    
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        errorMessage = error.error.message;
     }
     return throwError(errorMessage);
   }

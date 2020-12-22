@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Reservation } from '../../models/reservation';
 import { ReservationService } from '../../services/reservation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reservation-add',
@@ -18,7 +19,6 @@ export class ReservationAddComponent implements OnInit {
   submitted = false;
   intervalo = 20;
   reservation: Reservation;
-  error: string;
   ayuda: boolean = false;
   days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
   hours = [
@@ -37,6 +37,7 @@ export class ReservationAddComponent implements OnInit {
     private router: Router,
     private reservationService: ReservationService,
     private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) {
   }
   
@@ -67,8 +68,9 @@ export class ReservationAddComponent implements OnInit {
     this.reservation = this.angForm.value;
     this.reservationService.create(this.reservation).subscribe(res => {
       this.router.navigate(['reservation']);
+      this.toastr.success(res.message, '');
     }, (error) => {
-      this.error = error;
+      this.toastr.error('Intente nuevamente', error);
     });
   }
 

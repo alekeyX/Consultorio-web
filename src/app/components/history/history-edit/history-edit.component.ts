@@ -4,6 +4,7 @@ import { HistoryService } from '../../services/history.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { History } from '../../models/history';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-history-edit',
@@ -18,7 +19,6 @@ export class HistoryEditComponent implements OnInit {
   history: History;
   historyData: History[];
   currentUser: any;
-  error: string;
   id: string;
   eFisico: boolean = false;
   ePiel: boolean = false;
@@ -34,7 +34,8 @@ export class HistoryEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public historyService: HistoryService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
     ) {
   }
 
@@ -199,10 +200,11 @@ export class HistoryEditComponent implements OnInit {
     } else {
       if (window.confirm('Esta seguro?')) {
         this.historyService.update(this.id, this.angForm.value)
-          .subscribe(() => {
+          .subscribe((res) => {
             this.router.navigate(['/history', this.patientId._id]);
+            this.toastr.success(res.message, '');
           }, (error) => {
-            console.log(error);
+            this.toastr.error('Intente nuevamente', error);
           });
       }
     }
