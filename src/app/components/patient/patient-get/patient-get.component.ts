@@ -35,7 +35,7 @@ export class PatientGetComponent implements OnInit {
 
   // Obtener todos los pacientes
   getPatients() {
-    setInterval(() => {this.loading = true; }, 800);
+    setInterval(() => {this.loading = true; }, 100);
     switch (this.currentUser.role) {
       case 'Admin':
         this.patientService.getAll().subscribe((data) => {

@@ -44,7 +44,7 @@ export class ReservationGetComponent implements OnInit {
   
   // Obtener las reservas
   getReservas() {
-    setInterval(() => {this.loading = true; }, 800);
+    setInterval(() => {this.loading = true; }, 100);
     // si el usuario es admin obtiene todas las reservas
     if (this.currentUser.role === Role.Admin) {
       this.reservationService.getAll().subscribe((data) => {

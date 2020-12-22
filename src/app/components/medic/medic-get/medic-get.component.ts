@@ -36,7 +36,7 @@ export class MedicGetComponent implements OnInit {
 
   // Obtener todos los medicos y guardarlos en el arreglo medics
   getMedics() {
-    setInterval(() => {this.loading = true; }, 800);
+    setInterval(() => {this.loading = true; }, 100);
     this.medicService.getAll().subscribe((data) => {
       this.medics = data;
     });

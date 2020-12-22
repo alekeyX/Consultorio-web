@@ -3,11 +3,10 @@
     <h1 class="text-aqua-dark mb-3">Añadir Médico</h1>
     <!-- formulario para añadir medico -->
     <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
-      
       <div class="row">
         <div class="form-group col-lg">
           <input type="text" class="form-control" [ngClass]="{'is-invalid': angForm.controls['username'].errors?.required && angForm.controls['username'].touched}"
-          formControlName="username"  placeholder="Nombre de Usuario*"
+          formControlName="username"  placeholder="Nombre de Usuario *"
             #username/>
             <!-- error -->
             <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="text-danger font-weight-light">
@@ -19,7 +18,7 @@
         
         <div class="form-group col-lg">
           <input type="password" class="form-control" [ngClass]="{'is-invalid': angForm.controls['password'].errors?.required && angForm.controls['password'].touched}"
-          formControlName="password" placeholder="Contraseña*"
+          formControlName="password" placeholder="Contraseña *"
             #password/>
             <!-- error -->
             <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="text-danger font-weight-light">
@@ -34,7 +33,7 @@
         <div class="form-group col-lg">
           <input type="text" class="form-control"  
           [ngClass]="{'is-invalid': angForm.controls['firstName'].errors?.required && angForm.controls['firstName'].touched}"
-          formControlName="firstName" placeholder="Nombres*"
+          formControlName="firstName" placeholder="Nombres *"
             #firstName/>
               <!-- error -->
               <div *ngIf="angForm.controls['firstName'].invalid && (angForm.controls['firstName'].dirty || angForm.controls['firstName'].touched)" class="text-danger font-weight-light">
@@ -47,7 +46,7 @@
         <div class="form-group col-lg">
           <input type="text" class="form-control"  
           [ngClass]="{'is-invalid': angForm.controls['lastName'].errors?.required && angForm.controls['lastName'].touched}"
-          formControlName="lastName" placeholder="Apellidos*"
+          formControlName="lastName" placeholder="Apellidos *"
             #lastName/>
               <!-- error -->
               <div *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)" class="text-danger font-weight-light">
@@ -62,7 +61,7 @@
         <div class="form-group col-lg">
           <input type="email" class="form-control"  
           [ngClass]="{'is-invalid': angForm.controls['email'].errors?.required && angForm.controls['email'].touched}"
-          formControlName="email" placeholder="Correo Electrónico*"
+          formControlName="email" placeholder="Correo Electrónico *"
             #email/>
             <!-- error -->
             <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="text-danger font-weight-light">
@@ -107,7 +106,7 @@
         <div class="form-group col-lg-6">
           <select class="custom-select" formControlName="role" #role
             [ngClass]="{'is-invalid': angForm.controls['role'].errors?.required && angForm.controls['role'].touched}">
-            <option value="" disabled>Seleccione el rol</option>
+            <option value="" disabled>Seleccione el rol *</option>
             <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
           </select>
           <div *ngIf="angForm.controls['role'].invalid && (angForm.controls['role'].dirty || angForm.controls['role'].touched)" class="text-danger font-weight-light">

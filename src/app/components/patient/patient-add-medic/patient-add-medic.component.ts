@@ -34,7 +34,7 @@ export class PatientAddMedicComponent implements OnInit {
 
   // Obtener todos los pacientes excluyendo a los que el medico ya tiene registrado
   getPatients() {
-    setInterval(() => {this.loading = true; }, 800);
+    setInterval(() => {this.loading = true; }, 100);
     this.patientService.getAll().subscribe((data) => {
       data.forEach(patient => {
         let noExist = patient.medic_id.indexOf(this.currentUser._id);

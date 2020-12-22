@@ -50,7 +50,7 @@ export class ReservationAddComponent implements OnInit {
   // Crear formulario angForm
   createForm() {
     this.angForm = this.fb.group({
-      days: [''],
+      days: ['', Validators.required],
       dateStart: ['', Validators.required],
       dateEnd: ['', Validators.required],
       hours: ['', Validators.required],
@@ -65,13 +65,17 @@ export class ReservationAddComponent implements OnInit {
   // Enviar formulario angForm
   submitForm() {
     this.submitted = true;
-    this.reservation = this.angForm.value;
-    this.reservationService.create(this.reservation).subscribe(res => {
-      this.router.navigate(['reservation']);
-      this.toastr.success(res.message, '');
-    }, (error) => {
-      this.toastr.error('Intente nuevamente', error);
-    });
+    if (!this.angForm.valid) {
+      return false;
+    } else {
+      this.reservation = this.angForm.value;
+      this.reservationService.create(this.reservation).subscribe(res => {
+        this.router.navigate(['reservation']);
+        this.toastr.success(res.message, '');
+      }, (error) => {
+        this.toastr.error('Intente nuevamente', error);
+      });
+    }
   }
 
   // Cambio de valor de intervalo para cambiar la vista de intervalos de consultas

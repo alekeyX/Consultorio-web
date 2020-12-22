@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HistoryService } from '../../services/history.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -54,7 +54,7 @@ export class HistoryEditComponent implements OnInit {
     this.angForm = this.fb.group({
         medic: [data.medic],
         specialty: [data.specialty],
-        motivoConsulta: [data.motivoConsulta],
+        motivoConsulta: [data.motivoConsulta, Validators.required],
         enfermedadActual: [data.enfermedadActual],
         antecedentesPersonales: [data.antecedentesPersonales],
         antecedentesFamiliares: [data.antecedentesFamiliares],
@@ -126,7 +126,7 @@ export class HistoryEditComponent implements OnInit {
     this.angForm = this.fb.group({
       medic: [this.currentUser.firstName + ' ' + this.currentUser.lastName],
       specialty: [this.currentUser.specialty],
-      motivoConsulta: [''],
+      motivoConsulta: ['', Validators.required],
       enfermedadActual: [''],
       antecedentesPersonales: [''],
       antecedentesFamiliares: [''],

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HistoryService } from '../../services/history.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -49,7 +49,7 @@ export class HistoryAddComponent implements OnInit {
     this.angForm = this.fb.group({
       medic: [this.currentUser.firstName + ' ' + this.currentUser.lastName],
       specialty: [this.currentUser.specialty],
-      motivoConsulta: [''],
+      motivoConsulta: ['', Validators.required],
       enfermedadActual: [''],
       antecedentesPersonales: [''],
       antecedentesFamiliares: [''],
@@ -113,12 +113,16 @@ export class HistoryAddComponent implements OnInit {
     if (!this.angForm.valid) {
       return false;
     } else {
-      this.historyService.create(this.angForm.value).subscribe(res => {
-        this.router.navigate(['history/' + this.patientId]);
-        this.toastr.success(res.message, '');
-      }, (error) => {
-        this.toastr.error('Intente nuevamente', error);
-      });
+      if (!this.angForm.valid) {
+        return false;
+      } else {
+        this.historyService.create(this.angForm.value).subscribe(res => {
+          this.router.navigate(['history/' + this.patientId]);
+          this.toastr.success(res.message, '');
+        }, (error) => {
+          this.toastr.error('Intente nuevamente', error);
+        });
+      }
     }
   }
 }

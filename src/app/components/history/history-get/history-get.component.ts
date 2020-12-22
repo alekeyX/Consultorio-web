@@ -37,7 +37,7 @@ export class HistoryGetComponent implements OnInit {
 
   // Obtener historias clinicas por id de paciente
   getHistories() {
-    setInterval(() => {this.loading = true; }, 800);
+    setInterval(() => {this.loading = true; }, 100);
     // si el rol del usuario es paciente 
     if (this.currentUser.role === Role.Patient) {
       this.historyService.getHistoryByPatient(this.currentUser._id).subscribe((data) => {
@@ -47,8 +47,6 @@ export class HistoryGetComponent implements OnInit {
       let id = this.route.snapshot.paramMap.get('id');
       this.historyService.getHistoryByPatient(id).subscribe((data) => {
         this.histories = data;
-        console.log(this.histories);
-        
       });
     }
   }
