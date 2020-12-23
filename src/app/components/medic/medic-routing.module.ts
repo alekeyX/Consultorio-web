@@ -9,11 +9,11 @@ import { MedicProfileComponent } from './medic-profile/medic-profile.component';
 
 
 const routes: Routes = [
-  { path: 'signin', component: LoginMedicComponent },
-  { path: 'create', component: MedicAddComponent, canActivate: [AuthGuard] },
-  { path: 'update/:id', component: MedicEditComponent, canActivate: [AuthGuard] },
-  { path: '', component: MedicGetComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: MedicProfileComponent, canActivate: [AuthGuard] },
+  { path: 'signin', component: LoginMedicComponent, data: { breadcrumb: 'Iniciar Sesión' } },
+  { path: 'create', component: MedicAddComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Añadir' } },
+  { path: 'update/:id', component: MedicEditComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Editar' } },
+  { path: '', component: MedicGetComponent, canActivate: [AuthGuard], data: { breadcrumb: '' } },
+  { path: ':id', component: MedicProfileComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Perfil' } },
 ];
 
 @NgModule({

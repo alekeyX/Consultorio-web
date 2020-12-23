@@ -5,7 +5,7 @@ import { AuthGuard } from '../helpers/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: ChatComponent},
+  { path: '', component: ChatComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Chat' }},
 ];
 
 @NgModule({

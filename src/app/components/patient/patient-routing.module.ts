@@ -10,12 +10,12 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 
 
 const routes: Routes = [
-  { path: 'create', component: PatientAddComponent, canActivate: [AuthGuard] },
-  { path: 'signin', component: PatientLoginComponent },
-  { path: 'update/:id', component: PatientEditComponent, canActivate: [AuthGuard] },
-  { path: '', component: PatientGetComponent, canActivate: [AuthGuard] },
-  { path: 'find', component: PatientAddMedicComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: PatientProfileComponent, canActivate: [AuthGuard] }
+  { path: 'create', component: PatientAddComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Añadir' } },
+  { path: 'signin', component: PatientLoginComponent, data: { breadcrumb: 'Iniciar Sesión' } },
+  { path: 'update/:id', component: PatientEditComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Editar' } },
+  { path: '', component: PatientGetComponent, canActivate: [AuthGuard], data: { breadcrumb: '' } },
+  { path: 'find', component: PatientAddMedicComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Pacientes No Propios' } },
+  { path: ':id', component: PatientProfileComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Perfil' } }
 ];
 
 @NgModule({

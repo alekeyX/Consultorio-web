@@ -13,6 +13,7 @@ import { ReservationModule } from './components/reservation/reservation.module';
 import { SharedModule } from './components/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { BreadcrumbModule } from "xng-breadcrumb";
 
 // Componentes de pagina
 import { HomeComponent } from './components/home/home.component';
@@ -54,7 +55,8 @@ import { ChatbotComponent } from './components/chat/chatbot/chatbot.component';
     ChatModule,
     SharedModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BreadcrumbModule
   ],
   exports: [
   ],

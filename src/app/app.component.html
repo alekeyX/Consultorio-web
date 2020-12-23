@@ -2,8 +2,11 @@
 
 <div class="d-flex w-100" id="content">
   <app-menu class="d-none d-md-none d-lg-block" *ngIf="currentUser"></app-menu>
-  <div class="container mt-4 mb-4 col col-lg-9 col-xl-7">
-    <router-outlet></router-outlet>
+  <div class="col">
+    <xng-breadcrumb></xng-breadcrumb>
+    <div class="container mt-md-4 mb-4 col col-lg-10 col-xl-9">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 <app-chatbot id="chat"></app-chatbot>

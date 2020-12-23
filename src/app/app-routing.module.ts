@@ -7,30 +7,30 @@ import { ServiciosComponent } from './components/shared/servicios/servicios.comp
 import { ContactoComponent } from './components/shared/contacto/contacto.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'nosotros', component: NosotrosComponent },
-  { path: 'servicios', component: ServiciosComponent },
-  { path: 'contacto', component: ContactoComponent },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' }},
+  { path: 'nosotros', component: NosotrosComponent, data: { breadcrumb: 'Nosotros' } },
+  { path: 'servicios', component: ServiciosComponent, data: { breadcrumb: 'Servicios' } },
+  { path: 'contacto', component: ContactoComponent, data: { breadcrumb: 'Contacto' } },
 
   {
     path: 'medic',
-    loadChildren: () => import('./components/medic/medic.module').then(m => m.MedicModule)
+    loadChildren: () => import('./components/medic/medic.module').then(m => m.MedicModule), data: { breadcrumb: 'Médicos' }
   },
   {
     path: 'patient',
-    loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule)
+    loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule), data: { breadcrumb: 'Pacientes' }
   },
   {
     path: 'history',
-    loadChildren: () => import('./components/history/history.module').then(m => m.HistoryModule)
+    loadChildren: () => import('./components/history/history.module').then(m => m.HistoryModule), data: { breadcrumb: {disable: true, label: 'Historias'} }
   },
   {
     path: 'reservation',
-    loadChildren: () => import('./components/reservation/reservation.module').then(m => m.ReservationModule)
+    loadChildren: () => import('./components/reservation/reservation.module').then(m => m.ReservationModule), data: { breadcrumb: 'Reservaciones' }
   },
   {
     path: 'chat',
-    loadChildren: () => import('./components/chat/chat.module').then(m => m.ChatModule)
+    loadChildren: () => import('./components/chat/chat.module').then(m => m.ChatModule), data: { breadcrumb: 'Chat' }
   },
   { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];

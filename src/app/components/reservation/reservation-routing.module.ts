@@ -9,11 +9,11 @@ import { ReservationEditComponent } from './reservation-edit/reservation-edit.co
 
 
 const routes: Routes = [
-  { path: 'create', component: ReservationAddComponent, canActivate: [AuthGuard]  },
-  { path: 'choose', component: ReservationChooseComponent, canActivate: [AuthGuard]  },
-  { path: 'edit/:id', component: ReservationEditComponent, canActivate: [AuthGuard] },
-  { path: ':id', component: ReservationDetailComponent, canActivate: [AuthGuard]  },
-  { path: '', component: ReservationGetComponent, canActivate: [AuthGuard]  },
+  { path: 'create', component: ReservationAddComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Añadir' }  },
+  { path: 'choose', component: ReservationChooseComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Elegir Reserva' }  },
+  { path: 'edit/:id', component: ReservationEditComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Editar' } },
+  { path: ':id', component: ReservationDetailComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Detalles' }  },
+  { path: '', component: ReservationGetComponent, canActivate: [AuthGuard], data: { breadcrumb: '' }  },
 ];
 
 @NgModule({

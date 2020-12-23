@@ -66,3 +66,16 @@ app-footer {
 .fadeIn {
     animation-name: fadeIn;
 }
+
+/* Breadcrumb */
+
+.xng-breadcrumb-root {
+    padding: 0.5em;
+}
+
+.xng-breadcrumb-trail {
+    align-items: center;
+    color: #0F7F87 !important;
+    display: flex;
+    margin-bottom: 0;
+}
