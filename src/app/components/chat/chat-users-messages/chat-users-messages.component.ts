@@ -41,28 +41,37 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.chatService.connect();
-    this.getMedics();
-    this.getPatients();
+    if (this.currentUser.role == 'Admin' || this.currentUser.role == 'Medic') {
+      this.getPatients();
+    } else {
+      this.getMedics();
+    }
     this.scrollToBottom();
     this.getMessages();
   }
 
   // Obtener lista de medicos
   getMedics() {
-    this.medicService.getAll().subscribe((data) => {
-      this.medics = data;
+    let patientuser: Patient;
+    this.patientService.getById(this.currentUser._id).subscribe(data => {
+      patientuser = data;
+      this.medicService.getMedicsbyIds(patientuser.medic_id).subscribe((data) => {
+        this.medics = data;
+        console.log(data);
+        
+      });
     });
   }
 
   // Obtner pacientes por id de medico
   getPatients() {
-    this.patientService.getAll()
+    this.patientService.getPatientByMedic(this.currentUser._id)
     .subscribe((data) => {
       this.patients = data;
     })
   }
 
-  // elegir un usuario para abrir un chat
+  // Elegir un usuario para abrir un chat
   openChat(to_user_id: string, patientSelected: boolean) {
     this.isPatient = patientSelected;
     this.chatService.leaveRoom(this.room);

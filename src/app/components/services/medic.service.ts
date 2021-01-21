@@ -42,6 +42,14 @@ export class MedicService {
     );
   }
 
+  // Obtener medicos por id's de medicos
+  getMedicsbyIds(ids: string[]): Observable<Medic[]> {
+    return this.httpClient.get<Medic[]>(environment.apiUrl + '/medics/' + ids)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
   // Editar medico por su id
   update(id: string, medic: any): Observable<any> {
     return this.httpClient.put<any>(environment.apiUrl + '/medic/' + id, medic)
