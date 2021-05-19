@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { History } from '../../models/history';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-history-edit',
@@ -194,19 +195,32 @@ export class HistoryEditComponent implements OnInit {
 
   // Enviar formulario
   submitForm() {
-    this.submitted = true;
-    if (!this.angForm.valid) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos modificados se guardarán",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      this.submitted = true;
+      if (!this.angForm.valid) {
       return false;
-    } else {
-      if (window.confirm('Esta seguro?')) {
-        this.historyService.update(this.id, this.angForm.value)
-          .subscribe((res) => {
-            this.router.navigate(['/history', this.patientId._id]);
-            this.toastr.success(res.message, '');
-          }, (error) => {
-            this.toastr.error('Intente nuevamente', error);
-          });
+      } else {
+        if (result.isConfirmed) {
+          this.historyService.update(this.id, this.angForm.value)
+            .subscribe((res) => {
+              this.router.navigate(['/history', this.patientId._id]);
+              this.toastr.success(res.message, '');
+            }, (error) => {
+              this.toastr.error('Intente nuevamente', error);
+            });
+        }
       }
-    }
+    });
   }
 }

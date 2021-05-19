@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Patient } from '../../models/patient';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient-edit',
@@ -105,40 +106,52 @@ export class PatientEditComponent implements OnInit {
 
   // mandar formulario
   submitForm() {
-    this.submitted = true;
-    if (!this.angForm.valid) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos modificados se guardarán",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      this.submitted = true;
+      if (!this.angForm.valid) {
       return false;
-    } else {
-      if (window.confirm('Esta seguro?')) {
-        const formData: any = new FormData();
-        formData.append('username', this.angForm.get('username').value);
-        formData.append('password', this.angForm.get('ci').value);
-        formData.append('firstName', this.angForm.get('firstName').value);
-        formData.append('lastName', this.angForm.get('lastName').value);
-        formData.append('ci', this.angForm.get('ci').value);
-        formData.append('age', this.angForm.get('age').value);
-        formData.append('role', this.angForm.get('role').value);
-        formData.append('email', this.angForm.get('email').value);
-        formData.append('genero', this.angForm.get('genero').value);
-        formData.append('ethnicity', this.angForm.get('ethnicity').value);
-        formData.append('maritalStatus', this.angForm.get('maritalStatus').value);
-        formData.append('ocupation', this.angForm.get('ocupation').value);
-        formData.append('placeBirth', this.angForm.get('placeBirth').value);
-        formData.append('address', this.angForm.get('address').value);
-        formData.append('phone', this.angForm.get('phone').value);
-        formData.append('imagePath', this.angForm.get('imagePath').value);
-        
-        // Mandar el id y el formData al servicio para actualizar los datos
-        const id = this.route.snapshot.paramMap.get('id');
-        this.patientService.update(id, formData)
-          .subscribe(res => {
-            this.router.navigate(['/patient']);
-            this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName);
-          }, (error) => {
-            this.toastr.error('Intente nuevamente', error);
-          });
+      } else {
+        if (result.isConfirmed) {
+          const formData: any = new FormData();
+          formData.append('username', this.angForm.get('username').value);
+          formData.append('password', this.angForm.get('ci').value);
+          formData.append('firstName', this.angForm.get('firstName').value);
+          formData.append('lastName', this.angForm.get('lastName').value);
+          formData.append('ci', this.angForm.get('ci').value);
+          formData.append('age', this.angForm.get('age').value);
+          formData.append('role', this.angForm.get('role').value);
+          formData.append('email', this.angForm.get('email').value);
+          formData.append('genero', this.angForm.get('genero').value);
+          formData.append('ethnicity', this.angForm.get('ethnicity').value);
+          formData.append('maritalStatus', this.angForm.get('maritalStatus').value);
+          formData.append('ocupation', this.angForm.get('ocupation').value);
+          formData.append('placeBirth', this.angForm.get('placeBirth').value);
+          formData.append('address', this.angForm.get('address').value);
+          formData.append('phone', this.angForm.get('phone').value);
+          formData.append('imagePath', this.angForm.get('imagePath').value);
+          
+          // Mandar el id y el formData al servicio para actualizar los datos
+          const id = this.route.snapshot.paramMap.get('id');
+          this.patientService.update(id, formData)
+            .subscribe(res => {
+              this.router.navigate(['/patient']);
+              this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName);
+            }, (error) => {
+              this.toastr.error('Intente nuevamente', error);
+            });
+        }
       }
-    }
+    })
   }
-
 }

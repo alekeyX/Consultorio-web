@@ -5,6 +5,7 @@ import { History } from '../../models/history';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Role } from '../../models/role';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-history-get',
@@ -53,12 +54,25 @@ export class HistoryGetComponent implements OnInit {
 
   // Eliminar registro de historia clinica
   removeHistory(history: { _id: any; }, index: number) {
-    if (window.confirm('Esta seguro de eliminar la historia clínica?')) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos se eliminarán permanentemente",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.historyService.delete(history._id).subscribe((res) => {
           this.histories.splice(index, 1);
           this.toastr.success(res.message, '')
         });
-    }
+      }
+    });
   }
 
   // Navegar a los detalles de una historia clinica
