@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Medic } from '../../models/medic';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-medic-edit',
@@ -103,11 +104,27 @@ export class MedicEditComponent implements OnInit {
 
   // Enviar formulario
   submitForm() {
-    this.submitted = true;
-    if (!this.angForm.valid) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos modificados se guardarán",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: `
+        #0F7F875a
+        left top
+        no-repeat
+      `
+    }).then((result) => {
+      this.submitted = true;
+      if (!this.angForm.valid) {
       return false;
     } else {
-      if (window.confirm('Esta seguro?')) {
+      if (result.isConfirmed) {
         // Creacion de formData con los valores de angForm
         const formData: any = new FormData();
         formData.append('username', this.angForm.get('username').value);
@@ -122,25 +139,26 @@ export class MedicEditComponent implements OnInit {
         
         switch (this.angForm.get('role').value) {
           case 'Administrador':
-            formData.append('role', 'Admin');
-            break;
+          formData.append('role', 'Admin');
+          break;
           case 'Médico':
-            formData.append('role', 'Medic');
-            break;
+          formData.append('role', 'Medic');
+          break;
           case 'Recepción':
             formData.append('role', 'Reception');
             break;
-        }
-        // envio de id y formData al servicio para actualizar el registro
-        const id = this.route.snapshot.paramMap.get('id');
-        this.medicService.update(id, formData)
+          }
+          // envio de id y formData al servicio para actualizar el registro
+          const id = this.route.snapshot.paramMap.get('id');
+          this.medicService.update(id, formData)
           .subscribe(res => {
             this.router.navigate(['/medic']);
             this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName)
           }, (error) => {
             this.toastr.error('Intente nuevamente', error);
           });
+        }
       }
-    }
+    })
   }
 }

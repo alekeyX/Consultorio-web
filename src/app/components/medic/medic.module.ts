@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MedicRoutingModule } from './medic-routing.module';
 import { MedicService } from '../services/medic.service';
+import { SharedModule } from '../shared/shared.module';
 
 //  Interceptores
 import { JwtInterceptor } from '../helpers/jwt.interceptor';
@@ -16,7 +17,6 @@ import { MedicGetComponent } from './medic-get/medic-get.component';
 import { MedicProfileComponent } from './medic-profile/medic-profile.component';
 import { LoginMedicComponent } from './login-medic/login-medic.component';
 import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
