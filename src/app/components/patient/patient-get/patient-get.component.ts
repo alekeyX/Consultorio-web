@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Role } from '../../models/role';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient-get',
@@ -57,12 +58,25 @@ export class PatientGetComponent implements OnInit {
 
   // Eliminar el registro de un paciente
   removePatient(patient, index) {
-    if (window.confirm('¿Esta seguro que quiere eliminar el registro del médico?')) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos se eliminarán permanentemente",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.patientService.delete(patient._id).subscribe((res) => {
           this.patients.splice(index, 1);
           this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName);
         });
-    }
+      }
+    });
   }
 
   // Navegar al perfil de un paciente por su id

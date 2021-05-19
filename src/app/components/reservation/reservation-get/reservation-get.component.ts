@@ -7,6 +7,7 @@ import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 import { element } from 'protractor';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reservation-get',
@@ -84,12 +85,25 @@ export class ReservationGetComponent implements OnInit {
 
   // Eliminar una reserva por su id
   removeReservation(reservation, index) {
-    if (window.confirm('Esta seguro?')) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos se eliminarán permanentemente",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.reservationService.delete(reservation._id).subscribe((res) => {
           this.reservations.splice(index, 1);
           this.toastr.success(res.message, '');
         });
-    }
+      }
+    });
   }
 
   selectReserva(id: string) {

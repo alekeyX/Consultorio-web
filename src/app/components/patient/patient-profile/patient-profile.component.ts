@@ -6,6 +6,7 @@ import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../models/patient';
 import { Role } from '../../models/role';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient-profile',
@@ -52,13 +53,26 @@ export class PatientProfileComponent implements OnInit {
 
   // Eliminar registro del paciente 
   deletePatient(id: string) {
-    if (window.confirm('¿Esta seguro que quiere eliminar el registro del paciente?')) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos se eliminarán permanentemente",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      if (result.isConfirmed) {
       this.patientService.delete(id)
         .subscribe(res => {
           this.router.navigate(['/patient']);
           this.toastr.success(res.message, res.data.firstName + ' ' + res.data.lastName);
         });
       }
+    });
   }
 
   get isAdmin() {
