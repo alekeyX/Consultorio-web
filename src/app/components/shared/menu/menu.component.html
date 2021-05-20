@@ -29,7 +29,8 @@
       <div *ngIf="isAdmin || isMedic || isPatient">
         <a class="nav-link dropdown-item" [routerLink]="['/reservation']" routerLinkActive="activo">
           <i class="fas fa-calendar-plus fa-2x mr-3"></i>
-            MIS CONSULTAS
+            <span *ngIf="isMedic || isPatient">MIS CONSULTAS</span>
+            <span *ngIf="isAdmin">CONSULTAS</span>
         </a>
         <div class="dropdown-divider"></div>
       </div>
