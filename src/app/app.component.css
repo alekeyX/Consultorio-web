@@ -17,3 +17,9 @@ app-navbar {
     right: 2px;
     z-index: 1;
 }
+
+#menu {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
+}

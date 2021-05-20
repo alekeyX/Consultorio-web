@@ -1,45 +1,83 @@
 <div class="justify-content-md-center align-items-center animated fadeIn">
   <div class="card rounded-lg shadow-sm mb-2 rounded">
     <div class="card-body">
-      <div class="container h-100 col-md-8 mb-3">
+      <div class="container h-100 col-md-11 col-lg-10 col-xxl-8 mb-3">
         <!-- Titulos -->
-        <h1 class="card-title text-center text-aqua-dark mt-3 mb-2">
-          <i class="d-none fas fa-stethoscope pr-3 pl-2 color-icon text-aqua-dark"></i>
-          Consultorio Médico
-        </h1>
         <div class="mb-5">
-          <div class=" justify-content-center align-items-center p-1 mb-3" *ngIf="currentUser">
-              <h2 class="card-title text-center mr-2 text-aqua-dark">Bienvenido</h2>
-              <h2 class="card-title text-center text-aqua-dark">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
-          </div>
+          <div class=" justify-content-center align-items-center p-1 mb-3">
+              <div class="pt-4">
+                <div class="row align-items-center justify-content-center">
+                  <div class="col-12 col-md-10 col-lg-5 order-md-2">
+                    <img class="img-fluid" src="../../../assets/img/bg_medicine.svg" alt="Sistema Centro de Salud">
+                  </div>
+                  <div class="col-12 col-md-12 col-lg-7 order-md-1">
+                    <h1 class="display-3 text-center text-lg-left font-weight-bolder text-aqua-dark">Bienvenido</h1>
+                    <h2 class="card-title text-center text-lg-left text-aqua-dark" *ngIf="currentUser" >{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+                    <p class="lead text-center text-lg-left text-muted">
+                      Al Sistema del Centro de Salud
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
-
-        <!-- Parrafo de bienvenida -->
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at sodales nunc. Nulla pellentesque metus scelerisque malesuada porttitor.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at sodales nunc. Nulla pellentesque metus scelerisque malesuada porttitor.
-        </p>
-
         <div class="d-md-flex justify-content-around mt-5" *ngIf="!currentUser">
           <div class="card text-center mb-3 shadow-sm rounded">
             <div class="card-body">
               <i class="fas fa-user-md fa-2x text-aqua-dark"></i>
               <h5 class="card-title text-aqua-dark">Médico</h5>
-              <a [routerLink]="['/medic/signin']" class="btn bg-aqua text-white">Iniciar Sesión</a>
+              <a [routerLink]="['/medic/signin']" class="btn bg-aqua btn-lg shadow">Iniciar Sesión</a>
             </div>
           </div>
           <div class="card text-center mb-3 shadow-sm rounded">
             <div class="card-body">
               <i class="fas fa-user-injured fa-2x text-aqua-dark" ></i>
               <h5 class="card-title text-aqua-dark">Paciente</h5>
-              <a [routerLink]="['/patient/signin']" class="btn bg-aqua text-white">Iniciar Sesión</a>
+              <a [routerLink]="['/patient/signin']" class="btn bg-aqua btn-lg shadow">Iniciar Sesión</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    <section class="py-5 py-md-5 px-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <div class="text-p">
+              <div class="mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" style="color: #15B9C6;" width="40" height="40" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-aqua-dark">Registro de Pacientes</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi dolorem totam natus eos obcaecati pariatur optio maiores, sint facere assumenda, fugit qui beatae nam nihil dignissimos illum voluptatum quas.</p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="text-p">
+              <div class="mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" style="color: #15B9C6;" width="40" height="40" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                  <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </svg>
+              </div>
+              <h3 class="text-aqua-dark">Consultas por Chat</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi dolorem totam natus eos obcaecati pariatur optio maiores, sint facere assumenda, fugit qui beatae nam nihil dignissimos illum voluptatum quas.</p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="text-p">
+              <div class="mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" style="color: #15B9C6;" width="40" height="40" fill="currentColor" class="bi bi-stopwatch-fill" viewBox="0 0 16 16">
+                  <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07A7.001 7.001 0 0 0 8 16a7 7 0 0 0 5.29-11.584.531.531 0 0 0 .013-.012l.354-.354.353.354a.5.5 0 1 0 .707-.707l-1.414-1.415a.5.5 0 1 0-.707.707l.354.354-.354.354a.717.717 0 0 0-.012.012A6.973 6.973 0 0 0 9 2.071V1h.5a.5.5 0 0 0 0-1h-3zm2 5.6V9a.5.5 0 0 1-.5.5H4.5a.5.5 0 0 1 0-1h3V5.6a.5.5 0 1 1 1 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-aqua-dark">Reserva de consultas</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium commodi dolorem totam natus eos obcaecati pariatur optio maiores, sint facere assumenda, fugit qui beatae nam nihil dignissimos illum voluptatum quas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
-
