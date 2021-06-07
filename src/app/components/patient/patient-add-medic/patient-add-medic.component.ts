@@ -4,6 +4,8 @@ import { Patient } from '../../models/patient';
 import { AuthenticationService } from '../../services/authentication.service';
 import { PatientService } from '../../services/patient.service';
 import { Role } from '../../models/role';
+import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,7 +25,8 @@ export class PatientAddMedicComponent implements OnInit {
   constructor(
     private patientService: PatientService,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -47,14 +50,28 @@ export class PatientAddMedicComponent implements OnInit {
 
   // Seleccionar un paciente para adicionar el id del medico al registro del paciente
   selectedPatient(id: string) {
-    if (window.confirm('Esta seguro?')) {
-      this.patientService.medicAddPatient(id, this.currentUser._id)
-      .subscribe(res => {
-        this.router.navigate(['/patient']);
-      }, (error) => {
-        console.log(error);
-      });
-    }
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "El paciente se añadira a tu lista",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.patientService.medicAddPatient(id, this.currentUser._id)
+        .subscribe(res => {
+          this.router.navigate(['/patient']);
+          this.toastr.success('Paciente añadido con exito');
+        }, (error) => {
+          this.toastr.error('Ups algo salió mal');
+        });
+      }
+    });
   }
 
   // cambiar orden de la lista de forma ascendente o descendente
