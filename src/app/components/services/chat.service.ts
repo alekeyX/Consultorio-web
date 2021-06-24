@@ -15,7 +15,7 @@ export class ChatService {
   private socket;
 
   constructor(private httpClient: HttpClient) {
-    this.socket = io.connect(this.url);
+    // this.socket = io.connect(this.url);
   }
 
   // Conectarse al socket

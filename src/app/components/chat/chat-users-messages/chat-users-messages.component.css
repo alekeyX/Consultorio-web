@@ -1,6 +1,6 @@
 .imgRedonda {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
 }
 
@@ -26,8 +26,8 @@
 }
 
 #messages {
-    margin-bottom: 25px;
-    height: 586px;
+    padding-bottom: 15px;
+    height: 532px;
 }
 
 .chat {
@@ -48,36 +48,18 @@
     background: #ffffff;
 }
 
-#chat-users, #chat-list {
-    width: 350px;
-}
-
 #formulario {
     bottom: 0px;
     position: absolute;
-    width: 350px;
 }
 
-@media screen and (max-width: 400px) {
-    #formulario {
-        bottom: 0px;
-        position: absolute;
-        width: 344px;
-    }
-
-    #chat-users, #chat-list {
-        width: 344px;
-    }
+.p-25 {
+    padding: 0.76rem;
 }
 
-@media screen and (max-width: 340px) {
-    #formulario {
-        bottom: 0px;
-        position: absolute;
-        width: 288px;
-    }
-
-    #chat-users, #chat-list {
-        width: 288px;
+@media screen and (max-width: 768px) {
+    #messages {
+        height: 529px;
+        padding-bottom: 25px;
     }
 }

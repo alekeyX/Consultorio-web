@@ -7,13 +7,13 @@
         <div class="d-lg-flex">
             <div class="d-md-flex w-100 mx-auto">
                 <div class="col-md-6 col-lg-6 my-3">
-                    <label for="specialty"><strong>1.</strong> Elegir especialidad</label>
+                    <label for="specialty"><strong class="text-aqua-dark">1.</strong> Elegir especialidad*</label>
                     <select class="custom-select" id="specialty" [(ngModel)]="specialty" (change)="selectSpecialty(specialty)">
                         <option [ngValue]="specialty" *ngFor="let specialty of specialtys">{{specialty}}</option>
                     </select>
                 </div>
                 <div class="col-md-6 col-lg-6 my-3">
-                    <label for="medic"><strong>2.</strong> Elegir Médico</label>
+                    <label for="medic"><strong class="text-aqua-dark">2.</strong> Elegir Médico*</label>
                     <select class="custom-select" id="medic" [(ngModel)]="medic" (change)="selectMedic(medic)">
                         <option [ngValue]="medic" *ngFor="let medic of medics">{{medic.firstName}} {{medic.lastName}}</option>
                     </select>
@@ -21,7 +21,7 @@
             </div>
             <div class="d-md-flex w-100 mx-auto">
                 <div class="col-md-6 col-lg-6 my-3" *ngIf="!isPatient">
-                    <label for="patient"><strong>3.</strong>Elegir Paciente</label>
+                    <label for="patient"><strong class="text-aqua-dark">3.</strong> Código de Paciente*</label>
                     <select class="custom-select" [(ngModel)]="namePatient" id="patient">
                         <option [ngValue]="patient.firstName + ' ' + patient.lastName" *ngFor="let patient of patients">{{patient.username}}</option>
                     </select>

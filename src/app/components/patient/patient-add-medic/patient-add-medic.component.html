@@ -1,7 +1,7 @@
 <div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
     <div class="card-body">
         <div class="d-md-flex justify-content-between align-items-center mb-1">
-            <h1 class="text-aqua-dark">Pacientes Registrados</h1>
+            <h1 class="text-aqua-dark">Importar Paciente</h1>
             <div class="d-md-flex">
                 <div class="form-group mb-0 p-1">
                     <input type="text" class="form-control" name="filterPatient" placeholder="Buscar..." [(ngModel)]="filterPatient">
@@ -20,7 +20,7 @@
         
         <ng-template #main_content>
             <!-- Mensaje si no hay datos-->
-            <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen pacientes registrados</h2>
+            <h2 *ngIf="patients.length == 0" class="no-data text-center text-aqua-dark">No existen más pacientes registrados</h2>
             
             <!-- lista de pacientes -->
             <div class="table-responsive overflow-auto" *ngIf="isAdmin || isMedic">

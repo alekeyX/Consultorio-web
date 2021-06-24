@@ -2,10 +2,10 @@
     <div class="card-body">
         <!-- Titulo y boton para registrar una nueva historia clinica -->
         <div class="d-md-flex justify-content-between align-items-center mb-1">
-            <h1 class="text-aqua-dark">Lista de Historiales Clínicos</h1>
+            <h1 class="text-aqua-dark">Historial Clínico</h1>
             <div *ngIf="isAdmin || isMedic">
                 <a class="btn btn-block bg-aqua text-white" [routerLink]="['/history/create', patientId]"
-                    routerLinkActive="router-link-active"  role="button">Nuevo Historial</a>
+                    routerLinkActive="router-link-active"  role="button">Añadir Historia</a>
             </div>
         </div>
 

@@ -5,7 +5,6 @@ import { Role } from '../../models/role';
 import { ReservationService } from '../../services/reservation.service';
 import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
-import { element } from 'protractor';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
@@ -27,6 +26,7 @@ export class ReservationGetComponent implements OnInit {
   filterReservationByMedic: string = '';
   order: string = '';
   asc: boolean = false;
+  date = new Date();
 
   constructor(
     private reservationService: ReservationService,
@@ -52,7 +52,6 @@ export class ReservationGetComponent implements OnInit {
         this.reservations = data;
         this.filterDate();
         this.getMedics();
-        this.ReservationsActually();
       });
     } else {
     // si el usuario es medico obtiene sus reservas por su id
@@ -60,7 +59,6 @@ export class ReservationGetComponent implements OnInit {
         this.reservationService.getReservByMedic(this.currentUser._id).subscribe((data) => {
           this.reservations = data;
           this.filterDate();
-          this.ReservationsActually();
         })
       } else {
     // si el usuario es paciente obtiene las reservas por su nombre y apellido
@@ -69,12 +67,34 @@ export class ReservationGetComponent implements OnInit {
           .subscribe((data) => {
             this.reservations = data;
             this.filterDate();
-            this.ReservationsActually();
           })
         }
       }
     }
   }
+
+    // Arreglo de solo reservaciones a partir de la fecha actual
+    ReservationsActually() {
+      this.allReservations = !this.allReservations;
+      if(this.allReservations == true){
+        this.reservations.forEach(element => {
+          let year = parseInt(element.date.substring(0,4), 10),
+          month = parseInt(element.date.substring(5,7), 10),
+          day = parseInt(element.date.substring(8,10), 10);
+          
+          let date = new Date(year,month-1,day);
+          let today = new Date();
+    
+          if (date >= today) {
+            this.reservationsActive.push(element);
+          }
+        });
+        this.reservations = this.reservationsActive;
+        this.reservationsActive = [];
+      } else {
+        this.getReservas();
+      }
+    }
 
   // Obtener registros de los medicos
   getMedics() {
@@ -123,22 +143,6 @@ export class ReservationGetComponent implements OnInit {
   orderBy(order: string) {
     this.asc = !this.asc;
     this.order = order;
-  }
-
-  // Arreglo de solo reservaciones a partir de la fecha actual
-  ReservationsActually() {
-    this.reservations.forEach(element => {
-      let year = parseInt(element.date.substring(0,4), 10),
-      month = parseInt(element.date.substring(5,7), 10),
-      day = parseInt(element.date.substring(8,10), 10);
-      
-      let date = new Date(year,month-1,day);
-      let today = new Date();
-
-      if (date >= today) {
-        this.reservationsActive.push(element);
-      }
-    });
   }
 
   get isAdmin() {
