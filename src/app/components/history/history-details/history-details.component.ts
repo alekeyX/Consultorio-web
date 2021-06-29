@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HistoryService } from '../../services/history.service';
 import { History } from '../../models/history';
 import { Role } from '../../models/role';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-history-details',
@@ -70,5 +71,30 @@ export class HistoryDetailsComponent implements OnInit {
 
   get isMedic() {
     return this.currentUser && this.currentUser.role === Role.Medic;
+  }
+
+  getPDF(){
+    let doc = new jsPDF();
+
+    doc.setLineWidth(0.5);
+    doc.line(20, 15, 190, 15);
+    doc.setFontSize(22);
+    doc.text("Historia Clínica", 20, 25);
+    doc.setFontSize(14);
+    doc.text("Fecha: " + this.date, 120, 25);
+    doc.line(20, 35, 190, 35);
+    doc.setFontSize(12);
+    doc.text('Médico: ' + this.history.medic, 20, 50);
+    doc.text('Paciente: ' + this.patient.firstName + ' ' + this.patient.lastName, 20, 60);
+    doc.text('Motivo Consulta: ' + this.history.motivoConsulta, 20, 70);
+    doc.text('Enfermedad Actual: ' + this.history.enfermedadActual, 20, 80);
+    doc.text('Antecedentes Familiares: ' + this.history.antecedentesFamiliares, 20, 90);
+    doc.text('Antecedentes Personales: ' + this.history.antecedentesPersonales, 20, 100);
+    doc.text('Habitos Tóxicos: ' + this.history.habitosToxicos, 20, 110);
+    doc.text('Diagnóstico: ' + this.history.diagnostico, 20, 120);
+    doc.text('Tratamiento: ' + this.history.tratamiento, 20, 130);
+    doc.setLineWidth(1);
+    doc.line(20, 190, 190, 190);
+    doc.save(this.patient.firstName + '-' + this.patient.lastName + '.pdf');
   }
 }
