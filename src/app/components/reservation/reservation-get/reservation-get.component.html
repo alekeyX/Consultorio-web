@@ -62,7 +62,7 @@
                         <tr>
                             <th scope="col" class="text-center orderBy" (click)="orderBy('date')">Fecha</th>
                             <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora</th>
-                            <th scope="col" class="text-center orderBy" (click)="orderBy('medic_id')" *ngIf="isAdmin">Médico</th>
+                            <th scope="col" class="text-center orderBy" (click)="orderBy('medic_id')" *ngIf="isAdmin || !isMedic">Médico</th>
                             <th scope="col" class="text-center orderBy" (click)="orderBy('patient_id')">Paciente</th>
                             <th scope="col" class="text-center">Estado</th>
                             <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
@@ -72,7 +72,7 @@
                         <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | filterReservationByMedic:filterReservationByMedic | orderBy:order:asc ; let i = index">
                             <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
-                            <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="isAdmin">{{reserva.medic_id.firstName}} {{reserva.medic_id.lastName}}</td>
+                            <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="isAdmin || !isMedic">{{reserva.medic_id.firstName}} {{reserva.medic_id.lastName}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="reserva.patient_id !== ''">{{reserva.patient_id}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="reserva.patient_id === ''">No asignado</td>
                             <td *ngIf="reserva.enable" class="text-center">Activo</td>

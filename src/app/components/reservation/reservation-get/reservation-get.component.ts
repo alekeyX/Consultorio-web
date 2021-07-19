@@ -65,6 +65,8 @@ export class ReservationGetComponent implements OnInit {
         if (this.currentUser.role == Role.Patient) {
           this.reservationService.getReservByPatient(this.currentUser.firstName + ' ' + this.currentUser.lastName)
           .subscribe((data) => {
+            console.log(data);
+            
             this.reservations = data;
             this.filterDate();
           })

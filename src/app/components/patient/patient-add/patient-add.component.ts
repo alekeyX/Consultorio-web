@@ -42,7 +42,7 @@ export class PatientAddComponent implements OnInit {
       lastName: ['', Validators.required],
       age: [''],
       role: ['Patient'],
-      email: [''],
+      email: ['', Validators.required],
       genero: [''],
       ethnicity: [''],
       maritalStatus: [''],
