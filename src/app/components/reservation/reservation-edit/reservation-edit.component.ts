@@ -9,6 +9,7 @@ import { Medic } from '../../models/medic';
 import { Patient } from '../../models/patient';
 import { Role } from '../../models/role';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reservation-edit',
@@ -77,19 +78,38 @@ export class ReservationEditComponent implements OnInit {
 
   // Enviar formulario
   submitForm() {
-    this.submitted = true;
-    this.reserva = this.angForm.value;
-    this.reserva.date += 'T00:00:00.000Z';
-    if (this.angForm.value.enable === this.enable) {
-      this.reserva.enable = true;
-    } else {
-      this.reserva.enable = false;
-    }
-    this.reservationService.update(this.reservaId, this.reserva).subscribe(res => {
-      this.router.navigate(['reservation']);
-      this.toastr.success(res.message, '');
-    }, (error) => {
-      this.toastr.error('Intente nuevamente', error);
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos modificados se guardarán",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      this.submitted = true;
+      if (!this.angForm.valid) {
+      return false;
+      } else {
+        if (result.isConfirmed) {
+        this.reserva = this.angForm.value;
+        this.reserva.date += 'T00:00:00.000Z';
+        if (this.angForm.value.enable === this.enable) {
+          this.reserva.enable = true;
+        } else {
+          this.reserva.enable = false;
+        }
+        this.reservationService.update(this.reservaId, this.reserva).subscribe(res => {
+          this.router.navigate(['reservation']);
+          this.toastr.success(res.message, '');
+        }, (error) => {
+            this.toastr.error('Intente nuevamente', error);
+          });
+        }
+      }
     });
   }
 

@@ -14,11 +14,17 @@
         <ng-template #main_content>
             <div class="d-flex justify-content-between mb-3 align-items-center">
                 <h1 class="text-aqua-dark">Historia Clínica </h1>
-                <h3 class="text-aqua-dark">{{date}}</h3>
+                <div>
+                    <h3 class="text-aqua-dark">{{date}}</h3>
+                    <button class="btn bg-aqua text-white float-right" (click)="getPDF()">
+                        Descargar
+                    </button>
+                </div>
             </div>
 
+
             <!-- Informacion general -->
-            <div class="d-md-flex align-items-center">
+            <div class="d-md-flex">
                 <div class="card w-100">
                     <div class="container row align-items-center">
                         <div class="col-md-5">
@@ -91,6 +97,27 @@
                         <strong>Hábitos Tóxicos:</strong>
                     </div>
                     <div class="col-md-9">{{ history.habitosToxicos }} </div>
+                </div>
+            </div>
+
+            <!-- Tratamiento y diagnostico -->
+            <div>
+                <h6 class="text-aqua-dark my-3">Tratamiento y Diagnóstico</h6>
+                <div class="card">
+                    <div class="container row align-items-center">
+                        <div class="col-md-3">
+                            <strong>Diagnóstico:</strong>
+                        </div>
+                        <div class="col-md-9">{{ history.diagnostico }} </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="container row align-items-center">
+                        <div class="col-md-3">
+                            <strong>Tratamiento:</strong>
+                        </div>
+                        <div class="col-md-9">{{ history.tratamiento }} </div>
+                    </div>
                 </div>
             </div>
                 
@@ -495,27 +522,6 @@
                             </div>
                             <div class="col-md-9">{{ history.sensibilidadSuperficial }} </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tratamiento y diagnostico -->
-            <div>
-                <h6 class="text-aqua-dark my-3">Tratamiento y Diagnóstico</h6>
-                <div class="card">
-                    <div class="container row align-items-center">
-                        <div class="col-md-3">
-                            <strong>Diagnóstico:</strong>
-                        </div>
-                        <div class="col-md-9">{{ history.diagnostico }} </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="container row align-items-center">
-                        <div class="col-md-3">
-                            <strong>Tratamiento:</strong>
-                        </div>
-                        <div class="col-md-9">{{ history.tratamiento }} </div>
                     </div>
                 </div>
             </div>

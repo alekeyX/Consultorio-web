@@ -8,7 +8,7 @@
             <input type="text" class="form-control" name="filterMedic" placeholder="Buscar..." [(ngModel)]="filterMedic">
           </div>
           <div class="p-1">
-            <a class="btn btn-block bg-aqua text-white" [routerLink]="['/medic/create']" routerLinkActive="router-link-active" role="button" *ngIf="isAdmin">Nuevo Médico</a>
+            <a class="btn btn-block bg-aqua text-white" [routerLink]="['/medic/create']" routerLinkActive="router-link-active" role="button" *ngIf="isAdmin">Añadir Médico</a>
           </div>
         </div>
     </div>
@@ -33,14 +33,15 @@
             <tr>
               <th scope="col" class="orderBy" (click)="orderBy('username')">Nombre</th>
               <th scope="col" class="orderBy" (click)="orderBy('specialty')">Especialidad</th>
-              <th scope="col" >Teléfono</th>
+              <th scope="col">Teléfono</th>
               <th scope="col" class="text-center" *ngIf="isAdmin">Opciones</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let medic of medics | filter:filterMedic | orderBy:order:asc; let i = index ">
               <td scope="col" (click)="selectedMedic(medic._id)">{{medic.firstName}} {{medic.lastName}}</td>
-              <td scope="col" (click)="selectedMedic(medic._id)">{{medic.specialty}}</td>
+              <td scope="col" (click)="selectedMedic(medic._id)" *ngIf="medic.role != 'Reception'">{{medic.specialty}}</td>
+              <td scope="col" (click)="selectedMedic(medic._id)" *ngIf="medic.role == 'Reception'">Recepción</td>
               <td scope="col" (click)="selectedMedic(medic._id)">{{medic.phone}}</td>
               <td scope="col" class="text-center" *ngIf="isAdmin">
                 <a [routerLink]="['/medic/update', medic._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>

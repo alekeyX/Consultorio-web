@@ -144,7 +144,11 @@ export class ReservationChooseComponent implements OnInit {
 
   // Actualizar registro de reserva con el nombre del paciente
   submit() {
-    this.reserv.patient_id = this.namePatient;
+    if (this.isPatient) {
+      this.reserv.patient_id = this.currentUser.firstName + ' ' + this.currentUser.lastName;
+    } else {
+      this.reserv.patient_id = this.namePatient;
+    }
     this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
       this.getReservasByMedic(this.medic);
       this.toastr.success(res.message, '');

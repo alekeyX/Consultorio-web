@@ -6,6 +6,7 @@ import { ReservationService } from '../../services/reservation.service';
 import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 import { Role } from '../../models/role';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reservation-detail',
@@ -59,12 +60,25 @@ export class ReservationDetailComponent implements OnInit {
 
   // Eliminar el registro de la reserva
   deleteReserva(id: string) {
-    if (window.confirm('Esta seguro que quiere eliminar la reserva?')) {
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: "Los datos se eliminarán permanentemente",
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      if (result.isConfirmed) {
       this.reservaService.delete(id)
         .subscribe(res => {
           this.router.navigate(['/reservations']);
         });
       }
+    });
   }
 
   get isAdmin() {

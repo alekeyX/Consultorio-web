@@ -114,11 +114,7 @@ export class MedicEditComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar',
-      backdrop: `
-        #0F7F875a
-        left top
-        no-repeat
-      `
+      backdrop: '#0F7F875a'
     }).then((result) => {
       this.submitted = true;
       if (!this.angForm.valid) {
