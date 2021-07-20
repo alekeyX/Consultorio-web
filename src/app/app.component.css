@@ -10,10 +10,16 @@ app-navbar {
 #content {
     margin-top: 3.9rem;
 }
-/* Chatboy */
+/* Chatbot */
 #chat {
     position: fixed;
-    bottom: 5px;
-    right: 2px;
+    bottom: 12px;
+    right: 15px;
     z-index: 1;
+}
+
+#menu {
+    width: 230px;
+    height: 100vh;
+    position: fixed;
 }

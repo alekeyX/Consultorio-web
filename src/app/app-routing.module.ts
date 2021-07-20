@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NosotrosComponent } from './components/shared/nosotros/nosotros.component';
 import { ServiciosComponent } from './components/shared/servicios/servicios.component';
 import { ContactoComponent } from './components/shared/contacto/contacto.component';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: 'Home' }},
@@ -22,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'history',
-    loadChildren: () => import('./components/history/history.module').then(m => m.HistoryModule), data: { breadcrumb: {disable: true, label: 'Historias'} }
+    loadChildren: () => import('./components/history/history.module').then(m => m.HistoryModule), data: { breadcrumb: {disable: true, label: 'Pacientes'} }
   },
   {
     path: 'reservation',

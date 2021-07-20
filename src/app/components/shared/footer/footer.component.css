@@ -1,0 +1,9 @@
+@media screen and (min-width: 996px) {
+    .footer {
+        width: 60% !important;
+    }
+    
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        margin-left: 30%;
+    }
+}

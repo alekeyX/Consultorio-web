@@ -1,10 +1,10 @@
-<div class="d-md-flex justify-content-b h-100">
+<div class="d-md-flex h-100">
     <!-- lista de usuarios -->
-    <div id="chat-users" class="border-right" [ngClass]="{'d-none d-md-block': userSelected}">
+    <div id="chat-users" class="col-12 col-md-6 p-0 border-right" [ngClass]="{'d-none d-md-block': userSelected}">
         <!-- Si el usuario es paciente se mostrara a sus medicos -->
         <div *ngIf="!isAdmin && !isMedic" >
-            <div class="bg-aqua text-white w-100 text-center p-2">
-                Médicos
+            <div class="bg-aqua text-white w-100 text-center p-25">
+                <h5 class="mb-0">Médicos</h5>
             </div>
             <div class="overflow-auto">
                 <div *ngFor="let medic of medics" class="border-bottom p-2" (click)="openChat(medic._id, false)">
@@ -22,8 +22,8 @@
         </div>
         <!-- Si es medico vera a sus pacientes -->
         <div *ngIf="isMedic || isAdmin">
-            <div class="bg-aqua text-white w-100 text-center p-2">
-                Pacientes
+            <div class="bg-aqua text-white w-100 text-center p-25">
+                <h5 class="mb-0">Pacientes</h5>
             </div>
             <div class="overflow-auto">
                 <div *ngFor="let patient of patients" class="border-bottom p-2" (click)="openChat(patient._id, true)">
@@ -41,7 +41,7 @@
     </div>
 
     <!-- lista de mensajes -->
-    <div id="chat-list">
+    <div id="chat-list" class="col-12 col-md-6 p-0">
         <div *ngIf="!userSelected; else msg_content" id="notify" class="d-none d-md-block">
             <div class="p-5 text-center">
                 <i class="fas fa-user-circle fa-5x text-info"></i>
@@ -50,7 +50,7 @@
         </div>
         <ng-template #msg_content>
             <!-- Nombre de usuario -->
-            <div class=" px-3 py-2 border-bottom bg-aqua card" id="userTo" *ngIf="userSelected">
+            <div class="px-3 py-2 border-bottom bg-aqua card" id="userTo" *ngIf="userSelected">
                 <div class="d-flex align-items-center">
                     <!-- Boton de atras -->
                     <div class="text-white mr-3 d-md-none btn" role="button" (click)="userSelected = !userSelected">
@@ -60,7 +60,7 @@
                     <div class="d-flex justify-content-start align-items-center" *ngIf="!isPatient">
                         <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
                         class=" imgfluid imgRedonda">
-                        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+                        <i class="fas fa-user-circle fa-2x text-white" *ngIf="!avatar"></i>
                         <div class="ml-3 text-white">
                             <h5 class="mb-0">{{medic.firstName}} {{medic.lastName}}</h5>
                         </div>
@@ -69,7 +69,7 @@
                     <div class="d-flex justify-content-start align-items-center" *ngIf="isPatient">
                         <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="avatar"
                         class=" imgfluid imgRedonda">
-                        <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
+                        <i class="fas fa-user-circle fa-2x text-white" *ngIf="!avatar"></i>
                         <div class="ml-3 text-white">
                             <h5 class="mb-0">{{patient.firstName}} {{patient.lastName}}</h5>
                         </div>
@@ -95,9 +95,11 @@
             </div>
 
             <!-- input para mandar mensaje -->
-            <div class="d-flex"  id="formulario">
-                <input class="form-control" [(ngModel)]="message" (keyup)="$event.keyCode == 13 && submitForm()" />
-                <button class="btn bg-aqua text-white" (click)="submitForm()">Enviar</button>
+            <div class="d-flex col-12 p-0"  id="formulario">
+                <div class="col-9 p-0">
+                    <input class="form-control" [(ngModel)]="message" (keyup)="$event.keyCode == 13 && submitForm()" />
+                </div>
+                    <button class="btn bg-aqua text-white col-3 p-0" (click)="submitForm()">Enviar</button>
             </div>
         </ng-template>
     </div>

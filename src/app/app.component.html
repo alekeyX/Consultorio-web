@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 
-<div class="d-flex w-100" id="content">
-  <app-menu class="d-none d-md-none d-lg-block" *ngIf="currentUser"></app-menu>
-  <div class="col">
+<app-menu class="d-none d-md-none d-lg-block" id="menu" *ngIf="currentUser"></app-menu>
+<div class="d-flex justify-content-center" id="content" [ngClass]="{'justify-content-lg-end': currentUser}">
+  <div class="p-0 p-md-2 col-12 col-lg-9 col-xl-10">
     <xng-breadcrumb></xng-breadcrumb>
-    <div class="container mt-md-4 mb-4 col col-lg-10 col-xl-9">
+    <div class="container mt-md-4 mb-4 col-12 col-lg-10 col-xl-9">
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
 <app-chatbot id="chat"></app-chatbot>
-<app-footer></app-footer>
+<app-footer id="footer"></app-footer>

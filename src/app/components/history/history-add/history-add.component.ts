@@ -47,7 +47,7 @@ export class HistoryAddComponent implements OnInit {
   // Creacion de formulario angForm
   createForm() {
     this.angForm = this.fb.group({
-      medic: [this.currentUser.firstName + ' ' + this.currentUser.lastName],
+      medic: [this.currentUser.firstName + ' ' + this.currentUser.lastName, Validators.required],
       specialty: [this.currentUser.specialty],
       motivoConsulta: ['', Validators.required],
       enfermedadActual: [''],
