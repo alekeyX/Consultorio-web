@@ -16,7 +16,7 @@
         <ng-template #main_content>
             <div class="row mb-4">
                 <div class="col-md-4 d-flex justify-content-center">
-                    <img [src]="'http://localhost:4000/' + patient.imagePath" 
+                    <img [src]="'https://api-consultorio-web.herokuapp.com/' + patient.imagePath" 
                         class=" imgfluid imgRedonda border" *ngIf="avatar" >
                     <i class="fas fa-user-circle fa-10x text-aqua-dark" *ngIf="!avatar"></i>
                 </div>

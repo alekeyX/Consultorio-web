@@ -18,7 +18,7 @@
     <div class="dropdown d-lg-none d-xl-none pr-3" *ngIf="currentUser">
         <div role="button" id="dropdownMenuLinkPhone" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
-            <img [src]="'http://localhost:4000/' + currentUser.imagePath" *ngIf="avatar" 
+            <img [src]="'https://api-consultorio-web.herokuapp.com/' + currentUser.imagePath" *ngIf="avatar" 
                 class=" imgfluid imgRedonda">
         </div>
 
@@ -90,7 +90,7 @@
             <!-- Imagen de perfil para pantalla desktop -->
             <div class="d-none d-md-none d-lg-block" *ngIf="currentUser">
                 <i class="fas fa-user-circle fa-3x text-white" *ngIf="!avatar"></i>
-                <img [src]="'http://localhost:4000/' + currentUser.imagePath" *ngIf="avatar"
+                <img [src]="'https://api-consultorio-web.herokuapp.com/' + currentUser.imagePath" *ngIf="avatar"
                     class=" imgfluid imgRedonda">
             </div>  
         </div>
