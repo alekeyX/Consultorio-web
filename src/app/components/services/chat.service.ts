@@ -11,7 +11,7 @@ import { Message } from '../models/Message';
 })
 export class ChatService {
 
-  private url = 'http://localhost:5000';
+  private url = 'https://api-consultorio-web.herokuapp.com:5000';
   private socket;
 
   constructor(private httpClient: HttpClient) {
