@@ -47,7 +47,6 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
       this.getMedics();
     }
     this.scrollToBottom();
-    this.getMessages();
   }
 
   // Obtener lista de medicos
@@ -57,8 +56,6 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
       patientuser = data;
       this.medicService.getMedicsbyIds(patientuser.medic_id).subscribe((data) => {
         this.medics = data;
-        console.log(data);
-        
       });
     });
   }
@@ -100,10 +97,7 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
           if (this.medic.imagePath === 'none') {
             this.avatar = false;
           }
-          this.chatService.getAll2(this.to_user_id, this.currentUser._id)
-          .subscribe((data) => {
-            this.messages = data;
-          });
+          this.getMessages();
         },
         err => console.log(err)
       );
@@ -120,10 +114,7 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
           if (this.patient.imagePath === 'none') {
             this.avatar = false;
           }
-          this.chatService.getAll(this.to_user_id, this.currentUser._id)
-          .subscribe((data) => {
-            this.messages = data;
-          });
+          this.getMessages();
         },
         err => console.log(err)
       );
@@ -134,6 +125,7 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
     if (this.message !== '') {
       // si es medico a quien escribimos
       if (!this.isPatient) {
+        
         var id = this.medic._id;
         this.angForm = this.fb.group({
           medic_id: [id],
@@ -153,15 +145,27 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
       }
       this.chatService.sendMessage(this.angForm.value, this.room);
       this.message = '';
+      this.getMessages();
     }
   }
 
   // Devolver mensajes
   getMessages() {
-    this.chatService.getMessages()
-      .subscribe((messages) => {
-        this.messages = messages
+    // this.chatService.getMessages()
+    //   .subscribe((messages) => {
+    //     this.messages = messages
+    //   });
+    if (this.isPatient) {
+      this.chatService.getAll(this.to_user_id, this.currentUser._id)
+      .subscribe((data) => {
+        this.messages = data;
       });
+    } else {
+      this.chatService.getAll2(this.to_user_id, this.currentUser._id)
+      .subscribe((data) => {
+        this.messages = data;
+      });
+    }
   }
 
   get isAdmin() {

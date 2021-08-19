@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
-import { Observable, throwError } from 'rxjs';
+import { interval, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, delay, retry, retryWhen } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Message } from '../models/Message';
 
@@ -11,7 +11,7 @@ import { Message } from '../models/Message';
 })
 export class ChatService {
 
-  private url = 'https://api-consultorio-web.herokuapp.com:5000';
+  private url = 'http://localhost:5150';
   private socket;
 
   constructor(private httpClient: HttpClient) {
@@ -56,7 +56,7 @@ export class ChatService {
   getAll(to_id, from_id): Observable<Message[]> {
     return this.httpClient.get<Message[]>(environment.apiUrl + '/chat/' + to_id + '/' + from_id)
     .pipe(
-      catchError(this.errorHandler)
+      catchError(this.errorHandler),
     );
   }
 
