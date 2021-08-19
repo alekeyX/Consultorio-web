@@ -123,9 +123,8 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
   // Enviar un mensaje
   submitForm() {
     if (this.message !== '') {
-      // si es medico a quien escribimos
       if (!this.isPatient) {
-        
+        // si es medico a quien escribimos
         var id = this.medic._id;
         this.angForm = this.fb.group({
           medic_id: [id],
@@ -143,9 +142,12 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
           msg: [this.message]
         })
       }
-      this.chatService.sendMessage(this.angForm.value, this.room);
+      this.chatService.sendMessage(this.angForm.value).subscribe(res => {
+        this.getMessages();
+      }, (error) => {
+        console.log(error);
+      });
       this.message = '';
-      this.getMessages();
     }
   }
 
