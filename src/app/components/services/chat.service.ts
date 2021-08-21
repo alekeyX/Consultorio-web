@@ -31,33 +31,31 @@ export class ChatService {
     this.socket.emit('leaveRoom', room);
   }
 
-  // // Enviar mensaje
-  // public sendMessage(message, room) {
-  //   this.socket.emit('new-message', message, room);
-  // }
+  // Enviar mensaje
+  public sendMessage(message, room) {
+    this.socket.emit('new-message', message, room);
+  }
 
   // Recibir los mensajes
-  // public getMessages = () => {
-  //     return Observable.create((observer) => {
-  //         this.socket.on('new-message', (messages) => {
-  //           observer.next(messages);              
-  //         });
-  //     });
-  // }
+  public getMessages = () => {
+      return Observable.create((observer) => {
+          this.socket.on('new-message', () => {
+            observer.next();              
+          });
+      });
+  }
 
   // Desconectarse del socket
   public disconnect() {
     this.socket.disconnect();
   }
 
-  sendMessage(message): Observable<any> {
-    console.log(message);
-    
-    return this.httpClient.post<any>(environment.apiUrl + '/chat/', message )
-    .pipe(
-      catchError(this.errorHandler)
-    )
-  }
+  // sendMessage(message): Observable<any> {
+  //   return this.httpClient.post<any>(environment.apiUrl + '/chat/', message )
+  //   .pipe(
+  //     catchError(this.errorHandler)
+  //   )
+  // }
 
   // Obtener los mensajes por id de medico, id de paciente
   getAll(to_id, from_id): Observable<Message[]> {
@@ -84,7 +82,6 @@ export class ChatService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

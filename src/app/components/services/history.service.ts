@@ -75,7 +75,6 @@ export class HistoryService {
       // Get server-side error
       errorMessage = error.error.message;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

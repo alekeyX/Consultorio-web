@@ -142,21 +142,16 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
           msg: [this.message]
         })
       }
-      this.chatService.sendMessage(this.angForm.value).subscribe(res => {
-        this.getMessages();
-      }, (error) => {
-        console.log(error);
-      });
+      this.chatService.sendMessage(this.angForm.value, this.room);
       this.message = '';
+      this.chatService.getMessages().subscribe(() => {
+        this.getMessages();
+      });
     }
   }
 
-  // Devolver mensajes
+  // Obtener mensajes
   getMessages() {
-    // this.chatService.getMessages()
-    //   .subscribe((messages) => {
-    //     this.messages = messages
-    //   });
     if (this.isPatient) {
       this.chatService.getAll(this.to_user_id, this.currentUser._id)
       .subscribe((data) => {

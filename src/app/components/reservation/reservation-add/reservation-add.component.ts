@@ -70,8 +70,6 @@ export class ReservationAddComponent implements OnInit {
     } else {
       this.reservation = this.angForm.value;
       this.reservationService.create(this.reservation).subscribe(res => {
-        console.log(res);
-        
         this.router.navigate(['reservation']);
         this.toastr.success(res.message, '');
       }, (error) => {

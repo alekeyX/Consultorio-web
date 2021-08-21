@@ -54,7 +54,6 @@ export class HistoryDetailsComponent implements OnInit {
     if (window.confirm('Esta seguro de eliminar la historia clinica?')) {
       this.historyService.delete(id)
         .subscribe(res => {
-          console.log(res);
           this.router.navigate(['/history']);
         });
       }
