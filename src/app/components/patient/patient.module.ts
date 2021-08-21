@@ -18,6 +18,7 @@ import { PatientService } from '../services/patient.service';
 import { FilterPatientPipe } from 'src/app/pipes/filter-patient.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { PatientAddMedicComponent } from './patient-add-medic/patient-add-medic.component';
+import { PatientEditPasswordComponent } from './patient-edit/patient-edit-password/patient-edit-password.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { PatientAddMedicComponent } from './patient-add-medic/patient-add-medic.
     PatientProfileComponent,
     PatientLoginComponent,
     FilterPatientPipe,
-    PatientAddMedicComponent
+    PatientAddMedicComponent,
+    PatientEditPasswordComponent
   ],
   imports: [
     CommonModule,
