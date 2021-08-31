@@ -70,11 +70,14 @@
             </div>
             
             <!-- Botones para editar y eliminar -->
-            <div class="d-md-flex justify-content-md-end" *ngIf="isAdmin">
-                <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]">
+            <div class="d-md-flex justify-content-md-end">
+                <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]" *ngIf="isMedic">
+                    Cambiar Contraseña
+                </button>
+                <button class="btn bg-aqua btnOption text-white m-1" [routerLink]="['/medic/update', medic._id]" *ngIf="isAdmin">
                     Editar
                 </button>
-                <button class="btn btn-danger m-1" (click)="deleteMedic(medic._id)">
+                <button class="btn btn-danger btnOption m-1" (click)="deleteMedic(medic._id)" *ngIf="isAdmin">
                     Eliminar
                 </button>
             </div>

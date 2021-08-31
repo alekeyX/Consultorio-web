@@ -1,126 +1,139 @@
-<div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
-<div class="card-body">
-<h1 class="text-aqua-dark mb-3">Editar Médico</h1>
-  <!-- formulario para añadir medico -->
-  <form [formGroup]="angForm" (ngSubmit)="submitForm()">
-    
-    <div class="row">
-      <div class="form-group col-lg">
-        <label class="col-lg">Nombre de Usuario*</label>
-        <input type="text" class="form-control" [ngClass]="{'is-invalid': angForm.controls['username'].errors?.required && angForm.controls['username'].touched}"
-        formControlName="username" 
-          #username/>
+<div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn" *ngIf="isAdmin">
+  <div class="card-body">
+    <h1 class="text-aqua-dark mb-3">Editar Médico</h1>
+    <!-- formulario para añadir medico -->
+    <form [formGroup]="angForm" (ngSubmit)="submitForm()">
+
+      <div class="row">
+        <div class="form-group col-lg">
+          <label class="col-lg">Nombre de Usuario*</label>
+          <input type="text" class="form-control"
+            [ngClass]="{'is-invalid': angForm.controls['username'].errors?.required && angForm.controls['username'].touched}"
+            formControlName="username" #username />
           <!-- error -->
-          <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="text-danger font-weight-light">
+          <div
+            *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)"
+            class="text-danger font-weight-light font-error">
             <div *ngIf="angForm.controls['username'].errors.required">
               Nombre de usuario es requerido.
             </div>
           </div>
+        </div>
       </div>
-    </div>
 
-      
-    <div class="row">
-      <div class="form-group col-lg">
-        <label class="col-lg">Nombre(s)*</label>
-        <input type="text" class="form-control" 
-        [ngClass]="{'is-invalid': angForm.controls['firstName'].errors?.required && angForm.controls['firstName'].touched}"
-        formControlName="firstName" 
-          #firstName/>
+
+      <div class="row">
+        <div class="form-group col-lg">
+          <label class="col-lg">Nombre(s)*</label>
+          <input type="text" class="form-control"
+            [ngClass]="{'is-invalid': angForm.controls['firstName'].errors?.required && angForm.controls['firstName'].touched}"
+            formControlName="firstName" #firstName />
           <!-- error -->
-          <div *ngIf="angForm.controls['firstName'].invalid && (angForm.controls['firstName'].dirty || angForm.controls['firstName'].touched)" class="text-danger font-weight-light">
+          <div
+            *ngIf="angForm.controls['firstName'].invalid && (angForm.controls['firstName'].dirty || angForm.controls['firstName'].touched)"
+            class="text-danger font-weight-light font-error">
             <div *ngIf="angForm.controls['firstName'].errors.required">
               Nombre es requerido.
             </div>
           </div>
-      </div>
-      
-      <div class="form-group col-lg">
-        <label class="col-lg">Apellidos*</label>
-        <input type="text" class="form-control"
-        [ngClass]="{'is-invalid': angForm.controls['lastName'].errors?.required && angForm.controls['lastName'].touched}" 
-        formControlName="lastName" 
-          #lastName/>
-            <!-- error -->
-            <div *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)" class="text-danger font-weight-light">
-              <div *ngIf="angForm.controls['lastName'].errors.required">
-                Apellidos son requeridos.
-              </div>
-            </div>
-      </div>
-    </div>
+        </div>
 
-    <div class="row">
-      <div class="form-group col-lg">
-        <label class="col-lg">Email*</label>
-        <input type="email" class="form-control"
-        [ngClass]="{'is-invalid': angForm.controls['email'].errors?.required && angForm.controls['email'].touched}"
-        formControlName="email" 
-          #email/>
+        <div class="form-group col-lg">
+          <label class="col-lg">Apellidos*</label>
+          <input type="text" class="form-control"
+            [ngClass]="{'is-invalid': angForm.controls['lastName'].errors?.required && angForm.controls['lastName'].touched}"
+            formControlName="lastName" #lastName />
           <!-- error -->
-          <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="text-danger font-weight-light">
+          <div
+            *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)"
+            class="text-danger font-weight-light font-error">
+            <div *ngIf="angForm.controls['lastName'].errors.required">
+              Apellidos son requeridos.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-lg">
+          <label class="col-lg">Email*</label>
+          <input type="email" class="form-control"
+            [ngClass]="{'is-invalid': angForm.controls['email'].errors?.required && angForm.controls['email'].touched}"
+            formControlName="email" #email />
+          <!-- error -->
+          <div
+            *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)"
+            class="text-danger font-weight-light font-error">
             <div *ngIf="angForm.controls['email'].errors.required">
               Correo obligatorio.
             </div>
           </div>
-      </div>
-      
-      <div class="form-group col-lg">
-        <label class="col-lg">Especialidad</label>
-        <input type="text" class="form-control" 
-        formControlName="specialty" 
-          #specialty/>
-      </div>
-      
-      <div class="form-group col-lg">
-        <label class="col-lg">Teléfono</label>
-        <input type="text" class="form-control" 
-        formControlName="phone" 
-        #phone/>
-      </div>
-    </div>
+        </div>
 
-    <div class="row">
-      <div class="form-group col-lg">
-        <label class="col-lg">Dirección</label>
-        <input type="text" class="form-control" 
-        formControlName="address" 
-          #address/>
+        <div class="form-group col-lg">
+          <label class="col-lg">Especialidad</label>
+          <input type="text" class="form-control" formControlName="specialty" #specialty />
+        </div>
+
+        <div class="form-group col-lg">
+          <label class="col-lg">Teléfono</label>
+          <input type="text" class="form-control" formControlName="phone" #phone />
+        </div>
       </div>
 
-      <div class="form-group col-lg">
-        <label class="col-lg">Género</label>
-        <select class="custom-select" formControlName="genero" #genero>
-          <option value="" disabled>Seleccione género</option>
-          <option *ngFor="let gen of generos" [ngValue]="gen">{{gen}}</option>
-        </select>
-      </div>
-    </div>
+      <div class="row">
+        <div class="form-group col-lg">
+          <label class="col-lg">Dirección</label>
+          <input type="text" class="form-control" formControlName="address" #address />
+        </div>
 
-    <div class="row">
-      <div class="form-group col-lg-6">
-        <label class="col-lg">Rol*</label>
-        <select class="custom-select" formControlName="role" #role>
-          <option value="" disabled>Seleccione el rol</option>
-          <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
-        </select>
+        <div class="form-group col-lg">
+          <label class="col-lg">Género</label>
+          <select class="custom-select" formControlName="genero" #genero>
+            <option value="" disabled>Seleccione género</option>
+            <option *ngFor="let gen of generos" [ngValue]="gen">{{gen}}</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div>
-      <div class="custom-file col-lg-4 form-group">
-        <label class="custom-file-label" for="file">Foto de perfil</label>
-        <input type="file"  id="file" #fileInput lang="es" accept="image/gif, image/png, image/jpeg"
-                FormControlName="imagePath" (change)="onFileChange($event)" class="custom-file-input">
+      <div class="row">
+        <div class="form-group col-lg-6">
+          <label class="col-lg">Rol*</label>
+          <select class="custom-select" formControlName="role" #role>
+            <option value="" disabled>Seleccione el rol</option>
+            <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+          </select>
+          <div
+            *ngIf="angForm.controls['role'].invalid && (angForm.controls['role'].dirty || angForm.controls['role'].touched)"
+            class="text-danger font-weight-light font-error">
+            Debe elegir un rol
+          </div>
+        </div>
       </div>
-      <div class="w-100 d-flex justify-content-center">
-        <img [src]="image" *ngIf="image" alt="foto-perfil" id="foto-perfil" class="p-2 mx-auto">
+
+      <div>
+        <div class="custom-file form-group">
+          <div>
+            <label class="custom-file-label" for="file">Foto de perfil</label>
+            <input type="file" id="file" #fileInput lang="es" accept="image/gif, image/png, image/jpeg"
+              FormControlName="imagePath" (change)="onFileChange($event)" class="custom-file-input">
+          </div>
+          <div class="mt-2">
+            <label class="mr-2">Sin imagen</label>
+            <input type="checkbox" (change)="withoutImage($event)">
+          </div>
+        </div>
+        <div class="w-100 d-flex justify-content-center" *ngIf="!deleteImage">
+          <img [src]="image" alt="foto-perfil" id="foto-perfil" class="p-2 mx-auto" *ngIf="image !== 'none'">
+        </div>
       </div>
-    </div>
-    <div class="form-group mt-4">
-      <button type="submit" class="btn btn-block text-white bg-aqua">
-        Guardar
-      </button>
-    </div>
-  </form>
+      <div class="form-group mt-4">
+        <button type="submit" class="btn btn-block text-white bg-aqua">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
+
+  <app-medic-edit-password *ngIf="isMedic || isAdmin"></app-medic-edit-password>

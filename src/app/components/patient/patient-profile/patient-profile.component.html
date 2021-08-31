@@ -103,11 +103,14 @@
                     <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]" *ngIf="isAdmin || isMedic">
                         Historial Clínico
                     </button>
-                    <div class="d-md-flex" *ngIf="isAdmin" id="options">
-                        <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]" id="btnOption">
+                    <div class="d-md-flex" id="options">
+                        <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]" *ngIf="isPatient">
+                            Cambiar Contraseña
+                        </button>
+                        <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/update', patient._id]" id="btnOption" *ngIf="isAdmin">
                             Editar
                         </button>
-                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" id="btnOption">
+                        <button class="btn btn-danger m-1" (click)="deletePatient(patient._id)" id="btnOption" *ngIf="isAdmin">
                             Eliminar
                         </button>
                     </div>

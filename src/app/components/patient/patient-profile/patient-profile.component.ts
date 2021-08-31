@@ -83,4 +83,7 @@ export class PatientProfileComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Medic;
   }
 
+  get isPatient() {
+    return this.currentUser && this.currentUser.role === Role.Patient;
+  }
 }

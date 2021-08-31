@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Medic } from 'src/app/components/models/medic';
-import { Patient } from 'src/app/components/models/patient';
+import { validarQueSeanIguales } from 'src/app/components/patient/patient-edit/patient-edit-password/patient-edit-password.component';
 import { AuthenticationService } from 'src/app/components/services/authentication.service';
-import { PatientService } from 'src/app/components/services/patient.service';
+import { MedicService } from 'src/app/components/services/medic.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-patient-edit-password',
-  templateUrl: './patient-edit-password.component.html',
-  styleUrls: ['./patient-edit-password.component.css']
+  selector: 'app-medic-edit-password',
+  templateUrl: './medic-edit-password.component.html',
+  styleUrls: ['./medic-edit-password.component.css']
 })
-export class PatientEditPasswordComponent implements OnInit {
+export class MedicEditPasswordComponent implements OnInit {
+
 
   submitted = false;
   passForm: FormGroup;
-  currentUser: Medic | Patient;
+  currentUser: Medic;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private patientService: PatientService,
+    private medicService: MedicService,
     private authService: AuthenticationService,
     private toastr: ToastrService
   ) { }
@@ -71,7 +72,7 @@ export class PatientEditPasswordComponent implements OnInit {
           formData.append('password', this.passForm.get('password').value);
           const id = this.route.snapshot.paramMap.get('id');
           
-          this.patientService.changePassword(id, this.passForm.value)
+          this.medicService.changePassword(id, this.passForm.value)
             .subscribe(res => {
               this.router.navigate(['/patient']);
               this.toastr.success('Contraseña cambiada');
@@ -82,11 +83,5 @@ export class PatientEditPasswordComponent implements OnInit {
       }
     });
   }
+
 }
-
-export const validarQueSeanIguales: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
-  const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
-
-  return password.value === confirmPassword.value ? null : { 'noSonIguales': true };
-};

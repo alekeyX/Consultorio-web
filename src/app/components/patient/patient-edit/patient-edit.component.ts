@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Patient } from '../../models/patient';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-patient-edit',
@@ -22,6 +23,7 @@ export class PatientEditComponent implements OnInit {
   error: string;
   image: string;
   generos = ['Masculino', 'Femenino', 'Otro'];
+  deleteImage: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -43,6 +45,12 @@ export class PatientEditComponent implements OnInit {
   // Obtener los datos de un paciente por el id
   getPatient(id: string) {
     this.patientService.getById(id).subscribe(data => {
+      if(data.imagePath !== 'none') {
+        this.image = data.imagePath;
+      } else {
+        this.image = 'none'
+      }
+
       this.angForm = this.fb.group({
           username: [data.username, Validators.required],
           ci: [data.ci, Validators.required],
@@ -58,7 +66,8 @@ export class PatientEditComponent implements OnInit {
           placeBirth: [data.placeBirth],
           address: [data.address],
           phone: [data.phone, Validators.pattern('^[0-9]+$')],
-          imagePath: [data.imagePath]
+          imagePath: [data.imagePath],
+          withoutImage: ['']
         });
     });
   }
@@ -80,7 +89,8 @@ export class PatientEditComponent implements OnInit {
       placeBirth: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
-      imagePath: ['']
+      imagePath: [''],
+      withoutImage: ['']
     });
   }
 
@@ -125,7 +135,6 @@ export class PatientEditComponent implements OnInit {
         if (result.isConfirmed) {
           const formData: any = new FormData();
           formData.append('username', this.angForm.get('username').value);
-          formData.append('password', this.angForm.get('ci').value);
           formData.append('firstName', this.angForm.get('firstName').value);
           formData.append('lastName', this.angForm.get('lastName').value);
           formData.append('ci', this.angForm.get('ci').value);
@@ -140,6 +149,7 @@ export class PatientEditComponent implements OnInit {
           formData.append('address', this.angForm.get('address').value);
           formData.append('phone', this.angForm.get('phone').value);
           formData.append('imagePath', this.angForm.get('imagePath').value);
+          formData.append('withoutImage', this.angForm.get('withoutImage').value);
           
           // Mandar el id y el formData al servicio para actualizar los datos
           const id = this.route.snapshot.paramMap.get('id');
@@ -153,5 +163,20 @@ export class PatientEditComponent implements OnInit {
         }
       }
     })
+  }
+
+  withoutImage(event: any): void {
+    this.deleteImage = !this.deleteImage;
+    if (this.deleteImage) {
+      this.angForm.controls['withoutImage'].setValue('none');
+    }
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  get isPatient() {
+    return this.currentUser && this.currentUser.role === Role.Patient;
   }
 }

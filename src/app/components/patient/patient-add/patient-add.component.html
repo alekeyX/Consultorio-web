@@ -12,7 +12,7 @@
             formControlName="username"  placeholder="Código de paciente*"
               #username/>
               <!-- error -->
-              <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="text-danger font-weight-light">
+              <div *ngIf="angForm.controls['username'].invalid && (angForm.controls['username'].dirty || angForm.controls['username'].touched)" class="text-danger font-weight-light font-error">
                 <div *ngIf="angForm.controls['username'].errors.required">
                   Código de paciente es requerido.
                 </div>
@@ -24,7 +24,7 @@
             formControlName="ci" placeholder="Carnet de identidad*"
               #ci/>
               <!-- error -->
-            <div *ngIf="angForm.controls['ci'].invalid && (angForm.controls['ci'].dirty || angForm.controls['ci'].touched)" class="text-danger font-weight-light">
+            <div *ngIf="angForm.controls['ci'].invalid && (angForm.controls['ci'].dirty || angForm.controls['ci'].touched)" class="text-danger font-weight-light font-error">
               <div *ngIf="angForm.controls['ci'].errors.required">
                 Carnet de identidad es requerido.
               </div>
@@ -39,7 +39,7 @@
             formControlName="firstName" placeholder="Nombres*"
               #firstName/>
             <!-- error -->
-            <div *ngIf="angForm.controls['firstName'].invalid && (angForm.controls['firstName'].dirty || angForm.controls['firstName'].touched)" class="text-danger font-weight-light">
+            <div *ngIf="angForm.controls['firstName'].invalid && (angForm.controls['firstName'].dirty || angForm.controls['firstName'].touched)" class="text-danger font-weight-light font-error">
               <div *ngIf="angForm.controls['firstName'].errors.required">
                 Nombre es requerido.
               </div>
@@ -52,7 +52,7 @@
             formControlName="lastName" placeholder="Apellidos*"
               #lastName/>
             <!-- error -->
-            <div *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)" class="text-danger font-weight-light">
+            <div *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)" class="text-danger font-weight-light font-error">
               <div *ngIf="angForm.controls['lastName'].errors.required">
                 Apellidos son requeridos.
               </div>
@@ -67,7 +67,7 @@
             formControlName="email" placeholder="Correo Electrónico*"
               #email/>
               <!-- error -->
-            <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="text-danger font-weight-light">
+            <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="text-danger font-weight-light font-error">
               <div *ngIf="angForm.controls['email'].errors.required">
                 Correo es obligatorio.
               </div>
@@ -111,7 +111,7 @@
             <input type="text" class="form-control" 
             formControlName="phone" placeholder="Teléfono"
             #phone/>
-            <div *ngIf="angForm.controls['phone'].invalid && (angForm.controls['phone'].dirty || angForm.controls['phone'].touched)" class="text-danger font-weight-light">
+            <div *ngIf="angForm.controls['phone'].invalid && (angForm.controls['phone'].dirty || angForm.controls['phone'].touched)" class="text-danger font-weight-light font-error">
                 Deben ser solo digitos
             </div>
           </div>

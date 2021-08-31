@@ -81,6 +81,10 @@ export class MedicProfileComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
+  get isMedic() {
+    return this.currentUser && this.currentUser.role === Role.Medic;
+  }
+
   get isReception() {
     return this.currentUser && this.currentUser.role === Role.Reception;
   }
