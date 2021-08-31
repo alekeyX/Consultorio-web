@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   // Url backend local
-  apiUrl: 'http://localhost:4000/api'
-  // apiUrl: 'https://api-consultorio-web.herokuapp.com/api'
+  // apiUrl: 'http://localhost:4000/api'
+  apiUrl: 'https://api-consultorio-web.herokuapp.com/api'
 
 };
 
