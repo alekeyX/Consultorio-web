@@ -6,6 +6,11 @@ import { HistoryService } from '../../services/history.service';
 import { History } from '../../models/history';
 import { Role } from '../../models/role';
 import { jsPDF } from 'jspdf';
+import Swal from 'sweetalert2';
+import {ToastrService} from 'ngx-toastr';
+import {ExamService} from '../../services/exam.service';
+import {DiagnosticService} from '../../services/diagnostic.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-history-details',
@@ -17,14 +22,15 @@ export class HistoryDetailsComponent implements OnInit {
   currentUser: any;
   history: History;
   loading = false;
-  date: string;
-  patient: any;
 
   constructor(
       private historyService: HistoryService,
+      private examServ: ExamService,
+      private diagServ: DiagnosticService,
       private authenticationService: AuthenticationService,
       private activatedRoute: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService
   ) {  }
 
   ngOnInit(): void {
@@ -38,12 +44,8 @@ export class HistoryDetailsComponent implements OnInit {
 
   // Obtener la informacion de una historia por id
   getHistory(id: string) {
-    this.historyService.getById(id)
-    .subscribe(
-      res => {
-        this.getDate(res);
-        this.history = res; 
-        this.patient = res.patient_id;       
+    this.historyService.getById(id).subscribe(res => {
+        this.history = res;
       },
       err => console.log(err)
     );
@@ -51,17 +53,31 @@ export class HistoryDetailsComponent implements OnInit {
 
   // Eliminar registro de la historia clinica
   deleteHistory(id: string) {
-    if (window.confirm('Esta seguro de eliminar la historia clinica?')) {
-      this.historyService.delete(id)
-        .subscribe(res => {
-          this.router.navigate(['/history']);
+    Swal.fire({
+      title: 'Estas Seguro?',
+      text: 'Los datos se eliminarán permanentemente',
+      icon: 'warning',
+      iconColor: '#15B9C6',
+      showCancelButton: true,
+      confirmButtonColor: '#15B9C6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: '#0F7F875a'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.historyService.delete(id).subscribe((res) => {
+          this.deleteExamAndDiagnostic(this.history);
+          this.router.navigate(['/history/' + this.history.patient_id._id]);
+          this.toastr.success(res.message);
         });
       }
+    });
   }
 
-  // Cortar la fecha para mostrarla
-  getDate(history: any) {
-    this.date = history.createdAt.substring(0, 10) + ' ' + history.hour;
+  deleteExamAndDiagnostic(history: History): void {
+    this.examServ.delete(history.exam_id._id).subscribe();
+    this.diagServ.delete(history.diagnostic_id._id).subscribe();
   }
 
   get isAdmin() {
@@ -72,28 +88,28 @@ export class HistoryDetailsComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Medic;
   }
 
-  getPDF(){
-    let doc = new jsPDF();
+  getPDF() {
+    const doc = new jsPDF();
 
     doc.setLineWidth(0.5);
     doc.line(20, 15, 190, 15);
     doc.setFontSize(22);
-    doc.text("Historia Clínica", 20, 25);
+    doc.text('Historia Clínica', 20, 25);
     doc.setFontSize(14);
-    doc.text("Fecha: " + this.date, 120, 25);
+    doc.text('Fecha: ' + this.history.createdAt, 120, 25);
     doc.line(20, 35, 190, 35);
     doc.setFontSize(12);
     doc.text('Médico: ' + this.history.medic, 20, 50);
-    doc.text('Paciente: ' + this.patient.firstName + ' ' + this.patient.lastName, 20, 60);
+    doc.text('Paciente: ' + this.history.patient_id.firstName + ' ' + this.history.patient_id.lastName, 20, 60);
     doc.text('Motivo Consulta: ' + this.history.motivoConsulta, 20, 70);
     doc.text('Enfermedad Actual: ' + this.history.enfermedadActual, 20, 80);
     doc.text('Antecedentes Familiares: ' + this.history.antecedentesFamiliares, 20, 90);
     doc.text('Antecedentes Personales: ' + this.history.antecedentesPersonales, 20, 100);
     doc.text('Habitos Tóxicos: ' + this.history.habitosToxicos, 20, 110);
-    doc.text('Diagnóstico: ' + this.history.diagnostico, 20, 120);
-    doc.text('Tratamiento: ' + this.history.tratamiento, 20, 130);
+    doc.text('Diagnóstico: ' + this.history.diagnostic_id.diagnostico, 20, 120);
+    doc.text('Tratamiento: ' + this.history.diagnostic_id.tratamiento, 20, 130);
     doc.setLineWidth(1);
     doc.line(20, 190, 190, 190);
-    doc.save(this.patient.firstName + '-' + this.patient.lastName + '.pdf');
+    doc.save(this.history.patient_id.firstName + '-' + this.history.patient_id.lastName + '.pdf');
   }
 }

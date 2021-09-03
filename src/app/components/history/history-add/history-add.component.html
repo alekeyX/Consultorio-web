@@ -1,511 +1,510 @@
 <div class="card rounded-lg shadow mb-1 bg-white rounded animated fadeIn">
-    <div class="card-body">
+  <div class="card-body">
 
-        <!-- formulario para añadir historial -->
-        <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
-            <div class="d-md-flex justify-content-between align-items-center">
-                <h1 class="text-aqua-dark mb-3">Registrar Historia Clínica</h1>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-block text-white bg-aqua" [ngClass]="{disabled: !angForm.valid}">
-                        Guardar
-                    </button>
-                </div>
-            </div>
+    <!-- formulario para añadir historial -->
+    <form [formGroup]="angForm" (ngSubmit)="submitForm()" novalidate>
+      <div class="d-md-flex justify-content-between align-items-center">
+        <h1 class="text-aqua-dark mb-3">Registrar Historia Clínica</h1>
+        <div class="form-group">
+          <button type="submit" class="btn btn-block text-white bg-aqua" [ngClass]="{disabled: !angForm.valid}">
+            Guardar
+          </button>
+        </div>
+      </div>
 
-            <!-- Informacion general -->
-            <div>
-                <div class="form-group row">
-                    <label for="medic" class="col-sm-3 col-form-label">Médico:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="medic"
-                        formControlName="medic" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="specialty" class="col-sm-3 col-form-label">Especialidad:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="enfermedadActual"
-                        formControlName="specialty">
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="form-group row">
-                    <label for="motivoConsulta" class="col-sm-3 col-form-label">Motivo de Consulta:<span class="text-danger">*</span></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="motivoConsulta"
-                        formControlName="motivoConsulta">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="enfermedadActual" class="col-sm-3 col-form-label">Enfermedad Actual:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="enfermedadActual"
-                        formControlName="enfermedadActual">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="antecedentesPersonales" class="col-sm-3 col-form-label">Antecedentes Personales:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="antecedentesPersonales"
-                        formControlName="antecedentesPersonales">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="antecedentesFamiliares" class="col-sm-3 col-form-label">Antecedentes Familiares:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="antecedentesFamiliares"
-                        formControlName="antecedentesFamiliares">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="age" class="col-sm-3 col-form-label">Edad:</label>
-                    <div class="col-sm-9">
-                        <input type="number" class="form-control" id="age"
-                        formControlName="age">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="habitosToxicos" class="col-sm-3 col-form-label">Hábitos Tóxicos:</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="habitosToxicos"
-                        formControlName="habitosToxicos">
-                    </div>
-                </div>
-            </div>
+      <!-- Informacion general -->
+      <div>
+        <div class="form-group row">
+          <label for="medic" class="col-sm-3 col-form-label">Médico:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="medic"
+                   formControlName="medic" required>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-group row">
+          <label for="motivoConsulta" class="col-sm-3 col-form-label">Motivo de Consulta:<span
+            class="text-danger">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="motivoConsulta"
+                   formControlName="motivoConsulta">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="enfermedadActual" class="col-sm-3 col-form-label">Enfermedad Actual:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="enfermedadActual"
+                   formControlName="enfermedadActual">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="antecedentesPersonales" class="col-sm-3 col-form-label">Antecedentes Personales:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="antecedentesPersonales"
+                   formControlName="antecedentesPersonales">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="antecedentesFamiliares" class="col-sm-3 col-form-label">Antecedentes Familiares:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="antecedentesFamiliares"
+                   formControlName="antecedentesFamiliares">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="age" class="col-sm-3 col-form-label">Edad:</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="age"
+                   formControlName="age">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="habitosToxicos" class="col-sm-3 col-form-label">Hábitos Tóxicos:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="habitosToxicos"
+                   formControlName="habitosToxicos">
+          </div>
+        </div>
+      </div>
+    </form>
 
-            <!-- Botones de secciones -->
-            <div class="d-md-flex justify-content-around mb-1" id="btn-exam">
-                <a class="btn bg-aqua text-white m-1" (click)="eFisico = !eFisico" id="btn-exam-sub">
-                    <span *ngIf="!eFisico">Examen Físico  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eFisico">Examen Físico  <i class="fas fa-minus"></i></span>
-                </a>
+    <!-- Botones de secciones -->
+    <div class="d-md-flex justify-content-around mb-1" id="btn-exam">
+      <a class="btn bg-aqua text-white m-1 btn-exam-sub" (click)="eFisico = !eFisico">
+        <span *ngIf="!eFisico">Examen Físico  <i class="fas fa-plus"></i></span>
+        <span *ngIf="eFisico">Examen Físico  <i class="fas fa-minus"></i></span>
+      </a>
 
-                <a class="btn bg-aqua text-white m-1" (click)="ePiel = !ePiel">
-                    <span *ngIf="!ePiel">Piel, Fanera y Tejido Celular Subcutáneo  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="ePiel">Piel, Fanera y Tejido Celular Subcutáneo  <i class="fas fa-minus"></i></span>
-                </a>
+      <a class="btn bg-aqua text-white m-1" (click)="ePiel = !ePiel">
+        <span *ngIf="!ePiel">Piel, Fanera y Tejido Celular Subcutáneo  <i class="fas fa-plus"></i></span>
+        <span *ngIf="ePiel">Piel, Fanera y Tejido Celular Subcutáneo  <i class="fas fa-minus"></i></span>
+      </a>
 
-                <a class="btn bg-aqua text-white m-1" (click)="eCabeza = !eCabeza" id="btn-exam-sub">
-                    <span *ngIf="!eCabeza">Cabeza  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eCabeza">Cabeza  <i class="fas fa-minus"></i></span>
-                </a>
-            </div>
-
-            <div class="d-md-flex justify-content-around mb-2">
-                <a class="btn bg-aqua text-white m-1 w-100" (click)="eCuello = !eCuello">
-                    <span *ngIf="!eCuello">Cuello  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eCuello">Cuello  <i class="fas fa-minus"></i></span>
-                </a>
-
-                <a class="btn bg-aqua text-white m-1 w-100" (click)="eRespiratorio = !eRespiratorio">
-                    <span *ngIf="!eRespiratorio">Respiratorio  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eRespiratorio">Respiratorio  <i class="fas fa-minus"></i></span>
-                </a>
-
-                <a class="btn bg-aqua text-white m-1 w-100" (click)="eCardio = !eCardio">
-                    <span *ngIf="!eCardio">Cardio  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eCardio">Cardio  <i class="fas fa-minus"></i></span>
-                </a>
-
-                <a class="btn bg-aqua text-white m-1 w-100" (click)="eAbdomen = !eAbdomen">
-                    <span *ngIf="!eAbdomen">Abdomen  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eAbdomen">Abdomen  <i class="fas fa-minus"></i></span>
-                </a>
-
-                <a class="btn bg-aqua text-white m-1 w-100" (click)="eNeurologo = !eNeurologo">
-                    <span *ngIf="!eNeurologo">Neurologo  <i class="fas fa-plus"></i></span>
-                    <span *ngIf="eNeurologo">Neurologo  <i class="fas fa-minus"></i></span>
-                </a>
-            </div>
-
-            <!-- Examen físico -->
-            <div class="mb-1">
-                <div *ngIf="eFisico">
-                    <h6 class="text-aqua-dark mb-3">Examen Físico</h6>
-                    <div class="form-row justify-content-around">
-                        <div class="form-group col-2">
-                            <label for="peso" class="">Peso:</label>
-                            <input type="text" class="form-control" id="peso"
-                                formControlName="peso">
-                        </div>
-                        <div class="form-group col-2">
-                            <label for="talla" class="">Talla:</label>
-                                <input type="text" class="form-control" id="talla"
-                                formControlName="talla">
-                        </div>
-                        <div class="form-group col-2">
-                            <label for="FC" class="">FC:</label>
-                                <input type="text" class="form-control" id="FC"
-                                formControlName="FC">
-                        </div>
-                        <div class="form-group col-2">
-                            <label for="FR">FR:</label>
-                            <div>
-                                <input type="text" class="form-control" id="FR"
-                                formControlName="FR">
-                            </div>
-                        </div>
-                        <div class="form-group col-2">
-                            <label for="temperatura">Temp:</label>
-                            <div>
-                                <input type="text" class="form-control" id="temperatura"
-                                formControlName="temperatura">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row justify-content-around">
-                        <div class="form-group row col-6">
-                            <label for="impresionGeneral" class="col-md-5">Impresión General:</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="impresionGeneral"
-                                formControlName="impresionGeneral">
-                            </div>
-                        </div>
-                        <div class="form-group row col-6">
-                            <label for="actitud" class="col-md-4">Actitud:</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="actitud"
-                                formControlName="actitud">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row justify-content-around">
-                        <div class="form-group row col-6">
-                            <label for="constitucion" class="col-md-5">Constitución:</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="constitucion"
-                                formControlName="constitucion">
-                            </div>
-                        </div>
-                        <div class="form-group row col-6">
-                            <label for="decubito" class="col-md-4">Decúbito:</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="actitud"
-                                formControlName="decubito">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row justify-content-around">
-                        <div class="form-group row col-6">
-                            <label for="facies" class="col-md-5">Facies:</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="facies"
-                                formControlName="facies">
-                            </div>
-                        </div>
-                        <div class="form-group row col-6">
-                            <label for="marcha" class="col-md-4">Marcha:</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="marcha"
-                                formControlName="marcha">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Piel, Fanera y Tejido Celular Subcutaneo -->
-            <div class="mb-1">
-                <div *ngIf="ePiel">
-                    <h6 class="text-aqua-dark mb-3">Piel, Fanera y Tejido Celular Subcutáneo</h6>
-                    <div class="form-group row">
-                        <label for="aspecto" class="col-md-4">Aspecto:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="aspecto"
-                            formControlName="aspecto">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="distribucionPilosa" class="col-md-4">Distribución Pilosa:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="distribucionPilosa"
-                            formControlName="distribucionPilosa">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="lesiones" class="col-md-4">Lesiones:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="lesiones"
-                            formControlName="lesiones">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="faneras" class="col-md-4">Faneras:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="faneras"
-                            formControlName="faneras">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="tejidoCelularSub" class="col-md-4">Tejido Celular Subcutáneo:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="tejidoCelularSub"
-                            formControlName="tejidoCelularSub">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cabeza -->
-            <div class="mb-1">
-                <div *ngIf="eCabeza">
-                    <h6 class="text-aqua-dark mb-3">Cabeza</h6>
-                    <div class="form-group row">
-                        <label for="craneoCara" class="col-md-4">Cráneo y Cara:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="craneoCara"
-                            formControlName="craneoCara">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cueroCabelludo" class="col-md-4">Cuero Cabelludo:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cueroCabelludo"
-                            formControlName="cueroCabelludo">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="regionFrontal" class="col-md-4">Región Frontal:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="regionFrontal"
-                            formControlName="regionFrontal">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="regionOrbitonasal" class="col-md-4">Región Orbitonasal:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="regionOrbitonasal"
-                            formControlName="regionOrbitonasal">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="regionOrofaringea" class="col-md-4">Región Orofáringea:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="regionOrofaringea"
-                            formControlName="regionOrofaringea">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cuello -->
-            <div class="mb-1">
-                <div *ngIf="eCuello">
-                    <h6 class="text-aqua-dark mb-3">Cuello</h6>
-                    <div class="form-group row">
-                        <label for="cInspeccion" class="col-md-4">Inspección:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cInspeccion"
-                            formControlName="cInspeccion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cPalpacion" class="col-md-4">Palpación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cPalpacion"
-                            formControlName="cPalpacion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cPercusion" class="col-md-4">Percusión:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cPercusion"
-                            formControlName="cPercusion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cAuscultacion" class="col-md-4">Auscultación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cAuscultacion"
-                            formControlName="cAuscultacion">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Respiratorio -->
-            <div class="mb-1">
-                <div *ngIf="eRespiratorio">
-                    <h6 class="text-aqua-dark mb-3">Respiratorio</h6>
-                    <div class="form-group row">
-                        <label for="rInspeccion" class="col-md-4">Inspección:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="rInspeccion"
-                            formControlName="rInspeccion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="rPalpacion" class="col-md-4">Palpación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="rPalpacion"
-                            formControlName="rPalpacion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="rPercusion" class="col-md-4">Percusión:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="rPercusion"
-                            formControlName="rPercusion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="rAuscultacion" class="col-md-4">Auscultación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="rAuscultacion"
-                            formControlName="rAuscultacion">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cardiovascular -->
-            <div class="mb-1">
-                <div *ngIf="eCardio">
-                    <h6 class="text-aqua-dark mb-3">Cardiovascular</h6>
-                    <div class="form-group row">
-                        <label for="cdInspeccion" class="col-md-4">Inspección:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cdInspeccion"
-                            formControlName="cdInspeccion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cdPalpacion" class="col-md-4">Palpación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cdPalpacion"
-                            formControlName="cdPalpacion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cdAuscultacion" class="col-md-4">Auscultación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cdAuscultacion"
-                            formControlName="cdAuscultacion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="cdPulsos" class="col-md-4">Pulsos:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="cdPulsos"
-                            formControlName="cdPulsos">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Abdomen -->
-            <div class="mb-1">
-                <div *ngIf="eAbdomen">
-                    <h6 class="text-aqua-dark mb-3">Abdomen</h6>
-                    <div class="form-group row">
-                        <label for="aInspeccion" class="col-md-4">Inspección:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="aInspeccion"
-                            formControlName="aInspeccion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="aPalpacion" class="col-md-4">Palpación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="aPalpacion"
-                            formControlName="aPalpacion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="aPercusion" class="col-md-4">Percusión:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="aPercusion"
-                            formControlName="aPercusion">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="aAuscultacion" class="col-md-4">Auscultación:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="aAuscultacion"
-                            formControlName="aAuscultacion">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Neurólogo -->
-            <div class="mb-1">
-                <div *ngIf="eNeurologo">
-                    <h6 class="text-aqua-dark mb-3">Neurólogo</h6>
-                    <div class="form-group row">
-                        <label for="glasglow" class="col-md-4">Glasglow:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="glasglow"
-                            formControlName="glasglow">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="motilidadActiva" class="col-md-4">Motilidad Activa:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="motilidadActiva"
-                            formControlName="motilidadActiva">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="motilidadPasiva" class="col-md-4">Motilidad Pasiva:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="motilidadPasiva"
-                            formControlName="motilidadPasiva">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="motilidadRefleja" class="col-md-4">Motilidad Refleja:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="motilidadRefleja"
-                            formControlName="motilidadRefleja">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="paresCraneales" class="col-md-4">Pares Craneales:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="paresCraneales"
-                            formControlName="paresCraneales">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="sensibilidadProfunda" class="col-md-4">Sensibilidad Profunda:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="sensibilidadProfunda"
-                            formControlName="sensibilidadProfunda">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="sensibilidadSuperficial" class="col-md-4">Sensibilidad Superficial:</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="sensibilidadSuperficial"
-                            formControlName="sensibilidadSuperficial">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tratamiento y Diagnóstico -->
-            <h6 class="text-aqua-dark mb-3">Tratamiento y Diagnóstico</h6>
-            <div class="form-group row">
-                <label for="diagnostico" class="col-md-4">Diagnóstico:</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control" id="diagnostico"
-                    formControlName="diagnostico">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="tratamiento" class="col-md-4">Tratamiento:</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control" id="tratamiento"
-                    formControlName="tratamiento">
-                </div>
-            </div>
-            <div class="form-group mt-4">
-                <button type="submit" class="btn btn-block text-white bg-aqua" [ngClass]="{disabled: !angForm.valid}">
-                    Guardar
-                </button>
-            </div>
-        </form>
+      <a class="btn bg-aqua text-white m-1 btn-exam-sub" (click)="eCabeza = !eCabeza">
+        <span *ngIf="!eCabeza">Cabeza  <i class="fas fa-plus"></i></span>
+        <span *ngIf="eCabeza">Cabeza  <i class="fas fa-minus"></i></span>
+      </a>
     </div>
+
+    <div class="d-md-flex justify-content-around mb-2">
+      <a class="btn bg-aqua text-white m-1 w-100" (click)="eCuello = !eCuello">
+        <span *ngIf="!eCuello">Cuello  <i class="fas fa-plus"></i></span>
+        <span *ngIf="eCuello">Cuello  <i class="fas fa-minus"></i></span>
+      </a>
+
+      <a class="btn bg-aqua text-white m-1 w-100" (click)="eRespiratorio = !eRespiratorio">
+        <span *ngIf="!eRespiratorio">Respiratorio  <i class="fas fa-plus"></i></span>
+        <span *ngIf="eRespiratorio">Respiratorio  <i class="fas fa-minus"></i></span>
+      </a>
+
+      <a class="btn bg-aqua text-white m-1 w-100" (click)="eCardio = !eCardio">
+        <span *ngIf="!eCardio">Cardio  <i class="fas fa-plus"></i></span>
+        <span *ngIf="eCardio">Cardio  <i class="fas fa-minus"></i></span>
+      </a>
+
+      <a class="btn bg-aqua text-white m-1 w-100" (click)="eAbdomen = !eAbdomen">
+        <span *ngIf="!eAbdomen">Abdomen  <i class="fas fa-plus"></i></span>
+        <span *ngIf="eAbdomen">Abdomen  <i class="fas fa-minus"></i></span>
+      </a>
+
+      <a class="btn bg-aqua text-white m-1 w-100" (click)="eNeurologo = !eNeurologo">
+        <span *ngIf="!eNeurologo">Neurologo  <i class="fas fa-plus"></i></span>
+        <span *ngIf="eNeurologo">Neurologo  <i class="fas fa-minus"></i></span>
+      </a>
+    </div>
+
+    <form [formGroup]="examForm" (ngSubmit)="submitForm()" novalidate>
+
+      <!-- Examen físico -->
+      <div class="mb-1">
+        <div *ngIf="eFisico">
+          <h6 class="text-aqua-dark mb-3">Examen Físico</h6>
+          <div class="form-row justify-content-around">
+            <div class="form-group col-2">
+              <label for="peso" class="">Peso:</label>
+              <input type="text" class="form-control" id="peso"
+                     formControlName="peso">
+            </div>
+            <div class="form-group col-2">
+              <label for="talla" class="">Talla:</label>
+              <input type="text" class="form-control" id="talla"
+                     formControlName="talla">
+            </div>
+            <div class="form-group col-2">
+              <label for="FC" class="">FC:</label>
+              <input type="text" class="form-control" id="FC"
+                     formControlName="FC">
+            </div>
+            <div class="form-group col-2">
+              <label for="FR">FR:</label>
+              <div>
+                <input type="text" class="form-control" id="FR"
+                       formControlName="FR">
+              </div>
+            </div>
+            <div class="form-group col-2">
+              <label for="temperatura">Temp:</label>
+              <div>
+                <input type="text" class="form-control" id="temperatura"
+                       formControlName="temperatura">
+              </div>
+            </div>
+          </div>
+          <div class="form-row justify-content-around">
+            <div class="form-group row col-6">
+              <label for="impresionGeneral" class="col-md-5">Impresión General:</label>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="impresionGeneral"
+                       formControlName="impresionGeneral">
+              </div>
+            </div>
+            <div class="form-group row col-6">
+              <label for="actitud" class="col-md-4">Actitud:</label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="actitud"
+                       formControlName="actitud">
+              </div>
+            </div>
+          </div>
+          <div class="form-row justify-content-around">
+            <div class="form-group row col-6">
+              <label for="constitucion" class="col-md-5">Constitución:</label>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="constitucion"
+                       formControlName="constitucion">
+              </div>
+            </div>
+            <div class="form-group row col-6">
+              <label for="decubito" class="col-md-4">Decúbito:</label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="decubito"
+                       formControlName="decubito">
+              </div>
+            </div>
+          </div>
+          <div class="form-row justify-content-around">
+            <div class="form-group row col-6">
+              <label for="facies" class="col-md-5">Facies:</label>
+              <div class="col-md-7">
+                <input type="text" class="form-control" id="facies"
+                       formControlName="facies">
+              </div>
+            </div>
+            <div class="form-group row col-6">
+              <label for="marcha" class="col-md-4">Marcha:</label>
+              <div class="col-md-8">
+                <input type="text" class="form-control" id="marcha"
+                       formControlName="marcha">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Piel, Fanera y Tejido Celular Subcutaneo -->
+      <div class="mb-1">
+        <div *ngIf="ePiel">
+          <h6 class="text-aqua-dark mb-3">Piel, Fanera y Tejido Celular Subcutáneo</h6>
+          <div class="form-group row">
+            <label for="aspecto" class="col-md-4">Aspecto:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="aspecto"
+                     formControlName="aspecto">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="distribucionPilosa" class="col-md-4">Distribución Pilosa:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="distribucionPilosa"
+                     formControlName="distribucionPilosa">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="lesiones" class="col-md-4">Lesiones:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="lesiones"
+                     formControlName="lesiones">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="faneras" class="col-md-4">Faneras:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="faneras"
+                     formControlName="faneras">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tejidoCelularSub" class="col-md-4">Tejido Celular Subcutáneo:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="tejidoCelularSub"
+                     formControlName="tejidoCelularSub">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cabeza -->
+      <div class="mb-1">
+        <div *ngIf="eCabeza">
+          <h6 class="text-aqua-dark mb-3">Cabeza</h6>
+          <div class="form-group row">
+            <label for="craneoCara" class="col-md-4">Cráneo y Cara:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="craneoCara"
+                     formControlName="craneoCara">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cueroCabelludo" class="col-md-4">Cuero Cabelludo:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cueroCabelludo"
+                     formControlName="cueroCabelludo">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="regionFrontal" class="col-md-4">Región Frontal:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="regionFrontal"
+                     formControlName="regionFrontal">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="regionOrbitonasal" class="col-md-4">Región Orbitonasal:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="regionOrbitonasal"
+                     formControlName="regionOrbitonasal">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="regionOrofaringea" class="col-md-4">Región Orofáringea:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="regionOrofaringea"
+                     formControlName="regionOrofaringea">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuello -->
+      <div class="mb-1">
+        <div *ngIf="eCuello">
+          <h6 class="text-aqua-dark mb-3">Cuello</h6>
+          <div class="form-group row">
+            <label for="cInspeccion" class="col-md-4">Inspección:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cInspeccion"
+                     formControlName="cInspeccion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cPalpacion" class="col-md-4">Palpación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cPalpacion"
+                     formControlName="cPalpacion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cPercusion" class="col-md-4">Percusión:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cPercusion"
+                     formControlName="cPercusion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cAuscultacion" class="col-md-4">Auscultación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cAuscultacion"
+                     formControlName="cAuscultacion">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Respiratorio -->
+      <div class="mb-1">
+        <div *ngIf="eRespiratorio">
+          <h6 class="text-aqua-dark mb-3">Respiratorio</h6>
+          <div class="form-group row">
+            <label for="rInspeccion" class="col-md-4">Inspección:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="rInspeccion"
+                     formControlName="rInspeccion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rPalpacion" class="col-md-4">Palpación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="rPalpacion"
+                     formControlName="rPalpacion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rPercusion" class="col-md-4">Percusión:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="rPercusion"
+                     formControlName="rPercusion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="rAuscultacion" class="col-md-4">Auscultación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="rAuscultacion"
+                     formControlName="rAuscultacion">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cardiovascular -->
+      <div class="mb-1">
+        <div *ngIf="eCardio">
+          <h6 class="text-aqua-dark mb-3">Cardiovascular</h6>
+          <div class="form-group row">
+            <label for="cdInspeccion" class="col-md-4">Inspección:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cdInspeccion"
+                     formControlName="cdInspeccion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cdPalpacion" class="col-md-4">Palpación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cdPalpacion"
+                     formControlName="cdPalpacion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cdAuscultacion" class="col-md-4">Auscultación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cdAuscultacion"
+                     formControlName="cdAuscultacion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cdPulsos" class="col-md-4">Pulsos:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="cdPulsos"
+                     formControlName="cdPulsos">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abdomen -->
+      <div class="mb-1">
+        <div *ngIf="eAbdomen">
+          <h6 class="text-aqua-dark mb-3">Abdomen</h6>
+          <div class="form-group row">
+            <label for="aInspeccion" class="col-md-4">Inspección:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="aInspeccion"
+                     formControlName="aInspeccion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aPalpacion" class="col-md-4">Palpación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="aPalpacion"
+                     formControlName="aPalpacion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aPercusion" class="col-md-4">Percusión:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="aPercusion"
+                     formControlName="aPercusion">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aAuscultacion" class="col-md-4">Auscultación:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="aAuscultacion"
+                     formControlName="aAuscultacion">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Neurólogo -->
+      <div class="mb-1">
+        <div *ngIf="eNeurologo">
+          <h6 class="text-aqua-dark mb-3">Neurólogo</h6>
+          <div class="form-group row">
+            <label for="glasglow" class="col-md-4">Glasglow:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="glasglow"
+                     formControlName="glasglow">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="motilidadActiva" class="col-md-4">Motilidad Activa:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="motilidadActiva"
+                     formControlName="motilidadActiva">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="motilidadPasiva" class="col-md-4">Motilidad Pasiva:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="motilidadPasiva"
+                     formControlName="motilidadPasiva">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="motilidadRefleja" class="col-md-4">Motilidad Refleja:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="motilidadRefleja"
+                     formControlName="motilidadRefleja">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="paresCraneales" class="col-md-4">Pares Craneales:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="paresCraneales"
+                     formControlName="paresCraneales">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="sensibilidadProfunda" class="col-md-4">Sensibilidad Profunda:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="sensibilidadProfunda"
+                     formControlName="sensibilidadProfunda">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="sensibilidadSuperficial" class="col-md-4">Sensibilidad Superficial:</label>
+            <div class="col-md-8">
+              <input type="text" class="form-control" id="sensibilidadSuperficial"
+                     formControlName="sensibilidadSuperficial">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Tratamiento y Diagnóstico -->
+    <form [formGroup]="diagnosticForm" (ngSubmit)="submitForm()" novalidate>
+      <h6 class="text-aqua-dark mb-3">Tratamiento y Diagnóstico</h6>
+      <div class="form-group row">
+        <label for="diagnostico" class="col-md-4">Diagnóstico:</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="diagnostico"
+                 formControlName="diagnostico">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="tratamiento" class="col-md-4">Tratamiento:</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="tratamiento"
+                 formControlName="tratamiento">
+        </div>
+      </div>
+      <div class="form-group mt-4">
+        <button type="submit" class="btn btn-block text-white bg-aqua" [ngClass]="{disabled: !angForm.valid}">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

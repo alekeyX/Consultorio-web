@@ -5,6 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { History } from '../../models/history';
 import { ToastrService } from 'ngx-toastr';
+import {Medic} from '../../models/medic';
+import {Patient} from '../../models/patient';
+import {ExamService} from '../../services/exam.service';
+import {DiagnosticService} from '../../services/diagnostic.service';
 
 @Component({
   selector: 'app-history-add',
@@ -14,30 +18,34 @@ import { ToastrService } from 'ngx-toastr';
 export class HistoryAddComponent implements OnInit {
 
   angForm: FormGroup;
-  currentUser: any;
+  diagnosticForm: FormGroup;
+  examForm: FormGroup;
+  currentUser: Patient | Medic;
   submitted = false;
   image: string;
   patientId: string;
-  eFisico: boolean = false;
-  ePiel: boolean = false;
-  eCabeza: boolean = false;
-  eCuello: boolean = false;
-  eRespiratorio: boolean = false;
-  eCardio: boolean = false;
-  eAbdomen: boolean = false;
-  eNeurologo: boolean = false;
+  eFisico = false;
+  ePiel = false;
+  eCabeza = false;
+  eCuello = false;
+  eRespiratorio = false;
+  eCardio = false;
+  eAbdomen = false;
+  eNeurologo = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    public historyService: HistoryService,
+    private historyService: HistoryService,
+    private examService: ExamService,
+    private diagService: DiagnosticService,
     private authenticationService: AuthenticationService,
     private toastr: ToastrService
     ) {
       this.patientId = this.route.snapshot.paramMap.get('id');
     }
-    
+
     ngOnInit(): void {
       this.currentUser = this.authenticationService.currentUserValue;
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
@@ -48,7 +56,6 @@ export class HistoryAddComponent implements OnInit {
   createForm() {
     this.angForm = this.fb.group({
       medic: [this.currentUser.firstName + ' ' + this.currentUser.lastName, Validators.required],
-      specialty: [this.currentUser.specialty],
       motivoConsulta: ['', Validators.required],
       enfermedadActual: [''],
       antecedentesPersonales: [''],
@@ -67,6 +74,12 @@ export class HistoryAddComponent implements OnInit {
       actitud: [''],
       decubito: ['' ],
       marcha: [''],
+      patient_id: [this.patientId],
+      exam_id: [''],
+      diagnostic_id: ['']
+    });
+
+    this.examForm = this.fb.group({
       aspecto: [''],
       distribucionPilosa: [''],
       lesiones: [''],
@@ -99,12 +112,17 @@ export class HistoryAddComponent implements OnInit {
       motilidadRefleja: [''],
       paresCraneales: [''],
       sensibilidadProfunda: [''],
-      sensibilidadSuperficial: [''],
+      sensibilidadSuperficial: ['']
+    });
+
+    this.diagnosticForm = this.fb.group({
       diagnostico: [''],
       tratamiento: [''],
-      patient_id: [this.patientId],
-      hour: [Date().substring(16,21)],
     });
+  }
+
+  diag(diag: FormGroup) {
+    this.diagnosticForm = diag;
   }
 
   // Envio de formulario
@@ -113,16 +131,22 @@ export class HistoryAddComponent implements OnInit {
     if (!this.angForm.valid) {
       return false;
     } else {
-      if (!this.angForm.valid) {
-        return false;
-      } else {
-        this.historyService.create(this.angForm.value).subscribe(res => {
-          this.router.navigate(['history/' + this.patientId]);
-          this.toastr.success(res.message, '');
-        }, (error) => {
-          this.toastr.error('Intente nuevamente', error);
+      this.examService.create(this.examForm.value).subscribe(resExam => {
+        this.diagService.create(this.diagnosticForm.value).subscribe( resDiag => {
+          this.submitHistory(resExam._id, resDiag._id);
         });
-      }
+      });
     }
+  }
+
+  submitHistory(exam, diag) {
+    this.angForm.patchValue({exam_id: exam});
+    this.angForm.patchValue({diagnostic_id: diag});
+    this.historyService.create(this.angForm.value).subscribe(resHistory => {
+      this.router.navigate(['history/' + this.patientId]);
+      this.toastr.success(resHistory.message, '');
+    }, (error) => {
+      this.toastr.error('Error inesperado', error);
+    });
   }
 }

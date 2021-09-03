@@ -20,7 +20,7 @@ export class HistoryService {
 
   // Crear un registro
   create(history: any): Observable<any> {
-    return this.httpClient.post<any>(environment.apiUrl + '/chat2', history)
+    return this.httpClient.post<any>(environment.apiUrl + '/history', history)
     .pipe(
       catchError(this.errorHandler)
     );
