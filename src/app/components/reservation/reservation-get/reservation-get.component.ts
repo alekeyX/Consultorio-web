@@ -49,7 +49,7 @@ export class ReservationGetComponent implements OnInit {
     // si el usuario es admin obtiene todas las reservas
     if (this.currentUser.role === Role.Admin) {
       this.reservationService.getAll().subscribe((data) => {
-        this.reservations = data;
+        this.reservations = data.reverse();
         this.filterDate();
         this.getMedics();
       });
@@ -57,7 +57,7 @@ export class ReservationGetComponent implements OnInit {
     // si el usuario es medico obtiene sus reservas por su id
       if (this.currentUser.role === Role.Medic) {
         this.reservationService.getReservByMedic(this.currentUser._id).subscribe((data) => {
-          this.reservations = data;
+          this.reservations = data.reverse();
           this.filterDate();
         })
       } else {
@@ -65,7 +65,7 @@ export class ReservationGetComponent implements OnInit {
         if (this.currentUser.role == Role.Patient) {
           this.reservationService.getReservByPatient(this.currentUser.firstName + ' ' + this.currentUser.lastName)
           .subscribe((data) => {
-            this.reservations = data;
+            this.reservations = data.reverse();
             this.filterDate();
           })
         }
@@ -134,9 +134,9 @@ export class ReservationGetComponent implements OnInit {
   filterDate() {
     const resultado = Array.from(new Set(this.reservations.map(element => element.date)))
     .map(date => {
-      return date = this.reservations.find(element => element.date === date).date.substring(0, 10);
+      return date = this.reservations.find(element => element.date === date).date;
     });
-    return this.filterDates = resultado.reverse();
+    return this.filterDates = resultado;
   }
 
   // Cambiar el orden ascendente/descendente

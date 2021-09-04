@@ -27,7 +27,7 @@
                         <label for="fecha">Filtrar por fecha</label>
                         <select class="custom-select" [(ngModel)]="filterReservation" id="fecha">
                             <option value="">Todos</option>
-                            <option *ngFor="let date of filterDates">{{date}}</option>
+                            <option *ngFor="let date of filterDates" value="{{date}}">{{date | date:'dd/MM/yy' : 'GMT'}}</option>
                         </select>
                     </div>
                     <div class="p-0 pr-md-2 col-md-6 col-lg-4 my-3" *ngIf="isAdmin">
@@ -70,7 +70,7 @@
                     </thead>
                     <tbody>
                         <tr scope="row" *ngFor="let reserva of reservations | filterReservation:filterReservation | filterReservationByMedic:filterReservationByMedic | orderBy:order:asc ; let i = index">
-                            <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | slice:0:10}}</td>
+                            <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.date | date: 'dd-MM-yy' : 'GMT'}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center">{{reserva.hours}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="isAdmin || !isMedic">{{reserva.medic_id.firstName}} {{reserva.medic_id.lastName}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="reserva.patient_id !== ''">{{reserva.patient_id}}</td>
