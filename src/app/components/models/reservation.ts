@@ -1,4 +1,6 @@
 import { Time } from '@angular/common';
+import { Medic } from './medic';
+import { Patient } from './patient';
 
 export interface Reservation {
     _id: string;
@@ -7,7 +9,8 @@ export interface Reservation {
     dateEnd: string;
     date: string;
     hours: Time;
-    patient_id: string;
     enable: boolean;
-    medic_id: string;
+    patient_id: Patient;
+    medic_id: Medic;
+
 }

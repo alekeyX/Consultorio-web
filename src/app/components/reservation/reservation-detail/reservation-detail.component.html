@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="d-flex p-2">
                             <strong class="col-5 col-md-6">Fecha:</strong>
-                            <div class="col-7 col-md-6">{{ reserva.date | slice:0:10 }}</div>
+                            <div class="col-7 col-md-6">{{ reserva.date | date: 'dd-MM-yy' }}</div>
                         </div>
                     </div>
                     <div class="card">
@@ -37,8 +37,8 @@
                     <div class="card">
                         <div class="d-flex p-2">
                             <strong class="col-5 col-md-6">Paciente:</strong>
-                            <div class="col-7 col-md-6" *ngIf="reserva.patient_id !== ''">{{ reserva.patient_id }} </div>
-                            <div class="col-7 col-md-6" *ngIf="reserva.patient_id === ''">Vacio </div>
+                            <div class="col-7 col-md-6" *ngIf="reserva.patient_id._id !== ''">{{ reserva.patient_id._id }} </div>
+                            <div class="col-7 col-md-6" *ngIf="reserva.patient_id._id === ''">Vacio </div>
                         </div>
                     </div>
                     <div class="card">

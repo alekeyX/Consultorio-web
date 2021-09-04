@@ -7,6 +7,8 @@ import { MedicService } from '../../services/medic.service';
 import { Reservation } from '../../models/reservation';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Medic } from '../../models/medic';
+import { Patient } from '../../models/patient';
 
 @Component({
   selector: 'app-reservation-get',
@@ -15,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class ReservationGetComponent implements OnInit {
   
-  currentUser: any;
+  currentUser: Medic | Patient;
   reservations: Reservation[] = [];
   reservationsActive: Reservation[] = [];
   filterDates: string[] = [];

@@ -115,7 +115,7 @@ export class ReservationEditComponent implements OnInit {
 
   // Obtener lista de pacientes del medico
   getPatient(reserva: Reservation) {
-    this.patientService.getPatientByMedic(reserva.medic_id)
+    this.patientService.getPatientByMedic(reserva.medic_id._id)
     .subscribe((data) => {
       this.patients = data;
     });

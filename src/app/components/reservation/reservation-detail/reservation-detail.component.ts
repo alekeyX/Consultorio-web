@@ -52,7 +52,7 @@ export class ReservationDetailComponent implements OnInit {
 
   // Obtener los datos del medico por su id
   getMedic() {
-    this.medicService.getById(this.reserva.medic_id)
+    this.medicService.getById(this.reserva.medic_id._id)
     .subscribe(res => {
       this.medic = res;
     })
