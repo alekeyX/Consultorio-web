@@ -9,7 +9,7 @@
             <div class="overflow-auto">
                 <div *ngFor="let medic of medics" class="border-bottom p-2" (click)="openChat(medic._id, false)">
                     <div class="d-flex justify-content-start align-items-center" id="selected">
-                        <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="medic.imagePath != 'none'"
+                        <img [src]="'https://api-consultorio-web.herokuapp.com/' + medic.imagePath" *ngIf="medic.imagePath != 'none'"
                         class=" imgfluid imgRedonda">
                         <i class="fas fa-user-circle fa-3x text-info" *ngIf="medic.imagePath == 'none'"></i>
                         <div class="ml-2">
@@ -28,7 +28,7 @@
             <div class="overflow-auto">
                 <div *ngFor="let patient of patients" class="border-bottom p-2" (click)="openChat(patient._id, true)">
                     <div class="d-flex justify-content-start align-items-center" id="selected">
-                        <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="patient.imagePath != 'none'"
+                        <img [src]="'https://api-consultorio-web.herokuapp.com/' + patient.imagePath" *ngIf="patient.imagePath != 'none'"
                         class=" imgfluid imgRedonda">
                         <i class="fas fa-user-circle fa-3x text-info" *ngIf="patient.imagePath == 'none'"></i>
                         <div class="ml-2">
@@ -58,7 +58,7 @@
                     </div>
                     <!-- Se muestra si se elige a un medico -->
                     <div class="d-flex justify-content-start align-items-center" *ngIf="!isPatient">
-                        <img [src]="'http://localhost:4000/' + medic.imagePath" *ngIf="avatar"
+                        <img [src]="'https://api-consultorio-web.herokuapp.com/' + medic.imagePath" *ngIf="avatar"
                         class=" imgfluid imgRedonda">
                         <i class="fas fa-user-circle fa-2x text-white" *ngIf="!avatar"></i>
                         <div class="ml-3 text-white">
@@ -67,7 +67,7 @@
                     </div>
                     <!-- Se muestra si se elige a un paciente -->
                     <div class="d-flex justify-content-start align-items-center" *ngIf="isPatient">
-                        <img [src]="'http://localhost:4000/' + patient.imagePath" *ngIf="avatar"
+                        <img [src]="'https://api-consultorio-web.herokuapp.com/' + patient.imagePath" *ngIf="avatar"
                         class=" imgfluid imgRedonda">
                         <i class="fas fa-user-circle fa-2x text-white" *ngIf="!avatar"></i>
                         <div class="ml-3 text-white">

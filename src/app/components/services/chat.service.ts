@@ -11,12 +11,10 @@ import { Message } from '../models/Message';
 })
 export class ChatService {
 
-  private url = 'http://localhost:5000';
+  private url = 'http://localhost:18000';
   private socket;
 
-  constructor(private httpClient: HttpClient) {
-    // this.socket = io.connect(this.url);
-  }
+  constructor(private httpClient: HttpClient) {}
 
   // Conectarse al socket
   public connect() {
@@ -41,8 +39,8 @@ export class ChatService {
   // Recibir los mensajes
   public getMessages = () => {
       return Observable.create((observer) => {
-          this.socket.on('new-message', (messages) => {
-            observer.next(messages);              
+          this.socket.on('new-message', () => {
+            observer.next();              
           });
       });
   }
@@ -51,6 +49,13 @@ export class ChatService {
   public disconnect() {
     this.socket.disconnect();
   }
+
+  // sendMessage(message): Observable<any> {
+  //   return this.httpClient.post<any>(environment.apiUrl + '/chat/', message )
+  //   .pipe(
+  //     catchError(this.errorHandler)
+  //   )
+  // }
 
   // Obtener los mensajes por id de medico, id de paciente
   getAll(to_id, from_id): Observable<Message[]> {
@@ -77,7 +82,6 @@ export class ChatService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

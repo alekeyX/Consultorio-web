@@ -1,0 +1,45 @@
+export interface Exam {
+    _id: string;
+    // Piel; faneras y tejido celular subcutáneo
+    aspecto: string;
+    distribucionPilosa: string;
+    lesiones: string;
+    faneras: string;
+    tejidoCelularSub: string;
+    // Cabeza
+    craneoCara: string;
+    cueroCabelludo: string;
+    regionFrontal: string;
+    regionOrbitonasal: string;
+    regionOrofaringea: string;
+    //  Cuello
+    cInspeccion: string;
+    cPalpacion: string;
+    cPercusion: string;
+    cAuscultacion: string;
+    // Respiratorio
+    rInspeccion: string;
+    rPalpacion: string;
+    rPercusion: string;
+    rAuscultacion: string;
+    // Cardiovascular
+    cdInspeccion: string;
+    cdPalpacion: string;
+    cdAuscultacion: string;
+    cdPulsos: string;
+    // Abdomen
+    aInspeccion: string;
+    aPalpacion: string;
+    aPercusion: string;
+    aAuscultacion: string;
+    // Neurologo
+    glasglow: string;
+    motilidadActiva: string;
+    motilidadPasiva: string;
+    motilidadRefleja: string;
+    paresCraneales: string;
+    sensibilidadProfunda: string;
+    sensibilidadSuperficial: string;
+    createdAt: Date;
+    updatedAt: Date;
+}

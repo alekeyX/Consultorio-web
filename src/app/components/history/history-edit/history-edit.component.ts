@@ -54,7 +54,6 @@ export class HistoryEditComponent implements OnInit {
     this.patientId = data.patient_id;
     this.angForm = this.fb.group({
         medic: [data.medic],
-        specialty: [data.specialty],
         motivoConsulta: [data.motivoConsulta, Validators.required],
         enfermedadActual: [data.enfermedadActual],
         antecedentesPersonales: [data.antecedentesPersonales],
@@ -73,51 +72,50 @@ export class HistoryEditComponent implements OnInit {
         facies: [data.facies],
         actitud: [data.actitud],
         decubito: [data.decubito],
-        marcha: [data.marcha],             
+        marcha: [data.marcha],
         // Piel
-        aspecto: [data.aspecto],
-        distribucionPilosa: [data.distribucionPilosa],
-        lesiones: [''],
-        faneras: [data.faneras],
-        tejidoCelularSub: [data.tejidoCelularSub],             
-        // Cabeza
-        craneoCara: [data.craneoCara],
-        cueroCabelludo: [data.cueroCabelludo],
-        regionFrontal: [data.regionFrontal],
-        regionOrbitonasal: [data.regionOrbitonasal],
-        regionOrofaringea: [data.regionOrofaringea],            
-        //  Cuello
-        cInspeccion: [data.cInspeccion],
-        cPalpacion: [data.cPalpacion],
-        cPercusion: [data.cPercusion],
-        cAuscultacion: [data.cAuscultacion],            
-        // Respiratorio
-        rInspeccion: [data.rInspeccion],
-        rPalpacion: [data.rPalpacion],
-        rPercusion: [data.rPercusion],
-        rAuscultacion: [data.rAuscultacion],        
-        // Cardiovascular
-        cdInspeccion: [data.cdInspeccion],
-        cdPalpacion: [data.cdPalpacion],
-        cdAuscultacion: [data.cdAuscultacion],
-        cdPulsos: [data.cdPulsos],         
-        // Abdomen
-        aInspeccion: [data.aInspeccion],
-        aPalpacion: [data.aPalpacion],
-        aPercusion: [data.aPercusion],
-        aAuscultacion: [data.aAuscultacion],        
-        // Neurologo
-        glasglow: [data.glasglow],
-        motilidadActiva: [data.motilidadActiva],
-        motilidadPasiva: [data.motilidadPasiva],
-        motilidadRefleja: [data.motilidadRefleja],
-        paresCraneales: [data.paresCraneales],
-        sensibilidadProfunda: [data.sensibilidadProfunda],
-        sensibilidadSuperficial: [data.sensibilidadSuperficial],       
-        // Diagnostico
-        diagnostico: [data.diagnostico],
-        tratamiento: [data.tratamiento],
-        hour: [data.hour]
+        // aspecto: [data.aspecto],
+        // distribucionPilosa: [data.distribucionPilosa],
+        // lesiones: [''],
+        // faneras: [data.faneras],
+        // tejidoCelularSub: [data.tejidoCelularSub],
+        // // Cabeza
+        // craneoCara: [data.craneoCara],
+        // cueroCabelludo: [data.cueroCabelludo],
+        // regionFrontal: [data.regionFrontal],
+        // regionOrbitonasal: [data.regionOrbitonasal],
+        // regionOrofaringea: [data.regionOrofaringea],
+        // //  Cuello
+        // cInspeccion: [data.cInspeccion],
+        // cPalpacion: [data.cPalpacion],
+        // cPercusion: [data.cPercusion],
+        // cAuscultacion: [data.cAuscultacion],
+        // // Respiratorio
+        // rInspeccion: [data.rInspeccion],
+        // rPalpacion: [data.rPalpacion],
+        // rPercusion: [data.rPercusion],
+        // rAuscultacion: [data.rAuscultacion],
+        // // Cardiovascular
+        // cdInspeccion: [data.cdInspeccion],
+        // cdPalpacion: [data.cdPalpacion],
+        // cdAuscultacion: [data.cdAuscultacion],
+        // cdPulsos: [data.cdPulsos],
+        // // Abdomen
+        // aInspeccion: [data.aInspeccion],
+        // aPalpacion: [data.aPalpacion],
+        // aPercusion: [data.aPercusion],
+        // aAuscultacion: [data.aAuscultacion],
+        // // Neurologo
+        // glasglow: [data.glasglow],
+        // motilidadActiva: [data.motilidadActiva],
+        // motilidadPasiva: [data.motilidadPasiva],
+        // motilidadRefleja: [data.motilidadRefleja],
+        // paresCraneales: [data.paresCraneales],
+        // sensibilidadProfunda: [data.sensibilidadProfunda],
+        // sensibilidadSuperficial: [data.sensibilidadSuperficial],
+        // // Diagnostico
+        // diagnostico: [data.diagnostic_id.diagnostico],
+        // tratamiento: [data.diagnostic_id.tratamiento],
       });
     });
   }

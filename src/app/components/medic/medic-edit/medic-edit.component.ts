@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Medic } from '../../models/medic';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-medic-edit',
@@ -23,6 +24,7 @@ export class MedicEditComponent implements OnInit {
   image: string;
   generos: string[] = ['Masculino', 'Femenino', 'Otro'];
   roles: string[] = ['Médico', 'Administrador', 'Recepción'];
+  deleteImage: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -46,11 +48,23 @@ export class MedicEditComponent implements OnInit {
   getMedic(id: string) {
     this.medicService.getById(id).subscribe(data => {
       let rol: string;
-      if (data.role === 'Admin') {
-        rol = 'Administrador';
-      } else {
-        rol = 'Médico';
+      switch (data.role) {
+        case 'Admin':
+          rol = 'Administrador';
+          break;
+        case 'Medic':
+          rol = 'Médico';
+          break;
+        case 'Reception':
+          rol = 'Recepcionista';
+          break;
       }
+      if(data.imagePath !== 'none') {
+        this.image = data.imagePath;
+      } else {
+        this.image = 'none'
+      }
+      
       this.angForm = this.fb.group({
         username: [data.username, Validators.required],
         firstName: [ data.firstName, Validators.required ],
@@ -62,6 +76,7 @@ export class MedicEditComponent implements OnInit {
         phone: [ data.phone, Validators.pattern('^[0-9]+$') ],
         specialty: [ data.specialty ],
         imagePath: [ data.imagePath ],
+        withoutImage: ['']
       });
     });
   }
@@ -79,6 +94,7 @@ export class MedicEditComponent implements OnInit {
       phone: ['', Validators.pattern('^[0-9]+$')],
       specialty: [''],
       imagePath: [''],
+      withoutImage: ['']
     });
   }
 
@@ -132,6 +148,7 @@ export class MedicEditComponent implements OnInit {
         formData.append('phone', this.angForm.get('phone').value);
         formData.append('specialty', this.angForm.get('specialty').value);
         formData.append('imagePath', this.angForm.get('imagePath').value);
+        formData.append('withoutImage', this.angForm.get('withoutImage').value);
         
         switch (this.angForm.get('role').value) {
           case 'Administrador':
@@ -155,6 +172,21 @@ export class MedicEditComponent implements OnInit {
           });
         }
       }
-    })
+    });
+  }
+
+  withoutImage(event: any): void {
+    this.deleteImage = !this.deleteImage;
+    if (this.deleteImage) {
+      this.angForm.controls['withoutImage'].setValue('none');
+    }
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+
+  get isMedic() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
   }
 }

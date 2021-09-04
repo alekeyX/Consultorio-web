@@ -66,9 +66,15 @@ export class MedicService {
     );
   }
 
+  // cambiar contrasena
+  changePassword(id: string, password: string): Observable<string> {
+    return this.httpClient.put<string>(environment.apiUrl + '/medic/password/' + id, password)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   errorHandler(error) {
-    console.log(error);
-    
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

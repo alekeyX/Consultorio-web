@@ -57,6 +57,14 @@ export class PatientService {
       catchError(this.errorHandler)
     );
   }
+
+  // cambiar contrasena
+  changePassword(id: string, password: string): Observable<string> {
+    return this.httpClient.put<string>(environment.apiUrl + '/patient/password/' + id, password)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
   
   // Medico adiciona su id a un paciente
   medicAddPatient(id: string, medic_id: string) {

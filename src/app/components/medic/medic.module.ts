@@ -17,6 +17,7 @@ import { MedicGetComponent } from './medic-get/medic-get.component';
 import { MedicProfileComponent } from './medic-profile/medic-profile.component';
 import { LoginMedicComponent } from './login-medic/login-medic.component';
 import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { MedicEditPasswordComponent } from './medic-edit/medic-edit-password/medic-edit-password.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { FilterPipe } from 'src/app/pipes/filter.pipe';
     MedicProfileComponent,
     LoginMedicComponent,
     FilterPipe,
+    MedicEditPasswordComponent,
   ],
   imports: [
     CommonModule,

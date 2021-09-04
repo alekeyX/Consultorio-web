@@ -1,5 +1,10 @@
+import { Diagnostic } from "./diagnostic";
+import { Exam } from "./exam";
+import { Patient } from "./patient";
+
 export interface History {
     _id: string;
+    medic: string;
     motivoConsulta: string;
     enfermedadActual: string;
     antecedentesPersonales: string;
@@ -19,52 +24,10 @@ export interface History {
     actitud: string;
     decubito: string;
     marcha: string;
-    // Piel; faneras y tejido celular subcutáneo
-    aspecto: string;
-    distribucionPilosa: string;
-    lesiones: string;
-    faneras: string;
-    tejidoCelularSub: string;
-    // Cabeza
-    craneoCara: string;
-    cueroCabelludo: string;
-    regionFrontal: string;
-    regionOrbitonasal: string;
-    regionOrofaringea: string;
-    //  Cuello
-    cInspeccion: string;
-    cPalpacion: string;
-    cPercusion: string;
-    cAuscultacion: string;
-    // Respiratorio
-    rInspeccion: string;
-    rPalpacion: string;
-    rPercusion: string;
-    rAuscultacion: string;
-    // Cardiovascular
-    cdInspeccion: string;
-    cdPalpacion: string;
-    cdAuscultacion: string;
-    cdPulsos: string;
-    // Abdomen
-    aInspeccion: string;
-    aPalpacion: string;
-    aPercusion: string;
-    aAuscultacion: string;
-    // Neurologo
-    glasglow: string;
-    motilidadActiva: string;
-    motilidadPasiva: string;
-    motilidadRefleja: string;
-    paresCraneales: string;
-    sensibilidadProfunda: string;
-    sensibilidadSuperficial: string;
-    // Diagnostico
-    diagnostico: string;
-    tratamiento: string;
-    // Informacion
-    patient_id: string;
-    medic: string;
-    specialty: string;
-    hour: string;
+
+    patient_id: Patient;
+    exam_id: Exam;
+    diagnostic_id: Diagnostic;
+    createdAt: Date;
+    updatedAt: Date;
 }

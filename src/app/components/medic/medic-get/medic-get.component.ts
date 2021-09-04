@@ -47,7 +47,7 @@ export class MedicGetComponent implements OnInit {
   removeMedic(medic, index) {
     Swal.fire({
       title: 'Estas Seguro?',
-      text: "Los datos se eliminarán permanentemente",
+      text: 'Los datos se eliminarán permanentemente',
       icon: 'warning',
       iconColor: '#15B9C6',
       showCancelButton: true,
@@ -63,7 +63,7 @@ export class MedicGetComponent implements OnInit {
           this.medics.splice(index, 1);
         });
       }
-    })
+    });
   }
 
   // Navegar al perfil de un médico

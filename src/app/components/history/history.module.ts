@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     HistoryAddComponent,
     HistoryGetComponent,
     HistoryEditComponent,
-    HistoryDetailsComponent,
+    HistoryDetailsComponent
   ],
   imports: [
     CommonModule,

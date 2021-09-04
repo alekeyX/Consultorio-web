@@ -1,6 +1,6 @@
 <div class="card rounded-lg shadow mb-2 bg-white rounded animated fadeIn">
     <div class="card-body">
-    
+
         <!-- Mensaje de cargando -->
         <div *ngIf="!history; else main_content" class="container">
             <div class="row">
@@ -15,7 +15,7 @@
             <div class="d-flex justify-content-between mb-3 align-items-center">
                 <h1 class="text-aqua-dark">Historia Clínica </h1>
                 <div>
-                    <h3 class="text-aqua-dark">{{date}}</h3>
+                    <h3 class="text-aqua-dark">{{history.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</h3>
                     <button class="btn bg-aqua text-white float-right" (click)="getPDF()">
                         Descargar
                     </button>
@@ -24,22 +24,12 @@
 
 
             <!-- Informacion general -->
-            <div class="d-md-flex">
-                <div class="card w-100">
-                    <div class="container row align-items-center">
-                        <div class="col-md-5">
-                            <strong>Médico:</strong>
-                        </div>
-                        <div class="col-12 col-md-7">{{ history.medic }} </div>
+            <div class="card">
+                <div class="container row align-items-center">
+                    <div class="col-md-3">
+                        <strong>Médico:</strong>
                     </div>
-                </div>
-                <div class="card w-100">
-                    <div class="container row align-items-center">
-                        <div class="col-md-5">
-                            <strong>Especialidad:</strong>
-                        </div>
-                        <div class="col-12 col-md-7">{{ history.specialty }} </div>
-                    </div>
+                    <div class="col-12 col-md-9">{{ history.medic }} </div>
                 </div>
             </div>
             <div class="card">
@@ -47,7 +37,7 @@
                     <div class="col-md-3">
                         <strong>Paciente:</strong>
                     </div>
-                    <div class="col-md-9">{{ patient.firstName }} {{ patient.lastName }}</div>
+                    <div class="col-md-9">{{ history.patient_id.firstName }} {{ history.patient_id.lastName }}</div>
                 </div>
             </div>
             <div class="card">
@@ -108,7 +98,7 @@
                         <div class="col-md-3">
                             <strong>Diagnóstico:</strong>
                         </div>
-                        <div class="col-md-9">{{ history.diagnostico }} </div>
+                        <div class="col-md-9">{{ history.diagnostic_id.diagnostico }} </div>
                     </div>
                 </div>
                 <div class="card">
@@ -116,11 +106,11 @@
                         <div class="col-md-3">
                             <strong>Tratamiento:</strong>
                         </div>
-                        <div class="col-md-9">{{ history.tratamiento }} </div>
+                        <div class="col-md-9">{{ history.diagnostic_id.tratamiento }} </div>
                     </div>
                 </div>
             </div>
-                
+
             <!-- Informacion solo pra medicos y administradores -->
             <div *ngIf="isAdmin || isMedic">
                 <!-- Examen Fisico -->
@@ -225,7 +215,7 @@
                         <div class="col-md-9">{{ history.marcha }} </div>
                     </div>
                 </div>
-                
+
                 <!-- Piel, fanera y tejido celular -->
                 <div>
                     <h6 class="text-aqua-dark my-3">Piel, Faneras y Tejido Celular Subcutáneo</h6>
@@ -234,7 +224,7 @@
                             <div class="col-md-3">
                                 <strong>Aspecto:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.aspecto }} </div>
+                            <div class="col-md-9">{{ history.exam_id.aspecto }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -242,7 +232,7 @@
                             <div class="col-md-3">
                                 <strong>Distribución Pilosa:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.distribucionPilosa }} </div>
+                            <div class="col-md-9">{{ history.exam_id.distribucionPilosa }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -250,7 +240,7 @@
                             <div class="col-md-3">
                                 <strong>Lesiones:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.lesiones }} </div>
+                            <div class="col-md-9">{{ history.exam_id.lesiones }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -258,7 +248,7 @@
                             <div class="col-md-3">
                                 <strong>Faneras:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.faneras }} </div>
+                            <div class="col-md-9">{{ history.exam_id.faneras }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -266,11 +256,11 @@
                             <div class="col-md-3">
                                 <strong>Tejido Celular Subcutáneo:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.tejidoCelularSub }} </div>
+                            <div class="col-md-9">{{ history.exam_id.tejidoCelularSub }} </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Cabeza -->
                 <div>
                     <h6 class="text-aqua-dark">Cabeza</h6>
@@ -279,7 +269,7 @@
                             <div class="col-md-3">
                                 <strong>Cráneo y Cara:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.craneoCara }} </div>
+                            <div class="col-md-9">{{ history.exam_id.craneoCara }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -287,7 +277,7 @@
                             <div class="col-md-3">
                                 <strong>Cuero Cabelludo:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cueroCabelludo }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cueroCabelludo }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -295,7 +285,7 @@
                             <div class="col-md-3">
                                 <strong>Región Frontal:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.regionFrontal }} </div>
+                            <div class="col-md-9">{{ history.exam_id.regionFrontal }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -303,7 +293,7 @@
                             <div class="col-md-3">
                                 <strong>Región Orbitonasal:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.regionOrbitonasal }} </div>
+                            <div class="col-md-9">{{ history.exam_id.regionOrbitonasal }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -311,11 +301,11 @@
                             <div class="col-md-3">
                                 <strong>Región Orofaringea:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.regionOrofaringea }} </div>
+                            <div class="col-md-9">{{ history.exam_id.regionOrofaringea }} </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Cuello -->
                 <div>
                     <h6 class="text-aqua-dark my-3">Cuello</h6>
@@ -324,7 +314,7 @@
                             <div class="col-md-3">
                                 <strong>Inspección:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cInspeccion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cInspeccion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -332,7 +322,7 @@
                             <div class="col-md-3">
                                 <strong>Palpación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cPalpacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cPalpacion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -340,7 +330,7 @@
                             <div class="col-md-3">
                                 <strong>Percusión:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cPercusion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cPercusion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -348,11 +338,11 @@
                             <div class="col-md-3">
                                 <strong>Auscultación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cAuscultacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cAuscultacion }} </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Respiratorio -->
                 <div>
                     <h6 class="text-aqua-dark my-3">Respiratorio</h6>
@@ -361,7 +351,7 @@
                             <div class="col-md-3">
                                 <strong>Inspección:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.rInspeccion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.rInspeccion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -369,7 +359,7 @@
                             <div class="col-md-3">
                                 <strong>Palpación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.rPalpacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.rPalpacion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -377,7 +367,7 @@
                             <div class="col-md-3">
                                 <strong>Percusión:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.rPercusion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.rPercusion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -385,11 +375,11 @@
                             <div class="col-md-3">
                                 <strong>Auscultación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.rAuscultacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.rAuscultacion }} </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Cardiovascular -->
                 <div>
                     <h6 class="text-aqua-dark my-3">Cardiovascular</h6>
@@ -398,7 +388,7 @@
                             <div class="col-md-3">
                                 <strong>Inspección:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cdInspeccion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cdInspeccion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -406,7 +396,7 @@
                             <div class="col-md-3">
                                 <strong>Palpación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cdPalpacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cdPalpacion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -414,7 +404,7 @@
                             <div class="col-md-3">
                                 <strong>Auscultación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cdAuscultacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cdAuscultacion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -422,11 +412,11 @@
                             <div class="col-md-3">
                                 <strong>Pulsos:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.cdPulsos }} </div>
+                            <div class="col-md-9">{{ history.exam_id.cdPulsos }} </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Abdomen -->
                 <div>
                     <h6 class="text-aqua-dark my-3">Abdomen</h6>
@@ -435,7 +425,7 @@
                             <div class="col-md-3">
                                 <strong>Inspección:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.aInspeccion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.aInspeccion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -443,7 +433,7 @@
                             <div class="col-md-3">
                                 <strong>Palpación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.aPalpacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.aPalpacion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -451,7 +441,7 @@
                             <div class="col-md-3">
                                 <strong>Percusión:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.aPercusion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.aPercusion }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -459,11 +449,11 @@
                             <div class="col-md-3">
                                 <strong>Auscultación:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.aAuscultacion }} </div>
+                            <div class="col-md-9">{{ history.exam_id.aAuscultacion }} </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Neurologo -->
                 <div>
                     <h6 class="text-aqua-dark my-3">Neurólogo</h6>
@@ -472,7 +462,7 @@
                             <div class="col-md-3">
                                 <strong>Glasglow:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.glasglow }} </div>
+                            <div class="col-md-9">{{ history.exam_id.glasglow }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -480,7 +470,7 @@
                             <div class="col-md-3">
                                 <strong>Motilidad Activa:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.motilidadActiva }} </div>
+                            <div class="col-md-9">{{ history.exam_id.motilidadActiva }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -488,7 +478,7 @@
                             <div class="col-md-3">
                                 <strong>Motilidad Pasiva:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.motilidadPasiva }} </div>
+                            <div class="col-md-9">{{ history.exam_id.motilidadPasiva }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -496,7 +486,7 @@
                             <div class="col-md-3">
                                 <strong>Motilidad Refleja:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.motilidadRefleja }} </div>
+                            <div class="col-md-9">{{ history.exam_id.motilidadRefleja }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -504,7 +494,7 @@
                             <div class="col-md-3">
                                 <strong>Pares Craneales:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.paresCraneales }} </div>
+                            <div class="col-md-9">{{ history.exam_id.paresCraneales }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -512,7 +502,7 @@
                             <div class="col-md-3">
                                 <strong>Sensibilidad Profunda:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.sensibilidadProfunda }} </div>
+                            <div class="col-md-9">{{ history.exam_id.sensibilidadProfunda }} </div>
                         </div>
                     </div>
                     <div class="card">
@@ -520,7 +510,7 @@
                             <div class="col-md-3">
                                 <strong>Sensibilidad Superficial:</strong>
                             </div>
-                            <div class="col-md-9">{{ history.sensibilidadSuperficial }} </div>
+                            <div class="col-md-9">{{ history.exam_id.sensibilidadSuperficial }} </div>
                         </div>
                     </div>
                 </div>

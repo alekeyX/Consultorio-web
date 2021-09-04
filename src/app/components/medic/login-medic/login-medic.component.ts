@@ -52,6 +52,7 @@ export class LoginMedicComponent implements OnInit {
     }
 
     this.loading = true;
+    console.log(this.f);
     this.authenticationService.loginMedic(this.f.username.value, this.f.password.value)
         .pipe(first())
         .subscribe(
