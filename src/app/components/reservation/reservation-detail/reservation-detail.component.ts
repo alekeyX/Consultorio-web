@@ -39,9 +39,7 @@ export class ReservationDetailComponent implements OnInit {
     this.loading = true;
     this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
-      this.reservaService.getById(this.id)
-      .subscribe(
-        res => {
+      this.reservaService.getById(this.id).subscribe(res => {
           this.reserva = res;
           this.getMedic();
         },

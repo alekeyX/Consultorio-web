@@ -1,3 +1,4 @@
+import { Medic } from './medic';
 import { Role } from './role';
 
 export interface Patient {
@@ -18,6 +19,6 @@ export interface Patient {
     address?: string;
     phone?: string;
     imagePath?: string;
-    medic_id: string[];
+    medic_id: Medic[];
     token?: string;
 }

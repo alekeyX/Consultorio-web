@@ -48,30 +48,29 @@ export class ReservationGetComponent implements OnInit {
   // Obtener las reservas
   getReservas() {
     setInterval(() => {this.loading = true; }, 100);
-    // si el usuario es admin obtiene todas las reservas
-    if (this.currentUser.role === Role.Admin) {
-      this.reservationService.getAll().subscribe((data) => {
-        this.reservations = data.reverse();
-        this.filterDate();
-        this.getMedics();
-      });
-    } else {
-    // si el usuario es medico obtiene sus reservas por su id
-      if (this.currentUser.role === Role.Medic) {
-        this.reservationService.getReservByMedic(this.currentUser._id).subscribe((data) => {
+    switch (this.currentUser.role) {
+      case Role.Admin:
+        this.reservationService.getAll().subscribe((data) => {
           this.reservations = data.reverse();
           this.filterDate();
-        })
-      } else {
-    // si el usuario es paciente obtiene las reservas por su nombre y apellido
-        if (this.currentUser.role == Role.Patient) {
-          this.reservationService.getReservByPatient(this.currentUser.firstName + ' ' + this.currentUser.lastName)
-          .subscribe((data) => {
+          this.getMedics();
+        });
+        break;
+      case Role.Medic:
+          this.reservationService.getReservByMedic(this.currentUser._id).subscribe((data) => {
             this.reservations = data.reverse();
             this.filterDate();
-          })
-        }
-      }
+          });
+        break;
+      case Role.Patient:
+        this.reservationService.getReservByPatient(this.currentUser._id)
+        .subscribe((data) => {
+          this.reservations = data.reverse();
+          this.filterDate();
+        });
+        break;
+      default:
+        break;
     }
   }
 

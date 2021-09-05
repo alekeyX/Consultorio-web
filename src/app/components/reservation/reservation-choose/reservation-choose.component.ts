@@ -25,7 +25,7 @@ export class ReservationChooseComponent implements OnInit {
   patients: Patient[] = [];
   reservaByMedic: Reservation[] = [];
   reservas: string[] = [];
-  reserv: any = {};
+  reserv: Reservation;
   filterReservation = '';
   loading = false;
   specialtySelected: string;
@@ -34,7 +34,7 @@ export class ReservationChooseComponent implements OnInit {
   order: string = '';
   asc: boolean = false;
   reservationsActive: Reservation[] = [];
-  namePatient: string = '';
+  namePatient: Patient;
 
   constructor(
     private reservationService: ReservationService,
@@ -44,6 +44,26 @@ export class ReservationChooseComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.getSpecialty();
+    this.namePatient = {
+      _id: '',
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+      medic_id: null,
+      ci: 0,
+      role: Role.Patient
+    };
+
+    this.reserv = {
+      date: '',
+      _id: '',
+      enable: false,
+      hours: null,
+      days: '',
+      patient_id: null,
+      medic_id: null
+    }
   }
 
   ngOnInit(): void {
@@ -145,10 +165,11 @@ export class ReservationChooseComponent implements OnInit {
   // Actualizar registro de reserva con el nombre del paciente
   submit() {
     if (this.isPatient) {
-      this.reserv.patient_id = this.currentUser.firstName + ' ' + this.currentUser.lastName;
+      this.reserv.patient_id = this.currentUser;
     } else {
       this.reserv.patient_id = this.namePatient;
     }
+    
     this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
       this.getReservasByMedic(this.medic);
       this.toastr.success(res.message, '');
@@ -159,7 +180,7 @@ export class ReservationChooseComponent implements OnInit {
 
   // Cancelar una reserva quitando el nombre del paciente 
   cancelReserv() {
-    this.reserv.patient_id = '';
+    this.reserv.patient_id = null;
     this.reservationService.update(this.reserv._id , this.reserv).subscribe(res => {
       this.getReservasByMedic(this.medic);
     });

@@ -51,10 +51,13 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
 
   // Obtener lista de medicos
   getMedics() {
-    let patientuser: Patient;
-    this.patientService.getById(this.currentUser._id).subscribe(data => {
-      patientuser = data;
-      this.medicService.getMedicsbyIds(patientuser.medic_id).subscribe((data) => {
+    this.patientService.getById(this.currentUser._id).subscribe(patient => {
+      const medic_ids: string[] = [];
+      patient.medic_id.forEach(medic => {
+        medic_ids.push(medic._id);
+      });
+      
+      this.medicService.getMedicsbyIds(medic_ids).subscribe((data) => {
         this.medics = data;
       });
     });

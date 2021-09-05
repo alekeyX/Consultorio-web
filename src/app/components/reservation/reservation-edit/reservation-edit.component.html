@@ -18,8 +18,8 @@
                 <div class="form-group d-md-flex justify-content-between">
                     <label class="col-lg-4">Paciente:</label>
                     <select class="custom-select" formControlName="patient_id" #patient_id>
-                        <option value="">Ninguno</option>
-                        <option *ngFor="let patient of patients" [ngValue]="patient.firstName + ' ' + patient.lastName">{{patient.firstName}} {{patient.lastName}}</option>
+                        <option [ngValue]="">Ninguno</option>
+                        <option *ngFor="let patient of patients" [ngValue]="patient">{{patient.firstName}} {{patient.lastName}}</option>
                     </select>
                 </div>
                 

@@ -49,8 +49,6 @@ export class ReservationEditComponent implements OnInit {
     this.reservationService.getById(id).subscribe(data => {
       this.angForm = this.fb.group({
         days: [data.days],
-        dateStart: [data.dateStart],
-        dateEnd: [data.dateEnd],
         date: [data.date.substring(0, 10)],
         hours: [data.hours],
         patient_id: [data.patient_id],
@@ -65,8 +63,6 @@ export class ReservationEditComponent implements OnInit {
   createForm() {
     this.angForm = this.fb.group({
       days: ['', Validators.required],
-      dateStart: ['', Validators.required],
-      dateEnd: ['', Validators.required],
       hours: ['', Validators.required],
       date: [''],
       medic_id: [''],

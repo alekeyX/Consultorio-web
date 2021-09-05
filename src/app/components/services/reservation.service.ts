@@ -59,8 +59,8 @@ export class ReservationService {
   }
 
   // Actualizar una reserva por id
-  update(id: string, reservation: any): Observable<any> {
-    return this.httpClient.put<any>(environment.apiUrl + '/reservation/' + id, reservation)
+  update(id: string, reservation: Reservation): Observable<Reservation | any> {
+    return this.httpClient.put<Reservation | any>(environment.apiUrl + '/reservation/' + id, reservation)
     .pipe(
       catchError(this.errorHandler)
     );
