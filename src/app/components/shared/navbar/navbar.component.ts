@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Role } from '../../models/role';
+import { Patient } from '../../models/patient';
+import { Medic } from '../../models/medic';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -9,15 +12,16 @@ import { Role } from '../../models/role';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  currentUser: any;
+  currentUser: Medic | Patient;
   isShown: boolean = false;
   avatar: boolean = false;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.subscription = this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     if (this.currentUser) {
       if (this.currentUser.imagePath !== 'none') {
       this.avatar = true;
@@ -29,6 +33,7 @@ export class NavbarComponent implements OnInit {
   // cerrar sesion
   logout() {
     this.authenticationService.logout();
+    this.subscription.unsubscribe();
   }
 
   // Seleccionar perfil

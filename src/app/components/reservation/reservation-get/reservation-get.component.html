@@ -64,7 +64,7 @@
                             <th scope="col" class="text-center orderBy" (click)="orderBy('hours')">Hora <i class="fas fa-sort-down"></i></th>
                             <th scope="col" class="text-center text-ellipsis" *ngIf="isAdmin || !isMedic">Médico</th>
                             <th scope="col" class="text-center">Paciente</th>
-                            <th scope="col" class="text-center">Estado</th>
+                            <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Estado</th>
                             <th scope="col" class="text-center" *ngIf="isAdmin || isMedic">Opciones</th>
                         </tr>
                     </thead>
@@ -77,8 +77,8 @@
                             <td (click)="selectReserva(reserva._id)" class="text-center" title="{{reserva.patient_id.firstName}} {{reserva.patient_id.lastName}}" 
                                 *ngIf="reserva.patient_id !== null">{{reserva.patient_id.firstName}} {{reserva.patient_id.lastName}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="reserva.patient_id === null">No asignado</td>
-                            <td *ngIf="reserva.enable" class="text-center">Activo</td>
-                            <td *ngIf="!reserva.enable" class="text-center">Inactivo</td>
+                            <td *ngIf="reserva.enable && (isAdmin || isMedic)" class="text-center">Activo</td>
+                            <td *ngIf="!reserva.enable && (isAdmin || isMedic)" class="text-center">Inactivo</td>
                             <td class="text-center" *ngIf="isAdmin || isMedic">
                                 <a [routerLink]="['/reservation/edit', reserva._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
                                 <a (click)="removeReservation(reserva, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
