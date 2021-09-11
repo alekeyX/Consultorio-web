@@ -40,10 +40,12 @@ export class PatientAddMedicComponent implements OnInit {
     setInterval(() => {this.loading = true; }, 100);
     this.patientService.getAll().subscribe((data) => {
       data.forEach(patient => {
-        let noExist = patient.medic_id.indexOf(this.currentUser._id);
-        if (noExist == -1) {
-          this.patients.push(patient);
-        }
+        patient.medic_id.forEach(medic => {
+          let noExist = medic._id.indexOf(this.currentUser._id);
+          if (noExist == -1) {
+            this.patients.push(patient);
+          }
+        });
       });
     });
   }
