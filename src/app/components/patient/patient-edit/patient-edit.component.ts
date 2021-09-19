@@ -176,6 +176,10 @@ export class PatientEditComponent implements OnInit {
     return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
+  get isMedic() {
+    return this.currentUser && this.currentUser.role === Role.Medic;
+  }
+
   get isPatient() {
     return this.currentUser && this.currentUser.role === Role.Patient;
   }
