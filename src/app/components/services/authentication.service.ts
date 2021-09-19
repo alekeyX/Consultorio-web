@@ -57,7 +57,7 @@ export class AuthenticationService {
 
     logout() {
         // eliminar usuario del local storage para cerrar sesión
-        localStorage.removeItem('currentUser');
+        localStorage.clear();
         this.currentUserSubject.next(null);
         this.router.navigate(['/home']);
     }

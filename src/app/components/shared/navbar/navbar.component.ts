@@ -15,13 +15,12 @@ export class NavbarComponent implements OnInit {
   currentUser: Medic | Patient;
   isShown: boolean = false;
   avatar: boolean = false;
-  subscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.subscription = this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     if (this.currentUser) {
       if (this.currentUser.imagePath !== 'none') {
       this.avatar = true;
@@ -33,7 +32,6 @@ export class NavbarComponent implements OnInit {
   // cerrar sesion
   logout() {
     this.authenticationService.logout();
-    this.subscription.unsubscribe();
   }
 
   // Seleccionar perfil
