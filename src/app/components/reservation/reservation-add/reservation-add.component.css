@@ -1,3 +1,10 @@
 .custom-select[multiple], .custom-select[size]:not([size="1"]) {
     height: 10rem;
 }
+
+.input-days {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}

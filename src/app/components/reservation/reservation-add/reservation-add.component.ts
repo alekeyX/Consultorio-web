@@ -19,7 +19,7 @@ export class ReservationAddComponent implements OnInit {
   submitted = false;
   intervalo = 20;
   reservation: Reservation;
-  ayuda: boolean = false;
+  daysChecked: string[] = [];
   days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
   hours = [
     '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
@@ -62,8 +62,18 @@ export class ReservationAddComponent implements OnInit {
     });
   }
 
+  onChange(day: string, isChecked: boolean): void {
+    if (isChecked) {
+      this.daysChecked.push(day);
+    } else {
+      let index = this.daysChecked.indexOf(day);
+      this.daysChecked.splice(index, 1);
+    }
+  }
+
   // Enviar formulario angForm
   submitForm() {
+    this.angForm.controls['days'].setValue(this.daysChecked);
     this.submitted = true;
     if (!this.angForm.valid) {
       return false;
@@ -82,10 +92,4 @@ export class ReservationAddComponent implements OnInit {
   interval(interv: number) {
     this.intervalo = interv;
   }
-
-  // Mostrar/Ocultar ayuda
-  help() {
-    this.ayuda = !this.ayuda;
-  }
-
 }

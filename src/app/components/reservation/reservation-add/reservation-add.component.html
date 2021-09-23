@@ -2,50 +2,34 @@
     <div class="card-body">
         <!-- Titulo y boton de ayuda -->
         <div class="d-md-flex justify-content-between mb-5 mb-md-0">
-            <h1 class="text-aqua-dark mb-md-1">Habilitar reservas para consultas</h1>
-            <div class=" col-md-4 mt-md-1">
-                <button class="btn bg-aqua text-white float-right" (click)="help()">
-                    <span *ngIf="!ayuda">Mostrar Ayuda <i class="far fa-question-circle"></i></span>
-                    <span *ngIf="ayuda">Ocultar Ayuda <i class="far fa-question-circle"></i></span>
-                </button>
-            </div>
-        </div>
-        <!-- Instrucciones de ayuda -->
-        <div class="card" *ngIf="ayuda">
-            <p class="p-2">
-                Bienvenido al sistema de reservas para consultas médicas.<br>
-                Pasos para habilitar reserva(s):
-                <li><b>Paso 1:</b> Elija los dias que serán hábiles para reservar consultas.</li>
-                <li><b>Paso 2:</b> Elija la fecha inicial para habilitar las reservas.</li>
-                <li><b>Paso 3:</b> Elija la fecha limite de habilitación de reservas.</li>
-                <li><b>Paso 4:</b> Elija el intervalo y horarios para las reservas.</li>
-                <li class=" list-unstyled font-weight-lighter"><i>Para escoger más de una opción, utilice (ctrl+click) ó (shift+click).</i></li>
-            </p>
+            <h1 class="text-aqua-dark mb-md-1">Generar reservas para consultas</h1>
         </div>
         <!-- formulario para crear reservaciones -->
-        <div class="container col-md-10 col-lg-10 col-xl-7 py-3">
+        <div class="col-md-10 col-lg-12 col-xl-12 py-3">
             <form [formGroup]="angForm" (ngSubmit)="submitForm()">
-                <div class="d-md-flex justify-content-between">
-                    <div class="form-group">
-                        <label for="days" class="col-form-label"><b>1: </b>Día:</label>
-                        <select class="custom-select" formControlName="days" #Days multiple required>
-                            <option [value]="day" *ngFor="let day of days">{{day}}</option>
-                        </select>
-                    </div>
-                    <div class="my-auto">
-                        <div class="form-group d-md-flex">
-                            <label for="dateStart" class="col-sm-5 col-form-label"><b>2: </b>Fecha Inicial:</label>
-                            <input type="date" formControlName="dateStart" #dateStart required>
-                        </div>
-                        <div class="form-group d-md-flex">
-                            <label for="dateEnd" class="col-sm-5 col-form-label"><b>3: </b>Fecha Final:</label>
-                            <input type="date" formControlName="dateEnd" #dateEnd required>
+                <div class="mb-4">
+                    <p class="col-sm-12 col-form-label"><b>1: </b>Seleccione día(s) para habilitar reservas</p>
+                    <div class="input-days px-3">
+                        <div class="form-group d-flex justify-content-around align-items-center mr-3" *ngFor="let day of days">
+                            <input type="checkbox" (change)="onChange(day, $event.target.checked)" formControlName="days" #Days>
+                            <label for="days" class="ml-1 mb-0">{{day}}</label>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <label for="interval"><b>4: </b>Intervalo entre consultas:</label>
+                <div class="">
+                    <div class="form-group d-md-flex mb-4">
+                        <label for="dateStart" class="col-sm-5 col-form-label"><b>2: </b>Desde Fecha:</label>
+                        <input type="date" formControlName="dateStart" #dateStart required>
+                    </div>
+                    <div class="form-group d-md-flex mb-4">
+                        <label for="dateEnd" class="col-sm-5 col-form-label"><b>3: </b>Hasta Fecha:</label>
+                        <input type="date" formControlName="dateEnd" #dateEnd required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="interval" class="col-sm-12 col-form-label"><b>4: </b>Intervalo de horas:</label>
                     <div class="d-flex justify-content-around">
                         <div class="form-check" (click)="interval(20)">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
@@ -85,8 +69,11 @@
                         </select>
                     </div>
                 </div>
+                <p class="mb-0">
+                    <li class="list-unstyled font-weight-lighter"><i>Para escoger más de una opción, utilice (ctrl+click) ó (shift+click).</i></li>
+                </p>
                 <div class="form-group mt-4 text-center">
-                    <button type="submit" class="btn btn-block text-white bg-aqua" [ngClass]="{disabled: !angForm.valid}">
+                    <button type="submit" [disabled]="angForm.invalid" class="btn btn-block text-white bg-aqua" [ngClass]="{disabled: !angForm.valid}">
                         Habilitar
                     </button>
                 </div>
