@@ -35,12 +35,13 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
     private chatService: ChatService,
     private fb: FormBuilder,
     private authenticationService: AuthenticationService
-  ) { }
+  ) {
+    this.chatService.connect();
+  }
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.chatService.connect();
     if (this.currentUser.role == 'Admin' || this.currentUser.role == 'Medic') {
       this.getPatients();
     } else {
@@ -74,7 +75,9 @@ export class ChatUsersMessagesComponent implements OnInit, OnDestroy {
   // Elegir un usuario para abrir un chat
   openChat(to_user_id: string, patientSelected: boolean) {
     this.isPatient = patientSelected;
-    this.chatService.leaveRoom(this.room);
+    if (this.room) {
+      this.chatService.leaveRoom(this.room);
+    }
     if(!patientSelected) {
       // si se elige a un paciente para abrir un chat
       this.openChatMedic(to_user_id);
