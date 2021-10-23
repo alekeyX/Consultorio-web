@@ -68,7 +68,7 @@ export class HistoryDetailsComponent implements OnInit {
       if (result.isConfirmed) {
         this.historyService.delete(id).subscribe((res) => {
           this.deleteExamAndDiagnostic(this.history);
-          this.router.navigate(['/history/' + this.history.patient_id._id]);
+          this.router.navigate(['/patient/history/' + this.history.patient_id._id]);
           this.toastr.success(res.message);
         });
       }

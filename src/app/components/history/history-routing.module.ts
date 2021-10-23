@@ -10,7 +10,7 @@ import { AuthGuard } from '../helpers/auth.guard';
 const routes: Routes = [
   { path: 'create/:id', component: HistoryAddComponent,  canActivate: [AuthGuard], data: { breadcrumb: 'Añadir historia' } },
   { path: 'update/:id', component: HistoryEditComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Editar' } },
-  { path: ':id', component: HistoryGetComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Historial Clínico'} },
+  { path: '', component: HistoryGetComponent, canActivate: [AuthGuard] },
   { path: 'detail/:id', component: HistoryDetailsComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Detalle' } },
 ];
 

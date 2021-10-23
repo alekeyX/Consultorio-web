@@ -6,11 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 // Modulos
-import { PatientModule } from './components/patient/patient.module';
-import { MedicModule } from './components/medic/medic.module';
-import { HistoryModule } from './components/history/history.module';
-import { ReservationModule } from './components/reservation/reservation.module';
-import { SharedModule } from './components/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { BreadcrumbModule } from 'xng-breadcrumb';
@@ -27,7 +22,6 @@ import { ContactoComponent } from './components/shared/contacto/contacto.compone
 //  Interceptores
 import { JwtInterceptor } from './components/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './components/helpers/error.interceptor';
-import { ChatModule } from './components/chat/chat.module';
 import { ChatbotComponent } from './components/chat/chatbot/chatbot.component';
 
 @NgModule({
@@ -48,12 +42,6 @@ import { ChatbotComponent } from './components/chat/chatbot/chatbot.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MedicModule,
-    PatientModule,
-    HistoryModule,
-    ReservationModule,
-    ChatModule,
-    SharedModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BreadcrumbModule

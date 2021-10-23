@@ -22,10 +22,6 @@ const routes: Routes = [
     loadChildren: () => import('./components/patient/patient.module').then(m => m.PatientModule), data: { breadcrumb: 'Pacientes' }
   },
   {
-    path: 'history',
-    loadChildren: () => import('./components/history/history.module').then(m => m.HistoryModule), data: { breadcrumb: {disable: true, label: 'Pacientes'} }
-  },
-  {
     path: 'reservation',
     loadChildren: () => import('./components/reservation/reservation.module').then(m => m.ReservationModule), data: { breadcrumb: 'Reservaciones' }
   },

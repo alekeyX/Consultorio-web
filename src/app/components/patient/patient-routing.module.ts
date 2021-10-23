@@ -15,7 +15,11 @@ const routes: Routes = [
   { path: 'update/:id', component: PatientEditComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Editar' } },
   { path: '', component: PatientGetComponent, canActivate: [AuthGuard], data: { breadcrumb: '' } },
   { path: 'find', component: PatientAddMedicComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Pacientes No Propios' } },
-  { path: ':id', component: PatientProfileComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Perfil' } }
+  { path: ':id', component: PatientProfileComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Perfil' } },
+  {
+    path: 'history/:id',
+    loadChildren: () => import('../../components/history/history.module').then(m => m.HistoryModule), data: { breadcrumb: 'Historial Clínico'}
+  },
 ];
 
 @NgModule({

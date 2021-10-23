@@ -228,7 +228,7 @@ export class HistoryEditComponent implements OnInit {
           this.examServ.update(this.history.exam_id._id, this.examForm.value).subscribe( () => {
             this.diagServ.update(this.history.diagnostic_id._id, this.diagnosticForm.value).subscribe( () => {
               this.historyService.update(this.id, this.angForm.value).subscribe((res) => {
-                this.router.navigate(['/history', this.history.patient_id._id]);
+                this.router.navigate(['/patient/history', this.history.patient_id._id]);
                 this.toastr.success(res.message, '');
               }, (error) => {
                 this.toastr.error('Intente nuevamente', error);

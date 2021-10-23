@@ -100,7 +100,7 @@
             </div>
             <div class="container">
                 <div class="d-md-flex p-2 d-md-flex justify-content-sm-between">
-                    <button class="btn bg-aqua text-white m-1" [routerLink]="['/history', patient._id]" *ngIf="isAdmin || isMedic">
+                    <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/history', patient._id]" *ngIf="isAdmin || isMedic">
                         Historial Clínico
                     </button>
                     <div class="d-md-flex" id="options">

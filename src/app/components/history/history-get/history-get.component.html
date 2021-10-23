@@ -4,7 +4,7 @@
         <div class="d-md-flex justify-content-between align-items-center mb-1">
             <h1 class="text-aqua-dark">Historial Clínico</h1>
             <div *ngIf="isAdmin || isMedic">
-                <a class="btn btn-block bg-aqua text-white" [routerLink]="['/history/create', patientId]"
+                <a class="btn btn-block bg-aqua text-white" [routerLink]="['/patient/history/${patientId}/create', patientId]"
                     routerLinkActive="router-link-active"  role="button">Añadir Historia</a>
             </div>
         </div>
@@ -38,7 +38,7 @@
                             <td scope="col" (click)="selectedHistory(history._id)">{{history.createdAt | date: 'dd-MM-yy'}}</td>
                             <td scope="col" (click)="selectedHistory(history._id)">{{history.motivoConsulta}}</td>
                             <td scope="col" class="text-center" *ngIf="isAdmin">
-                                <a [routerLink]="['/history/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>
+                                <a [routerLink]="['/patient/history/${patientId}/update', history._id]" class="text-dark mr-2" title="Editar"><i class="fas fa-edit text-info"></i></a>
                                 <a (click)="removeHistory(history, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
                             </td>
                         </tr>

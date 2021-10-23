@@ -518,7 +518,7 @@
 
             <!-- Botones de edicion -->
             <div class="mt-4 d-md-flex justify-content-end align-content-center" id="buttons" *ngIf="isAdmin">
-                <button class="btn bg-aqua text-white m-1" [routerLink]="['/history/update', history._id]">
+                <button class="btn bg-aqua text-white m-1" [routerLink]="['/patient/history/update', history._id]">
                     Editar
                 </button>
                 <button class="btn btn-danger m-1" (click)="deleteHistory(history._id)">

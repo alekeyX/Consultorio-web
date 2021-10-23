@@ -67,8 +67,8 @@ export class MedicEditComponent implements OnInit {
       
       this.angForm = this.fb.group({
         username: [data.username, Validators.required],
-        firstName: [ data.firstName, Validators.required ],
-        lastName: [ data.lastName, Validators.required ],
+        firstName: [ data.firstName, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+        lastName: [ data.lastName, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
         role: [ rol ],
         email: [ data.email, Validators.required ],
         genero: [ data.genero ],
@@ -85,8 +85,8 @@ export class MedicEditComponent implements OnInit {
   createForm() {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
       role: [''],
       email: ['', Validators.required],
       genero: [''],
@@ -187,6 +187,6 @@ export class MedicEditComponent implements OnInit {
   }
 
   get isMedic() {
-    return this.currentUser && this.currentUser.role === Role.Admin;
+    return this.currentUser && this.currentUser.role === Role.Medic;
   }
 }

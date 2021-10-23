@@ -71,7 +71,7 @@
             
             <!-- Botones para editar y eliminar -->
             <div class="d-md-flex justify-content-md-end">
-                <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]" *ngIf="isMedic">
+                <button class="btn bg-aqua text-white m-1" [routerLink]="['/medic/update', medic._id]" *ngIf="isMedic && medic._id===currentUser._id">
                     Cambiar Contraseña
                 </button>
                 <button class="btn bg-aqua btnOption text-white m-1" [routerLink]="['/medic/update', medic._id]" *ngIf="isAdmin">

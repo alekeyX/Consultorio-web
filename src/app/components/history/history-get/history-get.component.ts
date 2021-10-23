@@ -46,12 +46,12 @@ export class HistoryGetComponent implements OnInit {
     // si el rol del usuario es paciente
     if (this.currentUser.role === Role.Patient) {
       this.historyService.getHistoryByPatient(this.currentUser._id).subscribe((data) => {
-        this.histories = data;
+        this.histories = data.reverse();
       });
     } else {
       const id = this.route.snapshot.paramMap.get('id');
       this.historyService.getHistoryByPatient(id).subscribe((data) => {
-        this.histories = data;
+        this.histories = data.reverse();
       });
     }
   }
@@ -87,7 +87,7 @@ export class HistoryGetComponent implements OnInit {
 
   // Navegar a los detalles de una historia clinica
   selectedHistory(id: string) {
-    this.router.navigate(['/history/detail/', id]);
+    this.router.navigate([`/patient/history/${this.patientId}/detail/`, id]);
   }
 
   // Ordenar en orden ascendente/descendente

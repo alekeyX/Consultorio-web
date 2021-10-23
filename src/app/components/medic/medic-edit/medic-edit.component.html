@@ -35,6 +35,9 @@
             <div *ngIf="angForm.controls['firstName'].errors.required">
               Nombre es requerido.
             </div>
+            <div *ngIf="angForm.controls['firstName'].errors.pattern">
+              No debe tener digitos.
+            </div>
           </div>
         </div>
 
@@ -49,6 +52,9 @@
             class="text-danger font-weight-light font-error">
             <div *ngIf="angForm.controls['lastName'].errors.required">
               Apellidos son requeridos.
+            </div>
+            <div *ngIf="angForm.controls['lastName'].errors.pattern">
+              No debe tener digitos.
             </div>
           </div>
         </div>
@@ -128,7 +134,8 @@
         </div>
       </div>
       <div class="form-group mt-4">
-        <button type="submit" class="btn btn-block text-white bg-aqua">
+        <button type="submit" class="btn btn-block text-white bg-aqua"
+        [disabled]="angForm.pristine || angForm.invalid">
           Guardar
         </button>
       </div>
@@ -136,4 +143,4 @@
   </div>
 </div>
 
-  <app-medic-edit-password *ngIf="isMedic || isAdmin"></app-medic-edit-password>
+<app-medic-edit-password *ngIf="isMedic || isAdmin"></app-medic-edit-password>

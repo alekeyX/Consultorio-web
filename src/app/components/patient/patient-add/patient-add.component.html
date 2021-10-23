@@ -43,6 +43,9 @@
               <div *ngIf="angForm.controls['firstName'].errors.required">
                 Nombre es requerido.
               </div>
+              <div *ngIf="angForm.controls['firstName'].errors.pattern">
+                No debe tener digitos.
+              </div>
             </div>
           </div>
           
@@ -55,6 +58,9 @@
             <div *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)" class="text-danger font-weight-light font-error">
               <div *ngIf="angForm.controls['lastName'].errors.required">
                 Apellidos son requeridos.
+              </div>
+              <div *ngIf="angForm.controls['lastName'].errors.pattern">
+                No debe tener digitos.
               </div>
             </div>
           </div>

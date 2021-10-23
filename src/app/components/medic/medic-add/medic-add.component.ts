@@ -40,8 +40,8 @@ export class MedicAddComponent implements OnInit {
     this.angForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
       role: ['', Validators.required],
       email: ['', Validators.required ],
       genero: [''],

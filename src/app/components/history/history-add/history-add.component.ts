@@ -143,7 +143,7 @@ export class HistoryAddComponent implements OnInit {
     this.angForm.patchValue({exam_id: exam});
     this.angForm.patchValue({diagnostic_id: diag});
     this.historyService.create(this.angForm.value).subscribe(resHistory => {
-      this.router.navigate(['history/' + this.patientId]);
+      this.router.navigate(['/patient/history/' + this.patientId]);
       this.toastr.success(resHistory.message, '');
     }, (error) => {
       this.toastr.error('Error inesperado', error);
