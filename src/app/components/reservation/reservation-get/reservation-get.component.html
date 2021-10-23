@@ -38,19 +38,23 @@
                         </select>
                     </div>
                 </div>
-
+                
                 <!-- Boton para mostrar los registros vigentes o todos los registros -->
                 <div class="p-0 col-12 col-md-4 col-lg-3">
                     <button class="btn btn-block bg-aqua text-white mb-3 float-right" 
-                            (click)="ReservationsActually()" title="Mostrar/Ocular todas las reservas">
-                        <div *ngIf="!allReservations">
-                            Mostrar Activas
-                        </div>
-                        <div *ngIf="allReservations">
-                            Mostrar Todo
-                        </div>
-                    </button>
+                    (click)="ReservationsActually()" title="Mostrar/Ocular todas las reservas">
+                    <div *ngIf="!changeReservations">
+                        Mostrar Activas
+                    </div>
+                    <div *ngIf="changeReservations">
+                        Mostrar Todo
+                    </div>
+                </button>
                 </div>
+            </div>
+            <div class="mb-2">
+                <input type="checkbox" (click)="getReserved()" [(ngModel)]="reserved">
+                <span class="ml-2">Reservados</span>
             </div>
             <!-- Mensaje si no hay datos -->
             <h2 *ngIf="reservations.length == 0" class="no-data text-center text-aqua-dark">No existen reservas añadidas!</h2>
@@ -76,7 +80,7 @@
                                 *ngIf="isAdmin || !isMedic">{{reserva.medic_id.firstName}} {{reserva.medic_id.lastName}}</td>
                             <td (click)="selectReserva(reserva._id)" class="text-center" title="{{reserva.patient_id.firstName}} {{reserva.patient_id.lastName}}" 
                                 *ngIf="reserva.patient_id !== null">{{reserva.patient_id.firstName}} {{reserva.patient_id.lastName}}</td>
-                            <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="reserva.patient_id === null">No asignado</td>
+                            <td (click)="selectReserva(reserva._id)" class="text-center" *ngIf="reserva.patient_id === null">Libre</td>
                             <td *ngIf="reserva.enable && (isAdmin || isMedic)" class="text-center">Activo</td>
                             <td *ngIf="!reserva.enable && (isAdmin || isMedic)" class="text-center">Inactivo</td>
                             <td class="text-center" *ngIf="isAdmin || isMedic">

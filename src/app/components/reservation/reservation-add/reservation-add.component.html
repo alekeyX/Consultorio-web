@@ -18,18 +18,18 @@
                 </div>
 
                 <div class="">
-                    <div class="form-group d-md-flex mb-4">
-                        <label for="dateStart" class="col-sm-5 col-form-label"><b>2: </b>Desde Fecha:</label>
-                        <input type="date" formControlName="dateStart" #dateStart required>
+                    <div class="form-group mb-4">
+                        <label for="dateStart" class="col-12 col-form-label"><b>2: </b>Seleccione desde que fecha desea crear reservas:</label><br>
+                        <input type="date" class="mx-md-3 col-5" formControlName="dateStart" #dateStart required>
                     </div>
-                    <div class="form-group d-md-flex mb-4">
-                        <label for="dateEnd" class="col-sm-5 col-form-label"><b>3: </b>Hasta Fecha:</label>
-                        <input type="date" formControlName="dateEnd" #dateEnd required>
+                    <div class="form-group mb-4">
+                        <label for="dateEnd" class="col-12 col-form-label"><b>3: </b>Seleccione hasta que fecha desea crear reservas:</label><br>
+                        <input type="date" class="mx-md-3 col-5" formControlName="dateEnd" #dateEnd required>
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label for="interval" class="col-sm-12 col-form-label"><b>4: </b>Intervalo de horas:</label>
+                    <label for="interval" class="col-sm-12 col-form-label"><b>4: </b>Elija el intervalo de horas para las reservas:</label>
                     <div class="d-flex justify-content-around">
                         <div class="form-check" (click)="interval(20)">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
