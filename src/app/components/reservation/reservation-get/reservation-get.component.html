@@ -38,23 +38,16 @@
                         </select>
                     </div>
                 </div>
-                
-                <!-- Boton para mostrar los registros vigentes o todos los registros -->
-                <div class="p-0 col-12 col-md-4 col-lg-3">
-                    <button class="btn btn-block bg-aqua text-white mb-3 float-right" 
-                    (click)="ReservationsActually()" title="Mostrar/Ocular todas las reservas">
-                    <div *ngIf="!changeReservations">
-                        Mostrar Activas
-                    </div>
-                    <div *ngIf="changeReservations">
-                        Mostrar Todo
-                    </div>
-                </button>
-                </div>
             </div>
-            <div class="mb-2">
-                <input type="checkbox" (click)="getReserved()" [(ngModel)]="reserved">
-                <span class="ml-2">Reservados</span>
+            <div class="d-flex">
+                <div class="col-12 col-md-3 mb-2">
+                    <input type="checkbox" (click)="ReservationsActually()" [(ngModel)]="changeReservations">
+                    <span class="ml-2">Mostrar solo vigentes</span>
+                </div>
+                <div class="col-12 col-md-3 mb-2">
+                    <input type="checkbox" (click)="getReserved()" [(ngModel)]="reserved">
+                    <span class="ml-2">Mostrar solo ocupados</span>
+                </div>
             </div>
             <!-- Mensaje si no hay datos -->
             <h2 *ngIf="reservations.length == 0" class="no-data text-center text-aqua-dark">No existen reservas añadidas!</h2>

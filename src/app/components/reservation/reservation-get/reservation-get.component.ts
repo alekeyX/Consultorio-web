@@ -19,12 +19,13 @@ export class ReservationGetComponent implements OnInit {
   
   currentUser: Medic | Patient;
   reservations: Reservation[] = [];
+  allReservations: Reservation[] = [];
   reservationsActive: Reservation[] = [];
   filterDates: string[] = [];
   medics: any[] = [];
   loading: boolean = false;
   changeReservations: boolean = false;
-  reserved: boolean = true;
+  reserved: boolean = false;
   filterReservation: string = '';
   filterReservationByMedic: string = '';
   order: string = '';
@@ -44,7 +45,6 @@ export class ReservationGetComponent implements OnInit {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.getReservas();
-    this.getReserved();
   }
   
   // Obtener las reservas
@@ -54,6 +54,7 @@ export class ReservationGetComponent implements OnInit {
       case Role.Admin:
         this.reservationService.getAll().subscribe((data) => {
           this.reservations = data;
+          this.allReservations = data;
           this.filterDate();
           this.getMedics();
         });
@@ -61,6 +62,7 @@ export class ReservationGetComponent implements OnInit {
       case Role.Medic:
           this.reservationService.getReservByMedic(this.currentUser._id).subscribe((data) => {
             this.reservations = data;
+            this.allReservations = data;
             this.filterDate();
           });
         break;
@@ -68,10 +70,11 @@ export class ReservationGetComponent implements OnInit {
         this.reservationService.getReservByPatient(this.currentUser._id)
         .subscribe((data) => {
           this.reservations = data;
+          this.allReservations = data;
           this.filterDate();
         });
         break;
-          default:
+      default:
         break;
     }
   }
@@ -80,36 +83,52 @@ export class ReservationGetComponent implements OnInit {
   ReservationsActually() {
     this.changeReservations = !this.changeReservations;
 
-    if(this.changeReservations == true){
 
-      this.reservations.forEach(element => {
-        let date = new Date(element.date)
-        let today = new Date();
-        
-        if (date >= today) {
-          this.reservationsActive.push(element);
-        }
-      });
-      this.reservations = this.reservationsActive;
-      this.reservationsActive = [];
-    } else {
-      this.getReservas();
-    }
+    this.filter();
   }
   
   getReserved() {
     this.reserved = !this.reserved;
-    if(this.reserved == true){
-      let reservationsReserved = [];
-      this.reservations.forEach(element => {
-        if(element.patient_id != null){
-          reservationsReserved.push(element);
+    this.filter();
+  }
+
+  filter() {
+    let auxList = [];
+    if (this.reserved === true && this.changeReservations === true) {
+      this.allReservations.forEach(element => {
+        let date = new Date(element.date)
+        let today = new Date();
+        if(element.patient_id != null && date >= today) {
+          auxList.push(element);
         }
       });
-      this.reservations = reservationsReserved;
+      this.reservations = auxList;
     } else {
-      this.getReservas();
-    }
+      switch (this.reserved || this.changeReservations){
+        case (this.reserved == false && this.changeReservations == true):
+          this.allReservations.forEach(element => {
+            let date = new Date(element.date)
+            let today = new Date();
+            if(date >= today) {
+              auxList.push(element);
+            }
+          });
+          this.reservations = auxList;
+          break;
+        case (this.reserved == true && this.changeReservations == false):
+          this.allReservations.forEach(element => {
+            if(element.patient_id != null) {
+              auxList.push(element);
+            }
+          });
+          this.reservations = auxList;
+          break;
+      }
+      if(this.reserved == false && this.changeReservations == false){
+        this.reservations = this.allReservations;
+      }
+  }
+
   }
 
   // Obtener registros de los medicos

@@ -42,7 +42,8 @@
               <td scope="col" (click)="selectedMedic(medic._id)">{{medic.firstName}} {{medic.lastName}}</td>
               <td scope="col" (click)="selectedMedic(medic._id)" *ngIf="medic.role != 'Reception'">{{medic.specialty}}</td>
               <td scope="col" (click)="selectedMedic(medic._id)" *ngIf="medic.role == 'Reception'">Recepción</td>
-              <td scope="col" (click)="selectedMedic(medic._id)">{{medic.phone}}</td>
+              <td scope="col" (click)="selectedMedic(medic._id)" *ngIf="medic.phone != ''">{{medic.phone}}</td>
+              <td scope="col" (click)="selectedMedic(medic._id)" *ngIf="medic.phone == ''">--</td>
               <td scope="col" class="text-center" *ngIf="isAdmin">
                 <a [routerLink]="['/medic/update', medic._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
                 <a (click)="removeMedic(medic, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>

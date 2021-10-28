@@ -50,7 +50,8 @@
                         <tr *ngFor="let patient of patients | filterPatient:filterPatient | orderBy:order:asc; let i = index">
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.username}}</td>
                             <td scope="col" (click)="selectedPatient(patient._id)">{{patient.firstName}} {{patient.lastName}}</td>
-                            <td scope="col" (click)="selectedPatient(patient._id)">{{patient.phone}}</td>
+                            <td scope="col" (click)="selectedPatient(patient._id)" *ngIf="patient.phone != ''">{{patient.phone}}</td>
+                            <td scope="col" (click)="selectedPatient(patient._id)" *ngIf="patient.phone == ''">--</td>
                             <td scope="col" class="text-center" *ngIf="isMedic || isAdmin">
                                 <a [routerLink]="['/patient/history', patient._id]" class="mr-2" title="Historial Clínico"><i class="fas fa-notes-medical text-aqua-dark"></i></a>
                                 <a [routerLink]="['/patient/update', patient._id]" class="mx-1"  title="Editar"><i class="fas fa-edit text-info"></i></a>
