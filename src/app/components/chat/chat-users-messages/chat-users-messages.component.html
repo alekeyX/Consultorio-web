@@ -6,7 +6,7 @@
             <div class="bg-aqua text-white w-100 text-center p-25">
                 <h5 class="mb-0">Médicos</h5>
             </div>
-            <div class="overflow-auto">
+            <div class="table-responsive overflow-auto">
                 <div *ngFor="let medic of medics" class="border-bottom p-2" (click)="openChat(medic._id, false)">
                     <div class="d-flex justify-content-start align-items-center" id="selected">
                         <img [src]="'https://api-consultorio-web.herokuapp.com/' + medic.imagePath" *ngIf="medic.imagePath != 'none'"
@@ -25,7 +25,7 @@
             <div class="bg-aqua text-white w-100 text-center p-25">
                 <h5 class="mb-0">Pacientes</h5>
             </div>
-            <div class="overflow-auto">
+            <div class="table-responsive overflow-auto">
                 <div *ngFor="let patient of patients" class="border-bottom p-2" (click)="openChat(patient._id, true)">
                     <div class="d-flex justify-content-start align-items-center" id="selected">
                         <img [src]="'https://api-consultorio-web.herokuapp.com/' + patient.imagePath" *ngIf="patient.imagePath != 'none'"
