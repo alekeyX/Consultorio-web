@@ -78,7 +78,10 @@
 
         <div class="form-group col-lg">
           <label class="col-lg">Especialidad</label>
-          <input type="text" class="form-control" formControlName="specialty" #specialty />
+          <select class="custom-select" formControlName="specialty" #specialty>
+            <option value="" disabled>Seleccione Especialidad</option>
+            <option *ngFor="let item of specialties" [ngValue]="item">{{item}}</option>
+          </select>
         </div>
 
         <div class="form-group col-lg">

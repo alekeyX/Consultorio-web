@@ -25,6 +25,7 @@ export class MedicEditComponent implements OnInit {
   generos: string[] = ['Masculino', 'Femenino', 'Otro'];
   roles: string[] = ['Médico', 'Administrador', 'Recepción'];
   deleteImage: boolean = false;
+  specialties: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,8 @@ export class MedicEditComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private toastr: ToastrService
     ) {
+      this.specialties = ['Medicina General', 'Pediatría', 'Ginecología', 'Cirugía', 'Psiquiatría', 'Cardiología', 'Dermatología', 'Endocrinología', 'Gastroenterología', 'Infectología', 'Oftalmología', 'Neumología', 'Oncología', 'Patología', 'Urología', 'Medicina Intensiva'];
+      this.specialties.sort();
   }
 
   ngOnInit() {

@@ -19,6 +19,7 @@ export class MedicAddComponent implements OnInit {
   image: string;
   generos = ['Masculino', 'Femenino', 'Otro'];
   roles = ['Médico', 'Administrador', 'Recepción'];
+  specialties: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +29,8 @@ export class MedicAddComponent implements OnInit {
     private toastr: ToastrService
     ) {
       this.createForm();
+      this.specialties = ['Medicina General', 'Pediatría', 'Ginecología', 'Cirugía', 'Psiquiatría', 'Cardiología', 'Dermatología', 'Endocrinología', 'Gastroenterología', 'Infectología', 'Oftalmología', 'Neumología', 'Oncología', 'Patología', 'Urología', 'Medicina Intensiva'];
+      this.specialties.sort();
     }
 
   ngOnInit(): void {
