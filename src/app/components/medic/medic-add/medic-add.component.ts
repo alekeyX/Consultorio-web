@@ -29,7 +29,7 @@ export class MedicAddComponent implements OnInit {
     private toastr: ToastrService
     ) {
       this.createForm();
-      this.specialties = ['Medicina General', 'Pediatría', 'Ginecología', 'Cirugía', 'Psiquiatría', 'Cardiología', 'Dermatología', 'Endocrinología', 'Gastroenterología', 'Infectología', 'Oftalmología', 'Neumología', 'Oncología', 'Patología', 'Urología', 'Medicina Intensiva'];
+      this.specialties = ['Medicina General', 'Pediatría', 'Ginecología', 'Cirugía', 'Psiquiatría', 'Cardiología', 'Dermatología', 'Endocrinología', 'Gastroenterología', 'Infectología', 'Oftalmología', 'Neumología', 'Oncología', 'Patología', 'Urología', 'Medicina Intensiva', 'Otorrinolaringología'];
       this.specialties.sort();
     }
 
