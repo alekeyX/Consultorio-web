@@ -10,5 +10,5 @@ export interface Reservation {
     enable: boolean;
     patient_id: Patient;
     medic_id: Medic;
-
+    dateReser: Date
 }

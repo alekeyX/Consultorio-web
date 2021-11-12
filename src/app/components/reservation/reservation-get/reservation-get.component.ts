@@ -57,6 +57,7 @@ export class ReservationGetComponent implements OnInit {
           this.allReservations = data;
           this.filterDate();
           this.getMedics();
+          this.filter();
         });
         break;
       case Role.Medic:
@@ -64,6 +65,7 @@ export class ReservationGetComponent implements OnInit {
             this.reservations = data;
             this.allReservations = data;
             this.filterDate();
+            this.filter();
           });
         break;
       case Role.Patient:
@@ -82,8 +84,6 @@ export class ReservationGetComponent implements OnInit {
   // Arreglo de solo reservaciones a partir de la fecha actual
   ReservationsActually() {
     this.changeReservations = !this.changeReservations;
-
-
     this.filter();
   }
   
@@ -99,6 +99,7 @@ export class ReservationGetComponent implements OnInit {
         let date = new Date(element.date)
         let today = new Date();
         if(element.patient_id != null && date >= today) {
+          element.dateReser = date;
           auxList.push(element);
         }
       });
@@ -110,6 +111,7 @@ export class ReservationGetComponent implements OnInit {
             let date = new Date(element.date)
             let today = new Date();
             if(date >= today) {
+              element.dateReser = date;
               auxList.push(element);
             }
           });

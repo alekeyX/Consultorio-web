@@ -77,7 +77,7 @@
                             <td *ngIf="reserva.enable && (isAdmin || isMedic)" class="text-center">Activo</td>
                             <td *ngIf="!reserva.enable && (isAdmin || isMedic)" class="text-center">Inactivo</td>
                             <td class="text-center" *ngIf="isAdmin || isMedic">
-                                <a [routerLink]="['/reservation/edit', reserva._id]" class="text-dark mr-2"  title="Editar"><i class="fas fa-edit text-info"></i></a>
+                                <a [routerLink]="['/reservation/edit', reserva._id]" class="text-dark mr-2"  title="Editar" *ngIf="reserva.dateReser > date"><i class="fas fa-edit text-info"></i></a>
                                 <a (click)="removeReservation(reserva, i)" class="ml-2" title="Eliminar"><i class="fas fa-trash text-danger"></i></a>
                             </td>
                         </tr>

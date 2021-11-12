@@ -52,7 +52,7 @@ export class ReservationChooseComponent implements OnInit {
       password: '',
       medic_id: null,
       ci: 0,
-      role: Role.Patient
+      role: Role.Patient,
     };
 
     this.reserv = {
@@ -62,14 +62,15 @@ export class ReservationChooseComponent implements OnInit {
       hours: null,
       days: '',
       patient_id: null,
-      medic_id: null
+      medic_id: null,
+      dateReser: new Date()   
     }
   }
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.patientList();
+    this.patientList(); 
   }
 
   // Mostrar lista de especialidades de medicos
