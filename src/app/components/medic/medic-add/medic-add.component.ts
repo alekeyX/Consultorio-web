@@ -12,14 +12,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./medic-add.component.css']
 })
 export class MedicAddComponent implements OnInit {
-  
+
   angForm: FormGroup;
   currentUser: Medic;
   submitted = false;
   image: string;
+  disableSpecialty: boolean;
   generos = ['Masculino', 'Femenino', 'Otro'];
   roles = ['Médico', 'Administrador', 'Recepción'];
   specialties: string[] = [];
+  rol: string;
 
   constructor(
     private fb: FormBuilder,
@@ -27,11 +29,13 @@ export class MedicAddComponent implements OnInit {
     public medicService: MedicService,
     private authenticationService: AuthenticationService,
     private toastr: ToastrService
-    ) {
-      this.createForm();
-      this.specialties = ['Medicina General', 'Pediatría', 'Ginecología', 'Cirugía', 'Psiquiatría', 'Cardiología', 'Dermatología', 'Endocrinología', 'Gastroenterología', 'Infectología', 'Oftalmología', 'Neumología', 'Oncología', 'Patología', 'Urología', 'Medicina Intensiva', 'Otorrinolaringología'];
-      this.specialties.sort();
-    }
+  ) {
+    this.createForm();
+    this.specialties = ['Medicina General', 'Pediatría', 'Ginecología', 'Cirugía', 'Psiquiatría', 'Cardiología', 'Dermatología', 'Endocrinología', 'Gastroenterología', 'Infectología', 'Oftalmología', 'Neumología', 'Oncología', 'Patología', 'Urología', 'Medicina Intensiva', 'Otorrinolaringología'];
+    this.specialties.sort();
+    this.disableSpecialty = false;
+    this.rol = '';
+  }
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
@@ -46,7 +50,7 @@ export class MedicAddComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
       role: ['', Validators.required],
-      email: ['', Validators.required ],
+      email: ['', Validators.required],
       genero: [''],
       address: [''],
       phone: ['', Validators.pattern('^[0-9]+$')],
@@ -75,6 +79,15 @@ export class MedicAddComponent implements OnInit {
     }
   }
 
+  selectRolReception(rol: string) {
+    if (rol == 'Recepción' && this.disableSpecialty == false) {
+      this.disableSpecialty = true;
+    } else {
+      if (this.disableSpecialty == true)
+        this.disableSpecialty = false;
+    }
+  }
+
   // Enviar formulario
   submitForm() {
     this.submitted = true;
@@ -90,18 +103,20 @@ export class MedicAddComponent implements OnInit {
       formData.append('genero', this.angForm.get('genero').value);
       formData.append('address', this.angForm.get('address').value);
       formData.append('phone', this.angForm.get('phone').value);
-      formData.append('specialty', this.angForm.get('specialty').value);
       formData.append('imagePath', this.angForm.get('imagePath').value);
-      
+
       switch (this.angForm.get('role').value) {
         case 'Administrador':
           formData.append('role', 'Admin');
+          formData.append('specialty', this.angForm.get('specialty').value);
           break;
         case 'Médico':
           formData.append('role', 'Medic');
+          formData.append('specialty', this.angForm.get('specialty').value);
           break;
         case 'Recepción':
           formData.append('role', 'Reception');
+          formData.append('specialty', 'Reception');
           break;
       }
       // Envio del formData al servicio
