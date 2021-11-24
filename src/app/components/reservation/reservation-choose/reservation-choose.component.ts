@@ -32,7 +32,7 @@ export class ReservationChooseComponent implements OnInit {
   medicName: string;
   dateSelected: string;
   order: string = '';
-  asc: boolean = false;
+  asc: boolean = true;
   reservationsActive: Reservation[] = [];
   namePatient: Patient;
 
@@ -116,17 +116,14 @@ export class ReservationChooseComponent implements OnInit {
       this.ReservationsActually(data);
       this.selectDate();
     })
+    this.orderBy('date');
   }
 
   // Arreglo de solo reservaciones a partir de la fecha actual
   ReservationsActually(reservas: Reservation[]) {
     const reservations: Reservation[] = [];
-    reservas.forEach(element => {
-      let year = parseInt(element.date.substring(0,4), 10),
-      month = parseInt(element.date.substring(5,7), 10),
-      day = parseInt(element.date.substring(8,10), 10);
-      
-      let date = new Date(year,month-1,day);
+    reservas.forEach(element => {      
+      let date = new Date(element.date);
       let today = new Date();
 
       if (date >= today) {
@@ -134,6 +131,7 @@ export class ReservationChooseComponent implements OnInit {
       }
     });
     this.reservaByMedic = reservations;
+    this.orderBy('date');
   }
 
   // Filtrar resultados por fecha
@@ -159,7 +157,7 @@ export class ReservationChooseComponent implements OnInit {
     this.reservationService.getById(id)
     .subscribe(data => {
       this.reserv = data;
-      this.dateSelected = data.date.substring(0, 10);
+      this.dateSelected = data.date;
     })
   }
 
