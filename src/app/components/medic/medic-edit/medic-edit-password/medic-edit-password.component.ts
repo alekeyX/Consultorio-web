@@ -74,7 +74,7 @@ export class MedicEditPasswordComponent implements OnInit {
           
           this.medicService.changePassword(id, this.passForm.value)
             .subscribe(res => {
-              this.router.navigate(['/patient']);
+              this.router.navigate(['/medic']);
               this.toastr.success('Contraseña cambiada');
             }, (error) => {
               this.toastr.error('Intente nuevamente', error);
