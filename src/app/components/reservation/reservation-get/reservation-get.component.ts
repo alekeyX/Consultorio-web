@@ -45,6 +45,7 @@ export class ReservationGetComponent implements OnInit {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.getReservas();
+    this.orderBy('date');
   }
   
   // Obtener las reservas

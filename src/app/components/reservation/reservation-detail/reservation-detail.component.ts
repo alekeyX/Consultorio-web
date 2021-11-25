@@ -20,6 +20,7 @@ export class ReservationDetailComponent implements OnInit {
   medic: any = {};
   loading = false;
   id: string;
+  date = new Date();
 
   constructor(
     private reservaService: ReservationService,
@@ -40,7 +41,9 @@ export class ReservationDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
       this.reservaService.getById(this.id).subscribe(res => {
-          this.reserva = res;
+        this.reserva = res;
+        let date = new Date(res.date);
+          this.reserva.dateReser = date;
           this.getMedic();
         },
         err => console.log(err)

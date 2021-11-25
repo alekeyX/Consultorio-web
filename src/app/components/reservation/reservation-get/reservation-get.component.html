@@ -44,7 +44,7 @@
                     <input type="checkbox" (click)="ReservationsActually()" [(ngModel)]="changeReservations">
                     <span class="ml-2">Mostrar solo vigentes</span>
                 </div>
-                <div class="col-12 col-md-3 mb-2">
+                <div class="col-12 col-md-3 mb-2" *ngIf="isMedic || isAdmin">
                     <input type="checkbox" (click)="getReserved()" [(ngModel)]="reserved">
                     <span class="ml-2">Mostrar solo ocupados</span>
                 </div>
